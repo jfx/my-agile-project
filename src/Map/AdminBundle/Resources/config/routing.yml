@@ -1,0 +1,3 @@
+map_admin_homepage:
+    resource: "@MapAdminBundle/Resources/config/routing/application.yml"
+    prefix:   /application

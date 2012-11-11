@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <ul>
+            {% for application in applications %}
+                <li>{{ application.name }} - {{ application.details }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

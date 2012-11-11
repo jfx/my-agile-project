@@ -1,0 +1,7 @@
+parameters:
+#    map_admin.example.class: Map\AdminBundle\Example
+
+services:
+#    map_admin.example:
+#        class: %map_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
