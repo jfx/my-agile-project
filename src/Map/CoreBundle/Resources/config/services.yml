@@ -1,0 +1,39 @@
+parameters:
+#    map_core.example.class: Map\CoreBundle\Example
+
+services:
+    map.navbar:
+        class: '%mopa_bootstrap.navbar.generic%'
+        scope: request
+        arguments:
+            # first argument: a named array of menues:
+            - { leftmenu: @map.navbar_main_menu=, rightmenu: @map.navbar_right_menu= }
+            # second argument: a named array of FormType Classes
+            - {}
+            # third argument: a named array of options
+            - { title: "My Agile Project", titleRoute: "adminApplication_index", inverse: true, fixedTop: true, isFluid: true, template:MopaBootstrapBundle:Navbar:navbar.html.twig }
+        tags:
+            - { name: mopa_bootstrap.navbar, alias: frontendNavbar }
+
+    map.navbar_menu_builder:
+        class: Map\CoreBundle\Menu\NavbarMenuBuilder
+        scope: request
+        arguments: [ '@knp_menu.factory', '@security.context' ]
+
+    map.navbar_main_menu:
+        class: Knp\Menu\MenuItem
+        factory_service: map.navbar_menu_builder
+        factory_method: createMainMenu
+        arguments: [ '@request' ]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
+    map.navbar_right_menu:
+        class: Knp\Menu\MenuItem
+        factory_service: map.navbar_menu_builder
+        factory_method: createRightSideDropdownMenu
+        arguments: [ '@request' ]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main }

@@ -1,3 +1,7 @@
+map_core:
+    resource: "@MapCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 map_admin:
     resource: "@MapAdminBundle/Resources/config/routing.yml"
     prefix:   /

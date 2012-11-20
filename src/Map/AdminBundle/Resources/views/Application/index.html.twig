@@ -1,9 +1,14 @@
-<html>
-    <body>
-        <ul>
-            {% for application in applications %}
-                <li>{{ application.name }} - {{ application.details }}</li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block headline %}List of applications{% endblock headline %}
+
+{% block content %}
+    {% for application in applications %}
+        <li>{{ application.name }} - {{ application.details }}</li>
+    {% endfor %}
+        <a href="#"
+    class="btn">
+    <i class="icon-eye-open"></i>
+    </a>
+
+{% endblock content %}
