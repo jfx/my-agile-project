@@ -1,0 +1,23 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Application delete - Id : {{ application.id }}{% endblock title %}
+
+{% block headline %}Application delete - Id : {{ application.id }}{% endblock headline %}
+
+{% block content %}
+<div class="span8"> 
+    <form class="form-horizontal well" method="post">
+        {% include "MapAdminBundle:Application:formread.html.twig" %}
+
+        <div class="center">
+           <button type="submit" class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button>
+        </div>
+    </form>
+</div>
+<div class="span8">
+<a href="{{ path('adminApplication_index') }}" class="btn">
+<i class="icon-chevron-left"></i>
+Return to list
+</a>
+</div>
+{% endblock content %}

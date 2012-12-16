@@ -9,7 +9,7 @@ services:
             # first argument: a named array of menues:
             - { leftmenu: @map.navbar_main_menu=, rightmenu: @map.navbar_right_menu= }
             # second argument: a named array of FormType Classes
-            - {}
+            - { searchform: Map\CoreBundle\Form\MenuSelectType }
             # third argument: a named array of options
             - { title: "My Agile Project", titleRoute: "adminApplication_index", inverse: true, fixedTop: true, isFluid: true, template:MopaBootstrapBundle:Navbar:navbar.html.twig }
         tags:

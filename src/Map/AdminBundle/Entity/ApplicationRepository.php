@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ApplicationRepository extends EntityRepository
 {
+    public function findAllOrderByName()
+    {
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->orderBy('a.name');
+        
+        $results = $queryBuilder->getQuery()->getResult();
+        
+        return $results;
+    }
 }

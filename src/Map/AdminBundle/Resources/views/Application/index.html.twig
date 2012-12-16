@@ -1,14 +1,48 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block headline %}List of applications{% endblock headline %}
+{% block title %}{{ parent() }} - Applications list{% endblock title %}
+
+{% block headline %}Applications list{% endblock headline %}
 
 {% block content %}
-    {% for application in applications %}
-        <li>{{ application.name }} - {{ application.details }}</li>
-    {% endfor %}
-        <a href="#"
-    class="btn">
-    <i class="icon-eye-open"></i>
-    </a>
-
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a href="{{ path('adminApplication_add') }}"
+                   class="btn">
+                    <i class="icon-plus-sign"></i>
+                </a>&nbsp;&nbsp;Action
+            </th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for application in applications %}
+            <tr>
+                <td width="150">
+                    <a href="{{ path('adminApplication_view', {'id': application.id}) }}"
+                       class="btn">
+                        <i class="icon-eye-open"></i>
+                    </a>
+                    <a href="{{ path('adminApplication_edit', {'id': application.id}) }}"
+                       class="btn">
+                        <i class="icon-edit"></i>
+                    </a>
+                    <a href="{{ path('adminApplication_del', {'id': application.id}) }}"
+                       class="btn">
+                        <i class="icon-trash"></i>
+                    </a>
+                </td>
+                <td>{{ application.id }}</td>
+                <td>{{ application.name }}</td>
+                <td>{{ application.details }}</td>
+            </tr>
+{% else %}
+        <li>No application</li>
+{% endfor %}
+    </tbody>
+</table>
 {% endblock content %}

@@ -3,12 +3,14 @@
 namespace Map\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Map\AdminBundle\Entity\Application
  *
  * @ORM\Table(name="map_application")
  * @ORM\Entity(repositoryClass="Map\AdminBundle\Entity\ApplicationRepository")
+ * @UniqueEntity(fields="name", message="An application with this name already exists.")
  */
 class Application
 {
@@ -24,14 +26,14 @@ class Application
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
 
     /**
      * @var string $details
      *
-     * @ORM\Column(name="details", type="text")
+     * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
 

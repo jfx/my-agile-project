@@ -33,7 +33,9 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
             $menu, "Admin", false, array('icon' => 'caret')
         );
         $dropdownAdmin->addChild('Preferences', array('route' => 'adminApplication_add'));
-        $dropdownAdmin->addChild('Companies', array('route' => 'adminApplication_index'));
+        $dropdownAdmin->addChild('Applications', array('route' => 'adminApplication_index'));
+        
+        $this->addDivider($menu, true);
     
         return $menu;
     }

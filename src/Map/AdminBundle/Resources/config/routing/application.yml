@@ -5,6 +5,8 @@ adminApplication_index:
 adminApplication_view:
     pattern:  /{id}
     defaults: { _controller: "MapAdminBundle:Application:view" }
+    requirements:
+        id:  \d+
     
 adminApplication_add:
     pattern:  /add
@@ -13,8 +15,11 @@ adminApplication_add:
 adminApplication_edit:
     pattern:  /edit/{id}
     defaults: { _controller: "MapAdminBundle:Application:edit" }
+    requirements:
+        id:  \d+
     
 adminApplication_del:
     pattern:  /del/{id}
     defaults: { _controller: "MapAdminBundle:Application:del" }
-
+    requirements:
+        id:  \d+
