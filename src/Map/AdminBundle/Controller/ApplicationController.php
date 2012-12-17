@@ -38,6 +38,9 @@ class ApplicationController extends Controller
             
             $id = $application->getId();
             
+            $this->get('session')->getFlashBag()
+                ->add('success', 'Application added successfully !');
+                        
             return $this->redirect(
                 $this->generateUrl('adminApplication_view', array('id' => $id))
             );
@@ -70,6 +73,9 @@ class ApplicationController extends Controller
             
             $id = $application->getId();
             
+            $this->get('session')->getFlashBag()
+                ->add('success', 'Application edited successfully !');
+            
             return $this->redirect(
                 $this->generateUrl('adminApplication_view', array('id' => $id))
             );
@@ -89,6 +95,9 @@ class ApplicationController extends Controller
             $em->remove($application);
             $em->flush();
             
+            $this->get('session')->getFlashBag()
+                ->add('success', 'Application removed successfully !');
+                        
             return $this->redirect(
                 $this->generateUrl('adminApplication_index')
             );
