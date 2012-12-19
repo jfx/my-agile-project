@@ -90,10 +90,6 @@
     </div> <!-- /container -->
     {% endblock container %}
     {% block foot_script %}
-    {# To only use a subset or add more js overwrite and copy paste this block
-    To speed up page loads save a copy of jQuery in your project and override this block to include the correct path
-    Otherwise the regeneration is done on every load in dev more with use_controller: true
-     #}
     {% javascripts
         '@MapCoreBundle/Resources/public/js/jquery.min.js'
         '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-transition.js'
@@ -110,6 +106,7 @@
         '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-typeahead.js'
         '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
         '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
+        '@MapCoreBundle/Resources/public/js/bootbox.min.js'
         output='js/compiled/main.js'
      %}
 <script type="text/javascript" src="{{ asset_url }}"></script>

@@ -6,11 +6,11 @@
 
 {% block content %}
 <div class="span8"> 
-    <form class="form-horizontal well" method="post">
+    <form id="formDel" class="form-horizontal well" method="post">
         {% include "MapAdminBundle:Application:formread.html.twig" %}
 
         <div class="center">
-           <button type="submit" class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button>
+           <a href="#" class="confirm"><button class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button></a>
         </div>
     </form>
 </div>
@@ -21,3 +21,19 @@ Return to list
 </a>
 </div>
 {% endblock content %}
+
+{% block foot_script %}
+{{ parent() }}
+<script type="text/javascript">
+$(function() {
+    $("a.confirm").click(function(e) {
+        e.preventDefault();
+        bootbox.confirm("Are you sure you want to delete ?", function(confirmed) {
+            if (confirmed) {
+                $("form").submit();
+            }
+        });
+    });
+});
+</script>
+{% endblock foot_script %}

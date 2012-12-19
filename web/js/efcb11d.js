@@ -1981,15 +1981,16 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             this.addPrototype(index);
         },
         addPrototype: function(index) {
-            var rowContent = $(this.options.collection_id).attr('data-prototype').replace(/__name__/g, index);
-            var row = $("<div />");
-            row.html(rowContent);
+            var rowContent = $(this.options.collection_id).attr('data-prototype').replace(/__name__/g, index);            
+            var row = $(rowContent);     
             $('div' + this.options.collection_id + '> .controls').append(row);
             $(this.options.collection_id).trigger('add.mopa-collection-item', [row]);
         },
         remove: function () {
                 if (this.$element.parents('.collection-item').length !== 0){
-                    this.$element.closest('.collection-item').remove();
+                    var row = this.$element.closest('.collection-item');
+                    row.remove();
+                    $(this.options.collection_id).trigger('remove.mopa-collection-item', [row]);
                 }
         }
 
@@ -2007,6 +2008,9 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             options = typeof option == 'object' ? option : {};
           if(collection_id){
               options.collection_id = collection_id;
+          }
+          else if($this.closest(".control-group").attr('id')){
+        	  options.collection_id = '#'+$this.closest(".control-group").attr('id');
           }
           else{
         	  options.collection_id = this.id.length === 0 ? '' : '#' + this.id;
