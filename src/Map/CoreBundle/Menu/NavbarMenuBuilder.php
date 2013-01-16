@@ -25,7 +25,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav');
     
-        $menu->addChild('Home', array('route' => 'adminApplication_add'));
+        $menu->addChild('Home', array('route' => 'home_index'));
         
         $this->addDivider($menu, true);
                 
@@ -45,7 +45,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav pull-right');
     
-        $menu->addChild('Log out', array('route' => 'adminApplication_add'));
+        $menu->addChild('Log out', array('route' => 'fos_user_security_logout'));
     
         return $menu;
     }

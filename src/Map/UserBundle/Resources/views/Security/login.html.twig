@@ -1,0 +1,49 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Login{% endblock title %}
+
+{% block headline %}My Agile Project{% endblock headline %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="offset3 span6">
+    
+<form  class="form-horizontal well" action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    
+    <div class="control-group">
+        <label  class="control-label" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+        <div class="controls">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label  class="control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+        <div class="controls">
+            <input type="password" id="password" name="_password" required="required" />
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <label  class="control-label" for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+        <div class="controls">  
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        </div>
+    </div>
+    <div class="center">
+        <button type="submit" class="btn btn-small btn-info">
+            <i class="icon-ok icon-white"></i>
+            &nbsp;&nbsp;{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}&nbsp;&nbsp;
+        </button>
+    </div>
+</form>
+</div>
+</div>
+</div>
+{% endblock fos_user_content %}

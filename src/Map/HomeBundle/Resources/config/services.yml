@@ -1,0 +1,7 @@
+parameters:
+#    map_home.example.class: Map\HomeBundle\Example
+
+services:
+#    map_home.example:
+#        class: %map_home.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

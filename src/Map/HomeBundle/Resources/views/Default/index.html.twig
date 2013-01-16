@@ -1,0 +1,9 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Home{% endblock title %}
+
+{% block headline %}Dashboard{% endblock headline %}
+
+{% block content %}
+Hello {{ app.user.username }} !
+{% endblock content %}
