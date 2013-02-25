@@ -1,0 +1,26 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - User view - Id : {{ user.id }}{% endblock title %}
+
+{% block headline %}User view - Id : {{ user.id }}{% endblock headline %}
+
+{% block content %}
+<div class="span8">
+    <form class="form-horizontal well">
+        
+        {% include "MapUserBundle:User:formread.html.twig" %}
+    
+    </form>
+</div>
+<div class="span8">
+<a href="{{ path('user_index') }}" class="btn">
+<i class="icon-chevron-left"></i>
+Return to list
+</a>
+<a href="{{ path('user_edit', {'id': user.id}) }}"
+class="btn">
+<i class="icon-edit"></i>
+Edit
+</a>
+</div>
+{% endblock content %}

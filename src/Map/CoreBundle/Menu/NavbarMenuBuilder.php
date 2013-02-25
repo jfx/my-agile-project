@@ -10,14 +10,12 @@ use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {
     protected $securityContext;
-    protected $isLoggedIn;
     
     public function __construct(FactoryInterface $factory, SecurityContextInterface $securityContext)
     {
         parent::__construct($factory);
     
         $this->securityContext = $securityContext;
-        // $this->isLoggedIn = $this->securityContext->isGranted('IS_AUTHENTICATED_FULLY');
     }
     
     public function createMainMenu(Request $request)
@@ -32,7 +30,11 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $dropdownAdmin = $this->createDropdownMenuItem(
             $menu, "Admin", false, array('icon' => 'caret')
         );
-        $dropdownAdmin->addChild('Preferences', array('route' => 'adminApplication_add'));
+        $dropdownAdmin->addChild('Password', array('route' => 'fos_user_change_password'));
+
+        $this->addDivider($dropdownAdmin);
+        
+        $dropdownAdmin->addChild('Users', array('route' => 'user_index'));
         $dropdownAdmin->addChild('Applications', array('route' => 'adminApplication_index'));
         
         $this->addDivider($menu, true);
@@ -44,6 +46,13 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
     {
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav pull-right');
+        
+        $user = $this->securityContext->getToken()->getUser();
+        $username = ucfirst($user->getUsername());
+        
+        $menu->addChild($username.' (user++)', array('route' => 'fos_user_profile_show'));
+        
+        $this->addDivider($menu, true);
     
         $menu->addChild('Log out', array('route' => 'fos_user_security_logout'));
     

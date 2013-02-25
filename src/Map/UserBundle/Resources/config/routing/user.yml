@@ -1,0 +1,25 @@
+user_index:
+    pattern:  /
+    defaults: { _controller: "MapUserBundle:User:index" }
+    
+user_view:
+    pattern:  /{id}
+    defaults: { _controller: "MapUserBundle:User:view" }
+    requirements:
+        id:  \d+
+    
+user_add:
+    pattern:  /add
+    defaults: { _controller: "MapUserBundle:User:add" }
+    
+user_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: "MapUserBundle:User:edit" }
+    requirements:
+        id:  \d+
+    
+user_del:
+    pattern:  /del/{id}
+    defaults: { _controller: "MapUserBundle:User:del" }
+    requirements:
+        id:  \d+

@@ -13,11 +13,11 @@ class ApplicationType extends DefaultType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Name', null, array('validation_constraint' => array(
+            ->add('name', null, array('validation_constraint' => array(
                 new MinLength(2), new MaxLength(50)))
             )
             ->add(
-                'Details', 'textarea', array(
+                'details', 'textarea', array(
                     'required' => false,
                     'attr'  => array(
                         'class' => 'input-xxlarge',
