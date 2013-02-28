@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Map\UserBundle\Entity\User;
 use Map\UserBundle\Form\UserAddType;
 use Map\UserBundle\Form\UserEditType;
+use Map\UserBundle\Form\UserPasswordType;
 use Map\UserBundle\Form\UserFormHandler;
 
 class UserController extends Controller
@@ -116,6 +117,40 @@ class UserController extends Controller
         return $this->render(
             'MapUserBundle:User:del.html.twig',
             array('user' => $user)
+        );
+    }
+    
+    public function profileAction()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        return $this->render(
+            'MapUserBundle:User:profile.html.twig',
+            array('user' => $user)
+        );
+    }
+    
+    public function passwordAction()
+    {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        $form  = $this->createForm(new UserPasswordType(), $user);
+        
+        $handler = new UserFormHandler(
+            $form,
+            $this->getRequest(),
+            $this->get('fos_user.user_manager')
+        );
+             
+        if ($handler->process()) {
+            
+            $this->get('session')->getFlashBag()
+                ->add('success', 'Password modified !');
+        }
+        
+        return $this->render(
+            'MapUserBundle:User:password.html.twig',
+            array('form' => $form->createView())
         );
     }
 }

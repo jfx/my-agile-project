@@ -23,3 +23,11 @@ user_del:
     defaults: { _controller: "MapUserBundle:User:del" }
     requirements:
         id:  \d+
+
+user_profile:
+    pattern:  /profile
+    defaults: { _controller: "MapUserBundle:User:profile" }
+    
+user_password:
+    pattern:  /password
+    defaults: { _controller: "MapUserBundle:User:password" }

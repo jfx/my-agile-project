@@ -1,8 +1,8 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - User view - Id : {{ user.id }}{% endblock title %}
+{% block title %}{{ parent() }} - Profile{% endblock title %}
 
-{% block headline %}Admin > User view - Id : {{ user.id }}{% endblock headline %}
+{% block headline %}Admin > Profile{% endblock headline %}
 
 {% block content %}
 <div class="span8">
@@ -13,14 +13,14 @@
     </form>
 </div>
 <div class="span8">
-<a href="{{ path('user_index') }}" class="btn">
+<a href="{{ path('home_index') }}" class="btn">
 <i class="icon-chevron-left"></i>
-Return to list
+Return to home
 </a>
-<a href="{{ path('user_edit', {'id': user.id}) }}"
+<a href="{{ path('user_password') }}"
 class="btn">
 <i class="icon-edit"></i>
-Edit
+Change Password
 </a>
 </div>
 {% endblock content %}

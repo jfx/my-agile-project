@@ -30,7 +30,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $dropdownAdmin = $this->createDropdownMenuItem(
             $menu, "Admin", false, array('icon' => 'caret')
         );
-        $dropdownAdmin->addChild('Password', array('route' => 'fos_user_change_password'));
+        $dropdownAdmin->addChild('Profile', array('route' => 'user_profile'));
 
         $this->addDivider($dropdownAdmin);
         
@@ -50,7 +50,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $user = $this->securityContext->getToken()->getUser();
         $username = ucfirst($user->getUsername());
         
-        $menu->addChild($username.' (user++)', array('route' => 'fos_user_profile_show'));
+        $menu->addChild($username.' (user++)', array('route' => 'user_profile'));
         
         $this->addDivider($menu, true);
     
