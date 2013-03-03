@@ -32,8 +32,7 @@ namespace Map\AdminBundle\Form;
 use Map\CoreBundle\Util\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\MinLength;
-use Symfony\Component\Validator\Constraints\MaxLength;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ApplicationType extends DefaultType
 {
@@ -41,8 +40,8 @@ class ApplicationType extends DefaultType
     {
         $builder
             ->add('name', null, array('validation_constraint' => array(
-                new MinLength(2), new MaxLength(50)))
-            )
+                new Length(array('min' => 2, 'max' => 50))
+            )))
             ->add(
                 'details', 'textarea', array(
                     'required' => false,

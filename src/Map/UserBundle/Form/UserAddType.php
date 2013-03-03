@@ -32,8 +32,7 @@ namespace Map\UserBundle\Form;
 use Map\CoreBundle\Util\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\MinLength;
-use Symfony\Component\Validator\Constraints\MaxLength;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 
 class UserAddType extends DefaultType
@@ -42,17 +41,17 @@ class UserAddType extends DefaultType
     {
         $builder
             ->add('firstname', null, array('validation_constraint' => array(
-                new MinLength(2), new MaxLength(50)))
-            )
+                new Length(array('min' => 2, 'max' => 50))
+            )))
             ->add('name', null, array('validation_constraint' => array(
-                new MinLength(2), new MaxLength(50)))
-            )
+                new Length(array('min' => 2, 'max' => 50))
+            )))
             ->add('displayname', null, array('validation_constraint' => array(
-                new MinLength(2), new MaxLength(50)))
-            )
+                new Length(array('min' => 2, 'max' => 50))
+            )))
             ->add('username', null, array('validation_constraint' => array(
-                new MinLength(2), new MaxLength(50)))
-            )
+                new Length(array('min' => 2, 'max' => 50))
+            )))
             ->add('plainPassword', 'password', array('label' => 'Password'))
             ->add('email', null, array('validation_constraint' => array(
                 new Email(array('message' => 'Invalid email address'))))

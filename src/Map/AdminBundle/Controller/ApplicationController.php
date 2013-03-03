@@ -39,7 +39,7 @@ class ApplicationController extends Controller
     public function indexAction()
     {
         $repository = $this->getDoctrine()
-            ->getEntityManager()
+            ->getManager()
             ->getRepository('MapAdminBundle:Application');
 
         $applications = $repository->findAllOrderByName();
@@ -58,7 +58,7 @@ class ApplicationController extends Controller
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getEntityManager()
+            $this->getDoctrine()->getManager()
         );
         
         if ($handler->process()) {
@@ -93,7 +93,7 @@ class ApplicationController extends Controller
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getEntityManager()
+            $this->getDoctrine()->getManager()
         );
         
         if ($handler->process()) {
@@ -117,7 +117,7 @@ class ApplicationController extends Controller
     {
         if( $this->get('request')->getMethod() == 'POST' ) {
             
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             
             $em->remove($application);
             $em->flush();

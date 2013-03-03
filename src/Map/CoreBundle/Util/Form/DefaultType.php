@@ -37,7 +37,9 @@ abstract class DefaultType extends AbstractType
 {
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-      $view->set('render_fieldset', false);
-      $view->set('show_legend', false);   
+        $view->vars = array_replace($view->vars, array(
+            'render_fieldset' => false,
+            'show_legend'     => false,
+        ));
     }
 }
