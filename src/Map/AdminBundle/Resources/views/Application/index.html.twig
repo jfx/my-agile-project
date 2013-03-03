@@ -8,11 +8,13 @@
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>
-                <a href="{{ path('adminApplication_add') }}"
-                   class="btn">
-                    <i class="icon-plus-sign"></i>
-                </a>&nbsp;&nbsp;Action
+            <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('adminApplication_add') }}"
+                        class="btn">
+                        <i class="icon-plus-sign"></i>
+                    </a>
+               {% endif %}
+               &nbsp;&nbsp;Action
             </th>
             <th>#</th>
             <th>Name</th>
@@ -27,6 +29,7 @@
                        class="btn">
                         <i class="icon-eye-open"></i>
                     </a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <a href="{{ path('adminApplication_edit', {'id': application.id}) }}"
                        class="btn">
                         <i class="icon-edit"></i>
@@ -35,6 +38,7 @@
                        class="btn">
                         <i class="icon-trash"></i>
                     </a>
+                    {% endif %}
                 </td>
                 <td>{{ application.id }}</td>
                 <td>{{ application.name }}</td>

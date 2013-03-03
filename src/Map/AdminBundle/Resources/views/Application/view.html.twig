@@ -17,10 +17,12 @@
 <i class="icon-chevron-left"></i>
 Return to list
 </a>
-<a href="{{ path('adminApplication_edit', {'id': application.id}) }}"
-class="btn">
-<i class="icon-edit"></i>
-Edit
-</a>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <a href="{{ path('adminApplication_edit', {'id': application.id}) }}"
+    class="btn">
+        <i class="icon-edit"></i>
+    Edit
+    </a>
+{% endif %}
 </div>
 {% endblock content %}

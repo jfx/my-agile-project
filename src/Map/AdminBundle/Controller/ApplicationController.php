@@ -29,6 +29,7 @@
 
 namespace Map\AdminBundle\Controller;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Map\AdminBundle\Entity\Application;
 use Map\AdminBundle\Form\ApplicationType;
@@ -50,6 +51,9 @@ class ApplicationController extends Controller
         );
     }
 
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function addAction()
     {
         $application = new Application();
@@ -86,6 +90,9 @@ class ApplicationController extends Controller
         );
     }
     
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function editAction(Application $application)
     {
         $form    = $this->createForm(new ApplicationType(), $application);
@@ -113,6 +120,9 @@ class ApplicationController extends Controller
         );
     }
     
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function delAction(Application $application)
     {
         if( $this->get('request')->getMethod() == 'POST' ) {

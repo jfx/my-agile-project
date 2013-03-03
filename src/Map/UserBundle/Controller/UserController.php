@@ -29,6 +29,7 @@
 
 namespace Map\UserBundle\Controller;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Map\UserBundle\Entity\User;
 use Map\UserBundle\Form\UserAddType;
@@ -44,12 +45,22 @@ class UserController extends Controller
         
         $users = $userManager->findUsers();
         
-        return $this->render(
-            'MapUserBundle:User:index.html.twig',
-            array('users' => $users)
-        );
+        if ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            return $this->render(
+                'MapUserBundle:User:index.html.twig',
+                array('users' => $users)
+            );
+        } else {
+            return $this->render(
+                'MapUserBundle:User:indexlight.html.twig',
+                array('users' => $users)
+            );
+        }
     }
 
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function addAction()
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -81,6 +92,9 @@ class UserController extends Controller
         );
     }
 
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function viewAction($id)
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -94,6 +108,9 @@ class UserController extends Controller
         );
     }
     
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function editAction($id)
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -124,6 +141,9 @@ class UserController extends Controller
         );
     }
     
+   /**
+    * @Secure(roles="ROLE_SUPER_ADMIN")
+    */
     public function delAction($id)
     {
         $userManager = $this->get('fos_user.user_manager');
