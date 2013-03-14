@@ -62,7 +62,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $this->addDivider($dropdownAdmin);
         
         $dropdownAdmin->addChild('Users', array('route' => 'user_index'));
-        $dropdownAdmin->addChild('Applications', array('route' => 'adminApplication_index'));
+        $dropdownAdmin->addChild('Domains', array('route' => 'adminDomain_index'));
         
         $this->addDivider($menu, true);
     

@@ -118,7 +118,7 @@ class UserController extends Controller
         if ( ! $user = $userManager->findUserBy(array('id' => $id))) {
             throw $this->createNotFoundException('User[id='.$id.'] not found');
         }
-        $form        = $this->createForm(new UserEditType(), $user);
+        $form    = $this->createForm(new UserEditType(), $user);
         
         $handler = new UserFormHandler(
             $form,

@@ -1,6 +1,6 @@
 <?php
 /**
- * Application controller class.
+ * Domain controller class.
  *
  * LICENSE : This file is part of My Agile Project.
  *
@@ -31,23 +31,23 @@ namespace Map\AdminBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Map\AdminBundle\Entity\Application;
-use Map\AdminBundle\Form\ApplicationType;
+use Map\AdminBundle\Entity\Domain;
+use Map\AdminBundle\Form\DomainType;
 use Map\CoreBundle\Util\Form\FormHandler;
 
-class ApplicationController extends Controller
+class DomainController extends Controller
 {
     public function indexAction()
     {
         $repository = $this->getDoctrine()
             ->getManager()
-            ->getRepository('MapAdminBundle:Application');
+            ->getRepository('MapAdminBundle:Domain');
 
-        $applications = $repository->findAllOrderByName();
+        $domains = $repository->findAllOrderByName();
 
         return $this->render(
-            'MapAdminBundle:Application:index.html.twig',
-            array('applications' => $applications)
+            'MapAdminBundle:Domain:index.html.twig',
+            array('domains' => $domains)
         );
     }
 
@@ -56,8 +56,8 @@ class ApplicationController extends Controller
     */
     public function addAction()
     {
-        $application = new Application();
-        $form        = $this->createForm(new ApplicationType(), $application);
+        $domain = new Domain();
+        $form   = $this->createForm(new DomainType(), $domain);
         
         $handler = new FormHandler(
             $form,
@@ -67,35 +67,35 @@ class ApplicationController extends Controller
         
         if ($handler->process()) {
             
-            $id = $application->getId();
+            $id = $domain->getId();
             
             $this->get('session')->getFlashBag()
-                ->add('success', 'Application added successfully !');
+                ->add('success', 'Domain added successfully !');
                         
             return $this->redirect(
-                $this->generateUrl('adminApplication_view', array('id' => $id))
+                $this->generateUrl('adminDomain_view', array('id' => $id))
             );
         }
         return $this->render(
-            'MapAdminBundle:Application:add.html.twig',
+            'MapAdminBundle:Domain:add.html.twig',
             array('form' => $form->createView())
         );
     }
 
-    public function viewAction(Application $application)
+    public function viewAction(Domain $domain)
     {
         return $this->render(
-            'MapAdminBundle:Application:view.html.twig',
-            array('application' => $application)
+            'MapAdminBundle:Domain:view.html.twig',
+            array('domain' => $domain)
         );
     }
     
    /**
     * @Secure(roles="ROLE_SUPER_ADMIN")
     */
-    public function editAction(Application $application)
+    public function editAction(Domain $domain)
     {
-        $form    = $this->createForm(new ApplicationType(), $application);
+        $form    = $this->createForm(new DomainType(), $domain);
         
         $handler = new FormHandler(
             $form,
@@ -105,43 +105,43 @@ class ApplicationController extends Controller
         
         if ($handler->process()) {
             
-            $id = $application->getId();
+            $id = $domain->getId();
             
             $this->get('session')->getFlashBag()
-                ->add('success', 'Application edited successfully !');
+                ->add('success', 'Domain edited successfully !');
             
             return $this->redirect(
-                $this->generateUrl('adminApplication_view', array('id' => $id))
+                $this->generateUrl('adminDomain_view', array('id' => $id))
             );
         }
         return $this->render(
-            'MapAdminBundle:Application:edit.html.twig',
-            array('form' => $form->createView(), 'application' => $application)
+            'MapAdminBundle:Domain:edit.html.twig',
+            array('form' => $form->createView(), 'domain' => $domain)
         );
     }
     
    /**
     * @Secure(roles="ROLE_SUPER_ADMIN")
     */
-    public function delAction(Application $application)
+    public function delAction(Domain $domain)
     {
         if( $this->get('request')->getMethod() == 'POST' ) {
             
             $em = $this->getDoctrine()->getManager();
             
-            $em->remove($application);
+            $em->remove($domain);
             $em->flush();
             
             $this->get('session')->getFlashBag()
-                ->add('success', 'Application removed successfully !');
+                ->add('success', 'Domain removed successfully !');
                         
             return $this->redirect(
-                $this->generateUrl('adminApplication_index')
+                $this->generateUrl('adminDomain_index')
             );
         }
         return $this->render(
-            'MapAdminBundle:Application:del.html.twig',
-            array('application' => $application)
+            'MapAdminBundle:Domain:del.html.twig',
+            array('domain' => $domain)
         );
     }
 }

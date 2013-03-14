@@ -1,0 +1,25 @@
+adminDomain_index:
+    pattern:  /
+    defaults: { _controller: "MapAdminBundle:Domain:index" }
+    
+adminDomain_view:
+    pattern:  /{id}
+    defaults: { _controller: "MapAdminBundle:Domain:view" }
+    requirements:
+        id:  \d+
+    
+adminDomain_add:
+    pattern:  /add
+    defaults: { _controller: "MapAdminBundle:Domain:add" }
+    
+adminDomain_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: "MapAdminBundle:Domain:edit" }
+    requirements:
+        id:  \d+
+    
+adminDomain_del:
+    pattern:  /del/{id}
+    defaults: { _controller: "MapAdminBundle:Domain:del" }
+    requirements:
+        id:  \d+

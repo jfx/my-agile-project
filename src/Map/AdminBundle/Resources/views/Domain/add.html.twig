@@ -1,8 +1,8 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Application edit - Id : {{ application.id }}{% endblock title %}
+{% block title %}{{ parent() }} - Domain add{% endblock title %}
 
-{% block headline %}Admin > Application edit - Id : {{ application.id }}{% endblock headline %}
+{% block headline %}Admin > Domain add{% endblock headline %}
 
 {% block content %}
 <div class="span8">
@@ -14,7 +14,7 @@
     </form>
 </div>
 <div class="span8">
-    <a href="{{ path('adminApplication_index') }}" class="btn">
+    <a href="{{ path('adminDomain_index') }}" class="btn">
         <i class="icon-chevron-left"></i>
         Return to list
     </a>

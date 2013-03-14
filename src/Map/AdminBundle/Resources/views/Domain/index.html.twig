@@ -1,15 +1,15 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Applications list{% endblock title %}
+{% block title %}{{ parent() }} - Domains list{% endblock title %}
 
-{% block headline %}Admin > Applications list{% endblock headline %}
+{% block headline %}Admin > Domains list{% endblock headline %}
 
 {% block content %}
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('adminApplication_add') }}"
+                    <a href="{{ path('adminDomain_add') }}"
                         class="btn">
                         <i class="icon-plus-sign"></i>
                     </a>
@@ -22,30 +22,30 @@
         </tr>
     </thead>
     <tbody>
-{% for application in applications %}
+{% for domain in domains %}
             <tr>
                 <td width="150">
-                    <a href="{{ path('adminApplication_view', {'id': application.id}) }}"
+                    <a href="{{ path('adminDomain_view', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-eye-open"></i>
                     </a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('adminApplication_edit', {'id': application.id}) }}"
+                    <a href="{{ path('adminDomain_edit', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-edit"></i>
                     </a>
-                    <a href="{{ path('adminApplication_del', {'id': application.id}) }}"
+                    <a href="{{ path('adminDomain_del', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-trash"></i>
                     </a>
                     {% endif %}
                 </td>
-                <td>{{ application.id }}</td>
-                <td>{{ application.name }}</td>
-                <td>{{ application.details }}</td>
+                <td>{{ domain.id }}</td>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.details }}</td>
             </tr>
 {% else %}
-        <li>No application</li>
+        <li>No domain</li>
 {% endfor %}
     </tbody>
 </table>

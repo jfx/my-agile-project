@@ -1,6 +1,6 @@
 <?php
 /**
- * Application entity class.
+ * Domain entity class.
  *
  * LICENSE : This file is part of My Agile Project.
  *
@@ -33,13 +33,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Map\AdminBundle\Entity\Application
+ * Map\AdminBundle\Entity\Domain
  *
- * @ORM\Table(name="map_application")
- * @ORM\Entity(repositoryClass="Map\AdminBundle\Entity\ApplicationRepository")
- * @UniqueEntity(fields="name", message="An application with this name already exists.")
+ * @ORM\Table(name="map_domain")
+ * @ORM\Entity(repositoryClass="Map\AdminBundle\Entity\DomainRepository")
+ * @UniqueEntity(fields="name", message="A domain with this name already exists.")
  */
-class Application
+class Domain
 {
     /**
      * @var integer $id
@@ -79,7 +79,7 @@ class Application
      * Set name
      *
      * @param string $name
-     * @return Application
+     * @return Domain
      */
     public function setName($name)
     {
@@ -102,7 +102,7 @@ class Application
      * Set details
      *
      * @param string $details
-     * @return Application
+     * @return Domain
      */
     public function setDetails($details)
     {

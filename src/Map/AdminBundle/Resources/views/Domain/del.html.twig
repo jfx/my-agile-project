@@ -1,13 +1,13 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Application delete - Id : {{ application.id }}{% endblock title %}
+{% block title %}{{ parent() }} - Domain delete - Id : {{ domain.id }}{% endblock title %}
 
-{% block headline %}Admin > Application delete - Id : {{ application.id }}{% endblock headline %}
+{% block headline %}Admin > Domain delete - Id : {{ domain.id }}{% endblock headline %}
 
 {% block content %}
 <div class="span8"> 
     <form id="formDel" class="form-horizontal well" method="post">
-        {% include "MapAdminBundle:Application:formread.html.twig" %}
+        {% include "MapAdminBundle:Domain:formread.html.twig" %}
 
         <div class="center">
            <a href="#" class="confirm"><button class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button></a>
@@ -15,7 +15,7 @@
     </form>
 </div>
 <div class="span8">
-<a href="{{ path('adminApplication_index') }}" class="btn">
+<a href="{{ path('adminDomain_index') }}" class="btn">
 <i class="icon-chevron-left"></i>
 Return to list
 </a>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Application form class.
+ * Domain form class.
  *
  * LICENSE : This file is part of My Agile Project.
  *
@@ -34,7 +34,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
-class ApplicationType extends DefaultType
+class DomainType extends DefaultType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -55,11 +55,11 @@ class ApplicationType extends DefaultType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Map\AdminBundle\Entity\Application'
+            'data_class' => 'Map\AdminBundle\Entity\Domain'
         ));
     }
     public function getName()
     {
-        return "map_adminbundle_applicationtype";
+        return "map_adminbundle_domaintype";
     }
 }
