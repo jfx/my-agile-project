@@ -63,6 +63,6 @@ class MenuSelectType extends AbstractType implements NavbarFormInterface
 */
     public function getRoute()
     {
-        return "adminDomain_index"; # return here the name of the route the form should point to
+        return "domain_index"; # return here the name of the route the form should point to
     }
 }

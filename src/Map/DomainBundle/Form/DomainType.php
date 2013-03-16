@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  MyAgileProject
- * @package   Admin
+ * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2012 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -27,7 +27,7 @@
  *
  */
 
-namespace Map\AdminBundle\Form;
+namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Util\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -55,11 +55,11 @@ class DomainType extends DefaultType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Map\AdminBundle\Entity\Domain'
+            'data_class' => 'Map\DomainBundle\Entity\Domain'
         ));
     }
     public function getName()
     {
-        return "map_adminbundle_domaintype";
+        return "map_domainbundle_domaintype";
     }
 }

@@ -21,10 +21,10 @@ class AppKernel extends Kernel {
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Map\CoreBundle\MapCoreBundle(),
-            new Map\AdminBundle\MapAdminBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Map\UserBundle\MapUserBundle(),
             new Map\HomeBundle\MapHomeBundle(),
+            new Map\DomainBundle\MapDomainBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

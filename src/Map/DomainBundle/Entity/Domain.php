@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  MyAgileProject
- * @package   Admin
+ * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2012 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -27,16 +27,16 @@
  *
  */
 
-namespace Map\AdminBundle\Entity;
+namespace Map\DomainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Map\AdminBundle\Entity\Domain
+ * Map\DomainBundle\Entity\Domain
  *
  * @ORM\Table(name="map_domain")
- * @ORM\Entity(repositoryClass="Map\AdminBundle\Entity\DomainRepository")
+ * @ORM\Entity(repositoryClass="Map\DomainBundle\Entity\DomainRepository")
  * @UniqueEntity(fields="name", message="A domain with this name already exists.")
  */
 class Domain

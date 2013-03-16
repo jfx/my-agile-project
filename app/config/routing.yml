@@ -1,3 +1,7 @@
+map_domain:
+    resource: "@MapDomainBundle/Resources/config/routing.yml"
+    prefix:   /
+
 map_home:
     resource: "@MapHomeBundle/Resources/config/routing.yml"
     prefix:   /
@@ -15,10 +19,6 @@ map_user:
 
 map_core:
     resource: "@MapCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
-map_admin:
-    resource: "@MapAdminBundle/Resources/config/routing.yml"
     prefix:   /
 
 # Internal routing configuration to handle ESI

@@ -1,0 +1,3 @@
+map_domain_homepage:
+    resource: "@MapDomainBundle/Resources/config/routing/domain.yml"
+    prefix:   /domain

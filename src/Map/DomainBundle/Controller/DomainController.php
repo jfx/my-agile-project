@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  MyAgileProject
- * @package   Admin
+ * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2012 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -27,12 +27,12 @@
  *
  */
 
-namespace Map\AdminBundle\Controller;
+namespace Map\DomainBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Map\AdminBundle\Entity\Domain;
-use Map\AdminBundle\Form\DomainType;
+use Map\DomainBundle\Entity\Domain;
+use Map\DomainBundle\Form\DomainType;
 use Map\CoreBundle\Util\Form\FormHandler;
 
 class DomainController extends Controller
@@ -41,12 +41,12 @@ class DomainController extends Controller
     {
         $repository = $this->getDoctrine()
             ->getManager()
-            ->getRepository('MapAdminBundle:Domain');
+            ->getRepository('MapDomainBundle:Domain');
 
         $domains = $repository->findAllOrderByName();
 
         return $this->render(
-            'MapAdminBundle:Domain:index.html.twig',
+            'MapDomainBundle:Domain:index.html.twig',
             array('domains' => $domains)
         );
     }
@@ -73,11 +73,11 @@ class DomainController extends Controller
                 ->add('success', 'Domain added successfully !');
                         
             return $this->redirect(
-                $this->generateUrl('adminDomain_view', array('id' => $id))
+                $this->generateUrl('domain_view', array('id' => $id))
             );
         }
         return $this->render(
-            'MapAdminBundle:Domain:add.html.twig',
+            'MapDomainBundle:Domain:add.html.twig',
             array('form' => $form->createView())
         );
     }
@@ -85,7 +85,7 @@ class DomainController extends Controller
     public function viewAction(Domain $domain)
     {
         return $this->render(
-            'MapAdminBundle:Domain:view.html.twig',
+            'MapDomainBundle:Domain:view.html.twig',
             array('domain' => $domain)
         );
     }
@@ -111,11 +111,11 @@ class DomainController extends Controller
                 ->add('success', 'Domain edited successfully !');
             
             return $this->redirect(
-                $this->generateUrl('adminDomain_view', array('id' => $id))
+                $this->generateUrl('domain_view', array('id' => $id))
             );
         }
         return $this->render(
-            'MapAdminBundle:Domain:edit.html.twig',
+            'MapDomainBundle:Domain:edit.html.twig',
             array('form' => $form->createView(), 'domain' => $domain)
         );
     }
@@ -136,11 +136,11 @@ class DomainController extends Controller
                 ->add('success', 'Domain removed successfully !');
                         
             return $this->redirect(
-                $this->generateUrl('adminDomain_index')
+                $this->generateUrl('domain_index')
             );
         }
         return $this->render(
-            'MapAdminBundle:Domain:del.html.twig',
+            'MapDomainBundle:Domain:del.html.twig',
             array('domain' => $domain)
         );
     }

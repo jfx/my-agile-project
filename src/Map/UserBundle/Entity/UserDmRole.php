@@ -45,7 +45,7 @@ class UserDmRole
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Map\AdminBundle\Entity\Domain")
+     * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     protected $domain;
 
@@ -87,7 +87,7 @@ class UserDmRole
      * 
      * @return UserDmRole
      */
-    public function setDomain(Map\AdminBundle\Entity\Domain $dm)
+    public function setDomain(Map\DomainBundle\Entity\Domain $dm)
     {
         $this->domain = $dm;
     

@@ -5,6 +5,13 @@
 {% block headline %}Admin > Domain edit - Id : {{ domain.id }}{% endblock headline %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+    <li class="active">
+    <a href="#">Main</a>
+    </li>
+    <li><a href="#">Milestones</a></li>
+    <li><a href="#">Resources</a></li>
+</ul>
 <div class="span8">
     <form class="form-horizontal well" method="post">
         {{ form_widget(form) }}
@@ -14,7 +21,7 @@
     </form>
 </div>
 <div class="span8">
-    <a href="{{ path('adminDomain_index') }}" class="btn">
+    <a href="{{ path('domain_index') }}" class="btn">
         <i class="icon-chevron-left"></i>
         Return to list
     </a>

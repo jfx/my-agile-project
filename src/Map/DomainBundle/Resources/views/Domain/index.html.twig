@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('adminDomain_add') }}"
+                    <a href="{{ path('domain_add') }}"
                         class="btn">
                         <i class="icon-plus-sign"></i>
                     </a>
@@ -25,16 +25,16 @@
 {% for domain in domains %}
             <tr>
                 <td width="150">
-                    <a href="{{ path('adminDomain_view', {'id': domain.id}) }}"
+                    <a href="{{ path('domain_view', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-eye-open"></i>
                     </a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('adminDomain_edit', {'id': domain.id}) }}"
+                    <a href="{{ path('domain_edit', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-edit"></i>
                     </a>
-                    <a href="{{ path('adminDomain_del', {'id': domain.id}) }}"
+                    <a href="{{ path('domain_del', {'id': domain.id}) }}"
                        class="btn">
                         <i class="icon-trash"></i>
                     </a>

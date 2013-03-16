@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  MyAgileProject
- * @package   Admin
+ * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2012 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -27,7 +27,7 @@
  *
  */
 
-namespace Map\AdminBundle\Entity;
+namespace Map\DomainBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -41,8 +41,8 @@ class DomainRepository extends EntityRepository
 {
     public function findAllOrderByName()
     {
-        $queryBuilder = $this->createQueryBuilder('a')
-            ->orderBy('a.name');
+        $queryBuilder = $this->createQueryBuilder('d')
+            ->orderBy('d.name');
         
         $results = $queryBuilder->getQuery()->getResult();
         
