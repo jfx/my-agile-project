@@ -84,6 +84,8 @@ class DomainController extends Controller
 
     public function viewAction(Domain $domain)
     {
+        $this->setCurrentDomain2User($domain);
+        
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
             array('domain' => $domain)
@@ -95,6 +97,8 @@ class DomainController extends Controller
     */
     public function editAction(Domain $domain)
     {
+        $this->setCurrentDomain2User($domain);
+        
         $form    = $this->createForm(new DomainType(), $domain);
         
         $handler = new FormHandler(
@@ -129,19 +133,59 @@ class DomainController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
+            $this->setCurrentDomain2User(null);
             $em->remove($domain);
-            $em->flush();
             
-            $this->get('session')->getFlashBag()
-                ->add('success', 'Domain removed successfully !');
-                        
-            return $this->redirect(
-                $this->generateUrl('domain_index')
-            );
+            try {    
+                $em->flush();
+                
+                $success = true;
+            }
+            catch (\Exception $e) {
+                $success = false;
+                
+                $this->get('session')->getFlashBag()
+                    ->add(
+                        'error', 
+                        'Impossible to remove this item'
+                     .  ' - Integrity constraint violation !'
+                    );              
+            }
+            if ($success) {
+                $this->get('session')->getFlashBag()
+                    ->add('success', 'Domain removed successfully !');
+ 
+                return $this->redirect(
+                    $this->generateUrl('domain_index')
+                );                
+            }
         }
+        $this->setCurrentDomain2User($domain);
+        
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
             array('domain' => $domain)
         );
     }
+    
+   /**
+    * 
+    */
+   private function setCurrentDomain2User($domain)
+   {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        
+        if ($domain != $user->getCurrentDomain()) {
+            
+            if ($domain == null) {
+                $user->unsetCurrentDomain();
+            }
+            else {
+                $user->setCurrentDomain($domain);
+            }
+            //TODO Set role dans label role in user.
+        
+            $this->get('fos_user.user_manager')->updateUser($user);
+        }
+   }
 }

@@ -55,7 +55,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $this->addDivider($menu, true);
                 
         $dropdownAdmin = $this->createDropdownMenuItem(
-            $menu, "Admin", false, array('icon' => 'caret')
+            $menu, "Admin", false, array('caret' => true)
         );
         $dropdownAdmin->addChild('Profile', array('route' => 'user_profile'));
 

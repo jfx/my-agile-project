@@ -1,26 +1,31 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Domain delete - Id : {{ domain.id }}{% endblock title %}
+{% block title %}{{ parent() }} - Resource delete{% endblock title %}
 
-{% block headline %}Admin > Domain delete - Id : {{ domain.id }}{% endblock headline %}
+{% block headline %}{{ domain.name }} > Resource delete{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#">Main</a></li>
-    <li><a href="#">Milestones</a></li>
-    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
-</ul>
 <div class="span8"> 
     <form id="formDel" class="form-horizontal well" method="post">
-        {% include "MapDomainBundle:Domain:formread.html.twig" %}
-
+        <div class="control-group">
+            <label class="control-label" for="inputResource">Resource</label>
+            <div class="controls">
+                <span  id="inputResource" class="input-xlarge uneditable-input">{{ userDmRole.user.nameFirstname }}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputRole">Role</label>
+            <div class="controls">
+                <span  id="inputRole" class="input-xlarge uneditable-input">{{ userDmRole.role.label }}</span>
+            </div>
+        </div>
         <div class="center">
            <a href="#" class="confirm"><button class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button></a>
         </div>
     </form>
 </div>
 <div class="span8">
-<a href="{{ path('domain_index') }}" class="btn">
+<a href="{{ path('dm-resource_index') }}" class="btn">
 <i class="icon-chevron-left"></i>
 Return to list
 </a>

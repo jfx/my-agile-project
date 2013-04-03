@@ -31,10 +31,12 @@ namespace Map\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Map\DomainBundle\Entity\Domain;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="map_user")
+ * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {
@@ -72,7 +74,12 @@ class User extends BaseUser
      * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
-    
+
+    /**
+     * @ORM\OneToOne(targetEntity="Map\DomainBundle\Entity\Domain")
+     */
+    private $currentDomain;
+
     public function __construct()
     {
         parent::__construct();
@@ -175,6 +182,44 @@ class User extends BaseUser
     }
     
     /**
+     * Set current domain
+     *
+     * @param Domain $currentDomain
+     * 
+     * @return User
+     */
+    public function setCurrentDomain(Domain $dm)
+    {
+        $this->currentDomain = $dm;
+    
+        return $this;
+    }
+
+    /**
+     * Get current domain
+     *
+     * @return Domain
+     */
+    public function getCurrentDomain()
+    {
+        return $this->currentDomain;
+    }
+
+    /**
+     * unset current domain
+     *
+     * @param Domain $currentDomain
+     * 
+     * @return User
+     */
+    public function unsetCurrentDomain()
+    {
+        $this->currentDomain = null;
+    
+        return $this;
+    }
+    
+    /**
      * Set password
      *
      * @param string $password
@@ -196,5 +241,15 @@ class User extends BaseUser
     public function getUpdatedPassword()
     {
         return '';
+    }
+    
+    /**
+     * Get Name and firstname
+     *
+     * @return string 
+     */
+    public function getNameFirstname()
+    {
+        return $this->getName().' '.$this->getFirstname();
     }
 }

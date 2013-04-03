@@ -154,12 +154,27 @@ class UserController extends Controller
         
         if( $this->get('request')->getMethod() == 'POST' ) {
                        
-            $userManager->deleteUser($user);
-            
-            $this->get('session')->getFlashBag()
-                ->add('success', 'User removed successfully !');
+            try {  
+                $userManager->deleteUser($user);
+                          
+                $success = true;
+            }
+            catch (\Exception $e) {
+                $success = false;
+                
+                $this->get('session')->getFlashBag()
+                    ->add(
+                        'error', 
+                        'Impossible to remove this item'
+                     .  ' - Integrity constraint violation !'
+                    );              
+            }
+            if ($success) {
+                $this->get('session')->getFlashBag()
+                    ->add('success', 'User removed successfully !');
                         
-            return $this->redirect($this->generateUrl('user_index'));
+                return $this->redirect($this->generateUrl('user_index'));
+            }
         }
         return $this->render(
             'MapUserBundle:User:del.html.twig',

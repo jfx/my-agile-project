@@ -1,6 +1,6 @@
 <?php
 /**
- * UserDmRole entity class.
+ * Role entity class.
  *
  * LICENSE : This file is part of My Agile Project.
  *
@@ -30,106 +30,105 @@
 namespace Map\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Map\UserBundle\Entity\User;
-use Map\DomainBundle\Entity\Domain;
-use Map\UserBundle\Entity\Role;
 
 /**
- * @ORM\Table(name="map_user_dm_role")
- * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\UserDmRoleRepository")
+ * Map\DomainBundle\Entity\Domain
+ *
+ * @ORM\Table(name="map_role")
+ * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\RoleRepository")
  */
-class UserDmRole
+class Role
 {
+    const DEFAULT_ROLE = 'ROLE_DM_USER';
     
     /**
+     * @var string $id
+     *
+     * @ORM\Column(name="id", type="string", length=20)
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\User")
      */
-    protected $user;
+    private $id;
 
     /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
+     * @var string $label
+     *
+     * @ORM\Column(name="label", type="string", length=20)
      */
-    protected $domain;
+    private $label;
 
     /**
-     * @var string $role
+     * @var integer $order
      *
-     * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\Role")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="r_order", type="integer", unique=true)
      */
-    protected $role;
-    
+    private $order;
+
     /**
-     * Set User
+     * Set id
      *
-     * @param User $user
-     * 
-     * @return UserDmRole
+     * @param string $id
+     * @return Role
      */
-    public function setUser(User $user)
+    public function setId($id)
     {
-        $this->user = $user;
+        $this->id = $id;
+    
+        return $this;
+    }
+    
+    /**
+     * Get id
+     *
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     * @return Role
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
     
         return $this;
     }
 
     /**
-     * Get User
+     * Get label
      *
-     * @return User 
+     * @return string 
      */
-    public function getUser()
+    public function getLabel()
     {
-        return $this->user;
+        return $this->label;
     }
 
     /**
-     * Set Domain
+     * Set order
      *
-     * @param Domain $dm
-     * 
-     * @return UserDmRole
-     */
-    public function setDomain(Domain $dm)
-    {
-        $this->domain = $dm;
-    
-        return $this;
-    }
-
-    /**
-     * Get Domain
-     *
+     * @param integer $order
      * @return Domain
      */
-    public function getDomain()
+    public function setOrder($order)
     {
-        return $this->domain;
-    }
-
-    /**
-     * Set role
-     *
-     * @param Role $role
-     * 
-     * @return User
-     */
-    public function setRole(Role $role)
-    {
-        $this->role = $role;
+        $this->order = $order;
     
         return $this;
     }
 
     /**
-     * Get role
+     * Get order
      *
-     * @return Role 
+     * @return integer 
      */
-    public function getRole()
+    public function geOrder()
     {
-        return $this->role;
-    }    
+        return $this->order;
+    }
 }

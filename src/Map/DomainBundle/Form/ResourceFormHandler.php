@@ -1,6 +1,6 @@
 <?php
 /**
- * Form handler class.
+ * Resource form handler class.
  *
  * LICENSE : This file is part of My Agile Project.
  *
@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @category  MyAgileProject
- * @package   User
+ * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2013 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -27,24 +27,42 @@
  *
  */
 
-namespace Map\UserBundle\Form;
+namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Util\Form\FormHandler;
-use FOS\UserBundle\Model\UserManager;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Map\DomainBundle\Entity\Domain;
 
-class UserFormHandler extends FormHandler
+class ResourceFormHandler extends FormHandler
 {
-    public function __construct(Form $form, Request $request, UserManager $um)
-    {
-        $this->_form = $form;
-        $this->_request = $request;
-        $this->_em = $um;
-    }
+    protected $_domain;
 
-    public function onSuccess($entity)
+    public function __construct(
+        Form $form, Request $request, EntityManager $em, Domain $dm
+    )
     {
-        $this->_em->updateUser($entity);
+        parent::__construct($form, $request, $em);
+        $this->_domain = $dm;
+    }
+    
+    public function process()
+    {
+        if ($this->_request->getMethod() == 'POST') {
+            
+            $this->_form->bindRequest($this->_request);
+            
+            if ($this->_form->isValid()) {
+                
+                $entity = $this->_form->getData();
+                $entity->setDomain($this->_domain);
+            
+                $this->onSuccess($entity);
+                
+                return true;
+            }            
+        }
+        return false;
     }
 }

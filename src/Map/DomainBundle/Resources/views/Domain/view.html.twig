@@ -5,6 +5,11 @@
 {% block headline %}Admin > Domain view - Id : {{ domain.id }}{% endblock headline %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Main</a></li>
+    <li><a href="#">Milestones</a></li>
+    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
+</ul>
 <div class="span8">
     <form class="form-horizontal well">
         

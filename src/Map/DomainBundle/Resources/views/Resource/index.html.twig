@@ -1,0 +1,53 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Resources list{% endblock title %}
+
+{% block headline %}{{ domain.name }} > Resources list{% endblock headline %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li><a href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
+    <li><a href="#">Milestones</a></li>
+    <li class="active"><a href="#">Resources</a></li>
+</ul>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('dm-resource_add') }}"
+                        class="btn">
+                        <i class="icon-plus-sign"></i>
+                    </a>
+               {% endif %}
+               &nbsp;&nbsp;Action
+            </th>
+            <th>Name</th>
+            <th>Displayname</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for resource in resources %}
+            <tr>
+                <td width="150">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('dm-resource_edit', {'id': resource.id}) }}"
+                       class="btn">
+                        <i class="icon-edit"></i>
+                    </a>
+                    <a href="{{ path('dm-resource_del', {'id': resource.id}) }}"
+                       class="btn">
+                        <i class="icon-trash"></i>
+                    </a>
+                    {% endif %}
+                </td>
+                <td>{{ resource.name }} {{ resource.firstname }}</td>
+                <td>{{ resource.displayname }}</td>
+                <td>{{ resource.role }}</td>
+            </tr>
+{% else %}
+        <li>No User</li>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
