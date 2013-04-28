@@ -8,6 +8,9 @@ security:
 
     role_hierarchy:
         ROLE_SUPER_ADMIN: ROLE_USER
+        ROLE_DM_USER:     ROLE_DM_GUEST
+        ROLE_DM_USERPLUS: ROLE_DM_USER
+        ROLE_DM_MANAGER:  ROLE_DM_USERPLUS
 
     providers:
         fos_userbundle:

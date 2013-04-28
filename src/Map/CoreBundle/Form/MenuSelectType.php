@@ -30,39 +30,66 @@
 namespace Map\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
 
 class MenuSelectType extends AbstractType implements NavbarFormInterface
 {
+    protected $_user;
+    
+    public function __construct(ContainerInterface $container)
+    {
+        $this->_user = $container->get('security.context')->getToken()->getUser();
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('search', 'choice', array(
-                'choices' => array(
-                    1 => 'Appli 1',
-                    2 => 'Appli 2',
-                    3 => 'Appli 3'
-                ),
-                'data' => 2,
-                'widget_control_group' => false,
-                'widget_controls' => false,
-                'attr' => array(
-                    'class' => "span2",
-                    'onChange' => "this.form.submit()"
-                )
-            ))
-        ;
+        $currentDomain = $this->_user->getCurrentDomain();
+        if (is_null($currentDomain)) {
+            $currentDomainId = 0;
+        } else {
+            $currentDomainId = $currentDomain->getId();
+        }
+        $availableDomains = $this->_user->getAvailableDomains();
+        
+        if (key_exists($currentDomainId, $availableDomains)) {
+            $builder
+                ->add('search', 'choice', array(
+                    'choices' => $availableDomains,
+                    'data' => $currentDomainId,
+                    'widget_control_group' => false,
+                    'widget_controls' => false,
+                    'attr' => array(
+                        'class' => "span2",
+                        'onChange' => "this.form.submit()"
+                    )
+                ))
+            ;        
+        } else {
+            $builder
+                ->add('search', 'choice', array(
+                    'choices' => $availableDomains,
+                    'empty_value' => '',
+                    'widget_control_group' => false,
+                    'widget_controls' => false,
+                    'attr' => array(
+                        'class' => "span2",
+                        'onChange' => "this.form.submit()"
+                    )
+                ))
+            ;          
+        }                
     }
     public function getName()
     {
         return 'map_menu_select';
     }
-    /**
+/**
 * To implement NavbarFormTypeInterface
 */
     public function getRoute()
     {
-        return "domain_index"; # return here the name of the route the form should point to
+        return "domain_select"; # return here the name of the route the form should point to
     }
 }

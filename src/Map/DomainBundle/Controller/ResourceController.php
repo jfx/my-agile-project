@@ -55,7 +55,7 @@ class ResourceController extends Controller
     }
  
    /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
+    * @Secure(roles="ROLE_SUPER_ADMIN, ROLE_DM_MANAGER")
     */
     public function addAction()
     {
@@ -80,6 +80,12 @@ class ResourceController extends Controller
         
         if ($handler->process()) {
             
+            $userDmRoleInForm = $form->getData();
+            $userId = $userDmRoleInForm->getUser()->getId();
+            
+            $service = $this->container->get('map_user.updatedomain4user');
+            $service->refreshAvailableDomains4UserId($userId);
+            
             $this->get('session')->getFlashBag()
                 ->add('success', 'Resource added successfully !');
                         
@@ -94,7 +100,7 @@ class ResourceController extends Controller
     }
 
    /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
+    * @Secure(roles="ROLE_SUPER_ADMIN, ROLE_DM_MANAGER")
     */
     public function editAction($id)
     {
@@ -124,6 +130,9 @@ class ResourceController extends Controller
         
         if ($handler->process()) {
             
+            $service = $this->container->get('map_user.updatedomain4user');
+            $service->refreshAvailableDomains4UserId($id);
+            
             $this->get('session')->getFlashBag()
                 ->add('success', 'Resource edited successfully !');
                         
@@ -142,7 +151,7 @@ class ResourceController extends Controller
     }
     
    /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
+    * @Secure(roles="ROLE_SUPER_ADMIN, ROLE_DM_MANAGER")
     */
     public function delAction($id)
     {
@@ -168,6 +177,9 @@ class ResourceController extends Controller
             try {    
                 $em->flush();
                 
+                $service = $this->container->get('map_user.updatedomain4user');
+                $service->refreshAvailableDomains4UserId($id);
+                
                 $success = true;
             }
             catch (\Exception $e) {
@@ -182,7 +194,7 @@ class ResourceController extends Controller
             }
             if ($success) {
                 $this->get('session')->getFlashBag()
-                    ->add('success', 'Ressource removed successfully !');
+                    ->add('success', 'Resource removed successfully !');
  
                 return $this->redirect(
                     $this->generateUrl('dm-resource_index')

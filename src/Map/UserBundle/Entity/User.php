@@ -76,13 +76,28 @@ class User extends BaseUser
     private $details;
 
     /**
-     * @ORM\OneToOne(targetEntity="Map\DomainBundle\Entity\Domain")
+     * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     private $currentDomain;
 
+    /**
+     * @var string $currentRoleLabel
+     *
+     * @ORM\Column(name="current_role_label", type="text", length=25, nullable=true)
+     */
+    private $currentRoleLabel;
+    
+    /**
+     * @var array $availableDomains
+     *
+     * @ORM\Column(name="available_domains", type="array")
+     */
+    private $availableDomains;
+    
     public function __construct()
     {
         parent::__construct();
+        $this->availableDomains = array();
     }
     
     /**
@@ -208,8 +223,6 @@ class User extends BaseUser
     /**
      * unset current domain
      *
-     * @param Domain $currentDomain
-     * 
      * @return User
      */
     public function unsetCurrentDomain()
@@ -219,6 +232,72 @@ class User extends BaseUser
         return $this;
     }
     
+    /**
+     * Set current role label
+     *
+     * @param string $crl
+     * 
+     * @return User
+     */
+    public function setCurrentRoleLabel($crl)
+    {
+        $this->currentRoleLabel = $crl;
+    
+        return $this;
+    }
+
+    /**
+     * Get current role label
+     *
+     * @return string 
+     */
+    public function getCurrentRoleLabel()
+    {
+        return $this->currentRoleLabel;
+    }
+    
+    /**
+     * Set available domains
+     *
+     * @param array $domains
+     * 
+     * @return User
+     */
+    public function setAvailableDomains($domains)
+    {
+        $this->availableDomains = $domains;
+    
+        return $this;
+    }
+
+    /**
+     * Get available domains
+     *
+     * @return array
+     */
+    public function getAvailableDomains()
+    {
+        return $this->availableDomains;
+    }
+
+    /**
+     * unset domain role
+     *
+     * @return User
+     */
+    public function unsetDomainRole()
+    {
+        $this->currentRoleLabel = null;
+        
+        foreach ($this->getRoles() as $key => $role) {
+            
+            if (substr($role, 0, 7) == 'ROLE_DM') {
+                $this->removeRole($role);
+            }
+        }
+        return $this;
+    }
+
     /**
      * Set password
      *

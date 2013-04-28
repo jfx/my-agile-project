@@ -7,20 +7,21 @@
 {% block content %}
 <ul class="nav nav-tabs">
     <li><a href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
-    <li><a href="#">Milestones</a></li>
     <li class="active"><a href="#">Resources</a></li>
 </ul>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
+            <th>
                     <a href="{{ path('dm-resource_add') }}"
                         class="btn">
                         <i class="icon-plus-sign"></i>
                     </a>
-               {% endif %}
+               
                &nbsp;&nbsp;Action
             </th>
+            {% endif %}
             <th>Name</th>
             <th>Displayname</th>
             <th>Role</th>
@@ -29,8 +30,8 @@
     <tbody>
 {% for resource in resources %}
             <tr>
-                <td width="150">
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
+                <td width="150"> 
                     <a href="{{ path('dm-resource_edit', {'id': resource.id}) }}"
                        class="btn">
                         <i class="icon-edit"></i>
@@ -39,8 +40,8 @@
                        class="btn">
                         <i class="icon-trash"></i>
                     </a>
-                    {% endif %}
                 </td>
+                {% endif %}
                 <td>{{ resource.name }} {{ resource.firstname }}</td>
                 <td>{{ resource.displayname }}</td>
                 <td>{{ resource.role }}</td>

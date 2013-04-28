@@ -23,3 +23,7 @@ domain_del:
     defaults: { _controller: "MapDomainBundle:Domain:del" }
     requirements:
         id:  \d+
+        
+domain_select:
+    pattern:  /select
+    defaults: { _controller: "MapDomainBundle:Domain:select" }

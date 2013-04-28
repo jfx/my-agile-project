@@ -33,6 +33,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
+use Map\UserBundle\Entity\Role;
 
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {
@@ -76,8 +77,19 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         
         $user = $this->securityContext->getToken()->getUser();
         $username = ucfirst($user->getUsername());
-        
-        $menu->addChild($username.' (user++)', array('route' => 'user_profile'));
+        $roleLabel = $user->getCurrentRoleLabel();
+
+        if (($roleLabel != null) 
+             && (strlen($roleLabel) > 0)
+             && ($roleLabel != Role::LABEL_NONE)
+        ) {
+            $roleLabel2Display = '('.$roleLabel.')';
+        } else {
+            $roleLabel2Display = '';
+        }
+        $menu->addChild($username.' '.$roleLabel2Display,
+            array('route' => 'user_profile')
+        );
         
         $this->addDivider($menu, true);
     

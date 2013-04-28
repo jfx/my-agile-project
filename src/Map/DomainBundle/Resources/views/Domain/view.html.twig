@@ -7,7 +7,6 @@
 {% block content %}
 <ul class="nav nav-tabs">
     <li class="active"><a href="#">Main</a></li>
-    <li><a href="#">Milestones</a></li>
     <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
 </ul>
 <div class="span8">
@@ -22,7 +21,7 @@
 <i class="icon-chevron-left"></i>
 Return to list
 </a>
-{% if is_granted('ROLE_SUPER_ADMIN') %}
+{% if (is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER')) %}
     <a href="{{ path('domain_edit', {'id': domain.id}) }}"
     class="btn">
         <i class="icon-edit"></i>

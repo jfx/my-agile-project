@@ -32,7 +32,7 @@ namespace Map\UserBundle\Form;
 use Map\CoreBundle\Util\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraint\UserPassword;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 class UserPasswordType extends DefaultType
 {

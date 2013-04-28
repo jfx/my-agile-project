@@ -30,10 +30,12 @@
 namespace Map\DomainBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Map\CoreBundle\Util\Form\FormHandler;
 use Map\DomainBundle\Entity\Domain;
 use Map\DomainBundle\Form\DomainType;
-use Map\CoreBundle\Util\Form\FormHandler;
+use Map\UserBundle\Entity\Role;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class DomainController extends Controller
 {
@@ -82,9 +84,13 @@ class DomainController extends Controller
         );
     }
 
+   /**
+    * @Secure(roles="ROLE_USER")
+    */
     public function viewAction(Domain $domain)
     {
-        $this->setCurrentDomain2User($domain);
+        $service = $this->container->get('map_user.updatedomain4user');
+        $service->setCurrentDomain($domain);
         
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
@@ -93,11 +99,22 @@ class DomainController extends Controller
     }
     
    /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
+    * @Secure(roles="ROLE_USER")
     */
     public function editAction(Domain $domain)
     {
-        $this->setCurrentDomain2User($domain);
+        $service = $this->container->get('map_user.updatedomain4user');
+        $service->setCurrentDomain($domain);
+        
+        $sc = $this->container->get('security.context');
+        
+        if (!($sc->isGranted('ROLE_SUPER_ADMIN')
+                || $sc->isGranted(Role::MANAGER_ROLE)
+           )) {
+            throw new AccessDeniedHttpException(
+                'You are not allowed to access this resource'
+            );
+        }
         
         $form    = $this->createForm(new DomainType(), $domain);
         
@@ -129,11 +146,14 @@ class DomainController extends Controller
     */
     public function delAction(Domain $domain)
     {
+        $service = $this->container->get('map_user.updatedomain4user');
+        
         if( $this->get('request')->getMethod() == 'POST' ) {
             
             $em = $this->getDoctrine()->getManager();
             
-            $this->setCurrentDomain2User(null);
+            $service->setCurrentDomain(null);
+
             $em->remove($domain);
             
             try {    
@@ -160,7 +180,7 @@ class DomainController extends Controller
                 );                
             }
         }
-        $this->setCurrentDomain2User($domain);
+        $service->setCurrentDomain($domain);
         
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
@@ -169,23 +189,15 @@ class DomainController extends Controller
     }
     
    /**
-    * 
+    * @Secure(roles="ROLE_USER")
     */
-   private function setCurrentDomain2User($domain)
-   {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+    public function selectAction()
+    {
+        $request = $this->getRequest();
+        $domainId = $request->request->get('map_menu_select')['search'];
         
-        if ($domain != $user->getCurrentDomain()) {
-            
-            if ($domain == null) {
-                $user->unsetCurrentDomain();
-            }
-            else {
-                $user->setCurrentDomain($domain);
-            }
-            //TODO Set role dans label role in user.
-        
-            $this->get('fos_user.user_manager')->updateUser($user);
-        }
-   }
+        return $this->redirect(
+            $this->generateUrl('domain_view', array('id' => $domainId))
+        );
+    }
 }

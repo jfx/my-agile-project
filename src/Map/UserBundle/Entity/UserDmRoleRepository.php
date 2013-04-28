@@ -31,6 +31,7 @@ namespace Map\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Map\DomainBundle\Entity\Domain;
+use Map\UserBundle\Entity\User;
 
 /**
  * UserDmRoleRepository
@@ -45,7 +46,6 @@ class UserDmRoleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('udr')
             ->join('udr.role', 'r')
             ->addSelect('r.label as role')
-                     
             ->join('udr.domain', 'd')
             ->addSelect('d')
             ->where('d.id = :domainId')
@@ -59,7 +59,24 @@ class UserDmRoleRepository extends EntityRepository
         return $results;
     }
     
-        public function findByUserIdDomainId($userId, $domainId)
+    public function findAvailableDomainsByUser(User $user)
+    {
+        $qb = $this->createQueryBuilder('udr')
+            ->join('udr.domain', 'd')
+            ->select('d.id, d.name')
+            ->join('udr.user', 'u')
+            ->where('u.id = :userId')   
+            ->setParameter('userId', $user->getId())
+            ->join('udr.role', 'r')
+            ->andWhere('r.id != \'ROLE_DM_NONE\'')
+            ->orderBy('d.name', 'ASC')
+        ;
+        $results = $qb->getQuery()->getResult();
+        
+        return $results;
+    }
+    
+    public function findByUserIdDomainId($userId, $domainId)
     {
         $qb = $this->createQueryBuilder('udr')
             ->join('udr.user', 'u')
