@@ -87,7 +87,12 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         } else {
             $roleLabel2Display = '';
         }
-        $menu->addChild($username.' '.$roleLabel2Display,
+        if ($user->isSuperAdmin()) {
+            $star = '*';
+        } else {
+            $star ='';
+        }
+        $menu->addChild($username.$star.' '.$roleLabel2Display,
             array('route' => 'user_profile')
         );
         

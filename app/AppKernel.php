@@ -25,6 +25,7 @@ class AppKernel extends Kernel {
             new Map\UserBundle\MapUserBundle(),
             new Map\HomeBundle\MapHomeBundle(),
             new Map\DomainBundle\MapDomainBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

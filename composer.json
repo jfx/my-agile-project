@@ -24,7 +24,8 @@
         "mopa/bootstrap-bundle": "dev-master",
         "twitter/bootstrap": "master",
         "knplabs/knp-menu-bundle": "dev-master",
-        "friendsofsymfony/user-bundle": "*"
+        "friendsofsymfony/user-bundle": "*",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "repositories": [
     {
