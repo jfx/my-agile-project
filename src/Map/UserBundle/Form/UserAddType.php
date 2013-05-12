@@ -1,7 +1,5 @@
 <?php
 /**
- * User add form class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   User
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\UserBundle\Form;
@@ -35,30 +24,84 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 
+/**
+ * User add form class.
+ *
+ * @category  MyAgileProject
+ * @package   User
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 class UserAddType extends DefaultType
 {
+    /**
+     * Builds the form.
+     *
+     * This method is called for each type in the hierarchy starting form the
+     * top most type. Type extensions can further modify the form.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', null, array('validation_constraint' => array(
-                new Length(array('min' => 2, 'max' => 50))
-            )))
-            ->add('name', null, array('validation_constraint' => array(
-                new Length(array('min' => 2, 'max' => 50))
-            )))
-            ->add('displayname', null, array('validation_constraint' => array(
-                new Length(array('min' => 2, 'max' => 50))
-            )))
-            ->add('username', null, array('validation_constraint' => array(
-                new Length(array('min' => 2, 'max' => 50))
-            )))
+            ->add(
+                'firstname',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Length(array('min' => 2, 'max' => 50))
+                    )
+                )
+            )
+            ->add(
+                'name',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Length(array('min' => 2, 'max' => 50))
+                    )
+                )
+            )
+            ->add(
+                'displayname',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Length(array('min' => 2, 'max' => 50))
+                    )
+                )
+            )
+            ->add(
+                'username',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Length(array('min' => 2, 'max' => 50))
+                    )
+                )
+            )
             ->add('plainPassword', 'password', array('label' => 'Password'))
-            ->add('email', null, array('validation_constraint' => array(
-                new Email(array('message' => 'Invalid email address'))))
+            ->add(
+                'email',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Email(array('message' => 'Invalid email address'))
+                    )
+                )
             )
             ->add('superAdmin', 'checkbox', array('required' => false))
             ->add(
-                'details', 'textarea', array(
+                'details',
+                'textarea',
+                array(
                     'required' => false,
                     'attr'  => array(
                         'class' => 'input-xxlarge',
@@ -68,12 +111,26 @@ class UserAddType extends DefaultType
             )
             ->add('locked', 'checkbox', array('required' => false));
     }
+
+    /**
+     * Sets the default options for this type.
+     *
+     * @param OptionsResolverInterface $resolver The resolver for the options.
+     *
+     * @return void
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Map\UserBundle\Entity\User'
-        ));
+        $resolver->setDefaults(
+            array('data_class' => 'Map\UserBundle\Entity\User')
+        );
     }
+
+    /**
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
+     */
     public function getName()
     {
         return "map_userbundle_usertype";

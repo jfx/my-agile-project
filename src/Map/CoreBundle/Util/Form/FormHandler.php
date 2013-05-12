@@ -1,7 +1,5 @@
 <?php
 /**
- * Form handler class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   Core
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2012 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\CoreBundle\Util\Form;
@@ -33,38 +22,80 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Form handler class.
+ *
+ * @category  MyAgileProject
+ * @package   Core
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2012 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 class FormHandler
 {
-    protected $_form;
-    protected $_request;
-    protected $_em;
+    /**
+     * @var Symfony\Component\Form\Form
+     */
+    protected $form;
 
+    /**
+     * @var Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var Doctrine\ORM\EntityManager
+     */
+    protected $em;
+
+    /**
+     * Constructor
+     *
+     * @param Form          $form    Form.
+     * @param Request       $request Http request.
+     * @param EntityManager $em      Doctrine entity manager
+     */
     public function __construct(Form $form, Request $request, EntityManager $em)
     {
-        $this->_form = $form;
-        $this->_request = $request;
-        $this->_em = $em;
+        $this->form = $form;
+        $this->request = $request;
+        $this->em = $em;
     }
 
+    /**
+     * For a submited form, valid it and update database.
+     *
+     * @return bolean
+     */
     public function process()
     {
-        if ($this->_request->getMethod() == 'POST') {
-            
-            $this->_form->bindRequest($this->_request);
-            
-            if ($this->_form->isValid()) {
-            
-                $this->onSuccess($this->_form->getData());
-                
+        if ($this->request->getMethod() == 'POST') {
+
+            $this->form->bindRequest($this->request);
+
+            if ($this->form->isValid()) {
+
+                $this->onSuccess($this->form->getData());
+
                 return true;
-            }            
+            }
         }
+
         return false;
     }
 
+    /**
+     * Save entity in database.
+     *
+     * @param mixed $entity Object entity.
+     *
+     * @return void
+     */
     public function onSuccess($entity)
     {
-        $this->_em->persist($entity);
-        $this->_em->flush();
+        $this->em->persist($entity);
+        $this->em->flush();
     }
 }

@@ -1,7 +1,5 @@
 <?php
 /**
- * Domain form class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\DomainBundle\Form;
+
+use Map\CoreBundle\Util\Form\DefaultType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Length;
+
+/**
+ * Domain form class.
  *
  * @category  MyAgileProject
  * @package   Domain
@@ -26,24 +35,35 @@
  * @since     2
  *
  */
-
-namespace Map\DomainBundle\Form;
-
-use Map\CoreBundle\Util\Form\DefaultType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Length;
-
 class DomainType extends DefaultType
 {
+    /**
+     * Builds the form.
+     *
+     * This method is called for each type in the hierarchy starting form the
+     * top most type. Type extensions can further modify the form.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('validation_constraint' => array(
-                new Length(array('min' => 2, 'max' => 50))
-            )))
             ->add(
-                'details', 'textarea', array(
+                'name',
+                null,
+                array(
+                    'validation_constraint' => array(
+                        new Length(array('min' => 2, 'max' => 50))
+                    )
+                )
+            )
+            ->add(
+                'details',
+                'textarea',
+                array(
                     'required' => false,
                     'attr'  => array(
                         'class' => 'input-xxlarge',
@@ -52,12 +72,26 @@ class DomainType extends DefaultType
                 )
             );
     }
+
+    /**
+     * Sets the default options for this type.
+     *
+     * @param OptionsResolverInterface $resolver The resolver for the options.
+     *
+     * @return void
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Map\DomainBundle\Entity\Domain'
-        ));
+        $resolver->setDefaults(
+            array('data_class' => 'Map\DomainBundle\Entity\Domain')
+        );
     }
+
+    /**
+     * Returns the name of this type.
+     *
+     * @return string The name of this type
+     */
     public function getName()
     {
         return "map_domainbundle_domaintype";

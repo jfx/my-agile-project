@@ -1,7 +1,5 @@
 <?php
 /**
- * Domain controller class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   Domain
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2012 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\DomainBundle\Controller;
@@ -37,8 +26,27 @@ use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
+/**
+ * Domain controller class.
+ *
+ * @category  MyAgileProject
+ * @package   Domain
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2012 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ *
+ */
 class DomainController extends Controller
 {
+    /**
+     * List of domains
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
     public function indexAction()
     {
         $repository = $this->getDoctrine()
@@ -53,149 +61,175 @@ class DomainController extends Controller
         );
     }
 
-   /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
-    */
+    /**
+     * Add a domain
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_SUPER_ADMIN")
+     */
     public function addAction()
     {
         $domain = new Domain();
         $form   = $this->createForm(new DomainType(), $domain);
-        
+
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
             $this->getDoctrine()->getManager()
         );
-        
+
         if ($handler->process()) {
-            
+
             $id = $domain->getId();
-            
+
             $this->get('session')->getFlashBag()
                 ->add('success', 'Domain added successfully !');
-                        
+
             return $this->redirect(
                 $this->generateUrl('domain_view', array('id' => $id))
             );
         }
+
         return $this->render(
             'MapDomainBundle:Domain:add.html.twig',
             array('form' => $form->createView())
         );
     }
 
-   /**
-    * @Secure(roles="ROLE_USER")
-    */
+    /**
+     * View a domain
+     *
+     * @param Domain $domain The domain to view.
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
     public function viewAction(Domain $domain)
     {
         $service = $this->container->get('map_user.updatedomain4user');
         $service->setCurrentDomain($domain);
-        
+
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
             array('domain' => $domain)
         );
     }
-    
-   /**
-    * @Secure(roles="ROLE_USER")
-    */
+
+    /**
+     * Edit a domain
+     *
+     * @param Domain $domain The domain to edit.
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
     public function editAction(Domain $domain)
     {
         $service = $this->container->get('map_user.updatedomain4user');
         $service->setCurrentDomain($domain);
-        
+
         $sc = $this->container->get('security.context');
-        
+
         if (!($sc->isGranted('ROLE_SUPER_ADMIN')
-                || $sc->isGranted(Role::MANAGER_ROLE)
-           )) {
+            || $sc->isGranted(Role::MANAGER_ROLE))
+        ) {
             throw new AccessDeniedHttpException(
                 'You are not allowed to access this resource'
             );
         }
-        
+
         $form    = $this->createForm(new DomainType(), $domain);
-        
+
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
             $this->getDoctrine()->getManager()
         );
-        
+
         if ($handler->process()) {
-            
+
             $id = $domain->getId();
-            
+
             $this->get('session')->getFlashBag()
                 ->add('success', 'Domain edited successfully !');
-            
+
             return $this->redirect(
                 $this->generateUrl('domain_view', array('id' => $id))
             );
         }
+
         return $this->render(
             'MapDomainBundle:Domain:edit.html.twig',
             array('form' => $form->createView(), 'domain' => $domain)
         );
     }
-    
-   /**
-    * @Secure(roles="ROLE_SUPER_ADMIN")
-    */
+
+    /**
+     * Delete a domain
+     *
+     * @param Domain $domain The domain to delete.
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_SUPER_ADMIN")
+     */
     public function delAction(Domain $domain)
     {
         $service = $this->container->get('map_user.updatedomain4user');
-        
-        if( $this->get('request')->getMethod() == 'POST' ) {
-            
+
+        if ($this->get('request')->getMethod() == 'POST') {
+
             $em = $this->getDoctrine()->getManager();
-            
+
             $service->setCurrentDomain(null);
 
             $em->remove($domain);
-            
-            try {    
+
+            try {
                 $em->flush();
-                
+
                 $success = true;
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $success = false;
-                
-                $this->get('session')->getFlashBag()
-                    ->add(
-                        'error', 
-                        'Impossible to remove this item'
-                     .  ' - Integrity constraint violation !'
-                    );              
+
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
+                );
             }
             if ($success) {
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Domain removed successfully !');
- 
+
                 return $this->redirect(
                     $this->generateUrl('domain_index')
-                );                
+                );
             }
         }
         $service->setCurrentDomain($domain);
-        
+
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
             array('domain' => $domain)
         );
     }
-    
-   /**
-    * @Secure(roles="ROLE_USER")
-    */
+
+    /**
+     * Select a domain in combobox
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
     public function selectAction()
     {
         $request = $this->getRequest();
         $domainId = $request->request->get('map_menu_select')['search'];
-        
+
         return $this->redirect(
             $this->generateUrl('domain_view', array('id' => $domainId))
         );

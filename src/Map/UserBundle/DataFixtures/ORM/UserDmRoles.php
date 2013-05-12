@@ -1,7 +1,5 @@
 <?php
 /**
- * Load user domain role data class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   User
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\UserBundle\DataFixtures\ORM;
@@ -34,30 +23,51 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Map\UserBundle\Entity\UserDmRole;
 
+/**
+ * Load user domain role data class.
+ *
+ * @category  MyAgileProject
+ * @package   User
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 class UserDmRoles extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * {@inheritDoc}
+     * Load data fixtures with the passed EntityManager
+     *
+     * @param ObjectManager $manager The entity manager
+     *
+     * @return void
      */
     public function load(ObjectManager $manager)
     {
         $dataArray = array(
-            array('user' => 'user-user', 'domain' => 'domainone-domain', 'role' => 'user-role'),
+            array(
+                'user' => 'user-user',
+                'domain' => 'domainone-domain',
+                'role' => 'user-role'
+            )
         );
-        
+
         foreach ($dataArray as $i => $data) {
             $objectList[$i] = new UserDmRole();
             $objectList[$i]->setUser($this->getReference($data['user']));
             $objectList[$i]->setDomain($this->getReference($data['domain']));
             $objectList[$i]->setRole($this->getReference($data['role']));
-            
-            $manager->persist($objectList[$i]);            
+
+            $manager->persist($objectList[$i]);
         }
         $manager->flush();
     }
-    
+
     /**
-     * {@inheritDoc}
+     * Get the order of this fixture
+     *
+     * @return integer
      */
     public function getOrder()
     {

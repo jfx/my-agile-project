@@ -1,7 +1,5 @@
 <?php
 /**
- * User entity class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   User
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\UserBundle\Entity;
@@ -34,6 +23,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Map\DomainBundle\Entity\Domain;
 
 /**
+ * User entity class.
+ *
+ * @category  MyAgileProject
+ * @package   User
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ *
  * @ORM\Entity
  * @ORM\Table(name="map_user")
  * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\UserRepository")
@@ -41,6 +40,8 @@ use Map\DomainBundle\Entity\Domain;
 class User extends BaseUser
 {
     /**
+     * @var integer
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -48,28 +49,28 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
     protected $name;
-    
+
     /**
-     * @var string $firstname
+     * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=50)
      */
     protected $firstname;
 
     /**
-     * @var string $displayname
+     * @var string
      *
      * @ORM\Column(name="displayname", type="string", length=50, unique=true)
      */
     protected $displayname;
-    
+
     /**
-     * @var string $details
+     * @var string
      *
      * @ORM\Column(name="details", type="text", nullable=true)
      */
@@ -81,43 +82,46 @@ class User extends BaseUser
     private $currentDomain;
 
     /**
-     * @var string $currentRoleLabel
+     * @var string
      *
      * @ORM\Column(name="current_role_label", type="text", length=25, nullable=true)
      */
     private $currentRoleLabel;
-    
+
     /**
-     * @var array $availableDomains
+     * @var array
      *
      * @ORM\Column(name="available_domains", type="array")
      */
     private $availableDomains;
-    
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
         $this->availableDomains = array();
     }
-    
+
     /**
      * Set name
      *
-     * @param string $name
-     * 
+     * @param string $name The name
+     *
      * @return User
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -127,86 +131,86 @@ class User extends BaseUser
     /**
      * Set firstname
      *
-     * @param string $firstname
-     * 
+     * @param string $firstname The firstname
+     *
      * @return User
      */
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
-    
+
         return $this;
     }
 
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
         return $this->firstname;
     }
-    
+
     /**
      * Set displayname
      *
-     * @param string $displayname
-     * 
+     * @param string $displayname The displayname
+     *
      * @return User
      */
     public function setDisplayname($displayname)
     {
         $this->displayname = $displayname;
-    
+
         return $this;
     }
 
     /**
      * Get displayname
      *
-     * @return string 
+     * @return string
      */
     public function getDisplayname()
     {
         return $this->displayname;
     }
-    
+
     /**
      * Set details
      *
-     * @param string $details
-     * 
+     * @param string $details The details
+     *
      * @return User
      */
     public function setDetails($details)
     {
         $this->details = $details;
-    
+
         return $this;
     }
 
     /**
      * Get details
      *
-     * @return string 
+     * @return string
      */
     public function getDetails()
     {
         return $this->details;
     }
-    
+
     /**
      * Set current domain
      *
-     * @param Domain $currentDomain
-     * 
+     * @param Domain $dm The current domain
+     *
      * @return User
      */
     public function setCurrentDomain(Domain $dm)
     {
         $this->currentDomain = $dm;
-    
+
         return $this;
     }
 
@@ -228,45 +232,45 @@ class User extends BaseUser
     public function unsetCurrentDomain()
     {
         $this->currentDomain = null;
-    
+
         return $this;
     }
-    
+
     /**
      * Set current role label
      *
-     * @param string $crl
-     * 
+     * @param string $crl Label of the role.
+     *
      * @return User
      */
     public function setCurrentRoleLabel($crl)
     {
         $this->currentRoleLabel = $crl;
-    
+
         return $this;
     }
 
     /**
      * Get current role label
      *
-     * @return string 
+     * @return string
      */
     public function getCurrentRoleLabel()
     {
         return $this->currentRoleLabel;
     }
-    
+
     /**
      * Set available domains
      *
-     * @param array $domains
-     * 
+     * @param array $domains List of domains
+     *
      * @return User
      */
     public function setAvailableDomains($domains)
     {
         $this->availableDomains = $domains;
-    
+
         return $this;
     }
 
@@ -288,44 +292,47 @@ class User extends BaseUser
     public function unsetDomainRole()
     {
         $this->currentRoleLabel = null;
-        
+
         foreach ($this->getRoles() as $key => $role) {
-            
+
             if (substr($role, 0, 7) == 'ROLE_DM') {
                 $this->removeRole($role);
             }
         }
+
         return $this;
     }
 
     /**
      * Set password
      *
-     * @param string $password
+     * @param string $password The new password
+     *
      * @return User
      */
     public function setUpdatedPassword($password)
     {
         if (!empty($password)) {
             $this->setPlainPassword($password);
-        }    
+        }
+
         return $this;
     }
 
     /**
      * Get an empty password
      *
-     * @return string 
+     * @return string
      */
     public function getUpdatedPassword()
     {
         return '';
     }
-    
+
     /**
      * Get Name and firstname
      *
-     * @return string 
+     * @return string
      */
     public function getNameFirstname()
     {

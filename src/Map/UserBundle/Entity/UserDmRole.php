@@ -1,7 +1,5 @@
 <?php
 /**
- * UserDmRole entity class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   User
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\UserBundle\Entity;
@@ -35,50 +24,64 @@ use Map\DomainBundle\Entity\Domain;
 use Map\UserBundle\Entity\Role;
 
 /**
+ * UserDmRole entity class.
+ *
+ * @category  MyAgileProject
+ * @package   User
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ *
  * @ORM\Table(name="map_user_dm_role")
  * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\UserDmRoleRepository")
  */
 class UserDmRole
 {
-    
+
     /**
+     * @var Map\UserBundle\Entity\User
+     *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\User")
      */
     protected $user;
 
     /**
+     * @var Map\DomainBundle\Entity\Domain
+     *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     protected $domain;
 
     /**
-     * @var string $role
+     * @var Map\UserBundle\Entity\Role
      *
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\Role")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $role;
-    
+
     /**
      * Set User
      *
-     * @param User $user
-     * 
+     * @param User $user The user
+     *
      * @return UserDmRole
      */
     public function setUser(User $user)
     {
         $this->user = $user;
-    
+
         return $this;
     }
 
     /**
      * Get User
      *
-     * @return User 
+     * @return User
      */
     public function getUser()
     {
@@ -88,14 +91,14 @@ class UserDmRole
     /**
      * Set Domain
      *
-     * @param Domain $dm
-     * 
+     * @param Domain $dm The domain
+     *
      * @return UserDmRole
      */
     public function setDomain(Domain $dm)
     {
         $this->domain = $dm;
-    
+
         return $this;
     }
 
@@ -112,24 +115,24 @@ class UserDmRole
     /**
      * Set role
      *
-     * @param Role $role
-     * 
+     * @param Role $role The role
+     *
      * @return User
      */
     public function setRole(Role $role)
     {
         $this->role = $role;
-    
+
         return $this;
     }
 
     /**
      * Get role
      *
-     * @return Role 
+     * @return Role
      */
     public function getRole()
     {
         return $this->role;
-    }    
+    }
 }

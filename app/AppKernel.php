@@ -20,12 +20,12 @@ class AppKernel extends Kernel {
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Map\CoreBundle\MapCoreBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Map\CoreBundle\MapCoreBundle(),
             new Map\UserBundle\MapUserBundle(),
             new Map\HomeBundle\MapHomeBundle(),
             new Map\DomainBundle\MapDomainBundle(),
-            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

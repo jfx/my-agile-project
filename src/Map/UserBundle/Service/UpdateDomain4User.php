@@ -1,7 +1,5 @@
 <?php
 /**
- * Update domain service class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\UserBundle\Service;
+
+use Doctrine\ORM\EntityManager;
+use Exception;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+
+/**
+ * Update domain service class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -24,95 +33,118 @@
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
- *
  */
-
-namespace Map\UserBundle\Service;
-
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Doctrine\ORM\EntityManager;
-use FOS\UserBundle\Model\UserManagerInterface;
-
 class UpdateDomain4User
 {
-    protected $_securityContext;
-    protected $_entityManager;
-    protected $_userManager;
-    
+    /**
+     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     */
+    protected $securityContext;
+
+    /**
+     * @var Doctrine\ORM\EntityManager
+     */
+    protected $entityManager;
+
+    /**
+     * @var FOS\UserBundle\Model\UserManagerInterface
+     */
+    protected $userManager;
+
+    /**
+     * Constructor
+     *
+     * @param SecurityContextInterface $securityContext The security context.
+     * @param EntityManager            $entityManager   The doctrine entity manager.
+     * @param UserManagerInterface     $userManager     The user manager.
+     */
     public function __construct(
         SecurityContextInterface $securityContext,
         EntityManager $entityManager,
         UserManagerInterface $userManager
-    )
-    {
-        $this->_securityContext = $securityContext;
-        $this->_entityManager   = $entityManager;
-        $this->_userManager     = $userManager;
+    ) {
+        $this->securityContext = $securityContext;
+        $this->entityManager   = $entityManager;
+        $this->userManager     = $userManager;
     }
-    
+
+    /**
+     * Set the current domain for a user and set role.
+     *
+     * @param Domain|null $domain The domain, if null unset current domain.
+     * @param int|null    $userId The user id, if null get user id from context.
+     *
+     * @return void
+     */
     public function setCurrentDomain($domain, $userId = null)
     {
         if ($userId == null) {
-            $getUserFromContext = TRUE;
-            $user = $this->_securityContext->getToken()->getUser();
-        }
-        else {
-            $getUserFromContext = FALSE;
-            if ( ! $user = $this->_userManager->findUserBy(array('id' => $userId))) {
+            $getUserFromContext = true;
+            $user = $this->securityContext->getToken()->getUser();
+        } else {
+            $getUserFromContext = false;
+            if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
                 throw $this->createNotFoundException(
                     'User[id='.$userId.'] not found'
                 );
             }
-        }      
+        }
         $user->unsetDomainRole();
 
         if ($domain == null) {
             $user->unsetCurrentDomain();
-        }
-        else {
+        } else {
             $user->setCurrentDomain($domain);
 
-            $repository = $this->_entityManager->getRepository(
+            $repository = $this->entityManager->getRepository(
                 'MapUserBundle:UserDmRole'
             );
 
             try {
                 $userDmRole = $repository->findByUserIdDomainId(
-                    $user->getId(), $domain->getId()
+                    $user->getId(),
+                    $domain->getId()
                 );
                 $user->addRole($userDmRole->getRole()->getId());
                 $user->setCurrentRoleLabel($userDmRole->getRole()->getLabel());
+            } catch (Exception $e) {
             }
-            catch (\Exception $e) { }
         }
-        $this->_userManager->updateUser($user);
-        
+        $this->userManager->updateUser($user);
+
         // Update role in cache
-        if($getUserFromContext) {
-            $this->_securityContext->getToken()->setAuthenticated(false);
+        if ($getUserFromContext) {
+            $this->securityContext->getToken()->setAuthenticated(false);
         }
     }
-    
+
+    /**
+     * Refresh available domains list.
+     *
+     * @param int $userId The user id.
+     *
+     * @return void
+     */
     public function refreshAvailableDomains4UserId($userId)
     {
-        if ( ! $user = $this->_userManager->findUserBy(array('id' => $userId))) {
+        if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
             throw $this->createNotFoundException(
                 'User[id='.$userId.'] not found'
             );
         }
-        $repository = $this->_entityManager->getRepository(
+        $repository = $this->entityManager->getRepository(
             'MapUserBundle:UserDmRole'
         );
-        
+
         $availableDomains = $repository->findAvailableDomainsByUser($user);
 
         $arrayDomains = array();
-        
+
         foreach ($availableDomains as $domain) {
             $arrayDomains[$domain['id']] = $domain['name'];
         }
 
         $user->setAvailableDomains($arrayDomains);
-        $this->_userManager->updateUser($user);
+        $this->userManager->updateUser($user);
     }
 }

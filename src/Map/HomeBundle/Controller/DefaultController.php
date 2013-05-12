@@ -1,7 +1,5 @@
 <?php
 /**
- * Home controller class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\HomeBundle\Controller;
+
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+/**
+ * Home controller class.
  *
  * @category  MyAgileProject
  * @package   Home
@@ -24,15 +31,16 @@
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
- *
  */
-
-namespace Map\HomeBundle\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 class DefaultController extends Controller
 {
+    /**
+     * Dashboard
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
     public function indexAction()
     {
         return $this->render('MapHomeBundle:Default:index.html.twig');

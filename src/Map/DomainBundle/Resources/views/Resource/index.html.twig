@@ -18,7 +18,7 @@
                         class="btn">
                         <i class="icon-plus-sign"></i>
                     </a>
-               
+
                &nbsp;&nbsp;Action
             </th>
             {% endif %}
@@ -31,7 +31,7 @@
 {% for resource in resources %}
             <tr>
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
-                <td width="150"> 
+                <td width="150">
                     <a href="{{ path('dm-resource_edit', {'id': resource.id}) }}"
                        class="btn">
                         <i class="icon-edit"></i>

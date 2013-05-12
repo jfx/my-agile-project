@@ -1,7 +1,5 @@
 <?php
 /**
- * Load user data class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\UserBundle\DataFixtures\ORM;
+
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+/**
+ * Load user data class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -24,20 +34,10 @@
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
- *
  */
-
-namespace Map\UserBundle\DataFixtures\ORM;
-
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Map\UserBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
-class Users extends AbstractFixture 
-    implements OrderedFixtureInterface, ContainerAwareInterface
+class Users extends AbstractFixture implements
+    OrderedFixtureInterface,
+    ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -45,33 +45,56 @@ class Users extends AbstractFixture
     private $container;
 
     /**
-     * {@inheritDoc}
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface
+     *
+     * @return void
      */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
-    
+
     /**
-     * {@inheritDoc}
+     * Load data fixtures with the passed EntityManager
+     *
+     * @param ObjectManager $manager The entity manager
+     *
+     * @return void
      */
     public function load(ObjectManager $manager)
     {
         $dataArray = array(
-            array('name' => 'admin', 'details' => 'Admin user', 'superadmin' => true, 'locked' => false),
-            array('name' => 'user', 'details' => 'user role on domain 1', 'superadmin' => false, 'locked' => false),
-            array('name' => 'lock', 'details' => 'Locked user', 'superadmin' => false, 'locked' => true),
+            array(
+                'name' => 'admin',
+                'details' => 'Admin user',
+                'superadmin' => true,
+                'locked' => false
+            ),
+            array(
+                'name' => 'user',
+                'details' => 'user role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
+            array(
+                'name' => 'lock',
+                'details' => 'Locked user',
+                'superadmin' => false,
+                'locked' => true
+            ),
         );
-        
+
         $userManager = $this->container->get('fos_user.user_manager');
 
         foreach ($dataArray as $i => $data) {
             // In lowercase and no whitespace
             $name = strtolower(str_replace(' ', '', $data['name']));
-            
+
             $objectList[$i] = $userManager->createUser();
             $objectList[$i]->setEnabled(true);
-            
+
             $objectList[$i]->setFirstname('First'.$name);
             $objectList[$i]->setName(ucfirst($name));
             $objectList[$i]->setDisplayname('display'.$name);
@@ -81,16 +104,18 @@ class Users extends AbstractFixture
             $objectList[$i]->setSuperAdmin($data['superadmin']);
             $objectList[$i]->setDetails($data['details']);
             $objectList[$i]->setLocked($data['locked']);
-            
+
             $userManager->updateUser($objectList[$i]);
-            
+
             $ref = $name.'-user';
             $this->addReference($ref, $objectList[$i]);
         }
     }
-    
+
     /**
-     * {@inheritDoc}
+     * Get the order of this fixture
+     *
+     * @return integer
      */
     public function getOrder()
     {

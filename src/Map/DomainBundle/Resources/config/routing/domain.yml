@@ -1,29 +1,29 @@
 domain_index:
     pattern:  /
     defaults: { _controller: "MapDomainBundle:Domain:index" }
-    
+
 domain_view:
     pattern:  /{id}
     defaults: { _controller: "MapDomainBundle:Domain:view" }
     requirements:
         id:  \d+
-    
+
 domain_add:
     pattern:  /add
     defaults: { _controller: "MapDomainBundle:Domain:add" }
-    
+
 domain_edit:
     pattern:  /edit/{id}
     defaults: { _controller: "MapDomainBundle:Domain:edit" }
     requirements:
         id:  \d+
-    
+
 domain_del:
     pattern:  /del/{id}
     defaults: { _controller: "MapDomainBundle:Domain:del" }
     requirements:
         id:  \d+
-        
+
 domain_select:
     pattern:  /select
     defaults: { _controller: "MapDomainBundle:Domain:select" }

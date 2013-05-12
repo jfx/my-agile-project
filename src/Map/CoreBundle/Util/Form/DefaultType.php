@@ -1,7 +1,5 @@
 <?php
 /**
- * Default form class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   Core
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2012 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\CoreBundle\Util\Form;
@@ -33,13 +22,46 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 
+/**
+ * Default form class.
+ *
+ * @category  MyAgileProject
+ * @package   Core
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2012 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 abstract class DefaultType extends AbstractType
 {
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars = array_replace($view->vars, array(
-            'render_fieldset' => false,
-            'show_legend'     => false,
-        ));
+    /**
+     * Builds the form view.
+     *
+     * This method is called for each type in the hierarchy starting form the
+     * top most type. Type extensions can further modify the view.
+     *
+     * A view of a form is built before the views of the child forms are built.
+     * This means that you cannot access child views in this method. If you need
+     * to do so, move your logic to {@link finishView()} instead.
+     *
+     * @param FormView      $view    The view
+     * @param FormInterface $form    The form
+     * @param array         $options The options
+     *
+     * @return void
+     */
+    public function buildView(
+        FormView $view,
+        FormInterface $form,
+        array $options
+    ) {
+        $view->vars = array_replace(
+            $view->vars,
+            array(
+                'render_fieldset' => false,
+                'show_legend'     => false,
+            )
+        );
     }
 }

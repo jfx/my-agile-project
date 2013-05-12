@@ -1,7 +1,5 @@
 <?php
 /**
- * Form handler class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\UserBundle\Form;
+
+use FOS\UserBundle\Model\UserManager;
+use Map\CoreBundle\Util\Form\FormHandler;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * Form handler class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -24,18 +33,16 @@
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
- *
  */
-
-namespace Map\UserBundle\Form;
-
-use Map\CoreBundle\Util\Form\FormHandler;
-use FOS\UserBundle\Model\UserManager;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\Request;
-
 class UserFormHandler extends FormHandler
 {
+    /**
+     * Constructor
+     *
+     * @param Form        $form    Form.
+     * @param Request     $request Http request.
+     * @param UserManager $um      User manager.
+     */
     public function __construct(Form $form, Request $request, UserManager $um)
     {
         $this->_form = $form;
@@ -43,6 +50,13 @@ class UserFormHandler extends FormHandler
         $this->_em = $um;
     }
 
+    /**
+     * Save entity in database.
+     *
+     * @param mixed $entity Object entity.
+     *
+     * @return void
+     */
     public function onSuccess($entity)
     {
         $this->_em->updateUser($entity);

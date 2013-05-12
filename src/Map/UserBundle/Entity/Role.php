@@ -1,7 +1,5 @@
 <?php
 /**
- * Role entity class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Role entity class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -25,15 +31,6 @@
  * @link      http://www.myagileproject.org
  * @since     2
  *
- */
-
-namespace Map\UserBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * Map\DomainBundle\Entity\Domain
- *
  * @ORM\Table(name="map_role")
  * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\RoleRepository")
  */
@@ -42,9 +39,9 @@ class Role
     const DEFAULT_ROLE = 'ROLE_DM_USER';
     const MANAGER_ROLE = 'ROLE_DM_MANAGER';
     const LABEL_NONE   = 'None';
-    
+
     /**
-     * @var string $id
+     * @var string
      *
      * @ORM\Column(name="id", type="string", length=20)
      * @ORM\Id
@@ -66,22 +63,23 @@ class Role
     private $order;
 
     /**
-     * Set id
+     * Set id.
      *
-     * @param string $id
+     * @param string $id Id.
+     *
      * @return Role
      */
     public function setId($id)
     {
         $this->id = $id;
-    
+
         return $this;
     }
-    
+
     /**
      * Get id
      *
-     * @return string 
+     * @return string
      */
     public function getId()
     {
@@ -91,20 +89,21 @@ class Role
     /**
      * Set label
      *
-     * @param string $label
+     * @param string $label The label.
+     *
      * @return Role
      */
     public function setLabel($label)
     {
         $this->label = $label;
-    
+
         return $this;
     }
 
     /**
      * Get label
      *
-     * @return string 
+     * @return string
      */
     public function getLabel()
     {
@@ -114,20 +113,21 @@ class Role
     /**
      * Set order
      *
-     * @param integer $order
+     * @param integer $order The order.
+     *
      * @return Domain
      */
     public function setOrder($order)
     {
         $this->order = $order;
-    
+
         return $this;
     }
 
     /**
      * Get order
      *
-     * @return integer 
+     * @return integer
      */
     public function geOrder()
     {

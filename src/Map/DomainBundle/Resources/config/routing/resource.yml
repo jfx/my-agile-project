@@ -1,23 +1,23 @@
 dm-resource_index:
     pattern:  /
     defaults: { _controller: "MapDomainBundle:Resource:index" }
-    
+
 dm-resource_view:
     pattern:  /{id}
     defaults: { _controller: "MapDomainBundle:Resource:view" }
     requirements:
         id:  \d+
-    
+
 dm-resource_add:
     pattern:  /add
     defaults: { _controller: "MapDomainBundle:Resource:add" }
-    
+
 dm-resource_edit:
     pattern:  /edit/{id}
     defaults: { _controller: "MapDomainBundle:Resource:edit" }
     requirements:
         id:  \d+
-    
+
 dm-resource_del:
     pattern:  /del/{id}
     defaults: { _controller: "MapDomainBundle:Resource:del" }

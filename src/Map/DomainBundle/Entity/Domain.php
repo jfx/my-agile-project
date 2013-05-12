@@ -1,7 +1,5 @@
 <?php
 /**
- * Domain entity class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\DomainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Domain entity class.
  *
  * @category  MyAgileProject
  * @package   Domain
@@ -25,16 +32,6 @@
  * @link      http://www.myagileproject.org
  * @since     2
  *
- */
-
-namespace Map\DomainBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
-/**
- * Map\DomainBundle\Entity\Domain
- *
  * @ORM\Table(name="map_domain")
  * @ORM\Entity(repositoryClass="Map\DomainBundle\Entity\DomainRepository")
  * @UniqueEntity(fields="name", message="A domain with this name already exists.")
@@ -42,7 +39,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Domain
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -51,24 +48,23 @@ class Domain
     private $id;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
 
     /**
-     * @var string $details
+     * @var string
      *
      * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,20 +74,21 @@ class Domain
     /**
      * Set name
      *
-     * @param string $name
+     * @param string $name Name of domain.
+     *
      * @return Domain
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -101,20 +98,21 @@ class Domain
     /**
      * Set details
      *
-     * @param string $details
+     * @param string $details Details of domain.
+     *
      * @return Domain
      */
     public function setDetails($details)
     {
         $this->details = $details;
-    
+
         return $this;
     }
 
     /**
      * Get details
      *
-     * @return string 
+     * @return string
      */
     public function getDetails()
     {

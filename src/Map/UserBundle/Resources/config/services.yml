@@ -6,7 +6,7 @@ services:
         class: Map\UserBundle\Service\UpdateDomain4User
         arguments: ['@security.context', '@doctrine.orm.entity_manager', '@fos_user.user_manager']
         scope: request
-        
+
     map_user.AuthenticationListener:
         class: Map\UserBundle\Service\AuthenticationListener
         arguments: ['@doctrine.orm.entity_manager', '@fos_user.user_manager']

@@ -1,7 +1,5 @@
 <?php
 /**
- * Load domain data class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   Domain
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\DomainBundle\DataFixtures\ORM;
@@ -34,10 +23,25 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Map\DomainBundle\Entity\Domain;
 
+/**
+ * Load domain data class.
+ *
+ * @category  MyAgileProject
+ * @package   Domain
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 class Domains extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
-     * {@inheritDoc}
+     * Load data fixtures with the passed EntityManager
+     *
+     * @param ObjectManager $manager The entity manager
+     *
+     * @return void
      */
     public function load(ObjectManager $manager)
     {
@@ -48,12 +52,12 @@ class Domains extends AbstractFixture implements OrderedFixtureInterface
             array('name' => 'Domain Four', 'details' => 'Details 4 domain 4'),
             array('name' => 'Domain Five', 'details' => 'Details 4 domain 5')
         );
-        
+
         foreach ($dataArray as $i => $data) {
             $objectList[$i] = new Domain();
             $objectList[$i]->setName($data['name']);
             $objectList[$i]->setDetails($data['details']);
-            
+
             $manager->persist($objectList[$i]);
 
             // In lowercase and no whitespace
@@ -62,9 +66,11 @@ class Domains extends AbstractFixture implements OrderedFixtureInterface
         }
         $manager->flush();
     }
-    
+
     /**
-     * {@inheritDoc}
+     * Get the order of this fixture
+     *
+     * @return integer
      */
     public function getOrder()
     {

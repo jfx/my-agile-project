@@ -1,7 +1,5 @@
 <?php
 /**
- * Resource form handler class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,15 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @category  MyAgileProject
- * @package   Domain
- * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
- * @license   http://www.gnu.org/licenses/   GPLv3
- * @link      http://www.myagileproject.org
- * @since     2
- *
  */
 
 namespace Map\DomainBundle\Form;
@@ -35,34 +24,64 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Map\DomainBundle\Entity\Domain;
 
+/**
+ * Resource form handler class.
+ *
+ * @category  MyAgileProject
+ * @package   Domain
+ * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
+ * @copyright 2013 Francois-Xavier Soubirou
+ * @license   http://www.gnu.org/licenses/   GPLv3
+ * @link      http://www.myagileproject.org
+ * @since     2
+ */
 class ResourceFormHandler extends FormHandler
 {
-    protected $_domain;
+    /**
+     * @var Domain $domain
+     */
+    protected $domain;
 
+    /**
+     * Constructor
+     *
+     * @param Form          $form    Form.
+     * @param Request       $request Http request.
+     * @param EntityManager $em      Doctrine entity manager
+     * @param Domain        $dm      The domain
+     */
     public function __construct(
-        Form $form, Request $request, EntityManager $em, Domain $dm
-    )
-    {
+        Form $form,
+        Request $request,
+        EntityManager $em,
+        Domain $dm
+    ) {
         parent::__construct($form, $request, $em);
-        $this->_domain = $dm;
+        $this->domain = $dm;
     }
-    
+
+    /**
+     * For a submited form, valid it and update database.
+     *
+     * @return bolean
+     */
     public function process()
     {
         if ($this->_request->getMethod() == 'POST') {
-            
+
             $this->_form->bindRequest($this->_request);
-            
+
             if ($this->_form->isValid()) {
-                
+
                 $entity = $this->_form->getData();
-                $entity->setDomain($this->_domain);
-            
+                $entity->setDomain($this->domain);
+
                 $this->onSuccess($entity);
-                
+
                 return true;
-            }            
+            }
         }
+
         return false;
     }
 }

@@ -1,7 +1,5 @@
 <?php
 /**
- * Authentication listener class.
- *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -16,6 +14,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Map\UserBundle\Service;
+
+use Doctrine\ORM\EntityManager;
+use Exception;
+use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Component\Security\Core\Event\AuthenticationEvent;
+
+/**
+ * Authentication listener class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -24,65 +33,78 @@
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
- *
  */
-
-namespace Map\UserBundle\Service;
-
-use Doctrine\ORM\EntityManager;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Symfony\Component\Security\Core\Event\AuthenticationEvent;
-
 class AuthenticationListener
 {
-    protected $_entityManager;
-    protected $_userManager;
-    
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+
+    /**
+     * @var UserManagerInterface
+     */
+    protected $userManager;
+
+    /**
+     * Constructor
+     *
+     * @param EntityManager        $entityManager The doctrine entity manager.
+     * @param UserManagerInterface $userManager   The user manager.
+     */
     public function __construct(
         EntityManager $entityManager,
         UserManagerInterface $userManager
-    )
-    {
-        $this->_entityManager   = $entityManager;
-        $this->_userManager     = $userManager;
+    ) {
+        $this->entityManager = $entityManager;
+        $this->userManager   = $userManager;
     }
-    
+
+    /**
+     * When authentication succeed (login or cookie remember), refresh role for
+     * the current domain and refresh list of available domains (select box).
+     *
+     * @param AuthenticationEvent $event The event object.
+     *
+     * @return void
+     */
     public function onSecurityAuthenticationSuccess(AuthenticationEvent $event)
     {
         $token = $event->getAuthenticationToken();
         $user = $token->getUser();
-        
-        $repository = $this->_entityManager->getRepository(
+
+        $repository = $this->entityManager->getRepository(
             'MapUserBundle:UserDmRole'
         );
         // Update current domain role
         $currentDomain = $user->getCurrentDomain();
-        
+
         $user->unsetDomainRole();
-        
+
         if ($currentDomain != null) {
             try {
                 $userDmRole = $repository->findByUserIdDomainId(
-                    $user->getId(), $currentDomain->getId()
+                    $user->getId(),
+                    $currentDomain->getId()
                 );
                 $user->addRole($userDmRole->getRole()->getId());
                 $user->setCurrentRoleLabel($userDmRole->getRole()->getLabel());
+            } catch (Exception $e) {
             }
-            catch (\Exception $e) { }
         }
-        
+
         // Update available domains
         $availableDomains = $repository->findAvailableDomainsByUser($user);
 
         $arrayDomains = array();
-        
+
         foreach ($availableDomains as $domain) {
             $arrayDomains[$domain['id']] = $domain['name'];
         }
 
         $user->setAvailableDomains($arrayDomains);
-        $this->_userManager->updateUser($user);
-        
+        $this->userManager->updateUser($user);
+
         $token->setAuthenticated(false);
     }
 }
