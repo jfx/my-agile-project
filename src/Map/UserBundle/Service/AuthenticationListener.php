@@ -104,7 +104,5 @@ class AuthenticationListener
 
         $user->setAvailableDomains($arrayDomains);
         $this->userManager->updateUser($user);
-
-        $token->setAuthenticated(false);
     }
 }

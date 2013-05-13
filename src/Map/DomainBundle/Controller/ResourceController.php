@@ -54,7 +54,7 @@ class ResourceController extends Controller
             ->getManager()
             ->getRepository('MapUserBundle:UserDmRole');
 
-        $resources = $repository->findUserByDomain($domain);
+        $resources = $repository->findUsersByDomain($domain);
 
         return $this->render(
             'MapDomainBundle:Resource:index.html.twig',

@@ -42,17 +42,17 @@ class UserDmRoleRepository extends EntityRepository
      *
      * @return array List of users and role.
      */
-    public function findUserByDomain(Domain $domain)
+    public function findUsersByDomain(Domain $domain)
     {
         $qb = $this->createQueryBuilder('udr')
-            ->join('udr.role', 'r')
-            ->addSelect('r.label as role')
-            ->join('udr.domain', 'd')
-            ->addSelect('d')
+            ->innerJoin('udr.user', 'u')
+            ->select('u.id, u.name, u.firstname, u.displayname')
+            ->innerJoin('udr.role', 'r')
+            ->addSelect('r.label')
+            ->innerJoin('udr.domain', 'd')
+            ->addSelect('d.name as domain_name')
             ->where('d.id = :domainId')
             ->setParameter('domainId', $domain->getId())
-            ->join('udr.user', 'u')
-            ->addSelect('u.id, u.name, u.firstname, u.displayname')
             ->orderBy('u.name, u.firstname', 'ASC');
 
         $results = $qb->getQuery()->getResult();

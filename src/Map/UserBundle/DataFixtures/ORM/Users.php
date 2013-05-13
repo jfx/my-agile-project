@@ -84,6 +84,30 @@ class Users extends AbstractFixture implements
                 'superadmin' => false,
                 'locked' => true
             ),
+            array(
+                'name' => 'd1-none',
+                'details' => 'none role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
+            array(
+                'name' => 'd1-guest',
+                'details' => 'guest role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
+            array(
+                'name' => 'd1-user+',
+                'details' => 'user+ role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
+            array(
+                'name' => 'd1-manager',
+                'details' => 'manager role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
         );
 
         $userManager = $this->container->get('fos_user.user_manager');

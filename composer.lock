@@ -215,12 +215,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "3506be7467dbd4f923691a00555cf80065d32e59"
+                "reference": "2.4.0-RC2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/3506be7467dbd4f923691a00555cf80065d32e59",
-                "reference": "3506be7467dbd4f923691a00555cf80065d32e59",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/2.4.0-RC2",
+                "reference": "2.4.0-RC2",
                 "shasum": ""
             },
             "require": {
@@ -266,7 +266,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "https://github.com/schmittjoh",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -281,7 +281,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2013-04-16 21:50:30"
+            "time": "2013-05-09 21:35:24"
         },
         {
             "name": "doctrine/data-fixtures",
@@ -344,12 +344,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "faacbe7fcb324101d80739ab91aae98d004344f4"
+                "reference": "081e461e446d650a3d804e20967417fbba27f8c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/faacbe7fcb324101d80739ab91aae98d004344f4",
-                "reference": "faacbe7fcb324101d80739ab91aae98d004344f4",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/081e461e446d650a3d804e20967417fbba27f8c7",
+                "reference": "081e461e446d650a3d804e20967417fbba27f8c7",
                 "shasum": ""
             },
             "require": {
@@ -399,7 +399,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-05-04 12:09:27"
+            "time": "2013-05-11 07:45:37"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -660,12 +660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "209090d338b2bacf2a7fbde3c57fe51702d1b295"
+                "reference": "425f375899b9b054867ea3a3cb752dabdd874651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/209090d338b2bacf2a7fbde3c57fe51702d1b295",
-                "reference": "209090d338b2bacf2a7fbde3c57fe51702d1b295",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/425f375899b9b054867ea3a3cb752dabdd874651",
+                "reference": "425f375899b9b054867ea3a3cb752dabdd874651",
                 "shasum": ""
             },
             "require": {
@@ -722,7 +722,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-05-04 11:39:37"
+            "time": "2013-05-11 07:51:12"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -731,12 +731,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "b77fc8b35f76f523c219224afc8f068cdb9baf24"
+                "reference": "3ddc575429f867a379375e9e8d336adb2a9bb04e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/b77fc8b35f76f523c219224afc8f068cdb9baf24",
-                "reference": "b77fc8b35f76f523c219224afc8f068cdb9baf24",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3ddc575429f867a379375e9e8d336adb2a9bb04e",
+                "reference": "3ddc575429f867a379375e9e8d336adb2a9bb04e",
                 "shasum": ""
             },
             "require": {
@@ -788,7 +788,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-05-04 01:14:40"
+            "time": "2013-05-09 21:16:30"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -1355,12 +1355,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "51aad6ef903bdcb18280ae81fb85016a078232a0"
+                "reference": "dbb61d4beaafb0d708b79b008d0b708abeb4eae9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/51aad6ef903bdcb18280ae81fb85016a078232a0",
-                "reference": "51aad6ef903bdcb18280ae81fb85016a078232a0",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/dbb61d4beaafb0d708b79b008d0b708abeb4eae9",
+                "reference": "dbb61d4beaafb0d708b79b008d0b708abeb4eae9",
                 "shasum": ""
             },
             "type": "library",
@@ -1388,7 +1388,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-04-09 01:25:49"
+            "time": "2013-05-07 23:46:12"
         },
         {
             "name": "monolog/monolog",
@@ -1747,17 +1747,17 @@
         },
         {
             "name": "sensio/generator-bundle",
-            "version": "dev-master",
+            "version": "2.2.x-dev",
             "target-dir": "Sensio/Bundle/GeneratorBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioGeneratorBundle.git",
-                "reference": "77ce71d2741af3536d846791182315a42e00b89c"
+                "reference": "781c1a93a705fc823e2b65dd85e322b4eb77fef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioGeneratorBundle/zipball/77ce71d2741af3536d846791182315a42e00b89c",
-                "reference": "77ce71d2741af3536d846791182315a42e00b89c",
+                "url": "https://api.github.com/repos/sensio/SensioGeneratorBundle/zipball/781c1a93a705fc823e2b65dd85e322b4eb77fef8",
+                "reference": "781c1a93a705fc823e2b65dd85e322b4eb77fef8",
                 "shasum": ""
             },
             "require": {
@@ -1791,7 +1791,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2013-05-04 14:19:26"
+            "time": "2013-05-07 13:40:47"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1912,12 +1912,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/MonologBundle.git",
-                "reference": "a165416edd8d8ada8a174dfeec11550e9a491792"
+                "reference": "v2.3.0-BETA2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/a165416edd8d8ada8a174dfeec11550e9a491792",
-                "reference": "a165416edd8d8ada8a174dfeec11550e9a491792",
+                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/v2.3.0-BETA2",
+                "reference": "v2.3.0-BETA2",
                 "shasum": ""
             },
             "require": {
@@ -1970,12 +1970,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/SwiftmailerBundle.git",
-                "reference": "ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce"
+                "reference": "v2.3.0-BETA2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce",
-                "reference": "ff109ff15bbd2b87fc03a3b2e5b934aeb79260ce",
+                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/v2.3.0-BETA2",
+                "reference": "v2.3.0-BETA2",
                 "shasum": ""
             },
             "require": {
@@ -2024,12 +2024,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b9bc5b4770068f863f7ce0e0d20bd8bffa571e49"
+                "reference": "70ea5a61c53d5529b7a971098d3e3df7c43467cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b9bc5b4770068f863f7ce0e0d20bd8bffa571e49",
-                "reference": "b9bc5b4770068f863f7ce0e0d20bd8bffa571e49",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/70ea5a61c53d5529b7a971098d3e3df7c43467cc",
+                "reference": "70ea5a61c53d5529b7a971098d3e3df7c43467cc",
                 "shasum": ""
             },
             "require": {
@@ -2115,7 +2115,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-05-06 08:37:50"
+            "time": "2013-05-10 18:08:31"
         },
         {
             "name": "twig/extensions",
@@ -2170,12 +2170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "b8a8701b6c2957a365b8596f55684679627d7cfb"
+                "reference": "4a49a3ae30ad2694057a63eccc3fb7b551b93e74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/b8a8701b6c2957a365b8596f55684679627d7cfb",
-                "reference": "b8a8701b6c2957a365b8596f55684679627d7cfb",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/4a49a3ae30ad2694057a63eccc3fb7b551b93e74",
+                "reference": "4a49a3ae30ad2694057a63eccc3fb7b551b93e74",
                 "shasum": ""
             },
             "require": {
@@ -2211,7 +2211,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-05-06 06:36:47"
+            "time": "2013-05-10 15:25:39"
         },
         {
             "name": "twitter/bootstrap",

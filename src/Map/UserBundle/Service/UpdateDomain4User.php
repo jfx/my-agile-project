@@ -79,10 +79,9 @@ class UpdateDomain4User
     public function setCurrentDomain($domain, $userId = null)
     {
         if ($userId == null) {
-            $getUserFromContext = true;
+            
             $user = $this->securityContext->getToken()->getUser();
         } else {
-            $getUserFromContext = false;
             if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
                 throw $this->createNotFoundException(
                     'User[id='.$userId.'] not found'
@@ -111,11 +110,6 @@ class UpdateDomain4User
             }
         }
         $this->userManager->updateUser($user);
-
-        // Update role in cache
-        if ($getUserFromContext) {
-            $this->securityContext->getToken()->setAuthenticated(false);
-        }
     }
 
     /**

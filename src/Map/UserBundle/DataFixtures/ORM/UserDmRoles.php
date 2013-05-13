@@ -50,7 +50,27 @@ class UserDmRoles extends AbstractFixture implements OrderedFixtureInterface
                 'user' => 'user-user',
                 'domain' => 'domainone-domain',
                 'role' => 'user-role'
-            )
+            ),
+            array(
+                'user' => 'd1-none-user',
+                'domain' => 'domainone-domain',
+                'role' => 'none-role'
+            ),
+            array(
+                'user' => 'd1-guest-user',
+                'domain' => 'domainone-domain',
+                'role' => 'guest-role'
+            ),
+             array(
+                'user' => 'd1-user+-user',
+                'domain' => 'domainone-domain',
+                'role' => 'user+-role'
+            ),
+            array(
+                'user' => 'd1-manager-user',
+                'domain' => 'domainone-domain',
+                'role' => 'manager-role'
+            ),
         );
 
         foreach ($dataArray as $i => $data) {
