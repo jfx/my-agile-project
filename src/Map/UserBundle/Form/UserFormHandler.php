@@ -45,9 +45,9 @@ class UserFormHandler extends FormHandler
      */
     public function __construct(Form $form, Request $request, UserManager $um)
     {
-        $this->_form = $form;
-        $this->_request = $request;
-        $this->_em = $um;
+        $this->form = $form;
+        $this->request = $request;
+        $this->em = $um;
     }
 
     /**
@@ -59,6 +59,6 @@ class UserFormHandler extends FormHandler
      */
     public function onSuccess($entity)
     {
-        $this->_em->updateUser($entity);
+        $this->em->updateUser($entity);
     }
 }

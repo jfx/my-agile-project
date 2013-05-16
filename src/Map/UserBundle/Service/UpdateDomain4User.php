@@ -79,7 +79,7 @@ class UpdateDomain4User
     public function setCurrentDomain($domain, $userId = null)
     {
         if ($userId == null) {
-            
+
             $user = $this->securityContext->getToken()->getUser();
         } else {
             if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
