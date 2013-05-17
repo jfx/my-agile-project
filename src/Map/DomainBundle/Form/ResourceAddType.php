@@ -20,7 +20,7 @@
 
 namespace Map\DomainBundle\Form;
 
-use Map\CoreBundle\Util\Form\DefaultType;
+use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Map\DomainBundle\Entity\Domain;
