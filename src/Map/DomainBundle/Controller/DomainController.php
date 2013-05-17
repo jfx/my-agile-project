@@ -19,7 +19,7 @@
 namespace Map\DomainBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Map\CoreBundle\Util\Form\FormHandler;
+use Map\CoreBundle\Form\FormHandler;
 use Map\DomainBundle\Entity\Domain;
 use Map\DomainBundle\Form\DomainType;
 use Map\UserBundle\Entity\Role;

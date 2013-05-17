@@ -19,7 +19,7 @@
 namespace Map\UserBundle\Form;
 
 use FOS\UserBundle\Model\UserManager;
-use Map\CoreBundle\Util\Form\FormHandler;
+use Map\CoreBundle\Form\FormHandler;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 

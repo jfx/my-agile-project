@@ -18,7 +18,7 @@
 
 namespace Map\DomainBundle\Form;
 
-use Map\CoreBundle\Util\Form\FormHandler;
+use Map\CoreBundle\Form\FormHandler;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
