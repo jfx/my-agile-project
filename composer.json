@@ -25,7 +25,8 @@
         "twitter/bootstrap": "master",
         "knplabs/knp-menu-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "gedmo/doctrine-extensions": "dev-master"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.4.*"
