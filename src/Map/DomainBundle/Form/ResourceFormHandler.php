@@ -67,13 +67,13 @@ class ResourceFormHandler extends FormHandler
      */
     public function process()
     {
-        if ($this->_request->getMethod() == 'POST') {
+        if ($this->request->getMethod() == 'POST') {
 
-            $this->_form->bindRequest($this->_request);
+            $this->form->bindRequest($this->_request);
 
-            if ($this->_form->isValid()) {
+            if ($this->form->isValid()) {
 
-                $entity = $this->_form->getData();
+                $entity = $this->form->getData();
                 $entity->setDomain($this->domain);
 
                 $this->onSuccess($entity);
