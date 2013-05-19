@@ -18,7 +18,7 @@
 
 namespace Map\UserBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
+use Gedmo\Sortable\Entity\Repository\SortableRepository;
 
 /**
  * Role entity repository class.
@@ -31,7 +31,7 @@ use Doctrine\ORM\EntityRepository;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class RoleRepository extends EntityRepository
+class RoleRepository extends SortableRepository
 {
     /**
      * Get all role ordered.
@@ -65,7 +65,7 @@ class RoleRepository extends EntityRepository
     public function getQBAllOrdered()
     {
         $qb = $this->createQueryBuilder('r')
-            ->orderBy('r.order', 'ASC');
+            ->orderBy('r.position', 'ASC');
 
         return $qb;
     }

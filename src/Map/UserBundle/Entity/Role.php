@@ -18,6 +18,7 @@
 
 namespace Map\UserBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,11 +57,12 @@ class Role
     private $label;
 
     /**
-     * @var integer $order
+     * @var integer $position
      *
-     * @ORM\Column(name="r_order", type="integer", unique=true)
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
      */
-    private $order;
+    private $position;
 
     /**
      * Set id.
@@ -113,24 +115,24 @@ class Role
     /**
      * Set order
      *
-     * @param integer $order The order.
+     * @param integer $position The order.
      *
-     * @return Domain
+     * @return Role
      */
-    public function setOrder($order)
+    public function setPosition($position)
     {
-        $this->order = $order;
+        $this->position = $position;
 
         return $this;
     }
 
     /**
-     * Get order
+     * Get position
      *
      * @return integer
      */
-    public function geOrder()
+    public function getPosition()
     {
-        return $this->order;
+        return $this->position;
     }
 }
