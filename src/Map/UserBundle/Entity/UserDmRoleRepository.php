@@ -70,12 +70,13 @@ class UserDmRoleRepository extends EntityRepository
     public function findAvailableDomainsByUser(User $user)
     {
         $qb = $this->createQueryBuilder('udr')
-            ->join('udr.domain', 'd')
+            ->innerJoin('udr.domain', 'd')
             ->select('d.id, d.name')
-            ->join('udr.user', 'u')
+            ->innerJoin('udr.user', 'u')
             ->where('u.id = :userId')
             ->setParameter('userId', $user->getId())
-            ->join('udr.role', 'r')
+            ->innerJoin('udr.role', 'r')
+            ->addSelect('r.label')
             ->andWhere('r.id != \'ROLE_DM_NONE\'')
             ->orderBy('d.name', 'ASC');
 

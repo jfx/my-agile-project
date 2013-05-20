@@ -224,7 +224,8 @@ class UserController extends Controller
      */
     public function profileAction()
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.context')
+            ->getToken()->getUser();
 
         return $this->render(
             'MapUserBundle:User:profile.html.twig',
@@ -263,4 +264,28 @@ class UserController extends Controller
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * Display own profile
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function roleAction()
+    {
+        $user = $this->container->get('security.context')
+            ->getToken()->getUser();
+
+        $repository = $this->getDoctrine()->getManager()->getRepository(
+            'MapUserBundle:UserDmRole'
+        );
+        $availableDomains = $repository->findAvailableDomainsByUser($user);
+        
+        return $this->render(
+            'MapUserBundle:User:role.html.twig',
+            array('domains' => $availableDomains)
+        );
+    }    
 }
+
