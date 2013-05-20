@@ -5,22 +5,16 @@
 {% block headline %}Admin > Profile{% endblock headline %}
 
 {% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Profile</a></li>
+    <li><a href="{{ path('user_password') }}">Password</a></li>
+    <li><a href="{{ path('user_role') }}">Roles</a></li>
+</ul>
 <div class="span8">
     <form class="form-horizontal well">
 
         {% include "MapUserBundle:User:formread.html.twig" %}
 
     </form>
-</div>
-<div class="span8">
-<a href="{{ path('home_index') }}" class="btn">
-<i class="icon-chevron-left"></i>
-Return to home
-</a>
-<a href="{{ path('user_password') }}"
-class="btn">
-<i class="icon-edit"></i>
-Change Password
-</a>
 </div>
 {% endblock content %}
