@@ -1,13 +1,12 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Profile{% endblock title %}
+{% block title %}{{ parent() }} - User view - Id : {{ user.id }}{% endblock title %}
 
-{% block headline %}Admin > Profile{% endblock headline %}
+{% block headline %}Admin > User view - Id : {{ user.id }}{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li><a href="{{ path('user_profile') }}">Profile</a></li>
-    <li><a href="{{ path('user_password') }}">Password</a></li>
+    <li><a href="{{ path('user_view', {'id': user.id}) }}">Profile</a></li>
     <li class="active"><a href="#">Roles</a></li>
 </ul>
 <div class="span6">

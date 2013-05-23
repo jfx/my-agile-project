@@ -106,7 +106,7 @@ class UserController extends Controller
     }
 
     /**
-     * View a user
+     * View a user profile.
      *
      * @param int $id The user id.
      *
@@ -125,6 +125,34 @@ class UserController extends Controller
         return $this->render(
             'MapUserBundle:User:view.html.twig',
             array('user' => $user)
+        );
+    }
+
+    /**
+     * View user's roles.
+     *
+     * @param int $id The user id.
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_SUPER_ADMIN")
+     */
+    public function viewroleAction($id)
+    {
+        $userManager = $this->get('fos_user.user_manager');
+
+        if (! $user = $userManager->findUserBy(array('id' => $id))) {
+            throw $this->createNotFoundException('User[id='.$id.'] not found');
+        }
+
+        $repository = $this->getDoctrine()->getManager()->getRepository(
+            'MapUserBundle:UserDmRole'
+        );
+        $availableDomains = $repository->findAvailableDomainsByUser($user);
+
+        return $this->render(
+            'MapUserBundle:User:viewrole.html.twig',
+            array('user' => $user, 'domains' => $availableDomains)
         );
     }
 
@@ -266,7 +294,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display own profile
+     * Display own role
      *
      * @return Response A Response instance
      *
@@ -281,11 +309,10 @@ class UserController extends Controller
             'MapUserBundle:UserDmRole'
         );
         $availableDomains = $repository->findAvailableDomainsByUser($user);
-        
+
         return $this->render(
             'MapUserBundle:User:role.html.twig',
             array('domains' => $availableDomains)
         );
-    }    
+    }
 }
-
