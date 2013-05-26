@@ -18,9 +18,10 @@
 
 namespace Map\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Entity\User as BaseUser;
 use Map\DomainBundle\Entity\Domain;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User entity class.
@@ -36,6 +37,9 @@ use Map\DomainBundle\Entity\Domain;
  * @ORM\Entity
  * @ORM\Table(name="map_user")
  * @ORM\Entity(repositoryClass="Map\UserBundle\Entity\UserRepository")
+ * @UniqueEntity(fields="displayname", message="A user with this displayname already exists.")
+ * @UniqueEntity(fields="username", message="A user with this username already exists.")
+ * @UniqueEntity(fields="email", message="A user with this email already exists.")
  */
 class User extends BaseUser
 {
