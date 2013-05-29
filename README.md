@@ -6,4 +6,4 @@ more specifically Agile projects with those following features :
 
 * Projects status and milestones,
 * Management of requirements with tree and tabular view,
-* Agile concepts : definition of iteration and burndown charts.
+* Agile concepts : definition of iteration and burn-down charts.
