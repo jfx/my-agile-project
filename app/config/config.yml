@@ -83,4 +83,4 @@ fos_user:
     user_class: Map\UserBundle\Entity\User
 
 parameters:
-    app.version: 0.0.0
+    app.version: 0.1.0
