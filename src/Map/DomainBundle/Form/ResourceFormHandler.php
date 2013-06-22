@@ -18,7 +18,7 @@
 
 namespace Map\DomainBundle\Form;
 
-use Map\CoreBundle\Util\Form\FormHandler;
+use Map\CoreBundle\Form\FormHandler;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +69,7 @@ class ResourceFormHandler extends FormHandler
     {
         if ($this->request->getMethod() == 'POST') {
 
-            $this->form->bindRequest($this->_request);
+            $this->form->bindRequest($this->request);
 
             if ($this->form->isValid()) {
 

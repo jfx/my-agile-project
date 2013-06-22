@@ -18,7 +18,7 @@
 
 namespace Map\UserBundle\Form;
 
-use Map\CoreBundle\Util\Form\DefaultType;
+use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;

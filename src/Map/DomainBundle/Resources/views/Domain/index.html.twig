@@ -45,7 +45,11 @@
                 <td>{{ domain.details }}</td>
             </tr>
 {% else %}
-        <li>No domain</li>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <tr><td colspan="4">No domain</td></tr>
+        {% else %}
+            <tr><td colspan="3">No domain</td></tr>
+        {% endif %}
 {% endfor %}
     </tbody>
 </table>

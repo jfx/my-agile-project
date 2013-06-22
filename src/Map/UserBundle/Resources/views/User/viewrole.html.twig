@@ -1,0 +1,32 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - User view - Id : {{ user.id }}{% endblock title %}
+
+{% block headline %}Admin > User view - Id : {{ user.id }}{% endblock headline %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li><a href="{{ path('user_view', {'id': user.id}) }}">Profile</a></li>
+    <li class="active"><a href="#">Roles</a></li>
+</ul>
+<div class="span6">
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for domain in domains %}
+            <tr>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.label }}</td>
+            </tr>
+{% else %}
+        <tr><td colspan="2">No role</td></tr>
+{% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock content %}

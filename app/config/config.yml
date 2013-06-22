@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
 
 framework:
     #esi:             ~
@@ -19,6 +20,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        version: %app.version%
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
@@ -78,3 +81,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Map\UserBundle\Entity\User
+
+parameters:
+    app.version: 0.1.0

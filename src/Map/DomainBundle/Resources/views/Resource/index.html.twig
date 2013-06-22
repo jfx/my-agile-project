@@ -47,7 +47,11 @@
                 <td>{{ resource.label }}</td>
             </tr>
 {% else %}
-        <li>No User</li>
+        {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
+            <tr><td colspan="4">No resource</td></tr>
+        {% else %}
+            <tr><td colspan="3">No resource</td></tr>
+        {% endif %}
 {% endfor %}
     </tbody>
 </table>

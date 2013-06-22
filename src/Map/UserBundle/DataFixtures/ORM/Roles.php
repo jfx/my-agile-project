@@ -46,18 +46,17 @@ class Roles extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $dataArray = array(
-            array('id' => 'ROLE_DM_NONE', 'label' => 'None', 'order' => 1),
-            array('id' => 'ROLE_DM_GUEST', 'label' => 'Guest', 'order' => 2),
-            array('id' => 'ROLE_DM_USER', 'label' => 'User', 'order' => 3),
-            array('id' => 'ROLE_DM_USERPLUS', 'label' => 'User+', 'order' => 4),
-            array('id' => 'ROLE_DM_MANAGER', 'label' => 'Manager', 'order' => 5)
+            array('id' => 'ROLE_DM_NONE', 'label' => 'None'),
+            array('id' => 'ROLE_DM_GUEST', 'label' => 'Guest'),
+            array('id' => 'ROLE_DM_USER', 'label' => 'User'),
+            array('id' => 'ROLE_DM_USERPLUS', 'label' => 'User+'),
+            array('id' => 'ROLE_DM_MANAGER', 'label' => 'Manager')
         );
 
         foreach ($dataArray as $i => $data) {
             $objectList[$i] = new Role();
             $objectList[$i]->setId($data['id']);
             $objectList[$i]->setLabel($data['label']);
-            $objectList[$i]->setOrder($data['order']);
 
             $manager->persist($objectList[$i]);
 
