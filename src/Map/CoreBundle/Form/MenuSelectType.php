@@ -19,7 +19,6 @@
 namespace Map\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
@@ -35,14 +34,22 @@ use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class MenuSelectType extends AbstractType implements
-    NavbarFormInterface,
-    ContainerAwareInterface
+class MenuSelectType extends AbstractType implements NavbarFormInterface
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface
+     * @var Map\UserBundle\Entity\User
      */
-    protected $container;
+    protected $user;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param ContainerInterface $container Service container.
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->user = $container->get('security.context')->getToken()->getUser();
+    }
 
     /**
      * {@inheritDoc}
@@ -54,16 +61,13 @@ class MenuSelectType extends AbstractType implements
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $securityContext = $this->container->get('security.context');
-        $user = $securityContext->getToken()->getUser();
-
-        $currentDomain = $user->getCurrentDomain();
+        $currentDomain = $this->user->getCurrentDomain();
         if (is_null($currentDomain)) {
             $currentDomainId = 0;
         } else {
             $currentDomainId = $currentDomain->getId();
         }
-        $availableDomains = $user->getAvailableDomains();
+        $availableDomains = $this->user->getAvailableDomains();
 
         if (key_exists($currentDomainId, $availableDomains)) {
             $builder->add(
@@ -116,18 +120,5 @@ class MenuSelectType extends AbstractType implements
     public function getRoute()
     {
         return "domain_select";
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance
-     * or null
-     *
-     * @return void
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 }

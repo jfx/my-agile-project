@@ -22,6 +22,7 @@ framework:
 twig:
     globals:
         version: %app.version%
+        build:   %app.build%
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
@@ -84,3 +85,4 @@ fos_user:
 
 parameters:
     app.version: 0.1.0
+    app.build:   BBB

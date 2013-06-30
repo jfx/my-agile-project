@@ -9,7 +9,7 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
-### 0.1.0 (22 june 2013)
+### 0.1.0 (22 June 2013)
 Features:
 
   - Migration to symfony framework,
