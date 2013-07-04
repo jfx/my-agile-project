@@ -18,11 +18,11 @@
 
 namespace Map\CoreBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+use Map\CoreBundle\Form\DefaultType;
+use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
 
 /**
  * Menu select form class.
@@ -35,12 +35,12 @@ use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class MenuSelectType extends AbstractType implements
+class MenuSelectType extends DefaultType implements
     NavbarFormInterface,
     ContainerAwareInterface
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface
+     * @var ContainerInterface
      */
     protected $container;
 
@@ -70,6 +70,7 @@ class MenuSelectType extends AbstractType implements
                 'search',
                 'choice',
                 array(
+                    'label' => false,
                     'choices' => $availableDomains,
                     'data' => $currentDomainId,
                     'widget_control_group' => false,
@@ -85,6 +86,7 @@ class MenuSelectType extends AbstractType implements
                 'search',
                 'choice',
                 array(
+                    'label' => false,
                     'choices' => $availableDomains,
                     'empty_value' => '',
                     'widget_control_group' => false,

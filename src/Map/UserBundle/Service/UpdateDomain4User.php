@@ -55,7 +55,7 @@ class UpdateDomain4User
      * Constructor
      *
      * @param SecurityContextInterface $securityContext The security context.
-     * @param EntityManager            $entityManager   The doctrine entity manager.
+     * @param EntityManager            $entityManager   The entity manager.
      * @param UserManagerInterface     $userManager     The user manager.
      */
     public function __construct(
@@ -82,7 +82,9 @@ class UpdateDomain4User
 
             $user = $this->securityContext->getToken()->getUser();
         } else {
-            if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
+            if (! $user = $this->userManager->findUserBy(
+                array('id' => $userId)
+            )) {
                 throw $this->createNotFoundException(
                     'User[id='.$userId.'] not found'
                 );
