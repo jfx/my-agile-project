@@ -127,7 +127,10 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 
         $this->addDivider($menu, true);
 
-        $menu->addChild('Log out', array('route' => 'fos_user_security_logout'));
+        $menu->addChild(
+            'Log out',
+            array('route' => 'fos_user_security_logout')
+        );
 
         return $menu;
     }

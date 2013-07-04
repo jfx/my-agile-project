@@ -18,10 +18,11 @@
 
 namespace Map\CoreBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+use Map\CoreBundle\Form\DefaultType;
+use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
 
 /**
  * Menu select form class.
@@ -34,22 +35,14 @@ use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class MenuSelectType extends AbstractType implements NavbarFormInterface
+class MenuSelectType extends DefaultType implements
+    NavbarFormInterface,
+    ContainerAwareInterface
 {
     /**
-     * @var Map\UserBundle\Entity\User
+     * @var ContainerInterface
      */
-    protected $user;
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param ContainerInterface $container Service container.
-     */
-    public function __construct(ContainerInterface $container)
-    {
-        $this->user = $container->get('security.context')->getToken()->getUser();
-    }
+    protected $container;
 
     /**
      * {@inheritDoc}
@@ -61,19 +54,23 @@ class MenuSelectType extends AbstractType implements NavbarFormInterface
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $currentDomain = $this->user->getCurrentDomain();
+        $securityContext = $this->container->get('security.context');
+        $user = $securityContext->getToken()->getUser();
+
+        $currentDomain = $user->getCurrentDomain();
         if (is_null($currentDomain)) {
             $currentDomainId = 0;
         } else {
             $currentDomainId = $currentDomain->getId();
         }
-        $availableDomains = $this->user->getAvailableDomains();
+        $availableDomains = $user->getAvailableDomains();
 
         if (key_exists($currentDomainId, $availableDomains)) {
             $builder->add(
                 'search',
                 'choice',
                 array(
+                    'label' => false,
                     'choices' => $availableDomains,
                     'data' => $currentDomainId,
                     'widget_control_group' => false,
@@ -89,6 +86,7 @@ class MenuSelectType extends AbstractType implements NavbarFormInterface
                 'search',
                 'choice',
                 array(
+                    'label' => false,
                     'choices' => $availableDomains,
                     'empty_value' => '',
                     'widget_control_group' => false,
@@ -120,5 +118,18 @@ class MenuSelectType extends AbstractType implements NavbarFormInterface
     public function getRoute()
     {
         return "domain_select";
+    }
+
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface|null $container A ContainerInterface instance
+     * or null
+     *
+     * @return void
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
     }
 }

@@ -55,7 +55,7 @@ class UserAddType extends DefaultType
                 'firstname',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
                     )
                 )
@@ -64,7 +64,7 @@ class UserAddType extends DefaultType
                 'name',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
                     )
                 )
@@ -73,7 +73,7 @@ class UserAddType extends DefaultType
                 'displayname',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
                     )
                 )
@@ -82,7 +82,7 @@ class UserAddType extends DefaultType
                 'username',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
                     )
                 )
@@ -92,7 +92,7 @@ class UserAddType extends DefaultType
                 'email',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Email(array('message' => 'Invalid email address'))
                     )
                 )
