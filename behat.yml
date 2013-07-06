@@ -1,0 +1,12 @@
+default:
+    extensions:
+        Behat\Symfony2Extension\Extension:
+            mink_driver: true
+        Behat\MinkExtension\Extension:
+            default_session: 'symfony2'
+            base_url: http://map2dev.localhost/app_dev.php/
+        VIPSoft\DoctrineDataFixturesExtension\Extension:
+            lifetime:    feature
+            autoload:    true
+            directories: ~
+            fixtures:    ~
