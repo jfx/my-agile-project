@@ -55,6 +55,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $this->parameters = $parameters;
         $this->useContext('login', new LoginSubcontext($parameters));
+        $this->useContext('gui', new GuiSubcontext($parameters));
     }
 
     /**

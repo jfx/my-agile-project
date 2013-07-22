@@ -100,6 +100,18 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
     /**
      * Reusable action method.
      *
+     * @return array
+     *
+     * @Given /^I am an admin$/
+     */
+    public function iAmAnAdmin()
+    {
+        return $this->iAmLoggedInAsWithThePassword('useradmin', 'admin');
+    }
+
+    /**
+     * Reusable action method.
+     *
      * @param string $username Username
      * @param string $password Password
      *
@@ -115,6 +127,21 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
             new When('I fill in "Password:" with "'.$password.'"'),
             new When('I press "Login"'),
             new Then('I should be on "/"')
+        );
+    }
+
+    /**
+     * Reusable action method.
+     *
+     * @return array
+     *
+     * @Given /^I logout$/
+     */
+    public function iLogout()
+    {
+        return array(
+            new When('I go to "/logout"'),
+            new Then('I should be on "/login"')
         );
     }
 

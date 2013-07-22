@@ -3,6 +3,7 @@ Feature: Login
   As a anonymous user
   I need to login to the application
 
+@javascript
 Scenario Outline: Successful login
   Given I go to "/login"
   When I am logged in as "<username>" with the password "<password>"
@@ -13,6 +14,7 @@ Scenario Outline: Successful login
   | useruser  | user     | Firstuser User   |
   | useradmin | admin    | Firstadmin Admin |
 
+@javascript
 Scenario Outline: Wrong credentials
   Given I go to "/login"
   When I fill in "Username:" with "<username>"
@@ -27,6 +29,7 @@ Scenario Outline: Wrong credentials
   | useruser   | wrong_pass |
   | userlock   | wrong_pass |
 
+@javascript
 Scenario: Locked user
   Given I go to "/login"
   When I fill in "Username:" with "userlock"
