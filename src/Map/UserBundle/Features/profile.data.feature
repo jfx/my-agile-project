@@ -19,8 +19,8 @@ Scenario: Display user data
   And the view checkbox "Superadmin" should not be checked
 
 @javascript
-Scenario: Display admin data
-  Given I am an admin
+Scenario: Display super-admin data
+  Given I am a super-admin
   When I follow "Admin"
   And I follow "Profile"
   Then I should be on "/user/profile"

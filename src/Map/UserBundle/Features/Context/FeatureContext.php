@@ -20,6 +20,7 @@ namespace Map\UserBundle\Features\Context;
 
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -70,5 +71,21 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * The AfterScenario event occurs after Behat finishes executing a scenario.
+     * Close Doctrine connection  to avoid "Too many connections" errors.
+     *
+     * @param Event $event ScenarioEvent or OutlineEvent or OutlineExampleEvent
+     *
+     * @return void
+     *
+     * @AfterScenario
+     */
+    public function after(Event $event)
+    {
+        $doctrine = $this->kernel->getContainer()->get('doctrine');
+        $doctrine->getConnection()->close();
     }
 }

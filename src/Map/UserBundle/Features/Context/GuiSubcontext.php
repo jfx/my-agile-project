@@ -42,6 +42,11 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  */
 class GuiSubcontext extends BehatContext implements KernelAwareInterface
 {
+    const ACTION_ADD    = 'icon-plus-sign';
+    const ACTION_EDIT   = 'icon-edit';
+    const ACTION_VIEW   = 'icon-eye-open';
+    const ACTION_DELETE = 'icon-trash';
+
     /**
      * @var KernelInterface Kernel
      */
@@ -74,6 +79,21 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * Checks that span field with specified label has specified value.
+     *
+     * @param integer $seconds Seconds
+     *
+     * @return void
+     *
+     * @When /^I wait for (\d+) seconds$/
+     */
+    public function iWaitForSeconds($seconds)
+    {
+        $session = $this->getMainContext()->getSession();
+        $session->wait($seconds*1000);
     }
 
     /**
@@ -181,6 +201,56 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
     }
 
     /**
+     * Checks, that the table does not containt action button.
+     *
+     * @param string $action Action button title.
+     *
+     * @return void
+     *
+     * @throws ExpectationException
+     *
+     * @Then /^I should not see "([^"]*)" action button$/
+     */
+    public function iShouldNotSeeActionButton($action)
+    {
+        $session = $this->getMainContext()->getSession();
+        $page = $session->getPage();
+
+        switch ($action) {
+            case "Add":
+                $actionButton = GuiSubcontext::ACTION_ADD;
+                break;
+            case "Edit":
+                $actionButton = GuiSubcontext::ACTION_EDIT;
+                break;
+            case "View":
+                $actionButton = GuiSubcontext::ACTION_VIEW;
+                break;
+            case "Delete":
+                $actionButton = GuiSubcontext::ACTION_DELETE;
+                break;
+            default:
+                $message = sprintf(
+                    'The action button has "%s" value, but "%s" expected.',
+                    $action,
+                    'Add|Edit|View|Delete'
+                );
+                throw new ExpectationException($message, $session);
+        }
+
+        $nodeElements = $page->findAll('css', 'table i');
+
+        $found = false;
+        foreach ($nodeElements as $nodeElement) {
+
+            if ($nodeElement->getAttribute('class') == $actionButton) {
+                $found = true;
+            }
+        }
+        assertEquals(false, $found, 'Action button "'.$action.'" found');
+    }
+
+    /**
      * Check snumber of rows in table.
      *
      * @param integer $rowCount Number of rows
@@ -246,7 +316,13 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
                 $columnName = $column2CheckKeys[$columnIdx];
 
                 if ($column2Check[$columnName]) {
-                    $row[$columnName] = $nodeElement->getText();
+                    $row[$columnName] = trim(
+                        preg_replace(
+                            "/[^[:print:]]/",
+                            "",
+                            $nodeElement->getText()
+                        )
+                    );
                 }
                 $columnIdx++;
             }
@@ -273,6 +349,33 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
         TableNode $tableNode
     ) {
         $this->theDataOfTheTableShouldMatch($tableNode, false);
+    }
+
+    /**
+     * Checks that the specified table's columns match the given schema
+     *
+     * @param TableNode $tableNode Table with labels and expected values
+     *
+     * @return void
+     *
+     * @Then /^the columns of the table should match:$/
+     */
+    public function theColumnsShouldMatch(TableNode $tableNode)
+    {
+        $session = $this->getMainContext()->getSession();
+        $page = $session->getPage();
+
+        $nodeElements = $page->findAll('css', 'table thead tr th');
+
+        $tableHeader = array();
+
+        foreach ($nodeElements as $key => $nodeElement) {
+
+            $tableHeader[] = trim(
+                preg_replace("/[^[:print:]]/", "", $nodeElement->getText())
+            );
+        }
+        assertEquals($tableNode->getRow(0), $tableHeader);
     }
 
     /**

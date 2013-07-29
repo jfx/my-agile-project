@@ -25,7 +25,7 @@ dev:
                 capabilities: { "browserName": "firefox", 'platform':'LINUX', 'browserVersion':'','version':'' }
                 wd_host: 'http://localhost:4444/wd/hub'
         VIPSoft\DoctrineDataFixturesExtension\Extension:
-            lifetime:    feature
+            lifetime:    scenario
             autoload:    true
             directories: ~
             fixtures:    ~

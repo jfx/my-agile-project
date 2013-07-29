@@ -1,4 +1,4 @@
-Feature: Role
+Feature: Role profile
   In order to see my role on domains
   As a connected user
   I need to see my different role on each domain. 
@@ -19,7 +19,7 @@ Scenario: Multiple roles
 
 @javascript
 Scenario: No role
-  Given I am an admin
+  Given I am a super-admin
   When I follow "Admin"
   And I follow "Profile"
   And I follow "Role"

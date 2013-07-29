@@ -102,9 +102,9 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
      *
      * @return array
      *
-     * @Given /^I am an admin$/
+     * @Given /^I am a super-admin$/
      */
-    public function iAmAnAdmin()
+    public function iAmAnSuperAdmin()
     {
         return $this->iAmLoggedInAsWithThePassword('useradmin', 'admin');
     }

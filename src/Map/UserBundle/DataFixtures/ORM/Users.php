@@ -74,7 +74,7 @@ class Users extends AbstractFixture implements
             ),
             array(
                 'name' => 'user',
-                'details' => 'user role on domain 1',
+                'details' => 'user role on domain 1 + user+ on domain 2',
                 'superadmin' => false,
                 'locked' => false
             ),
