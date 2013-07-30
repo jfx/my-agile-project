@@ -18,10 +18,7 @@
 
 namespace Map\UserBundle\Features\Context;
 
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Map\CoreBundle\Features\Context\FeatureContext as CoreFeatureContext;
 
 /**
  * Feature context class.
@@ -35,57 +32,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
  * @since     2
  *
  */
-class FeatureContext extends MinkContext implements KernelAwareInterface
+class FeatureContext extends CoreFeatureContext
 {
-    /**
-     * @var KernelInterface Kernel
-     */
-    private $kernel;
-
-    /**
-     * @var array parameters
-     */
-    private $parameters;
-
-    /**
-     * Initializes context with parameters from behat.yml.
-     *
-     * @param array $parameters Parameters
-     */
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-        $this->useContext('login', new LoginSubcontext($parameters));
-        $this->useContext('gui', new GuiSubcontext($parameters));
-    }
-
-    /**
-     * Sets HttpKernel instance.
-     * This method will be automatically called by Symfony2Extension
-     * ContextInitializer.
-     *
-     * @param KernelInterface $kernel Kernel
-     *
-     * @return void
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
-    /**
-     * The AfterScenario event occurs after Behat finishes executing a scenario.
-     * Close Doctrine connection  to avoid "Too many connections" errors.
-     *
-     * @param Event $event ScenarioEvent or OutlineEvent or OutlineExampleEvent
-     *
-     * @return void
-     *
-     * @AfterScenario
-     */
-    public function after(Event $event)
-    {
-        $doctrine = $this->kernel->getContainer()->get('doctrine');
-        $doctrine->getConnection()->close();
-    }
 }

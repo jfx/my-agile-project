@@ -16,23 +16,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Map\UserBundle\Features\Context;
+namespace Map\CoreBundle\Features\Context;
 
-use Behat\Behat\Context\BehatContext;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Map\CoreBundle\Features\Context\Subcontext;
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
 /**
- * HTML GUI subcontext class.
+ * Table subcontext class.
  *
  * @category  MyAgileProject
- * @package   User
+ * @package   Core
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
  * @copyright 2013 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
@@ -40,165 +37,12 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
  * @since     2
  *
  */
-class GuiSubcontext extends BehatContext implements KernelAwareInterface
+class TableSubcontext extends Subcontext
 {
     const ACTION_ADD    = 'icon-plus-sign';
     const ACTION_EDIT   = 'icon-edit';
     const ACTION_VIEW   = 'icon-eye-open';
     const ACTION_DELETE = 'icon-trash';
-
-    /**
-     * @var KernelInterface Kernel
-     */
-    private $kernel;
-
-    /**
-     * @var array parameters
-     */
-    private $parameters;
-
-    /**
-     * Initializes context with parameters from behat.yml.
-     *
-     * @param array $parameters Parameters
-     */
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * Sets HttpKernel instance.
-     * This method will be automatically called by Symfony2Extension
-     * ContextInitializer.
-     *
-     * @param KernelInterface $kernel Kernel
-     *
-     * @return void
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
-    /**
-     * Checks that span field with specified label has specified value.
-     *
-     * @param integer $seconds Seconds
-     *
-     * @return void
-     *
-     * @When /^I wait for (\d+) seconds$/
-     */
-    public function iWaitForSeconds($seconds)
-    {
-        $session = $this->getMainContext()->getSession();
-        $session->wait($seconds*1000);
-    }
-
-    /**
-     * Checks that span field with specified label has specified value.
-     *
-     * @param string $field Field label
-     * @param string $value Value
-     *
-     * @return void
-     *
-     * @throws ElementNotFoundException
-     * @throws ExpectationException
-     *
-     * @Then /^the "([^"]*)" view field should contain "([^"]*)"$/
-     */
-    public function assertViewFieldContains($field, $value)
-    {
-        $spanId = $this->getForAttributeFromLabel($field);
-
-        $span = $this->getElementById($spanId);
-
-        $actual = $span->getText();
-        $regex  = '/^'.preg_quote($value, '/').'/ui';
-
-        if (!preg_match($regex, $actual)) {
-            $message = sprintf(
-                'The field "%s" value is "%s", but "%s" expected.',
-                $field,
-                $actual,
-                $value
-            );
-            $session = $this->getMainContext()->getSession();
-            throw new ExpectationException($message, $session);
-        }
-    }
-
-    /**
-     * Checks that checkbox is checked.
-     *
-     * @param string $checkboxName Checkbox name
-     *
-     * @return void
-     *
-     * @throws ExpectationException
-     *
-     * @Then /^the view checkbox "([^"]*)" should be checked$/
-     */
-    public function assertViewCheckboxChecked($checkboxName)
-    {
-        $checkboxId = $this->getForAttributeFromLabel($checkboxName);
-
-        $checkbox = $this->getElementById($checkboxId);
-
-        if (!$checkbox->hasAttribute('checked')) {
-            $message = sprintf(
-                'Checkbox "%s" is not checked, but it should be.',
-                $checkboxName
-            );
-            $session = $this->getMainContext()->getSession();
-            throw new ExpectationException($message, $session);
-        }
-    }
-
-    /**
-     * Checks that checkbox is not checked.
-     *
-     * @param string $checkboxName Checkbox name
-     *
-     * @return void
-     *
-     * @throws ExpectationException
-     *
-     * @Then /^the view checkbox "([^"]*)" should not be checked$/
-     */
-    public function assertViewCheckboxNotChecked($checkboxName)
-    {
-        $checkboxId = $this->getForAttributeFromLabel($checkboxName);
-
-        $checkbox = $this->getElementById($checkboxId);
-
-        if ($checkbox->hasAttribute('checked')) {
-            $message = sprintf(
-                'Checkbox "%s" is checked, but it should not be.',
-                $checkboxName
-            );
-            $session = $this->getMainContext()->getSession();
-            throw new ExpectationException($message, $session);
-        }
-    }
-
-    /**
-     * Checks view fields with provided table.
-     *
-     * @param TableNode $fields Table with labels and expected values
-     *
-     * @return void
-     *
-     * @Then /^I should see the following view form:$/
-     */
-    public function assertViewFieldsContains(TableNode $fields)
-    {
-        foreach ($fields->getRowsHash() as $field => $value) {
-            $this->assertViewFieldContains($field, $value);
-        }
-    }
 
     /**
      * Checks, that the table does not containt action button.
@@ -218,16 +62,16 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
 
         switch ($action) {
             case "Add":
-                $actionButton = GuiSubcontext::ACTION_ADD;
+                $actionButton = TableSubcontext::ACTION_ADD;
                 break;
             case "Edit":
-                $actionButton = GuiSubcontext::ACTION_EDIT;
+                $actionButton = TableSubcontext::ACTION_EDIT;
                 break;
             case "View":
-                $actionButton = GuiSubcontext::ACTION_VIEW;
+                $actionButton = TableSubcontext::ACTION_VIEW;
                 break;
             case "Delete":
-                $actionButton = GuiSubcontext::ACTION_DELETE;
+                $actionButton = TableSubcontext::ACTION_DELETE;
                 break;
             default:
                 $message = sprintf(
@@ -403,60 +247,5 @@ class GuiSubcontext extends BehatContext implements KernelAwareInterface
             $cells,
             'The table does not containt "'.$value.'"'
         );
-    }
-
-    /**
-     * Get for attribute from label find by text name.
-     *
-     * @param string $labelName Label name
-     *
-     * @return string Field/Span id
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getForAttributeFromLabel($labelName)
-    {
-        $session = $this->getMainContext()->getSession();
-        $page = $session->getPage();
-
-        $label = $page->find('xpath', '//label[text()="'.$labelName.'"]');
-
-        if (null === $label) {
-            throw new ElementNotFoundException(
-                $session,
-                'label',
-                'text',
-                $labelName
-            );
-        }
-
-        return $label->getAttribute('for');
-    }
-
-    /**
-     * Get a HTML element by its id.
-     *
-     * @param string $id Id of element
-     *
-     * @return NodeElement Span|Checkbox id
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getElementById($id)
-    {
-        $session = $this->getMainContext()->getSession();
-        $page = $session->getPage();
-
-        $element = $page->findById($id);
-        if (null === $element) {
-            throw new ElementNotFoundException(
-                $session,
-                'span|checkbox',
-                'id',
-                $id
-            );
-        }
-
-        return $element;
     }
 }
