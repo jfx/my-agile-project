@@ -1,4 +1,4 @@
-Feature: Password
+Feature: User.Profile.Profile password
   In order to change my password
   As a connected user
   I need to submit my old password and the new one. 

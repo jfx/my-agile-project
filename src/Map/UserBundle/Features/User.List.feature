@@ -1,4 +1,4 @@
-Feature: Users list
+Feature: User.User.Users list
   In order to see users data
   As a connected user
   I need to see a users list. 

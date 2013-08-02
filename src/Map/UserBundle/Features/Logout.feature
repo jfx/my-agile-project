@@ -1,4 +1,4 @@
-Feature: Log out
+Feature: User.Security.Log out
   In order to quit the application
   As a connected user
   I need to disconnect. 

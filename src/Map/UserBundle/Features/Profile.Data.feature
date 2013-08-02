@@ -1,4 +1,4 @@
-Feature: Profile
+Feature: User.Profile.Profile data
   In order to see my personal data
   As a connected user
   I need to see my profile page. 

@@ -1,5 +1,5 @@
-Feature: Add User
-  In order to manage
+Feature: User.User.Add User
+  In order to manage user
   As a super-admin user profile
   I need to add a user. 
 

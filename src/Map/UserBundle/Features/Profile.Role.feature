@@ -1,4 +1,4 @@
-Feature: Role profile
+Feature: User.Profile.Profile role 
   In order to see my role on domains
   As a connected user
   I need to see my different role on each domain. 

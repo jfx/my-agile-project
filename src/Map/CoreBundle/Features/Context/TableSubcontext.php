@@ -95,7 +95,7 @@ class TableSubcontext extends Subcontext
     }
 
     /**
-     * Check snumber of rows in table.
+     * Checks number of rows in table.
      *
      * @param integer $rowCount Number of rows
      *

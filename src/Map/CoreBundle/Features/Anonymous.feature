@@ -1,4 +1,4 @@
-Feature: Anonymous access to login page
+Feature: Core.Anonymous access to login page
   In order to be able to connect 
   As a anonymous user
   I need to see the login form

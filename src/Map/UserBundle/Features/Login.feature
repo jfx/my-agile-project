@@ -1,4 +1,4 @@
-Feature: Login
+Feature: User.Security.Login
   In order to use the application 
   As a anonymous user
   I need to login to the application
