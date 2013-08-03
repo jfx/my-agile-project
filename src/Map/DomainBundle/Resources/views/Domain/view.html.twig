@@ -17,13 +17,13 @@
     </form>
 </div>
 <div class="span8">
-<a href="{{ path('domain_index') }}" class="btn">
+<a href="{{ path('domain_index') }}" class="btn" title="Return to list">
 <i class="icon-chevron-left"></i>
 Return to list
 </a>
 {% if (is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER')) %}
     <a href="{{ path('domain_edit', {'id': domain.id}) }}"
-    class="btn">
+    class="btn" title="Edit">
         <i class="icon-edit"></i>
     Edit
     </a>

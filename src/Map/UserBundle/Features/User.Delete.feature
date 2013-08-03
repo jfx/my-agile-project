@@ -15,7 +15,7 @@ Scenario: Delete a user
   And I should see "User removed successfully"
 
 @javascript
-Scenario: Do no confirm delete a user
+Scenario: Cancel to delete a user
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
@@ -34,3 +34,12 @@ Scenario: Impossible to delete a user
   And I follow "OK"
   Then I should be on "/user/del/2"
   And I should see "Impossible to remove this item - Integrity constraint violation !"
+
+@javascript
+Scenario: Return to list button
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Users"
+  And I follow "Delete user #3"
+  When I follow "Return to list"
+  Then I should be on "/user/"

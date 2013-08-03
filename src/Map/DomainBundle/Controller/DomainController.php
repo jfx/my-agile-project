@@ -180,6 +180,8 @@ class DomainController extends Controller
     {
         $service = $this->container->get('map_user.updatedomain4user');
 
+        $success = true;
+
         if ($this->get('request')->getMethod() == 'POST') {
 
             $em = $this->getDoctrine()->getManager();
@@ -191,7 +193,6 @@ class DomainController extends Controller
             try {
                 $em->flush();
 
-                $success = true;
             } catch (\Exception $e) {
                 $success = false;
 
@@ -210,7 +211,9 @@ class DomainController extends Controller
                 );
             }
         }
-        $service->setCurrentDomain($domain);
+        if ($success) {
+            $service->setCurrentDomain($domain);
+        }
 
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',

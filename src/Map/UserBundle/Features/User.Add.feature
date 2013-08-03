@@ -10,13 +10,13 @@ Scenario: Add a user with non super-admin profile
   And I follow "Users"
   And I follow "Add"
   When I fill in the following:
-  | Firstname          | Firstadded         |
-  | Name               | Added              |
-  | Displayname        | displayAdded       |
-  | Username           | useradded          |
-  | Password           | passAdded          |
-  | Email              | added@example.com  |
-  | Details (optional) | User added         |
+  | Firstname          | Firstadded        |
+  | Name               | Added             |
+  | Displayname        | displayAdded      |
+  | Username           | useradded         |
+  | Password           | passAdded         |
+  | Email              | added@example.com |
+  | Details (optional) | User added        |
   And I press "Save"
   Then I should see "User added successfully"
   And I should see the following view form:
@@ -38,13 +38,13 @@ Scenario: Add a user with super-admin profile
   And I follow "Users"
   And I follow "Add"
   When I fill in the following:
-  | Firstname          | Firstadded         |
-  | Name               | Added              |
-  | Displayname        | displayAdded       |
-  | Username           | useradded          |
-  | Password           | passAdded          |
-  | Email              | added@example.com  |
-  | Details (optional) | User added         |
+  | Firstname          | Firstadded        |
+  | Name               | Added             |
+  | Displayname        | displayAdded      |
+  | Username           | useradded         |
+  | Password           | passAdded         |
+  | Email              | added@example.com |
+  | Details (optional) | User added        |
   And I check "Super admin"
   And I press "Save"
   Then I should see "User added successfully"
@@ -65,13 +65,13 @@ Scenario: Add a locked user
   And I follow "Users"
   And I follow "Add"
   When I fill in the following:
-  | Firstname          | Firstadded         |
-  | Name               | Added              |
-  | Displayname        | displayAdded       |
-  | Username           | useradded          |
-  | Password           | passAdded          |
-  | Email              | added@example.com  |
-  | Details (optional) | User added         |
+  | Firstname          | Firstadded        |
+  | Name               | Added             |
+  | Displayname        | displayAdded      |
+  | Username           | useradded         |
+  | Password           | passAdded         |
+  | Email              | added@example.com |
+  | Details (optional) | User added        |
   And I check "Locked"
   And I press "Save"
   Then I should see "User added successfully"
@@ -118,7 +118,6 @@ Scenario: Impossible to add a user with wrong mail
   And I press "Save"
   Then I should be on "/user/add"
 
-
 @javascript
 Scenario: Impossible to add a user with no password
   Given I am a super-admin
@@ -156,3 +155,12 @@ Scenario Outline: Impossible to add a user with duplicate data
   | Displayname | displayuser      | displayname |
   | Username    | useruser         | username    |
   | Email       | user@example.com | email       |
+
+@javascript
+Scenario: Return to list button
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Users"
+  And I follow "Add"
+  When I follow "Return to list"
+  Then I should be on "/user/"

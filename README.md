@@ -16,11 +16,14 @@ Features:
   - Behat/Mink/PHPUnit integration,
   - Security features (login, logout),
   - User behat features (profile),
-  - User list and add behat features.
+  - User management behat features,
+  - Domain management behat features.
 
 Bugfixes:
 
   - <tr> tag missing in users light list,
+  - Add title to buttons,
+  - Entity manager closed after rollback on deleting a domain
 
 
 ### 0.1.0 (22 June 2013)

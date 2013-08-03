@@ -160,7 +160,7 @@ Scenario: Impossible to modify a user with wrong mail
   Then I should be on "/user/edit/2"
 
 @javascript
-Scenario Outline: Impossible to add a user with duplicate data
+Scenario Outline: Impossible to edit a user with duplicate data
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
@@ -174,3 +174,12 @@ Scenario Outline: Impossible to add a user with duplicate data
   | Displayname | displayuser      | displayname |
   | Username    | useruser         | username    |
   | Email       | user@example.com | email       |
+
+@javascript
+Scenario: Return to list button
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Users"
+  And I follow "Edit user #1"
+  When I follow "Return to list"
+  Then I should be on "/user/"

@@ -78,3 +78,21 @@ Scenario: View a locked user profile with non super-admin profile
   | Details     | locked user      |
   And the view checkbox "Superadmin" should not be checked
   And the view checkbox "Locked" should be checked
+
+@javascript
+Scenario: Return to list button
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Users"
+  And I follow "View user #2"
+  When I follow "Return to list"
+  Then I should be on "/user/"
+
+@javascript
+Scenario: Edit button
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Users"
+  And I follow "View user #2"
+  When I follow "Edit"
+  Then I should be on "/user/edit/2"
