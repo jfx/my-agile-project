@@ -15,15 +15,17 @@ Features:
   - Migration to symfony 2.3,
   - Behat/Mink/PHPUnit integration,
   - Security features (login, logout),
-  - User behat features (profile),
+  - Profile behat features,
   - User management behat features,
-  - Domain management behat features.
+  - Domain management behat features,
+  - Resource management behat features
 
 Bugfixes:
 
   - <tr> tag missing in users light list,
   - Add title to buttons,
-  - Entity manager closed after rollback on deleting a domain
+  - Entity manager closed after rollback on deleting domain,
+  - Refresh role after domain change
 
 
 ### 0.1.0 (22 June 2013)

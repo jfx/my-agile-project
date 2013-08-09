@@ -1,7 +1,7 @@
 Feature: Domain.Domain.Domains list
   In order to see domains data
   As a connected user
-  I need to see a domains list. 
+  I need to see domains list. 
 
 @javascript
 Scenario: Display domains list for connected user

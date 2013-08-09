@@ -146,6 +146,7 @@ Scenario Outline: Impossible to add a user with duplicate data
   | Username    | useradded         |
   | Password    | passAdded         |
   | Email       | added@example.com |
+  And I wait for 1 seconds
   And I fill in "<field>" with "<value>"
   And I press "Save"
   Then I should see "A user with this <message> already exists."

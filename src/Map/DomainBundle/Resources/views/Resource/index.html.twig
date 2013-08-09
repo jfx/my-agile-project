@@ -15,7 +15,7 @@
             {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
             <th>
                     <a href="{{ path('dm-resource_add') }}"
-                        class="btn">
+                        class="btn" title="Add">
                         <i class="icon-plus-sign"></i>
                     </a>
 
@@ -33,11 +33,11 @@
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
                 <td width="150">
                     <a href="{{ path('dm-resource_edit', {'id': resource.id}) }}"
-                       class="btn">
+                       class="btn" title="Edit resource #{{ resource.id }}">
                         <i class="icon-edit"></i>
                     </a>
                     <a href="{{ path('dm-resource_del', {'id': resource.id}) }}"
-                       class="btn">
+                       class="btn" title="Delete resource #{{ resource.id }}">
                         <i class="icon-trash"></i>
                     </a>
                 </td>

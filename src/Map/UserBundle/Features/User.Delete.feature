@@ -8,11 +8,13 @@ Scenario: Delete a user
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
+  And I should see "lock@example.com"
   And I follow "Delete user #3"
   When I press "Remove"
   And I follow "OK"
   Then I should be on "/user/"
   And I should see "User removed successfully"
+  And I should not see "lock@example.com"
 
 @javascript
 Scenario: Cancel to delete a user

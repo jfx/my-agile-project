@@ -8,11 +8,13 @@ Scenario: Delete a domain
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Domains"
+  And I should see "Domain Five"
   And I follow "Delete domain #5"
   When I press "Remove"
   And I follow "OK"
   Then I should be on "/domain/"
   And I should see "Domain removed successfully"
+  And I should not see "Domain Five"
 
 @javascript
 Scenario: Cancel to delete a domain

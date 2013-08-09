@@ -7,7 +7,7 @@ Feature: User.Security.Login
 Scenario Outline: Successful login
   Given I go to "/login"
   When I am logged in as "<username>" with the password "<password>"
-  And I should see "Hello <message> !"
+  Then I should see "Hello <message> !"
 
   Examples:
   | username  | password | message          |

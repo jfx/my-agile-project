@@ -4,7 +4,7 @@ Feature: Domain.Domain.Edit Domain
   I need to edit a domain. 
 
 @javascript
-Scenario: Edit a domain
+Scenario: A super-admin edits a domain
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Domains"
@@ -19,7 +19,30 @@ Scenario: Edit a domain
   | Details     | Domain modified |
   And I follow "Return to list"
   And I should see 5 rows in the table
-  And the table should contain "Modified"
+  And the table should contain the row:
+  | Name     | Details         |
+  | Modified | Domain modified | 
+
+@javascript
+Scenario: A manager edits a domain
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Edit"
+  When I fill in the following:
+  | Name               | Modified        |
+  | Details (optional) | Domain modified |
+  And I press "Save"
+  Then I should see "Domain edited successfully"
+  And I should see the following view form:
+  | Name        | Modified        |
+  | Details     | Domain modified |
+  And I follow "Return to list"
+  And I should see 5 rows in the table
+  And the table should contain the row:
+  | Name     | Details         |
+  | Modified | Domain modified |
 
 @javascript
 Scenario: Impossible to edit a domain with a name too short

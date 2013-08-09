@@ -19,7 +19,9 @@ Scenario: Add a domain
   | Details     | Domain added |
   And I follow "Return to list"
   And I should see 6 rows in the table
-  And the table should contain "Added"
+  And the table should contain the row:
+  | Name  | Details      |
+  | Added | Domain added | 
 
 @javascript
 Scenario: Impossible to add a domain with a name too short
