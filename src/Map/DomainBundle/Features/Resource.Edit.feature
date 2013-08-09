@@ -5,7 +5,13 @@ Feature: Domain.Resource.Edit Resource
 
 @javascript
 Scenario: A super-admin edits a resource role
-  Given I am a super-admin
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Domain"
+  And I follow "View domain #1"
+  And I follow "Resources"
+  And I should not see "Add" action button
+  And I am a super-admin
   And I follow "Admin"
   And I follow "Domains"
   And I follow "Edit domain #1"
@@ -17,12 +23,18 @@ Scenario: A super-admin edits a resource role
   And the table should contain the row:
   | Name           | Displayname | Role    |
   | User Firstuser | displayuser | Manager |
-  And I am logged in as "useruser" with the password "user"
+  And I am a user
   And I follow "Admin"
   And I follow "Domain"
   And I follow "View domain #1"
   And I follow "Resources"
   And I should see "Add" action button
+  And I follow "Admin"
+  And I follow "Domain"
+  And I follow "View domain #2"
+  And I follow "Resources"
+  And I should not see "Add" action button
+
 
 @javascript
 Scenario: A manager edits a resource role
