@@ -18,8 +18,10 @@
 
 namespace Map\CoreBundle\Features\Context;
 
+use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\ExpectationException;
 use Map\CoreBundle\Features\Context\Subcontext;
 
 /**
@@ -36,6 +38,95 @@ use Map\CoreBundle\Features\Context\Subcontext;
  */
 class UtilSubcontext extends Subcontext
 {
+
+    /**
+     * Checks access to URL for different roles.
+     *
+     * @param TableNode $tableNode Table with URL and granted access for role
+     *
+     * @return void
+     *
+     * @Given /^I check the following ACL table:$/
+     */
+    public function iCheckTheFollowingAclTable(TableNode $tableNode)
+    {
+        $hash = $tableNode->getHash();
+
+        $mainContext = $this->getMainContext();
+        $session = $mainContext->getSession();
+
+        $loginSubContext = $this->getMainContext()->getSubcontext('login');
+
+        $roles = array_keys($hash[0]);
+
+        for ($i = 1; $i <= 6; $i++) {
+
+            $role = $roles[$i];
+            $credentials = $loginSubContext->getCredentialsFromRole($role);
+
+            $session->restart();
+
+            // Login
+            $session->visit($mainContext->locatePath('/login'));
+            $loginPage = $session->getPage();
+            $loginPage->fillField('Username:', $credentials['username']);
+            $loginPage->fillField('Password:', $credentials['password']);
+            $loginPage->pressButton('Login');
+            try {
+                $mainContext->assertPageAddress('/');
+            } catch (\Exception $e) {
+                $message  = 'Role : '.$role;
+                $message .= ' > '.$e->getMessage();
+                throw new ExpectationException($message, $session);
+            }
+            foreach ($hash as $idx => $row) {
+
+                if (strlen($row['Prerequisite']) > 0) {
+
+                    $session->visit(
+                        $mainContext->locatePath($row['Prerequisite'])
+                    );
+                    try {
+                        $mainContext->assertPageAddress($row['Prerequisite']);
+                    } catch (\Exception $e) {
+                        $message  = 'Prerequisite : '.$row['Prerequisite'];
+                        $message .= ' - '.'Role : '.$role;
+                        $message .= ' > '.$e->getMessage();
+                        throw new ExpectationException($message, $session);
+                    }
+                }
+                $session->visit($mainContext->locatePath($row['URL']));
+                try {
+                    $mainContext->assertPageAddress($row['URL']);
+                } catch (\Exception $e) {
+                    $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
+                    $message .= ' > '.$e->getMessage();
+                    throw new ExpectationException($message, $session);
+                }
+
+                if ($row[$role] == 'Y') {
+                    try {
+                        $mainContext->assertPageNotContainsText(
+                            '403 Forbidden'
+                        );
+                    } catch (\Exception $e) {
+                        $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
+                        $message .= ' > '.$e->getMessage();
+                        throw new ExpectationException($message, $session);
+                    }
+
+                } else {
+                    try {
+                        $mainContext->assertPageContainsText('403 Forbidden');
+                    } catch (\Exception $e) {
+                        $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
+                        $message .= ' > '.$e->getMessage();
+                        throw new ExpectationException($message, $session);
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Checks that span field with specified label has specified value.

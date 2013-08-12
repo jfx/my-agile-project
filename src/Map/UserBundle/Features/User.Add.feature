@@ -28,7 +28,7 @@ Scenario: Add a user with non super-admin profile
   | Details     | User added        |
   And the view checkbox "Superadmin" should not be checked
   And the view checkbox "Locked" should not be checked
-  And I follow "Log out"
+  And I logout
   And I am logged in as "useradded" with the password "passAdded"
 
 @javascript

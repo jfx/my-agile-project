@@ -4,7 +4,7 @@ Feature: User.User.View User
   I need to view user's details. 
 
 @javascript
-Scenario: View a user profile with non super-admin profile
+Scenario: View a user profile with super-admin profile
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"

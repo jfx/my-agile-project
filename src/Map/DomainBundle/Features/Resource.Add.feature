@@ -41,7 +41,7 @@ Scenario: A super-admin adds a manager
   And the table should contain the row:
   | Name                     | Displayname      | Role    |
   | No-domain Firstno-domain | displayno-domain | Manager |
-  And I follow "Log out"
+  And I logout
   And I am logged in as "userno-domain" with the password "no-domain"
   And I follow "Admin"
   And I follow "Domain"

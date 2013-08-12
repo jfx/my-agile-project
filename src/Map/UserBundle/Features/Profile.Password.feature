@@ -15,7 +15,7 @@ Scenario: Wrong current password
   | Verification     | passChanged  |
   And I press "Save"
   Then I should see "This value should be the user current password"
-  And I follow "Log out"
+  And I logout
   And I am logged in as "useruser" with the password "user"
 
 @javascript
@@ -30,7 +30,7 @@ Scenario: New passwords don't match
   | Verification     | donotmatch   |
   And I press "Save"
   Then I should see "The entered passwords don't match "
-  And I follow "Log out"
+  And I logout
   And I am logged in as "useruser" with the password "user"
 
 @javascript
@@ -45,7 +45,7 @@ Scenario: Change password
   | Verification     | passChanged  |
   And I press "Save"
   Then I should see "Password modified"
-  And I follow "Log out"
+  And I logout
   And I go to "/login"
   And I am logged in as "useruser" with the password "passChanged"
   And I should see "Hello Firstuser User !"

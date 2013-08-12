@@ -28,7 +28,7 @@ Scenario: Edit a user with non super-admin profile
   | Details     | User modified        |
   And the view checkbox "Superadmin" should not be checked
   And the view checkbox "Locked" should not be checked
-  And I follow "Log out"
+  And I logout
   And I am logged in as "usermodified" with the password "passModified"
 
 @javascript
@@ -55,7 +55,7 @@ Scenario: Edit a user without changing password with non super-admin profile
   | Details     | User modified        |
   And the view checkbox "Superadmin" should not be checked
   And the view checkbox "Locked" should not be checked
-  And I follow "Log out"
+  And I logout
   And I am logged in as "usermodified" with the password "user"
 
 @javascript
@@ -76,7 +76,7 @@ Scenario: Change a password of a user
   | Details     | user role on domain 1 |
   And the view checkbox "Superadmin" should not be checked
   And the view checkbox "Locked" should not be checked
-  And I follow "Log out"
+  And I logout
   And I am logged in as "useruser" with the password "passModified"
 
 @javascript
@@ -111,7 +111,7 @@ Scenario: Unlock a user
   And I press "Save"
   Then I should see "User edited successfully"
   And the view checkbox "Locked" should not be checked
-  And I follow "Log out"
+  And I logout
   And I am logged in as "userlock" with the password "lock"
 
 @javascript
@@ -124,7 +124,7 @@ Scenario: Lock a user
   And I press "Save"
   Then I should see "User edited successfully"
   And the view checkbox "Locked" should be checked
-  And I follow "Log out"
+  And I logout
   And I go to "/login"
   And I fill in "Username:" with "useruser"
   And I fill in "Password:" with "user"

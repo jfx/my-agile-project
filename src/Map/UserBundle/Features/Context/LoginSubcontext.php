@@ -94,7 +94,12 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
      */
     public function iAmAUser()
     {
-        return $this->iAmLoggedInAsWithThePassword('useruser', 'user');
+        $credentials = $this->getCredentialsFromRole('user');
+
+        return $this->iAmLoggedInAsWithThePassword(
+            $credentials['username'],
+            $credentials['password']
+        );
     }
 
     /**
@@ -104,9 +109,14 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
      *
      * @Given /^I am a super-admin$/
      */
-    public function iAmAnSuperAdmin()
+    public function iAmASuperAdmin()
     {
-        return $this->iAmLoggedInAsWithThePassword('useradmin', 'admin');
+        $credentials = $this->getCredentialsFromRole('super-admin');
+
+        return $this->iAmLoggedInAsWithThePassword(
+            $credentials['username'],
+            $credentials['password']
+        );
     }
 
     /**
@@ -158,5 +168,53 @@ class LoginSubcontext extends BehatContext implements KernelAwareInterface
             new When('I go to "/"'),
             new Then('I should be on "/login"')
         );
+    }
+
+    /**
+     * Return test credentials from role.
+     *
+     * @param string $role Role
+     *
+     * @return array
+     */
+    public function getCredentialsFromRole($role)
+    {
+        $session = $this->getMainContext()->getSession();
+
+        switch ($role) {
+            case "super-admin":
+                $credentials['username'] = 'useradmin';
+                $credentials['password'] = 'admin';
+                break;
+            case "manager":
+                $credentials['username'] = 'userd1-manager';
+                $credentials['password'] = 'd1-manager';
+                break;
+            case "user+":
+                $credentials['username'] = 'userd1-user+';
+                $credentials['password'] = 'd1-user+';
+                break;
+            case "user":
+                $credentials['username'] = 'useruser';
+                $credentials['password'] = 'user';
+                break;
+            case "guest":
+                $credentials['username'] = 'userd1-guest';
+                $credentials['password'] = 'd1-guest';
+                break;
+            case "none":
+                $credentials['username'] = 'userd1-none';
+                $credentials['password'] = 'd1-none';
+                break;
+            default:
+                $message = sprintf(
+                    'The role has "%s" value, but "%s" expected.',
+                    $role,
+                    'super-admin|manager|user+|user|guest|none'
+                );
+                throw new ExpectationException($message, $session);
+        }
+
+        return $credentials;
     }
 }

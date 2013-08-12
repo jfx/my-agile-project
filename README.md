@@ -18,7 +18,9 @@ Features:
   - Profile behat features,
   - User management behat features,
   - Domain management behat features,
-  - Resource management behat features
+  - Resource management behat features,
+  - Home, header, footer behat features,
+  - ACL behat features.
 
 Bugfixes:
 
