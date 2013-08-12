@@ -15,13 +15,13 @@ Scenario: Display users list for a non super-admin profile
   And the data of the table should match:
   | Name       | Firstname       | Displayname       | Super admin | Details                                   |
   | Admin      | Firstadmin      | displayadmin      |             | Admin user                                |
-  | User       | Firstuser       | displayuser       | -           | user role on domain 1 + user+ on domain 2 |
-  | Lock       | Firstlock       | displaylock       | -           | Locked user                               |
-  | D1-none    | Firstd1-none    | displayd1-none    | -           | none role on domain 1                     |
   | D1-guest   | Firstd1-guest   | displayd1-guest   | -           | guest role on domain 1                    |
-  | D1-user+   | Firstd1-user+   | displayd1-user+   | -           | user+ role on domain 1                    |
   | D1-manager | Firstd1-manager | displayd1-manager | -           | manager role on domain 1                  |
+  | D1-none    | Firstd1-none    | displayd1-none    | -           | none role on domain 1                     |
+  | D1-user+   | Firstd1-user+   | displayd1-user+   | -           | user+ role on domain 1                    |
+  | Lock       | Firstlock       | displaylock       | -           | Locked user                               |
   | No-domain  | Firstno-domain  | displayno-domain  | -           | user with no role on domain               |
+  | User       | Firstuser       | displayuser       | -           | user role on domain 1 + user+ on domain 2 |
 
 @javascript
 Scenario: Display users list for a super-admin profile
@@ -35,13 +35,13 @@ Scenario: Display users list for a super-admin profile
   And the data of the table should match:
   | Name       | Firstname       | Displayname       | Super admin | Locked | Details                                   |
   | Admin      | Firstadmin      | displayadmin      |             | -      | Admin user                                |
-  | User       | Firstuser       | displayuser       | -           | -      | user role on domain 1 + user+ on domain 2 |
-  | Lock       | Firstlock       | displaylock       | -           |        | Locked user                               |
-  | D1-none    | Firstd1-none    | displayd1-none    | -           | -      | none role on domain 1                     |
   | D1-guest   | Firstd1-guest   | displayd1-guest   | -           | -      | guest role on domain 1                    |
-  | D1-user+   | Firstd1-user+   | displayd1-user+   | -           | -      | user+ role on domain 1                    |
   | D1-manager | Firstd1-manager | displayd1-manager | -           | -      | manager role on domain 1                  |
+  | D1-none    | Firstd1-none    | displayd1-none    | -           | -      | none role on domain 1                     |
+  | D1-user+   | Firstd1-user+   | displayd1-user+   | -           | -      | user+ role on domain 1                    |
+  | Lock       | Firstlock       | displaylock       | -           |        | Locked user                               |
   | No-domain  | Firstno-domain  | displayno-domain  | -           | -      | user with no role on domain               |
+  | User       | Firstuser       | displayuser       | -           | -      | user role on domain 1 + user+ on domain 2 |
 
 @javascript
 Scenario Outline: No actions buttons in users list for a non super-admin profile

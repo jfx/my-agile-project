@@ -35,6 +35,21 @@ use Map\DomainBundle\Entity\Domain;
 class UserRepository extends EntityRepository
 {
     /**
+     * Get all users ordered by name, firstname.
+     *
+     * @return array List of users.
+     */
+    public function findAllOrderByNameFirstname()
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->orderBy('u.name, u.firstname');
+
+        $results = $queryBuilder->getQuery()->getResult();
+
+        return $results;
+    }
+    
+    /**
      * Get the query builder of all available user for a domain (new resource).
      *
      * @param Domain $domain The domain.
