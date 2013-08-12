@@ -52,6 +52,11 @@ class UserDmRoles extends AbstractFixture implements OrderedFixtureInterface
                 'role' => 'user-role'
             ),
             array(
+                'user' => 'user-user',
+                'domain' => 'domaintwo-domain',
+                'role' => 'user+-role'
+            ),
+            array(
                 'user' => 'd1-none-user',
                 'domain' => 'domainone-domain',
                 'role' => 'none-role'

@@ -6,6 +6,7 @@
        <exclude name="PEAR.Commenting.FileComment.MissingVersion"/>
        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
+       <exclude name="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
     </rule>
     <rule ref="Zend">
        <exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>

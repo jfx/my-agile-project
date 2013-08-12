@@ -15,7 +15,7 @@
     </form>
 </div>
 <div class="span8">
-<a href="{{ path('user_index') }}" class="btn">
+<a href="{{ path('user_index') }}" class="btn" title="Return to list">
 <i class="icon-chevron-left"></i>
 Return to list
 </a>
@@ -28,7 +28,7 @@ Return to list
 $(function() {
     $("a.confirm").click(function(e) {
         e.preventDefault();
-        bootbox.confirm("Are you sure you want to delete ?", function(confirmed) {
+        bootbox.confirm("Are you sure you want to delete this item ?", function(confirmed) {
             if (confirmed) {
                 $("form").submit();
             }

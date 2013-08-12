@@ -19,7 +19,7 @@
 namespace Map\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Map\DomainBundle\Entity\Domain;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 

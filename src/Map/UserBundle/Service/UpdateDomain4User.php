@@ -107,8 +107,10 @@ class UpdateDomain4User
                     $domain->getId()
                 );
                 $user->addRole($userDmRole->getRole()->getId());
+                $this->securityContext->getToken()->setAuthenticated(false);
                 $user->setCurrentRoleLabel($userDmRole->getRole()->getLabel());
             } catch (Exception $e) {
+                $this->securityContext->getToken()->setAuthenticated(false);
             }
         }
         $this->userManager->updateUser($user);
