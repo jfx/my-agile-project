@@ -25,7 +25,7 @@
         "jms/di-extra-bundle": "1.4.*",
         "leafo/lessphp": "dev-master",
         "mopa/bootstrap-bundle": "dev-master",
-        "twitter/bootstrap": "master",
+        "twbs/bootstrap": "master",
         "knplabs/knp-menu-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
         "doctrine/doctrine-fixtures-bundle": "dev-master",

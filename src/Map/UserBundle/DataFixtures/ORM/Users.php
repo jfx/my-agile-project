@@ -40,7 +40,7 @@ class Users extends AbstractFixture implements
     ContainerAwareInterface
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface Container
      */
     private $container;
 

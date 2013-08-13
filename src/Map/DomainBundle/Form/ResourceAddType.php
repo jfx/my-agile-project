@@ -42,7 +42,7 @@ use Map\UserBundle\Entity\RoleRepository;
 class ResourceAddType extends DefaultType
 {
     /**
-     * @var Domain $domain
+     * @var Map\DomainBundle\Entity\Domain Domain
      */
     protected $domain;
 

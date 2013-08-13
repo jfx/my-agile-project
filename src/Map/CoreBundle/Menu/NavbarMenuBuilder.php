@@ -38,7 +38,7 @@ use Map\UserBundle\Entity\Role;
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
      */
     protected $securityContext;
 

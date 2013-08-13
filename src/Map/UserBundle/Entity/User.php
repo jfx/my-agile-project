@@ -44,7 +44,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class User extends BaseUser
 {
     /**
-     * @var integer
+     * @var integer Id
      *
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -53,47 +53,49 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string
+     * @var string Name
      *
      * @ORM\Column(name="name", type="string", length=50)
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string Firstname
      *
      * @ORM\Column(name="firstname", type="string", length=50)
      */
     protected $firstname;
 
     /**
-     * @var string
+     * @var string Displayname
      *
      * @ORM\Column(name="displayname", type="string", length=50, unique=true)
      */
     protected $displayname;
 
     /**
-     * @var string
+     * @var string Details
      *
      * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
 
     /**
+     * @var Map\DomainBundle\Entity\Domain Current domain
+     *
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     private $currentDomain;
 
     /**
-     * @var string
+     * @var string Current role label
      *
      * @ORM\Column(name="current_role_label", type="text", length=25, nullable=true)
      */
     private $currentRoleLabel;
 
     /**
-     * @var array
+     * @var array Available domain for user
      *
      * @ORM\Column(name="available_domains", type="array")
      */

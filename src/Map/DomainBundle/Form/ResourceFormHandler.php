@@ -38,7 +38,7 @@ use Map\DomainBundle\Entity\Domain;
 class ResourceFormHandler extends FormHandler
 {
     /**
-     * @var Domain $domain
+     * @var Map\DomainBundle\Entity\Domain Domain
      */
     protected $domain;
 

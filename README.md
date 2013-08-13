@@ -29,7 +29,8 @@ Bugfixes:
   - <tr> tag missing in users light list,
   - Add title to buttons,
   - Entity manager closed after rollback on deleting domain,
-  - Refresh role after domain change
+  - Refresh role after domain change,
+  - Fix API documentation errors.
 
 
 ### 0.1.0 (22 June 2013)

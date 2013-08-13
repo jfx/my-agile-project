@@ -37,17 +37,18 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class UpdateDomain4User
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     *
      */
     protected $securityContext;
 
     /**
-     * @var Doctrine\ORM\EntityManager
+     * @var Doctrine\ORM\EntityManager Entity manager
      */
     protected $entityManager;
 
     /**
-     * @var FOS\UserBundle\Model\UserManagerInterface
+     * @var FOS\UserBundle\Model\UserManagerInterface User manager
      */
     protected $userManager;
 
