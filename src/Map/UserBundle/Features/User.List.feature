@@ -10,10 +10,10 @@ Scenario: Display users list for a non super-admin profile
   And I follow "Users"
   Then I should be on "/user/"
   And the columns of the table should match:
-  | Name | Firstname | Displayname | Super admin | Details |
+  | Name | Firstname | Displayname | Super-admin | Details |
   And I should see 8 rows in the table
   And the data of the table should match:
-  | Name       | Firstname       | Displayname       | Super admin | Details                                   |
+  | Name       | Firstname       | Displayname       | Super-admin | Details                                   |
   | Admin      | Firstadmin      | displayadmin      |             | Admin user                                |
   | D1-guest   | Firstd1-guest   | displayd1-guest   | -           | guest role on domain 1                    |
   | D1-manager | Firstd1-manager | displayd1-manager | -           | manager role on domain 1                  |
@@ -30,10 +30,10 @@ Scenario: Display users list for a super-admin profile
   And I follow "Users"
   Then I should be on "/user/"
   And the columns of the table should match:
-  | Action | # | Name | Firstname | Displayname | Username | Email | Super admin | Locked | Details |
+  | Action | # | Name | Firstname | Displayname | Username | Email | Super-admin | Locked | Details |
   And I should see 8 rows in the table
   And the data of the table should match:
-  | Name       | Firstname       | Displayname       | Super admin | Locked | Details                                   |
+  | Name       | Firstname       | Displayname       | Super-admin | Locked | Details                                   |
   | Admin      | Firstadmin      | displayadmin      |             | -      | Admin user                                |
   | D1-guest   | Firstd1-guest   | displayd1-guest   | -           | -      | guest role on domain 1                    |
   | D1-manager | Firstd1-manager | displayd1-manager | -           | -      | manager role on domain 1                  |

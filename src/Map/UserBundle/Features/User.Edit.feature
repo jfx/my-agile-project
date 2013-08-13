@@ -26,7 +26,7 @@ Scenario: Edit a user with non super-admin profile
   | Username    | usermodified         |
   | Email       | modified@example.com |
   | Details     | User modified        |
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should not be checked
   And I logout
   And I am logged in as "usermodified" with the password "passModified"
@@ -53,7 +53,7 @@ Scenario: Edit a user without changing password with non super-admin profile
   | Username    | usermodified         |
   | Email       | modified@example.com |
   | Details     | User modified        |
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should not be checked
   And I logout
   And I am logged in as "usermodified" with the password "user"
@@ -74,7 +74,7 @@ Scenario: Change a password of a user
   | Username    | useruser              |
   | Email       | user@example.com      |
   | Details     | user role on domain 1 |
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should not be checked
   And I logout
   And I am logged in as "useruser" with the password "passModified"
@@ -85,10 +85,10 @@ Scenario: Change a user to super-admin profile
   And I follow "Admin"
   And I follow "Users"
   And I follow "Edit user #2"
-  When I check "Super admin"
+  When I check "Super-admin"
   And I press "Save"
   Then I should see "User edited successfully"
-  And the view checkbox "Superadmin" should be checked
+  And the view checkbox "Super-admin" should be checked
 
 @javascript
 Scenario: Change a super-admin profile to a non super-admin profile
@@ -96,10 +96,10 @@ Scenario: Change a super-admin profile to a non super-admin profile
   And I follow "Admin"
   And I follow "Users"
   And I follow "Edit user #1"
-  When I uncheck "Super admin"
+  When I uncheck "Super-admin"
   And I press "Save"
   Then I should see "User edited successfully"
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
 
 @javascript
 Scenario: Unlock a user

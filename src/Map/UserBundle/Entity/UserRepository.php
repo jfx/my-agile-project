@@ -48,7 +48,7 @@ class UserRepository extends EntityRepository
 
         return $results;
     }
-    
+
     /**
      * Get the query builder of all available user for a domain (new resource).
      *

@@ -16,7 +16,7 @@ Scenario: Display user data
   | Username    | useruser              |
   | Email       | user@example.com      |
   | Details     | user role on domain 1 |
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
 
 @javascript
 Scenario: Display super-admin data
@@ -31,4 +31,4 @@ Scenario: Display super-admin data
   | Username    | useradmin         |
   | Email       | admin@example.com |
   | Details     | Admin user        |
-  And the view checkbox "Superadmin" should be checked
+  And the view checkbox "Super-admin" should be checked

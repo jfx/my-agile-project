@@ -20,7 +20,9 @@ Features:
   - Domain management behat features,
   - Resource management behat features,
   - Home, header, footer behat features,
-  - ACL behat features.
+  - ACL behat features,
+  - Order users list by name/firstname,
+  - Change label to super-admin for administrator.
 
 Bugfixes:
 

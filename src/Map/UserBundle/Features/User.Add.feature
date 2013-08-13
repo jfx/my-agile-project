@@ -26,7 +26,7 @@ Scenario: Add a user with non super-admin profile
   | Username    | useradded         |
   | Email       | added@example.com |
   | Details     | User added        |
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should not be checked
   And I logout
   And I am logged in as "useradded" with the password "passAdded"
@@ -45,7 +45,7 @@ Scenario: Add a user with super-admin profile
   | Password           | passAdded         |
   | Email              | added@example.com |
   | Details (optional) | User added        |
-  And I check "Super admin"
+  And I check "Super-admin"
   And I press "Save"
   Then I should see "User added successfully"
   And I should see the following view form:
@@ -55,7 +55,7 @@ Scenario: Add a user with super-admin profile
   | Username    | useradded         |
   | Email       | added@example.com |
   | Details     | User added        |
-  And the view checkbox "Superadmin" should be checked
+  And the view checkbox "Super-admin" should be checked
   And the view checkbox "Locked" should not be checked
 
 @javascript
@@ -75,7 +75,7 @@ Scenario: Add a locked user
   And I check "Locked"
   And I press "Save"
   Then I should see "User added successfully"
-  And the view checkbox "Superadmin" should not be checked
+  And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should be checked
 
 @javascript

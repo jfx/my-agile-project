@@ -104,7 +104,11 @@ class UserEditType extends DefaultType
                     )
                 )
             )
-            ->add('superAdmin', 'checkbox', array('required' => false))
+            ->add(
+                'superAdmin',
+                'checkbox',
+                array('label' => 'Super-admin', 'required' => false)
+            )
             ->add(
                 'details',
                 'textarea',
