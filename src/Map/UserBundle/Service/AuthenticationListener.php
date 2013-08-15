@@ -37,12 +37,12 @@ use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 class AuthenticationListener
 {
     /**
-     * @var EntityManager
+     * @var Doctrine\ORM\EntityManager Entity manager
      */
     protected $entityManager;
 
     /**
-     * @var UserManagerInterface
+     * @var FOS\UserBundle\Model\UserManagerInterface User manager
      */
     protected $userManager;
 

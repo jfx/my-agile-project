@@ -39,7 +39,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Domain
 {
     /**
-     * @var integer
+     * @var integer Id
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -48,14 +48,14 @@ class Domain
     private $id;
 
     /**
-     * @var string
+     * @var string Name
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
 
     /**
-     * @var string
+     * @var string Details
      *
      * @ORM\Column(name="details", type="text", nullable=true)
      */

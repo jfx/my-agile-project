@@ -10,7 +10,7 @@
         <tr>
             <th>
                 <a href="{{ path('user_add') }}"
-                   class="btn">
+                   class="btn" title="Add">
                     <i class="icon-plus-sign"></i>
                 </a>&nbsp;&nbsp;Action
             </th>
@@ -20,7 +20,7 @@
             <th>Displayname</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Super admin</th>
+            <th>Super-admin</th>
             <th>Locked</th>
             <th>Details</th>
         </tr>
@@ -30,15 +30,15 @@
             <tr>
                 <td width="150">
                     <a href="{{ path('user_view', {'id': user.id}) }}"
-                       class="btn">
+                       class="btn" title="View user #{{ user.id }}">
                         <i class="icon-eye-open"></i>
                     </a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}"
-                       class="btn">
+                       class="btn" title="Edit user #{{ user.id }}">
                         <i class="icon-edit"></i>
                     </a>
                     <a href="{{ path('user_del', {'id': user.id}) }}"
-                       class="btn">
+                       class="btn" title="Delete user #{{ user.id }}">
                         <i class="icon-trash"></i>
                     </a>
                 </td>

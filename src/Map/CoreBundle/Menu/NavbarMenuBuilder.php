@@ -38,7 +38,7 @@ use Map\UserBundle\Entity\Role;
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
      */
     protected $securityContext;
 
@@ -127,7 +127,10 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 
         $this->addDivider($menu, true);
 
-        $menu->addChild('Log out', array('route' => 'fos_user_security_logout'));
+        $menu->addChild(
+            'Log out',
+            array('route' => 'fos_user_security_logout')
+        );
 
         return $menu;
     }

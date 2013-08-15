@@ -41,7 +41,7 @@ class UserDmRole
 {
 
     /**
-     * @var Map\UserBundle\Entity\User
+     * @var Map\UserBundle\Entity\User User
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\User")
@@ -49,7 +49,7 @@ class UserDmRole
     protected $user;
 
     /**
-     * @var Map\DomainBundle\Entity\Domain
+     * @var Map\DomainBundle\Entity\Domain Domain
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
@@ -57,7 +57,7 @@ class UserDmRole
     protected $domain;
 
     /**
-     * @var Map\UserBundle\Entity\Role
+     * @var Map\UserBundle\Entity\Role Role
      *
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\Role")
      * @ORM\JoinColumn(nullable=false)

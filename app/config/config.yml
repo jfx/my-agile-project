@@ -15,13 +15,14 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
-    trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    trusted_proxies: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
 
 # Twig Configuration
 twig:
     globals:
         version: %app.version%
+        build:   %app.build%
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
@@ -83,4 +84,5 @@ fos_user:
     user_class: Map\UserBundle\Entity\User
 
 parameters:
-    app.version: 0.1.0
+    app.version: 0.2.0
+    app.build:   BBB

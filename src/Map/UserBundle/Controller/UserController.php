@@ -49,9 +49,11 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $userManager = $this->get('fos_user.user_manager');
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MapUserBundle:User');
 
-        $users = $userManager->findUsers();
+        $users = $repository->findAllOrderByNameFirstname();
 
         if ($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
             return $this->render(

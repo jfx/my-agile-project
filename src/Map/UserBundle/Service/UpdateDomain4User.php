@@ -37,17 +37,18 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class UpdateDomain4User
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface
+     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     *
      */
     protected $securityContext;
 
     /**
-     * @var Doctrine\ORM\EntityManager
+     * @var Doctrine\ORM\EntityManager Entity manager
      */
     protected $entityManager;
 
     /**
-     * @var FOS\UserBundle\Model\UserManagerInterface
+     * @var FOS\UserBundle\Model\UserManagerInterface User manager
      */
     protected $userManager;
 
@@ -55,7 +56,7 @@ class UpdateDomain4User
      * Constructor
      *
      * @param SecurityContextInterface $securityContext The security context.
-     * @param EntityManager            $entityManager   The doctrine entity manager.
+     * @param EntityManager            $entityManager   The entity manager.
      * @param UserManagerInterface     $userManager     The user manager.
      */
     public function __construct(
@@ -82,7 +83,9 @@ class UpdateDomain4User
 
             $user = $this->securityContext->getToken()->getUser();
         } else {
-            if (! $user = $this->userManager->findUserBy(array('id' => $userId))) {
+            if (! $user = $this->userManager->findUserBy(
+                array('id' => $userId)
+            )) {
                 throw $this->createNotFoundException(
                     'User[id='.$userId.'] not found'
                 );
@@ -105,8 +108,10 @@ class UpdateDomain4User
                     $domain->getId()
                 );
                 $user->addRole($userDmRole->getRole()->getId());
+                $this->securityContext->getToken()->setAuthenticated(false);
                 $user->setCurrentRoleLabel($userDmRole->getRole()->getLabel());
             } catch (Exception $e) {
+                $this->securityContext->getToken()->setAuthenticated(false);
             }
         }
         $this->userManager->updateUser($user);

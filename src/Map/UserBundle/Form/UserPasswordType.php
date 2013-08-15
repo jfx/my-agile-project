@@ -57,7 +57,8 @@ class UserPasswordType extends DefaultType
                     'label' => 'Current password',
                     'mapped' => false,
                     'constraints' => new UserPassword(),
-                    'invalid_message' => 'This value should be the user current password'
+                    'invalid_message'
+                        => 'This value should be the user current password'
                 )
             )
             ->add(

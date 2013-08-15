@@ -10,7 +10,7 @@
         <tr>
             <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
                     <a href="{{ path('domain_add') }}"
-                        class="btn">
+                        class="btn" title="Add">
                         <i class="icon-plus-sign"></i>
                     </a>
                {% endif %}
@@ -26,16 +26,16 @@
             <tr>
                 <td width="150">
                     <a href="{{ path('domain_view', {'id': domain.id}) }}"
-                       class="btn">
+                       class="btn" title="View domain #{{ domain.id }}">
                         <i class="icon-eye-open"></i>
                     </a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <a href="{{ path('domain_edit', {'id': domain.id}) }}"
-                       class="btn">
+                       class="btn" title="Edit domain #{{ domain.id }}">
                         <i class="icon-edit"></i>
                     </a>
                     <a href="{{ path('domain_del', {'id': domain.id}) }}"
-                       class="btn">
+                       class="btn" title="Delete domain #{{ domain.id }}">
                         <i class="icon-trash"></i>
                     </a>
                     {% endif %}

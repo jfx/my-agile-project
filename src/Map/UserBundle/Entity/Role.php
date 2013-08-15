@@ -42,7 +42,7 @@ class Role
     const LABEL_NONE   = 'None';
 
     /**
-     * @var string
+     * @var string Id
      *
      * @ORM\Column(name="id", type="string", length=20)
      * @ORM\Id
@@ -50,14 +50,14 @@ class Role
     private $id;
 
     /**
-     * @var string $label
+     * @var string Label
      *
      * @ORM\Column(name="label", type="string", length=20)
      */
     private $label;
 
     /**
-     * @var integer $position
+     * @var integer Position
      *
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")

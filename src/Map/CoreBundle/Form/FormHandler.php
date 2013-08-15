@@ -36,17 +36,17 @@ use Symfony\Component\HttpFoundation\Request;
 class FormHandler
 {
     /**
-     * @var Symfony\Component\Form\Form
+     * @var Symfony\Component\Form\Form Form
      */
     protected $form;
 
     /**
-     * @var Symfony\Component\HttpFoundation\Request
+     * @var Symfony\Component\HttpFoundation\Request Request
      */
     protected $request;
 
     /**
-     * @var Doctrine\ORM\EntityManager
+     * @var Doctrine\ORM\EntityManager Entity manager
      */
     protected $em;
 
@@ -73,7 +73,7 @@ class FormHandler
     {
         if ($this->request->getMethod() == 'POST') {
 
-            $this->form->bindRequest($this->request);
+            $this->form->bind($this->request);
 
             if ($this->form->isValid()) {
 

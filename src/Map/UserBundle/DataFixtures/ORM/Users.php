@@ -40,7 +40,7 @@ class Users extends AbstractFixture implements
     ContainerAwareInterface
 {
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface Container
      */
     private $container;
 
@@ -74,7 +74,7 @@ class Users extends AbstractFixture implements
             ),
             array(
                 'name' => 'user',
-                'details' => 'user role on domain 1',
+                'details' => 'user role on domain 1 + user+ on domain 2',
                 'superadmin' => false,
                 'locked' => false
             ),
@@ -105,6 +105,12 @@ class Users extends AbstractFixture implements
             array(
                 'name' => 'd1-manager',
                 'details' => 'manager role on domain 1',
+                'superadmin' => false,
+                'locked' => false
+            ),
+            array(
+                'name' => 'no-domain',
+                'details' => 'user with no role on domain',
                 'superadmin' => false,
                 'locked' => false
             ),

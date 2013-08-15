@@ -38,7 +38,7 @@ use Map\DomainBundle\Entity\Domain;
 class ResourceFormHandler extends FormHandler
 {
     /**
-     * @var Domain $domain
+     * @var Map\DomainBundle\Entity\Domain Domain
      */
     protected $domain;
 
@@ -69,7 +69,7 @@ class ResourceFormHandler extends FormHandler
     {
         if ($this->request->getMethod() == 'POST') {
 
-            $this->form->bindRequest($this->request);
+            $this->form->bind($this->request);
 
             if ($this->form->isValid()) {
 

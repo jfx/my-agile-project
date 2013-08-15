@@ -55,7 +55,7 @@ class DomainType extends DefaultType
                 'name',
                 null,
                 array(
-                    'validation_constraint' => array(
+                    'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
                     )
                 )
