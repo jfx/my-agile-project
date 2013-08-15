@@ -9,7 +9,7 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
-### 0.2.0 ()
+### 0.2.0 (15 August 2013)
 Features:
 
   - Migration to symfony 2.3,
@@ -22,7 +22,8 @@ Features:
   - Home, header, footer behat features,
   - ACL behat features,
   - Order users list by name/firstname,
-  - Change label to super-admin for administrator.
+  - Change label to super-admin for administrator,
+  - Update jquery to version 1.9.1.
 
 Bugfixes:
 
