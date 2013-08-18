@@ -1,0 +1,58 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Projects list{% endblock title %}
+
+{% block headline %}{{ domain.name }} > Projects list{% endblock headline %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li><a href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
+    <li class="active"><a href="#">Projects</a></li>
+    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
+</ul>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
+                    <a href="{{ path('dm-resource_add') }}"
+                        class="btn" title="Add">
+                        <i class="icon-plus-sign"></i>
+                    </a>
+            {% endif %}
+               &nbsp;&nbsp;Action
+            </th>
+            <th>Name</th>
+            <th>Start date</th>
+            <th>Finish date</th>
+            <th>Closed</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for project in projects %}
+            <tr>
+                <td width="150">
+                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
+                    <a href="{{ path('dm-resource_edit', {'id': project.id}) }}"
+                       class="btn" title="Edit resource #{{ project.id }}">
+                        <i class="icon-edit"></i>
+                    </a>
+                    <a href="{{ path('dm-resource_del', {'id': project.id}) }}"
+                       class="btn" title="Delete resource #{{ project.id }}">
+                        <i class="icon-trash"></i>
+                    </a>
+                    {% endif %}
+                </td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.startDate|localeDate }}</td>
+                <td>{{ project.finishDate|localeDate }}</td>
+                <td>{% if project.isClosed() %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
+                <td>{{ project.details }}</td>
+            </tr>
+{% else %}
+            <tr><td colspan="6">No project</td></tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
