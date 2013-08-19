@@ -14,8 +14,8 @@
     <thead>
         <tr>
             <th>
-            {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
-                    <a href="{{ path('dm-resource_add') }}"
+            {% if is_granted('ROLE_DM_MANAGER') %}
+                    <a href="{{ path('project_add') }}"
                         class="btn" title="Add">
                         <i class="icon-plus-sign"></i>
                     </a>
@@ -33,13 +33,17 @@
 {% for project in projects %}
             <tr>
                 <td width="150">
-                    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
-                    <a href="{{ path('dm-resource_edit', {'id': project.id}) }}"
-                       class="btn" title="Edit resource #{{ project.id }}">
+                    <a href="{{ path('project_view', {'id': project.id}) }}"
+                       class="btn" title="View project #{{ project.id }}">
+                        <i class="icon-eye-open"></i>
+                    </a>
+                    {% if is_granted('ROLE_DM_MANAGER') %}
+                    <a href="{{ path('project_edit', {'id': project.id}) }}"
+                       class="btn" title="Edit project #{{ project.id }}">
                         <i class="icon-edit"></i>
                     </a>
-                    <a href="{{ path('dm-resource_del', {'id': project.id}) }}"
-                       class="btn" title="Delete resource #{{ project.id }}">
+                    <a href="{{ path('project_del', {'id': project.id}) }}"
+                       class="btn" title="Delete project #{{ project.id }}">
                         <i class="icon-trash"></i>
                     </a>
                     {% endif %}

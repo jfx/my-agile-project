@@ -90,7 +90,7 @@ class Projects extends AbstractFixture implements OrderedFixtureInterface
             $objectList[$i]->setDomain($this->getReference($data['domain']));
 
             $manager->persist($objectList[$i]);
-            
+
             // In lowercase and no whitespace
             $ref = strtolower(str_replace(' ', '', $data['name'])).'-project';
             $this->addReference($ref, $objectList[$i]);

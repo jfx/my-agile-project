@@ -80,7 +80,7 @@ class Project
      * @ORM\Column(name="closed", type="boolean")
      */
     protected $closed;
-    
+
     /**
      * @var Map\DomainBundle\Entity\Domain Domain
      *
@@ -88,11 +88,11 @@ class Project
      * @ORM\JoinColumn(nullable=false)
      */
     protected $domain;
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -103,20 +103,20 @@ class Project
      * Set name
      *
      * @param string $name Name of project.
-     * 
+     *
      * @return Project
      */
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -127,20 +127,20 @@ class Project
      * Set details
      *
      * @param string $details Details
-     * 
+     *
      * @return Project
      */
     public function setDetails($details)
     {
         $this->details = $details;
-    
+
         return $this;
     }
 
     /**
      * Get details
      *
-     * @return string 
+     * @return string
      */
     public function getDetails()
     {
@@ -151,20 +151,20 @@ class Project
      * Set start date of project.
      *
      * @param \DateTime $startDate Start date of project.
-     * 
+     *
      * @return Project
      */
     public function setStartDate($startDate)
     {
         $this->startDate = $startDate;
-    
+
         return $this;
     }
 
     /**
      * Get start date of project.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStartDate()
     {
@@ -175,30 +175,30 @@ class Project
      * Set finish date of project.
      *
      * @param \DateTime $finishDate Finish date
-     * 
+     *
      * @return Project
      */
     public function setFinishDate($finishDate)
     {
         $this->finishDate = $finishDate;
-    
+
         return $this;
     }
 
     /**
      * Get finish date of project.
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFinishDate()
     {
         return $this->finishDate;
     }
-    
+
     /**
      * Is project closed or not.
      *
-     * @return integer 
+     * @return integer
      */
     public function isClosed()
     {
@@ -209,16 +209,16 @@ class Project
      * Set closed status
      *
      * @param boolean $closed Closed status.
-     * 
+     *
      * @return Project
      */
     public function setClosed($closed)
     {
         $this->closed = $closed;
-    
+
         return $this;
     }
-    
+
     /**
      * Set Domain
      *

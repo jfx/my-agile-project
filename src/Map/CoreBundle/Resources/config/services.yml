@@ -37,7 +37,7 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: main }
-            
+
     map.localeDate:
         class: Map\CoreBundle\Extensions\LocaleDateExtension
         arguments: [ '@service_container' ]

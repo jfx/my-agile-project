@@ -1,0 +1,21 @@
+project_view:
+    pattern:  /{id}
+    defaults: { _controller: "MapProjectBundle:Project:view" }
+    requirements:
+        id:  \d+
+
+project_add:
+    pattern:  /add
+    defaults: { _controller: "MapProjectBundle:Project:add" }
+
+project_edit:
+    pattern:  /edit/{id}
+    defaults: { _controller: "MapProjectBundle:Project:edit" }
+    requirements:
+        id:  \d+
+
+project_del:
+    pattern:  /del/{id}
+    defaults: { _controller: "MapProjectBundle:Project:del" }
+    requirements:
+        id:  \d+

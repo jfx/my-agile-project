@@ -45,6 +45,10 @@ class ProjectController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
+        if (is_null($domain)) {
+            return $this->redirect($this->generateUrl('domain_index'));
+        }
+        
         $repository = $this->getDoctrine()
             ->getManager()
             ->getRepository('MapProjectBundle:Project');

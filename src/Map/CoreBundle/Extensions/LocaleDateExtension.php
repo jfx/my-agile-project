@@ -37,7 +37,7 @@ use Twig_Filter_Method;
 class LocaleDateExtension extends Twig_Extension
 {
     protected $container;
-    
+
     /**
      * Constructor
      *
@@ -47,23 +47,23 @@ class LocaleDateExtension extends Twig_Extension
     {
         $this->container = $containerInterface;
     }
-    
+
     /**
      * Returns a list of filters to add to the existing list.
      *
      * @return array An array of filters
      */
     public function getFilters()
-    {     
+    {
         return array(
             'localeDate' => new Twig_Filter_Method($this, 'localeDateFilter')
         );
     }
-    
+
     /**
      * Convert a datetime object to a locale date display.
      *
-     * @param DateTime $dateTime.
+     * @param DateTime $dateTime The date to convert.
      *
      * @return string
      */
@@ -73,7 +73,7 @@ class LocaleDateExtension extends Twig_Extension
 
         return $dateTime->format($format);
     }
-    
+
     /**
      * Returns the name of the extension.
      *
