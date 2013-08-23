@@ -18,13 +18,14 @@
 
 namespace Map\ProjectBundle\Controller;
 
+use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Map\CoreBundle\Form\FormHandler;
 use Map\DomainBundle\Entity\Domain;
-use Map\DomainBundle\Form\DomainType;
-use Map\UserBundle\Entity\Role;
+use Map\ProjectBundle\Entity\Project;
+use Map\ProjectBundle\Form\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Project controller class.
@@ -42,38 +43,49 @@ class ProjectController extends Controller
 {
 
     /**
-     * Add a domain
+     * Add a project.
      *
      * @return Response A Response instance
      *
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_DM_MANAGER")
      */
     public function addAction()
     {
-        $domain = new Domain();
-        $form   = $this->createForm(new DomainType(), $domain);
+        $domain = $this->getCurrentDomainFromUser();
+
+        if (is_null($domain)) {
+            return $this->redirect($this->generateUrl('domain_index'));
+        }
+        $project = new Project();
+        $project->setDomain($domain);
+
+        $form   = $this->createForm(
+            new ProjectType($this->container),
+            $project
+        );
 
         $handler = new FormHandler(
             $form,
+            $project,
             $this->getRequest(),
-            $this->getDoctrine()->getManager()
+            $this->container
         );
 
         if ($handler->process()) {
 
-            $id = $domain->getId();
+            $id = $project->getId();
 
             $this->get('session')->getFlashBag()
-                ->add('success', 'Domain added successfully !');
+                ->add('success', 'Project added successfully !');
 
             return $this->redirect(
-                $this->generateUrl('domain_view', array('id' => $id))
+                $this->generateUrl('project_view', array('id' => $id))
             );
         }
 
         return $this->render(
-            'MapDomainBundle:Domain:add.html.twig',
-            array('form' => $form->createView())
+            'MapProjectBundle:Project:add.html.twig',
+            array('form' => $form->createView(), 'domain' => $domain)
         );
     }
 
@@ -93,7 +105,7 @@ class ProjectController extends Controller
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MapProjectBundle:Project');
 
@@ -118,82 +130,107 @@ class ProjectController extends Controller
     }
 
     /**
-     * Edit a domain
+     * Edit a project
      *
-     * @param Domain $domain The domain to edit.
+     * @param int $id Id of the project to edit.
      *
      * @return Response A Response instance
      *
-     * @Secure(roles="ROLE_USER")
+     * @Secure(roles="ROLE_DM_MANAGER")
      */
-    public function editAction(Domain $domain)
+    public function editAction($id)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
-        $service->setCurrentDomain($domain);
+        $domain = $this->getCurrentDomainFromUser();
 
-        $sc = $this->container->get('security.context');
+        if (is_null($domain)) {
+            return $this->redirect($this->generateUrl('domain_index'));
+        }
 
-        if (!($sc->isGranted('ROLE_SUPER_ADMIN')
-            || $sc->isGranted(Role::MANAGER_ROLE))
-        ) {
-            throw new AccessDeniedHttpException(
-                'You are not allowed to access this resource'
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MapProjectBundle:Project');
+
+        try {
+            $project = $repository->findByProjectIdDomainId(
+                $id,
+                $domain->getId()
+            );
+        } catch (Exception $e) {
+            throw $this->createNotFoundException(
+                'Project[id='.$id.'] not found for this domain'
             );
         }
 
-        $form    = $this->createForm(new DomainType(), $domain);
+        $form = $this->createForm(new ProjectType($this->container), $project);
 
         $handler = new FormHandler(
             $form,
+            $project,
             $this->getRequest(),
-            $this->getDoctrine()->getManager()
+            $this->container
         );
 
         if ($handler->process()) {
 
-            $id = $domain->getId();
+            $id = $project->getId();
 
             $this->get('session')->getFlashBag()
-                ->add('success', 'Domain edited successfully !');
+                ->add('success', 'Project edited successfully !');
 
             return $this->redirect(
-                $this->generateUrl('domain_view', array('id' => $id))
+                $this->generateUrl('project_view', array('id' => $id))
             );
         }
 
         return $this->render(
-            'MapDomainBundle:Domain:edit.html.twig',
-            array('form' => $form->createView(), 'domain' => $domain)
+            'MapProjectBundle:Project:edit.html.twig',
+            array(
+                'form' => $form->createView(),
+                'project' => $project,
+                'domain' => $domain
+            )
         );
     }
 
     /**
-     * Delete a domain
+     * Delete a project
      *
-     * @param Domain $domain The domain to delete.
+     * @param int $id Id of the project to delete.
      *
      * @return Response A Response instance
      *
-     * @Secure(roles="ROLE_SUPER_ADMIN")
+     * @Secure(roles="ROLE_DM_MANAGER")
      */
-    public function delAction(Domain $domain)
+    public function delAction($id)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
+        $domain = $this->getCurrentDomainFromUser();
 
+        if (is_null($domain)) {
+            return $this->redirect($this->generateUrl('domain_index'));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MapProjectBundle:Project');
+
+        try {
+            $project = $repository->findByProjectIdDomainId(
+                $id,
+                $domain->getId()
+            );
+        } catch (Exception $e) {
+            throw $this->createNotFoundException(
+                'Project[id='.$id.'] not found for this domain'
+            );
+        }
         $success = true;
 
         if ($this->get('request')->getMethod() == 'POST') {
 
-            $em = $this->getDoctrine()->getManager();
-
-            $service->setCurrentDomain(null);
-
-            $em->remove($domain);
+            $em->remove($project);
 
             try {
                 $em->flush();
 
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $success = false;
 
                 $this->get('session')->getFlashBag()->add(
@@ -204,23 +241,20 @@ class ProjectController extends Controller
             }
             if ($success) {
                 $this->get('session')->getFlashBag()
-                    ->add('success', 'Domain removed successfully !');
+                    ->add('success', 'Project removed successfully !');
 
                 return $this->redirect(
-                    $this->generateUrl('domain_index')
+                    $this->generateUrl('dm-project_index')
                 );
             }
         }
-        if ($success) {
-            $service->setCurrentDomain($domain);
-        }
 
         return $this->render(
-            'MapDomainBundle:Domain:del.html.twig',
-            array('domain' => $domain)
+            'MapProjectBundle:Project:del.html.twig',
+            array('project' => $project, 'domain' => $domain)
         );
     }
-    
+
     /**
      * Return the current domain from user context.
      *

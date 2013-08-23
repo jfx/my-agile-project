@@ -20,6 +20,7 @@ namespace Map\ProjectBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Map\DomainBundle\Entity\Domain;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project entity class.
@@ -50,13 +51,14 @@ class Project
      * @var string Name
      *
      * @ORM\Column(name="name", type="string", length=50)
+     * @Assert\Length(min=2, max=50)
      */
     protected $name;
 
     /**
      * @var string Details
      *
-     * @ORM\Column(name="details", type="text")
+     * @ORM\Column(name="details", type="text", nullable=true)
      */
     protected $details;
 
@@ -241,5 +243,17 @@ class Project
     public function getDomain()
     {
         return $this->domain;
+    }
+
+    /**
+     * Test if finish date is greater than start date.
+     *
+     * @return boolean
+     *
+     * @Assert\True(message="The finish date must be after the start date.")
+     */
+    public function isDates()
+    {
+        return ($this->getStartDate() < $this->getFinishDate());
     }
 }

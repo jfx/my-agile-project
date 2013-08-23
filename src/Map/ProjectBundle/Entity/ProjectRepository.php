@@ -53,12 +53,12 @@ class ProjectRepository extends EntityRepository
 
         return $results;
     }
-    
+
     /**
      * Get a project by its id and domain id.
      *
-     * @param int $projectId  Project id.
-     * @param int $domainId   Domain id.
+     * @param int $projectId Project id.
+     * @param int $domainId  Domain id.
      *
      * @return Project.
      */

@@ -19,8 +19,11 @@
 namespace Map\CoreBundle\Form;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Validator\Validator;
 
 /**
  * Form handler class.
@@ -36,32 +39,57 @@ use Symfony\Component\HttpFoundation\Request;
 class FormHandler
 {
     /**
-     * @var Symfony\Component\Form\Form Form
+     * @var Form Form
      */
     protected $form;
 
     /**
-     * @var Symfony\Component\HttpFoundation\Request Request
+     * @var mixed Doctrine entity object
+     */
+    protected $entity;
+
+    /**
+     * @var Request Request
      */
     protected $request;
 
     /**
-     * @var Doctrine\ORM\EntityManager Entity manager
+     * @var EntityManager Entity manager
      */
     protected $em;
 
     /**
+     * @var Validator Validator
+     *
+     */
+    protected $validator;
+
+    /**
+     * @var Session Session
+     *
+     */
+    protected $session;
+
+    /**
      * Constructor
      *
-     * @param Form          $form    Form.
-     * @param Request       $request Http request.
-     * @param EntityManager $em      Doctrine entity manager
+     * @param Form               $form      Form.
+     * @param mixed              $entity    Doctrine entity.
+     * @param Request            $request   Http request.
+     * @param ContainerInterface $container Container.
      */
-    public function __construct(Form $form, Request $request, EntityManager $em)
-    {
-        $this->form = $form;
-        $this->request = $request;
-        $this->em = $em;
+    public function __construct(
+        Form $form,
+        $entity,
+        Request $request,
+        ContainerInterface $container
+    ) {
+        $this->form      = $form;
+        $this->entity    = $entity;
+        $this->request   = $request;
+        $this->em        = $container->get('doctrine')->getManager();
+        $this->validator = $container->get('validator');
+        $this->session   = $container->get('session');
     }
 
     /**
@@ -80,6 +108,17 @@ class FormHandler
                 $this->onSuccess($this->form->getData());
 
                 return true;
+            } else {
+                $errors = $this->validator->validate($this->entity);
+
+                foreach ($errors as $error) {
+
+                    $this->session->getFlashBag()->add(
+                        'error',
+                        ucfirst($error->getPropertyPath())
+                        .' : '.$error->getMessage()
+                    );
+                }
             }
         }
 

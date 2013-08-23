@@ -53,7 +53,7 @@ class ResourceController extends Controller
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
-        
+
         $repository = $this->getDoctrine()
             ->getManager()
             ->getRepository('MapUserBundle:UserDmRole');
@@ -80,7 +80,7 @@ class ResourceController extends Controller
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
-        
+
         $userDmRole = new UserDmRole();
 
         $repositoryRole = $this->getDoctrine()
@@ -136,7 +136,7 @@ class ResourceController extends Controller
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MapUserBundle:UserDmRole');
 
@@ -194,11 +194,11 @@ class ResourceController extends Controller
     public function delAction($id)
     {
         $domain = $this->getCurrentDomainFromUser();
-        
+
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
-        
+
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('MapUserBundle:UserDmRole');
 
