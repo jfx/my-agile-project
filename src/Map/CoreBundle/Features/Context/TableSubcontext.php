@@ -131,9 +131,9 @@ class TableSubcontext extends Subcontext
         TableNode $tableNode
     ) {
         $utilSubcontext = $this->getMainContext()->getSubcontext('util');
-        
+
         $utilSubcontext->dynamicDateFormatTable($tableNode);
-        
+
         $this->theDataOfTheTableShouldMatch($tableNode);
     }
 

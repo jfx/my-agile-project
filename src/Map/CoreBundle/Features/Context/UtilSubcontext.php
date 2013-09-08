@@ -142,11 +142,11 @@ class UtilSubcontext extends Subcontext
     public function fillFieldsWithDynamicDate(TableNode $tableNode)
     {
         $this->dynamicDateFormatTable($tableNode);
-        
+
         $mainContext = $this->getMainContext();
         $mainContext->fillFields($tableNode);
     }
-    
+
     /**
      * Checks that span field with specified label has specified value.
      *
@@ -216,7 +216,7 @@ class UtilSubcontext extends Subcontext
 
         return $element;
     }
-    
+
     /**
      * Convert a dynamic date like @date("+ 1 months") to a real date.
      *
@@ -246,9 +246,9 @@ class UtilSubcontext extends Subcontext
 
         return false;
     }
-    
+
     /**
-     * Parse table and convert a dynamic date like @date("+ 1 months") 
+     * Parse table and convert a dynamic date like @date("+ 1 months")
      * to a real date.
      *
      * @param TableNode $tableNode Table that contains dynamic date
@@ -271,6 +271,7 @@ class UtilSubcontext extends Subcontext
             }
             $rows[$rowId] = $row;
         }
+
         return $tableNode->setRows($rows);
     }
 }
