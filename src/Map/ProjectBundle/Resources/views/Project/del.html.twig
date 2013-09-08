@@ -1,0 +1,42 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Project delete - Id : {{ project.id }}{% endblock title %}
+
+{% block headline %}<a href="{{ path('dm-project_index') }}">{{ domain.name }}</a> > Delete {{ project.name }}{% endblock headline %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Main</a></li>
+</ul>
+<div class="span8">
+    <form id="formDel" class="form-horizontal well" method="post">
+        {% include "MapProjectBundle:Project:formread.html.twig" %}
+
+        <div class="center">
+           <a href="#" class="confirm"><button class="btn btn-small btn-info"><i class="icon-remove icon-white"></i>&nbsp;&nbsp;Remove&nbsp;&nbsp;</button></a>
+        </div>
+    </form>
+</div>
+<div class="span8">
+<a href="{{ path('dm-project_index') }}" class="btn" title="Return to list">
+<i class="icon-chevron-left"></i>
+Return to domain
+</a>
+</div>
+{% endblock content %}
+
+{% block foot_script %}
+{{ parent() }}
+<script type="text/javascript">
+$(function() {
+    $("a.confirm").click(function(e) {
+        e.preventDefault();
+        bootbox.confirm("Are you sure you want to delete this item ?", function(confirmed) {
+            if (confirmed) {
+                $("form").submit();
+            }
+        });
+    });
+});
+</script>
+{% endblock foot_script %}

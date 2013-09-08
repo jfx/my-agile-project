@@ -9,6 +9,16 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.3.0 ()
+Features:
+
+  - 
+
+Bugfixes:
+
+  - 
+
+
 ### 0.2.0 (15 August 2013)
 Features:
 

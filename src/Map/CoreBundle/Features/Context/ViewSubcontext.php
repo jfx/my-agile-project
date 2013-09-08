@@ -144,4 +144,29 @@ class ViewSubcontext extends Subcontext
             $this->assertViewFieldContains($field, $value);
         }
     }
+
+    /**
+     * Checks view fields with dynamic date with provided table.
+     *
+     * @param TableNode $fields Table with labels and expected values
+     *
+     * @return void
+     *
+     * @Then /^I should see the following view form with dynamic date:$/
+     */
+    public function assertViewFieldswithDynamicDateContains(TableNode $fields)
+    {
+        $utilSubcontext = $this->getMainContext()->getSubcontext('util');
+
+        foreach ($fields->getRowsHash() as $field => $value) {
+
+            $dynamicDateFormat = $utilSubcontext->dynamicDateFormat($value);
+
+            if ($dynamicDateFormat) {
+
+                $value = $dynamicDateFormat;
+            }
+            $this->assertViewFieldContains($field, $value);
+        }
+    }
 }

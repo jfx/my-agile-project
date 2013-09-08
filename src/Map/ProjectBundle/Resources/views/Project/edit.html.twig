@@ -1,0 +1,37 @@
+{% extends 'MapCoreBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Project edit - Id : {{ project.id }}{% endblock title %}
+
+{% block headline %}<a href="{{ path('dm-project_index') }}">{{ domain.name }}</a> > Edit {{ project.name }}{% endblock headline %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Main</a></li>
+    <li><a href="#">Objectives</a></li>
+    <li><a href="#">Milestones</a></li>
+    <li><a href="#">Risks</a></li>
+</ul>
+<div class="span8">
+    <form class="form-horizontal well" method="post">
+        {{ form_widget(form) }}
+        <div class="center">
+            <button type="submit" class="btn btn-small btn-info"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+        </div>
+    </form>
+</div>
+<div class="span8">
+<a href="{{ path('dm-project_index') }}" class="btn" title="Return to domain">
+<i class="icon-chevron-left"></i>
+Return to domain
+</a>
+</div>
+{% endblock content %}
+
+{% block foot_script %}
+{{ parent() }}
+<script type="text/javascript">
+$("form input.datepicker").datepicker({
+    weekStart: 1
+});
+</script>
+{% endblock foot_script %}

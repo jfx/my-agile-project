@@ -32,7 +32,7 @@ Scenario: Add a user with non super-admin profile
   And I am logged in as "useradded" with the password "passAdded"
 
 @javascript
-Scenario: Add a user with super-admin profile
+Scenario: Add a user with super-admin profile with no details
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
@@ -44,7 +44,6 @@ Scenario: Add a user with super-admin profile
   | Username           | useradded         |
   | Password           | passAdded         |
   | Email              | added@example.com |
-  | Details (optional) | User added        |
   And I check "Super-admin"
   And I press "Save"
   Then I should see "User added successfully"
@@ -54,7 +53,7 @@ Scenario: Add a user with super-admin profile
   | Displayname | displayAdded      |
   | Username    | useradded         |
   | Email       | added@example.com |
-  | Details     | User added        |
+  | Details     |                   |
   And the view checkbox "Super-admin" should be checked
   And the view checkbox "Locked" should not be checked
 

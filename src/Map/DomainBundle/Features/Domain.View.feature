@@ -37,5 +37,5 @@ Scenario: Edit button not displayed for non super-admin profile
   Given I am a user
   And I follow "Admin"
   And I follow "Domains"
-  And I follow "View domain #1"
-  And I should not see "Edit" action button
+  When I follow "View domain #1"
+  Then I should not see "Edit" action button

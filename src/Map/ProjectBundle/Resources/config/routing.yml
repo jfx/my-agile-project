@@ -1,0 +1,3 @@
+map_domain_homepage:
+    resource: "@MapProjectBundle/Resources/config/routing/project.yml"
+    prefix:   /project
