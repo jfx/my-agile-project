@@ -18,6 +18,7 @@
 
 namespace Map\ProjectBundle\DataFixtures\ORM;
 
+use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -48,33 +49,33 @@ class Projects extends AbstractFixture implements OrderedFixtureInterface
         $dataArray = array(
             array(
                 'name'       => 'Project One',
-                'details'    => 'details 4 project one',
-                'startDate'  => new \DateTime("- 2 months"),
-                'finishDate' => new \DateTime("+ 1 months"),
+                'details'    => 'Details 4 project 1',
+                'startDate'  => new DateTime("- 2 months"),
+                'finishDate' => new DateTime("+ 1 months"),
                 'closed'     => false,
                 'domain'     => 'domainone-domain',
             ),
             array(
                 'name'       => 'Project Two',
-                'details'    => 'details 4 project two',
-                'startDate'  => new \DateTime("- 1 months"),
-                'finishDate' => new \DateTime("+ 2 months"),
+                'details'    => 'Details 4 project 2',
+                'startDate'  => new DateTime("- 1 months"),
+                'finishDate' => new DateTime("+ 2 months"),
                 'closed'     => false,
                 'domain'     => 'domainone-domain',
             ),
             array(
                 'name'       => 'Project Closed',
-                'details'    => 'details 4 project closed',
-                'startDate'  => new \DateTime("2013-05-02 12:00:00"),
-                'finishDate' => new \DateTime("2013-07-31 12:00:00"),
+                'details'    => 'Details 4 project closed',
+                'startDate'  => new DateTime("2013-05-02 12:00:00"),
+                'finishDate' => new DateTime("2013-07-31 12:00:00"),
                 'closed'     => true,
                 'domain'     => 'domainone-domain',
             ),
             array(
                 'name'       => 'Project Three',
-                'details'    => 'details 4 project three',
-                'startDate'  => new \DateTime("- 3 months"),
-                'finishDate' => new \DateTime("+ 3 months"),
+                'details'    => 'Details 4 project 3',
+                'startDate'  => new DateTime("- 3 months"),
+                'finishDate' => new DateTime("+ 3 months"),
                 'closed'     => false,
                 'domain'     => 'domaintwo-domain',
             ),
