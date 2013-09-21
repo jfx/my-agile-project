@@ -86,6 +86,7 @@ class UserController extends Controller
         $handler = new UserFormHandler(
             $form,
             $this->getRequest(),
+            $this->container,
             $userManager
         );
 
@@ -179,6 +180,7 @@ class UserController extends Controller
         $handler = new UserFormHandler(
             $form,
             $this->getRequest(),
+            $this->container,
             $userManager
         );
 
@@ -280,6 +282,7 @@ class UserController extends Controller
         $handler = new UserFormHandler(
             $form,
             $this->getRequest(),
+            $this->container,
             $this->get('fos_user.user_manager')
         );
 

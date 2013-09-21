@@ -22,6 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Map\DomainBundle\Entity\Domain;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User entity class.
@@ -56,6 +57,7 @@ class User extends BaseUser
      * @var string Name
      *
      * @ORM\Column(name="name", type="string", length=50)
+     * @Assert\Length(min=2, max=50)
      */
     protected $name;
 
@@ -63,6 +65,7 @@ class User extends BaseUser
      * @var string Firstname
      *
      * @ORM\Column(name="firstname", type="string", length=50)
+     * @Assert\Length(min=2, max=50)
      */
     protected $firstname;
 
@@ -70,6 +73,7 @@ class User extends BaseUser
      * @var string Displayname
      *
      * @ORM\Column(name="displayname", type="string", length=50, unique=true)
+     * @Assert\Length(min=2, max=50)
      */
     protected $displayname;
 

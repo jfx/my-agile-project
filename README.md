@@ -12,7 +12,8 @@ more specifically Agile projects with those following features :
 ### 0.3.0 ()
 Features:
 
-  - 
+  - Projects management,
+  - Form validation evolution. Constraints in entity.
 
 Bugfixes:
 

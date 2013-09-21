@@ -66,7 +66,6 @@ class ProjectController extends Controller
 
         $handler = new FormHandler(
             $form,
-            $project,
             $this->getRequest(),
             $this->container
         );
@@ -164,7 +163,6 @@ class ProjectController extends Controller
 
         $handler = new FormHandler(
             $form,
-            $project,
             $this->getRequest(),
             $this->container
         );
