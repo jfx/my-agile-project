@@ -18,6 +18,7 @@
 
 namespace Map\DomainBundle\Controller;
 
+use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Map\CoreBundle\Form\FormHandler;
 use Map\DomainBundle\Entity\Domain;
@@ -76,7 +77,7 @@ class DomainController extends Controller
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getManager()
+            $this->container
         );
 
         if ($handler->process()) {
@@ -146,7 +147,7 @@ class DomainController extends Controller
         $handler = new FormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getManager()
+            $this->container
         );
 
         if ($handler->process()) {
@@ -193,7 +194,7 @@ class DomainController extends Controller
             try {
                 $em->flush();
 
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $success = false;
 
                 $this->get('session')->getFlashBag()->add(

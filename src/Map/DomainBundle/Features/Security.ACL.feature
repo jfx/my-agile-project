@@ -17,7 +17,7 @@ Scenario: Domain
 Scenario: Resource
   Given I check the following ACL table:
   | URL                 |  super-admin | manager | user+ | user | guest | none | Prerequisite |
-  | /dm-resource/       |       Y      |    Y    |   Y   |  Y   |   Y   |  Y   |              |
+  | /dm-resource/       |       Y      |    Y    |   Y   |  Y   |   Y   |  Y   | /domain/1    |
   | /dm-resource/add    |       Y      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |
   | /dm-resource/edit/2 |       Y      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |
   | /dm-resource/del/2  |       Y      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |

@@ -44,11 +44,6 @@ class FormHandler
     protected $form;
 
     /**
-     * @var mixed Doctrine entity object
-     */
-    protected $entity;
-
-    /**
      * @var Request Request
      */
     protected $request;
@@ -74,18 +69,15 @@ class FormHandler
      * Constructor
      *
      * @param Form               $form      Form.
-     * @param mixed              $entity    Doctrine entity.
      * @param Request            $request   Http request.
      * @param ContainerInterface $container Container.
      */
     public function __construct(
         Form $form,
-        $entity,
         Request $request,
         ContainerInterface $container
     ) {
         $this->form      = $form;
-        $this->entity    = $entity;
         $this->request   = $request;
         $this->em        = $container->get('doctrine')->getManager();
         $this->validator = $container->get('validator');
@@ -109,7 +101,7 @@ class FormHandler
 
                 return true;
             } else {
-                $errors = $this->validator->validate($this->entity);
+                $errors = $this->validator->validate($this->form->getData());
 
                 foreach ($errors as $error) {
 
