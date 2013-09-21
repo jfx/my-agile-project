@@ -19,10 +19,10 @@
 namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Form\FormHandler;
-use Doctrine\ORM\EntityManager;
+use Map\DomainBundle\Entity\Domain;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Map\DomainBundle\Entity\Domain;
 
 /**
  * Resource form handler class.
@@ -38,25 +38,25 @@ use Map\DomainBundle\Entity\Domain;
 class ResourceFormHandler extends FormHandler
 {
     /**
-     * @var Map\DomainBundle\Entity\Domain Domain
+     * @var Domain Domain
      */
     protected $domain;
 
     /**
      * Constructor
      *
-     * @param Form          $form    Form.
-     * @param Request       $request Http request.
-     * @param EntityManager $em      Doctrine entity manager
-     * @param Domain        $dm      The domain
+     * @param Form               $form      Form.
+     * @param Request            $request   Http request.
+     * @param ContainerInterface $container Container
+     * @param Domain             $dm        The domain.
      */
     public function __construct(
         Form $form,
         Request $request,
-        EntityManager $em,
+        ContainerInterface $container,
         Domain $dm
     ) {
-        parent::__construct($form, $request, $em);
+        parent::__construct($form, $request, $container);
         $this->domain = $dm;
     }
 
@@ -79,6 +79,11 @@ class ResourceFormHandler extends FormHandler
                 $this->onSuccess($entity);
 
                 return true;
+            } else {
+                $this->session->getFlashBag()->add(
+                    'error',
+                    'Integrity constraint violation !'
+                );
             }
         }
 

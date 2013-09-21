@@ -21,7 +21,6 @@ namespace Map\DomainBundle\Form;
 use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * Domain form class.
@@ -53,12 +52,7 @@ class DomainType extends DefaultType
         $builder
             ->add(
                 'name',
-                null,
-                array(
-                    'constraints' => array(
-                        new Length(array('min' => 2, 'max' => 50))
-                    )
-                )
+                null
             )
             ->add(
                 'details',

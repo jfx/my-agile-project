@@ -94,7 +94,7 @@ class ResourceController extends Controller
         $handler = new ResourceFormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getManager(),
+            $this->container,
             $domain
         );
 
@@ -155,7 +155,7 @@ class ResourceController extends Controller
         $handler = new ResourceFormHandler(
             $form,
             $this->getRequest(),
-            $this->getDoctrine()->getManager(),
+            $this->container,
             $domain
         );
 
