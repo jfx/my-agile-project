@@ -1,5 +1,5 @@
 Feature: Domain.Project.Projects list
-  In order to see projects for a domain
+  In order to manage projects for a domain
   As a connected user
   I need to see projects list. 
 
@@ -32,7 +32,7 @@ Scenario: List with no project on a domain for a connected user
   And the table should contain "No project"
 
 @javascript
-Scenario: No action buttons Add/Edit/Delete for a non-manager
+Scenario: View action button for a user
   Given I am a user
   And I follow "Admin"
   And I follow "Domains"
@@ -40,22 +40,39 @@ Scenario: No action buttons Add/Edit/Delete for a non-manager
   When I follow "Projects"
   Then I should see 3 rows in the table
   And I should see "View" action button
-  And I should not see "Add" action button
-  And I should not see "Edit" action button
-  And I should not see "Delete" action button
 
 @javascript
-Scenario: Action buttons Add/Edit/Delete for a manager
+Scenario Outline: No action buttons Add/Edit/Delete for a non-manager
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  When I follow "Projects"
+  Then I should see 3 rows in the table
+  And I should not see "<action>" action button
+
+  Examples:
+  | action |
+  | Add    |
+  | Edit   |
+  | Delete |
+
+@javascript
+Scenario Outline: Action buttons Add/View/Edit/Delete for a manager
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
   And I follow "Domains"
   And I follow "View domain #1"
   When I follow "Projects"
   Then I should see 3 rows in the table
-  And I should see "View" action button
-  And I should see "Add" action button
-  And I should see "Edit" action button
-  And I should see "Delete" action button
+  And I should see "<action>" action button
+
+  Examples:
+  | action |
+  | Add    |
+  | View   |
+  | Edit   |
+  | Delete |
 
 @javascript
 Scenario Outline: Links to see

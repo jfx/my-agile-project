@@ -48,8 +48,23 @@ Scenario Outline: No actions buttons in users list for a non super-admin profile
   Given I am a user
   When I follow "Admin"
   And I follow "Users"
-  Then I should be on "/user/"
+  Then I should see 8 rows in the table
   And I should not see "<action>" action button
+
+  Examples:
+  | action  |
+  | Add     |
+  | Edit    |
+  | View    |
+  | Delete  |
+
+@javascript
+Scenario Outline: Actions buttons in users list for a super-admin profile
+  Given I am a super-admin
+  When I follow "Admin"
+  And I follow "Users"
+  Then I should see 8 rows in the table
+  And I should see "<action>" action button
 
   Examples:
   | action  |

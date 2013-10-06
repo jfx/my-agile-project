@@ -148,7 +148,7 @@ class UtilSubcontext extends Subcontext
     }
 
     /**
-     * Checks that span field with specified label has specified value.
+     * Wait for x seconds.
      *
      * @param integer $seconds Seconds
      *
