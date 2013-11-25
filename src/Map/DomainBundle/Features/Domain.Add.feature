@@ -3,7 +3,6 @@ Feature: Domain.Domain.Add Domain
   As a super-admin user profile
   I need to add a domain. 
 
-@javascript
 Scenario: Add a domain
   Given I am a super-admin
   And I follow "Admin"
@@ -23,7 +22,6 @@ Scenario: Add a domain
   | Name  | Details      |
   | Added | Domain added | 
 
-@javascript
 Scenario: Impossible to add a domain with a name too short
   Given I am a super-admin
   And I follow "Admin"
@@ -33,7 +31,6 @@ Scenario: Impossible to add a domain with a name too short
   And I press "Save"
   Then I should see "This value is too short. It should have 2 characters or more."
 
-@javascript
 Scenario: Impossible to add a domain with a duplicate name
   Given I am a super-admin
   And I follow "Admin"
@@ -43,7 +40,6 @@ Scenario: Impossible to add a domain with a duplicate name
   And I press "Save"
   Then I should see "A domain with this name already exists."
 
-@javascript
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

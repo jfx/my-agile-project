@@ -18,12 +18,10 @@
 
 namespace Map\UserBundle\Features\Context;
 
-use Behat\Behat\Context\BehatContext;
 use Behat\Behat\Context\Step\Given;
 use Behat\Behat\Context\Step\Then;
 use Behat\Behat\Context\Step\When;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Map\CoreBundle\Features\Context\Subcontext;
 
 /**
  * Login subcontext class.
@@ -37,42 +35,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
  * @since     2
  *
  */
-class LoginSubcontext extends BehatContext implements KernelAwareInterface
+class LoginSubcontext extends Subcontext
 {
-    /**
-     * @var KernelInterface Kernel
-     */
-    private $kernel;
-
-    /**
-     * @var array parameters
-     */
-    private $parameters;
-
-    /**
-     * Initializes context with parameters from behat.yml.
-     *
-     * @param array $parameters Parameters
-     */
-    public function __construct(array $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * Sets HttpKernel instance.
-     * This method will be automatically called by Symfony2Extension
-     * ContextInitializer.
-     *
-     * @param KernelInterface $kernel Kernel
-     *
-     * @return void
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
-
     /**
      * Reusable action method.
      *

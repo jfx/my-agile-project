@@ -20,6 +20,7 @@ namespace Map\UserBundle\Form;
 
 use FOS\UserBundle\Model\UserManager;
 use Map\CoreBundle\Form\FormHandler;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,17 +38,26 @@ use Symfony\Component\HttpFoundation\Request;
 class UserFormHandler extends FormHandler
 {
     /**
+     * @var UserManager User manager
+     */
+    protected $userManager;
+
+    /**
      * Constructor
      *
-     * @param Form        $form    Form.
-     * @param Request     $request Http request.
-     * @param UserManager $um      User manager.
+     * @param Form               $form      Form.
+     * @param Request            $request   Http request.
+     * @param ContainerInterface $container Container.
+     * @param UserManager        $um        User manager.
      */
-    public function __construct(Form $form, Request $request, UserManager $um)
-    {
-        $this->form = $form;
-        $this->request = $request;
-        $this->em = $um;
+    public function __construct(
+        Form $form,
+        Request $request,
+        ContainerInterface $container,
+        UserManager $um
+    ) {
+        parent::__construct($form, $request, $container);
+        $this->userManager = $um;
     }
 
     /**
@@ -59,6 +69,6 @@ class UserFormHandler extends FormHandler
      */
     public function onSuccess($entity)
     {
-        $this->em->updateUser($entity);
+        $this->userManager->updateUser($entity);
     }
 }

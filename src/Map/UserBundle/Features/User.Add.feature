@@ -3,7 +3,6 @@ Feature: User.User.Add User
   As a super-admin user profile
   I need to add a user. 
 
-@javascript
 Scenario: Add a user with non super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -31,8 +30,7 @@ Scenario: Add a user with non super-admin profile
   And I logout
   And I am logged in as "useradded" with the password "passAdded"
 
-@javascript
-Scenario: Add a user with super-admin profile
+Scenario: Add a user with super-admin profile with no details
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
@@ -44,7 +42,6 @@ Scenario: Add a user with super-admin profile
   | Username           | useradded         |
   | Password           | passAdded         |
   | Email              | added@example.com |
-  | Details (optional) | User added        |
   And I check "Super-admin"
   And I press "Save"
   Then I should see "User added successfully"
@@ -54,11 +51,10 @@ Scenario: Add a user with super-admin profile
   | Displayname | displayAdded      |
   | Username    | useradded         |
   | Email       | added@example.com |
-  | Details     | User added        |
+  | Details     |                   |
   And the view checkbox "Super-admin" should be checked
   And the view checkbox "Locked" should not be checked
 
-@javascript
 Scenario: Add a locked user
   Given I am a super-admin
   And I follow "Admin"
@@ -78,7 +74,6 @@ Scenario: Add a locked user
   And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should be checked
 
-@javascript
 Scenario Outline: Impossible to add a user with data too short
   Given I am a super-admin
   And I follow "Admin"
@@ -102,7 +97,6 @@ Scenario Outline: Impossible to add a user with data too short
   | Displayname |
   | Username    |
 
-@javascript
 Scenario: Impossible to add a user with wrong mail
   Given I am a super-admin
   And I follow "Admin"
@@ -118,7 +112,6 @@ Scenario: Impossible to add a user with wrong mail
   And I press "Save"
   Then I should be on "/user/add"
 
-@javascript
 Scenario: Impossible to add a user with no password
   Given I am a super-admin
   And I follow "Admin"
@@ -133,7 +126,6 @@ Scenario: Impossible to add a user with no password
   And I press "Save"
   Then I should be on "/user/add"
 
-@javascript
 Scenario Outline: Impossible to add a user with duplicate data
   Given I am a super-admin
   And I follow "Admin"
@@ -157,7 +149,6 @@ Scenario Outline: Impossible to add a user with duplicate data
   | Username    | useruser         | username    |
   | Email       | user@example.com | email       |
 
-@javascript
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

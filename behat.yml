@@ -4,28 +4,16 @@ default:
             mink_driver: true
         Behat\MinkExtension\Extension:
             base_url: http://map2dev.localhost/app_dev.php/
-            default_session: 'symfony2'
-            javascript_session: 'symfony2'
-        VIPSoft\DoctrineDataFixturesExtension\Extension:
-            lifetime:    scenario
-            autoload:    true
-            directories: ~
-            fixtures:    ~
-            
-dev:
-    extensions:
-        Behat\Symfony2Extension\Extension:
-            mink_driver: true
-        Behat\MinkExtension\Extension:
-            base_url: http://map2dev.localhost/app_dev.php/
-            default_session: 'symfony2'
+# default_session: symfony2 (headless), selenium2 (webdriver)
+            default_session: 'selenium2'
             javascript_session: 'selenium2'
             selenium2:
                 browser: 'firefox'
-                capabilities: { "browserName": "firefox", 'platform':'LINUX', 'browserVersion':'','version':'' }
+                capabilities: { 'browserName': 'firefox', 'version':'', 'platform':'LINUX' }
                 wd_host: 'http://localhost:4444/wd/hub'
         VIPSoft\DoctrineDataFixturesExtension\Extension:
             lifetime:    scenario
             autoload:    true
             directories: ~
             fixtures:    ~
+            

@@ -1,0 +1,3 @@
+dm-project_index:
+    pattern:  /
+    defaults: { _controller: "MapDomainBundle:Project:index" }

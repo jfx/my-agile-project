@@ -100,7 +100,7 @@ class TableSubcontext extends Subcontext
     }
 
     /**
-     * Checks that the dispayed table matches with the reference table.
+     * Checks that the displayed table matches with the reference table.
      *
      * @param TableNode $tableNode Table with labels and expected values
      *
@@ -118,7 +118,27 @@ class TableSubcontext extends Subcontext
     }
 
     /**
-     * Checks that the dispayed table matches with the reference table. Rows
+     * Checks that the displayed table that contains dynamic date matches with
+     * the reference table.
+     *
+     * @param TableNode $tableNode Table with labels and expected values
+     *
+     * @return void
+     *
+     * @Then /^the data of the table with dynamic date should match:$/
+     */
+    public function theDataOfTheTableWithDynamicDateShouldMatch(
+        TableNode $tableNode
+    ) {
+        $utilSubcontext = $this->getMainContext()->getSubcontext('util');
+
+        $utilSubcontext->dynamicDateFormatTable($tableNode);
+
+        $this->theDataOfTheTableShouldMatch($tableNode);
+    }
+
+    /**
+     * Checks that the displayed table matches with the reference table. Rows
      * are not ordered.
      *
      * @param TableNode $tableNode Table with labels and expected values

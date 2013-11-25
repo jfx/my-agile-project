@@ -3,7 +3,6 @@ Feature: User.Profile.Profile data
   As a connected user
   I need to see my profile page. 
 
-@javascript
 Scenario: Display user data
   Given I am a user
   When I follow "Admin"
@@ -18,7 +17,6 @@ Scenario: Display user data
   | Details     | user role on domain 1 |
   And the view checkbox "Super-admin" should not be checked
 
-@javascript
 Scenario: Display super-admin data
   Given I am a super-admin
   When I follow "Admin"
@@ -32,3 +30,15 @@ Scenario: Display super-admin data
   | Email       | admin@example.com |
   | Details     | Admin user        |
   And the view checkbox "Super-admin" should be checked
+
+Scenario Outline: Links to see
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Profile"
+  When I follow "<link>"
+  Then I should be on "<page>"
+
+ Examples:
+  | link     | page           |
+  | Password | /user/password |
+  | Roles    | /user/role     |

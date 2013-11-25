@@ -3,7 +3,6 @@ Feature: User.Security.Log out
   As a connected user
   I need to disconnect. 
 
-@javascript
 Scenario: A user logs out
   Given I am a user
   And I am on "/"

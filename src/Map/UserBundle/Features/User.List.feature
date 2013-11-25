@@ -3,7 +3,6 @@ Feature: User.User.Users list
   As a connected user
   I need to see a users list. 
 
-@javascript
 Scenario: Display users list for a non super-admin profile
   Given I am a user
   When I follow "Admin"
@@ -23,7 +22,6 @@ Scenario: Display users list for a non super-admin profile
   | No-domain  | Firstno-domain  | displayno-domain  | -           | user with no role on domain               |
   | User       | Firstuser       | displayuser       | -           | user role on domain 1 + user+ on domain 2 |
 
-@javascript
 Scenario: Display users list for a super-admin profile
   Given I am a super-admin
   When I follow "Admin"
@@ -43,13 +41,26 @@ Scenario: Display users list for a super-admin profile
   | No-domain  | Firstno-domain  | displayno-domain  | -           | -      | user with no role on domain               |
   | User       | Firstuser       | displayuser       | -           | -      | user role on domain 1 + user+ on domain 2 |
 
-@javascript
 Scenario Outline: No actions buttons in users list for a non super-admin profile
   Given I am a user
   When I follow "Admin"
   And I follow "Users"
-  Then I should be on "/user/"
+  Then I should see 8 rows in the table
   And I should not see "<action>" action button
+
+  Examples:
+  | action  |
+  | Add     |
+  | Edit    |
+  | View    |
+  | Delete  |
+
+Scenario Outline: Actions buttons in users list for a super-admin profile
+  Given I am a super-admin
+  When I follow "Admin"
+  And I follow "Users"
+  Then I should see 8 rows in the table
+  And I should see "<action>" action button
 
   Examples:
   | action  |

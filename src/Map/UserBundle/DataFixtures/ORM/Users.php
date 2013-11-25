@@ -67,52 +67,52 @@ class Users extends AbstractFixture implements
     {
         $dataArray = array(
             array(
-                'name' => 'admin',
-                'details' => 'Admin user',
+                'name'       => 'admin',
+                'details'    => 'Admin user',
                 'superadmin' => true,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'user',
-                'details' => 'user role on domain 1 + user+ on domain 2',
+                'name'       => 'user',
+                'details'    => 'user role on domain 1 + user+ on domain 2',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'lock',
-                'details' => 'Locked user',
+                'name'       => 'lock',
+                'details'    => 'Locked user',
                 'superadmin' => false,
-                'locked' => true
+                'locked'     => true
             ),
             array(
-                'name' => 'd1-none',
-                'details' => 'none role on domain 1',
+                'name'       => 'd1-none',
+                'details'    => 'none role on domain 1',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'd1-guest',
-                'details' => 'guest role on domain 1',
+                'name'       => 'd1-guest',
+                'details'    => 'guest role on domain 1',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'd1-user+',
-                'details' => 'user+ role on domain 1',
+                'name'       => 'd1-user+',
+                'details'    => 'user+ role on domain 1',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'd1-manager',
-                'details' => 'manager role on domain 1',
+                'name'       => 'd1-manager',
+                'details'    => 'manager role on domain 1',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
             array(
-                'name' => 'no-domain',
-                'details' => 'user with no role on domain',
+                'name'       => 'no-domain',
+                'details'    => 'user with no role on domain',
                 'superadmin' => false,
-                'locked' => false
+                'locked'     => false
             ),
         );
 

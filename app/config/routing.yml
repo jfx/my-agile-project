@@ -1,3 +1,7 @@
+map_project:
+    resource: "@MapProjectBundle/Resources/config/routing.yml"
+    prefix:   /
+
 map_domain:
     resource: "@MapDomainBundle/Resources/config/routing.yml"
     prefix:   /

@@ -5,3 +5,7 @@ map_domain_homepage:
 map_dm-resource_homepage:
     resource: "@MapDomainBundle/Resources/config/routing/resource.yml"
     prefix:   /dm-resource
+
+map_dm-project_homepage:
+    resource: "@MapDomainBundle/Resources/config/routing/project.yml"
+    prefix:   /dm-project

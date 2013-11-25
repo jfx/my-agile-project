@@ -9,6 +9,18 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.3.0 (25 November 2013)
+Features:
+
+  - Projects management,
+  - Form validation evolution. Constraints in entity,
+  - Behat/Mink features improvements.
+
+Bugfixes:
+
+  - 
+
+
 ### 0.2.0 (15 August 2013)
 Features:
 

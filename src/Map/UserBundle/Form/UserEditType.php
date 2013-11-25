@@ -53,30 +53,15 @@ class UserEditType extends DefaultType
         $builder
             ->add(
                 'firstname',
-                null,
-                array(
-                    'constraints' => array(
-                        new Length(array('min' => 2, 'max' => 50))
-                    )
-                )
+                null
             )
             ->add(
                 'name',
-                null,
-                array(
-                    'constraints' => array(
-                        new Length(array('min' => 2, 'max' => 50))
-                    )
-                )
+                null
             )
             ->add(
                 'displayname',
-                null,
-                array(
-                    'constraints' => array(
-                        new Length(array('min' => 2, 'max' => 50))
-                    )
-                )
+                null
             )
             ->add(
                 'username',

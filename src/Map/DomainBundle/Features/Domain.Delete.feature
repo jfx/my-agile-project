@@ -3,7 +3,6 @@ Feature: Domain.Domain.Delete Domain
   As a super-admin user profile
   I need to delete a domain. 
 
-@javascript
 Scenario: Delete a domain
   Given I am a super-admin
   And I follow "Admin"
@@ -16,7 +15,13 @@ Scenario: Delete a domain
   And I should see "Domain removed successfully"
   And I should not see "Domain Five"
 
-@javascript
+Scenario: Wrong domain Id
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Domains"
+  When I go to "/domain/del/999"
+  Then I should see "404 Not Found"
+
 Scenario: Cancel to delete a domain
   Given I am a super-admin
   And I follow "Admin"
@@ -26,7 +31,6 @@ Scenario: Cancel to delete a domain
   And I follow "Cancel"
   Then I should be on "/domain/del/5"
 
-@javascript
 Scenario: Impossible to delete a domain
   Given I am a super-admin
   And I follow "Admin"
@@ -37,7 +41,6 @@ Scenario: Impossible to delete a domain
   Then I should be on "/domain/del/1"
   And I should see "Impossible to remove this item - Integrity constraint violation !"
 
-@javascript
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

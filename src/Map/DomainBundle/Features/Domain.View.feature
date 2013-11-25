@@ -3,7 +3,6 @@ Feature: Domain.Domain.View Domain
   As a connected user
   I need to view domain details. 
 
-@javascript
 Scenario: View a domain details
   Given I am a user
   And I follow "Admin"
@@ -14,7 +13,13 @@ Scenario: View a domain details
   | Name        | Domain One         |
   | Details     | Details 4 domain 1 |
 
-@javascript
+Scenario: Wrong domain Id
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Domains"
+  When I go to "/domain/999"
+  Then I should see "404 Not Found"
+
 Scenario: Return to list button
   Given I am a user
   And I follow "Admin"
@@ -23,7 +28,6 @@ Scenario: Return to list button
   When I follow "Return to list"
   Then I should be on "/domain/"
 
-@javascript
 Scenario: Edit button for super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -32,10 +36,9 @@ Scenario: Edit button for super-admin profile
   When I follow "Edit"
   Then I should be on "/domain/edit/1"
 
-@javascript
 Scenario: Edit button not displayed for non super-admin profile
   Given I am a user
   And I follow "Admin"
   And I follow "Domains"
-  And I follow "View domain #1"
-  And I should not see "Edit" action button
+  When I follow "View domain #1"
+  Then I should not see "Edit" action button

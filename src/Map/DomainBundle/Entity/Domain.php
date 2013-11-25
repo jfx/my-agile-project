@@ -20,6 +20,7 @@ namespace Map\DomainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Domain entity class.
@@ -51,6 +52,7 @@ class Domain
      * @var string Name
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @Assert\Length(min=2, max=50)
      */
     private $name;
 

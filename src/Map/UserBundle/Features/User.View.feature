@@ -3,7 +3,6 @@ Feature: User.User.View User
   As a super-admin user profile
   I need to view user's details. 
 
-@javascript
 Scenario: View a user profile with super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -20,21 +19,6 @@ Scenario: View a user profile with super-admin profile
   And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should not be checked
 
-@javascript
-Scenario: View a user roles list
-  Given I am a super-admin
-  And I follow "Admin"
-  And I follow "Users"
-  And I follow "View user #2"
-  And I follow "Roles"
-  Then I should be on "/user/role/2"
-  And I should see 2 rows in the table
-  And the data not ordered of the table should match:
-  | Domain     | Role  |
-  | Domain One | User  |
-  | Domain Two | User+ |
-
-@javascript
 Scenario: View a user profile with super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -51,18 +35,6 @@ Scenario: View a user profile with super-admin profile
   And the view checkbox "Super-admin" should be checked
   And the view checkbox "Locked" should not be checked
 
-@javascript
-Scenario: View a user role list with no role
-  Given I am a super-admin
-  And I follow "Admin"
-  And I follow "Users"
-  And I follow "View user #1"
-  And I follow "Roles"
-  Then I should be on "/user/role/1"
-  And I should see 1 rows in the table
-  And the table should contain "No role"
-
-@javascript
 Scenario: View a locked user profile with non super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -79,20 +51,21 @@ Scenario: View a locked user profile with non super-admin profile
   And the view checkbox "Super-admin" should not be checked
   And the view checkbox "Locked" should be checked
 
-@javascript
-Scenario: Return to list button
+Scenario: Impossible to view a user with wrong id
   Given I am a super-admin
-  And I follow "Admin"
-  And I follow "Users"
-  And I follow "View user #2"
-  When I follow "Return to list"
-  Then I should be on "/user/"
+  When I go to "/user/999"
+  Then I should see "404 Not Found"
 
-@javascript
-Scenario: Edit button
+Scenario Outline: Links to see
   Given I am a super-admin
   And I follow "Admin"
   And I follow "Users"
   And I follow "View user #2"
-  When I follow "Edit"
-  Then I should be on "/user/edit/2"
+  When I follow "<link>"
+  Then I should be on "<page>"
+
+ Examples:
+  | link           | page         |
+  | Return to list | /user/       |
+  | Edit           | /user/edit/2 |
+  | Roles          | /user/role/2 |

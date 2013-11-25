@@ -3,13 +3,11 @@ Feature: Core.Header.MAP header
   As a connected user
   I need to see header information 
 
-@javascript
 Scenario: Title
   Given I am a user
   When I follow "My Agile Project"
   Then I should be on "/"
 
-@javascript
 Scenario: Select box to change domain for a user not manager
   Given I am a user
   When I select "Domain One" from "map_menu_select_search"
@@ -19,7 +17,6 @@ Scenario: Select box to change domain for a user not manager
   Then I should be on "/domain/2"
   And I should see "Useruser (user+)"
 
-@javascript
 Scenario: Select box to change domain for a user manager
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -33,17 +30,14 @@ Scenario: Select box to change domain for a user manager
   And I follow "Resources"
   And I should see "Add" action button
 
-@javascript
 Scenario: Super-admin username displayed with a star
   When I am a super-admin
   Then I should see "Useradmin*"
 
-@javascript
 Scenario: Non super-admin username
   When I am a user
   Then I should see "Useruser"
 
-@javascript
 Scenario: Link to profile page
   Given I am a user
   When I follow "Useruser"

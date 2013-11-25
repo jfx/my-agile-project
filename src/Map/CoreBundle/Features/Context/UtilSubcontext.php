@@ -22,6 +22,8 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
+use DateTime;
+use Exception;
 use Map\CoreBundle\Features\Context\Subcontext;
 
 /**
@@ -98,7 +100,7 @@ class UtilSubcontext extends Subcontext
                 $session->visit($mainContext->locatePath($row['URL']));
                 try {
                     $mainContext->assertPageAddress($row['URL']);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                     $message .= ' > '.$e->getMessage();
                     throw new ExpectationException($message, $session);
@@ -109,7 +111,7 @@ class UtilSubcontext extends Subcontext
                         $mainContext->assertPageNotContainsText(
                             '403 Forbidden'
                         );
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                         $message .= ' > '.$e->getMessage();
                         throw new ExpectationException($message, $session);
@@ -118,7 +120,7 @@ class UtilSubcontext extends Subcontext
                 } else {
                     try {
                         $mainContext->assertPageContainsText('403 Forbidden');
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                         $message .= ' > '.$e->getMessage();
                         throw new ExpectationException($message, $session);
@@ -129,7 +131,24 @@ class UtilSubcontext extends Subcontext
     }
 
     /**
-     * Checks that span field with specified label has specified value.
+     * Fills in form fields with provided table containing dynamic date.
+     *
+     * @param TableNode $tableNode Table with labels and expected values
+     *
+     * @return void
+     *
+     * @When /^(?:|I )fill in the following with dynamic date:$/
+     */
+    public function fillFieldsWithDynamicDate(TableNode $tableNode)
+    {
+        $this->dynamicDateFormatTable($tableNode);
+
+        $mainContext = $this->getMainContext();
+        $mainContext->fillFields($tableNode);
+    }
+
+    /**
+     * Wait for x seconds.
      *
      * @param integer $seconds Seconds
      *
@@ -196,5 +215,63 @@ class UtilSubcontext extends Subcontext
         }
 
         return $element;
+    }
+
+    /**
+     * Convert a dynamic date like @date("+ 1 months") to a real date.
+     *
+     * @param string $dynDate Dynamic date
+     *
+     * @return string|false a formated date or false if it is not a dynamic
+     * date.
+     *
+     * @throws Exception
+     */
+    public function dynamicDateFormat($dynDate)
+    {
+        if (is_string($dynDate) && (substr($dynDate, 0, 5) == '@date')) {
+            preg_match_all('/\((.*)\)/', $dynDate, $matches);
+            $paramDateTime =  str_replace('"', '', $matches[1])[0];
+
+            try {
+                $date = new DateTime($paramDateTime);
+            } catch (Exception $e) {
+                $msg  = 'Wrong date format : '.$dynDate.' - '.$e->getMessage();
+
+                throw new Exception($msg);
+            }
+
+            return $date->format('d/m/Y');
+        }
+
+        return false;
+    }
+
+    /**
+     * Parse table and convert a dynamic date like @date("+ 1 months")
+     * to a real date.
+     *
+     * @param TableNode $tableNode Table that contains dynamic date
+     *
+     * @return TableNode Table node with real date.
+     */
+    public function dynamicDateFormatTable(TableNode $tableNode)
+    {
+        $rows = $tableNode->getRows();
+
+        foreach ($rows as $rowId => $row) {
+            foreach ($row as $cellId => $value) {
+
+                $dynamicDateFormat = $this->dynamicDateFormat($value);
+
+                if ($dynamicDateFormat) {
+
+                    $row[$cellId] = $dynamicDateFormat;
+                }
+            }
+            $rows[$rowId] = $row;
+        }
+
+        return $tableNode->setRows($rows);
     }
 }
