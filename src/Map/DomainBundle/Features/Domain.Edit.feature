@@ -3,7 +3,6 @@ Feature: Domain.Domain.Edit Domain
   As a super-admin user profile
   I need to edit a domain. 
 
-@javascript
 Scenario: A super-admin edits a domain
   Given I am a super-admin
   And I follow "Admin"
@@ -23,7 +22,6 @@ Scenario: A super-admin edits a domain
   | Name     | Details         |
   | Modified | Domain modified | 
 
-@javascript
 Scenario: A manager edits a domain
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -44,7 +42,6 @@ Scenario: A manager edits a domain
   | Name     | Details         |
   | Modified | Domain modified |
 
-@javascript
 Scenario: Impossible to edit a domain with a name too short
   Given I am a super-admin
   And I follow "Admin"
@@ -54,7 +51,6 @@ Scenario: Impossible to edit a domain with a name too short
   And I press "Save"
   Then I should see "This value is too short. It should have 2 characters or more."
 
-@javascript
 Scenario: Impossible to edit a domain with a duplicate name
   Given I am a super-admin
   And I follow "Admin"
@@ -64,7 +60,13 @@ Scenario: Impossible to edit a domain with a duplicate name
   And I press "Save"
   Then I should see "A domain with this name already exists."
 
-@javascript
+Scenario: Wrong domain Id
+  Given I am a super-admin
+  And I follow "Admin"
+  And I follow "Domains"
+  When I go to "/domain/edit/999"
+  Then I should see "404 Not Found"
+
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

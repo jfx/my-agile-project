@@ -3,7 +3,6 @@ Feature: Project.Project.Edit Project
   As a user with a manager role
   I need to edit a project. 
 
-@javascript
 Scenario: Edit a project
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -59,7 +58,6 @@ Scenario: Open a closed project
   Then I should see "Project edited successfully"
   And the view checkbox "Closed" should not be checked
 
-@javascript
 Scenario: Impossible to edit a project with a name too short
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -71,7 +69,6 @@ Scenario: Impossible to edit a project with a name too short
   And I press "Save"
   Then I should see "This value is too short. It should have 2 characters or more."
 
-@javascript
 Scenario Outline: Impossible to modify a project with wrong date
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -88,7 +85,6 @@ Scenario Outline: Impossible to modify a project with wrong date
   | Start date  |
   | Finish date |
 
-@javascript
 Scenario: Impossible to modify a project with a finish date before a start date
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -103,7 +99,29 @@ Scenario: Impossible to modify a project with a finish date before a start date
   And I press "Save"
   Then I should see "The finish date must be after the start date."
 
-@javascript
+Scenario: Wrong project Id for a domain
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/edit/4"
+  Then I should see "404 Not Found"
+
+Scenario: Wrong project Id
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/edit/999"
+  Then I should see "404 Not Found"
+
+Scenario: Impossible to edit a project without selecting a domain before
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  When I go to "/project/edit/1"
+  Then I should see "403 Forbidden"
+
 Scenario Outline: Links to see
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"

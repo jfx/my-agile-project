@@ -3,7 +3,6 @@ Feature: User.Profile.Profile password
   As a connected user
   I need to submit my old password and the new one. 
 
-@javascript
 Scenario: Wrong current password
   Given I am a user
   And I follow "Admin"
@@ -18,7 +17,6 @@ Scenario: Wrong current password
   And I logout
   And I am logged in as "useruser" with the password "user"
 
-@javascript
 Scenario: New passwords don't match
   Given I am a user
   And I follow "Admin"
@@ -33,7 +31,6 @@ Scenario: New passwords don't match
   And I logout
   And I am logged in as "useruser" with the password "user"
 
-@javascript
 Scenario: Change password
   Given I am a user
   And I follow "Admin"
@@ -49,3 +46,16 @@ Scenario: Change password
   And I go to "/login"
   And I am logged in as "useruser" with the password "passChanged"
   And I should see "Hello Firstuser User !"
+
+Scenario Outline: Links to see
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Profile"
+  And I follow "Password"
+  When I follow "<link>"
+  Then I should be on "<page>"
+
+ Examples:
+  | link    | page          |
+  | Main    | /user/profile |
+  | Roles   | /user/role    |

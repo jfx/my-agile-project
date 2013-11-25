@@ -100,7 +100,7 @@ class UtilSubcontext extends Subcontext
                 $session->visit($mainContext->locatePath($row['URL']));
                 try {
                     $mainContext->assertPageAddress($row['URL']);
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                     $message .= ' > '.$e->getMessage();
                     throw new ExpectationException($message, $session);
@@ -111,7 +111,7 @@ class UtilSubcontext extends Subcontext
                         $mainContext->assertPageNotContainsText(
                             '403 Forbidden'
                         );
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                         $message .= ' > '.$e->getMessage();
                         throw new ExpectationException($message, $session);
@@ -120,7 +120,7 @@ class UtilSubcontext extends Subcontext
                 } else {
                     try {
                         $mainContext->assertPageContainsText('403 Forbidden');
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         $message  = 'URL : '.$row['URL'].' - '.'Role : '.$role;
                         $message .= ' > '.$e->getMessage();
                         throw new ExpectationException($message, $session);

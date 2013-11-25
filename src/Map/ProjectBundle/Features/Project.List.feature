@@ -3,7 +3,6 @@ Feature: Domain.Project.Projects list
   As a connected user
   I need to see projects list. 
 
-@javascript
 Scenario: Display projects list on a domain for a connected user
   Given I am a user
   And I follow "Admin"
@@ -19,7 +18,6 @@ Scenario: Display projects list on a domain for a connected user
   | Project One    | @date("- 2 months") | @date("+ 1 months") | -      | Details 4 project 1      |
   | Project Two    | @date("- 1 months") | @date("+ 2 months") | -      | Details 4 project 2      |
 
-@javascript
 Scenario: List with no project on a domain for a connected user
   Given I am a user
   And I follow "Admin"
@@ -31,7 +29,11 @@ Scenario: List with no project on a domain for a connected user
   And I should see 1 rows in the table
   And the table should contain "No project"
 
-@javascript
+Scenario: Impossible to view projects list without selecting a domain before
+  Given I am a user
+  When I go to "/dm-project/"
+  Then I should be on "/domain/"
+
 Scenario: View action button for a user
   Given I am a user
   And I follow "Admin"
@@ -41,7 +43,6 @@ Scenario: View action button for a user
   Then I should see 3 rows in the table
   And I should see "View" action button
 
-@javascript
 Scenario Outline: No action buttons Add/Edit/Delete for a non-manager
   Given I am a user
   And I follow "Admin"
@@ -57,7 +58,6 @@ Scenario Outline: No action buttons Add/Edit/Delete for a non-manager
   | Edit   |
   | Delete |
 
-@javascript
 Scenario Outline: Action buttons Add/View/Edit/Delete for a manager
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -74,7 +74,6 @@ Scenario Outline: Action buttons Add/View/Edit/Delete for a manager
   | Edit   |
   | Delete |
 
-@javascript
 Scenario Outline: Links to see
   Given I am a user
   And I follow "Admin"

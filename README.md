@@ -13,7 +13,8 @@ more specifically Agile projects with those following features :
 Features:
 
   - Projects management,
-  - Form validation evolution. Constraints in entity.
+  - Form validation evolution. Constraints in entity,
+  - Behat/Mink features improvements.
 
 Bugfixes:
 

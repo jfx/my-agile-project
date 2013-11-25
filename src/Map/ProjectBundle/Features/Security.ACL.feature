@@ -3,7 +3,6 @@ Feature: Domain.Security.ACL
   As a user
   I need to have access only to granted pages
 
-@javascript
 Scenario: Project
   Given I check the following ACL table:
   | URL             |  super-admin | manager | user+ | user | guest | none | Prerequisite |
@@ -12,3 +11,6 @@ Scenario: Project
   | /project/add    |       N      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |
   | /project/edit/1 |       N      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |
   | /project/del/1  |       N      |    Y    |   N   |  N   |   N   |  N   | /domain/1    |
+  | /project/add    |       N      |    N    |   N   |  N   |   N   |  N   | /domain/2    |
+  | /project/edit/4 |       N      |    N    |   N   |  N   |   N   |  N   | /domain/2    |
+  | /project/del/4  |       N      |    N    |   N   |  N   |   N   |  N   | /domain/2    |

@@ -3,7 +3,6 @@ Feature: User.User.Delete User
   As a super-admin user profile
   I need to delete a user. 
 
-@javascript
 Scenario: Delete a user
   Given I am a super-admin
   And I follow "Admin"
@@ -16,7 +15,6 @@ Scenario: Delete a user
   And I should see "User removed successfully"
   And I should not see "lock@example.com"
 
-@javascript
 Scenario: Cancel to delete a user
   Given I am a super-admin
   And I follow "Admin"
@@ -26,7 +24,6 @@ Scenario: Cancel to delete a user
   And I follow "Cancel"
   Then I should be on "/user/del/3"
 
-@javascript
 Scenario: Impossible to delete a user
   Given I am a super-admin
   And I follow "Admin"
@@ -37,7 +34,11 @@ Scenario: Impossible to delete a user
   Then I should be on "/user/del/2"
   And I should see "Impossible to remove this item - Integrity constraint violation !"
 
-@javascript
+Scenario: Impossible to delete a user with wrong id
+  Given I am a super-admin
+  When I go to "/user/del/999"
+  Then I should see "404 Not Found"
+
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

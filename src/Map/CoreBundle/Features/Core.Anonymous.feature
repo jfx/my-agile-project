@@ -3,7 +3,6 @@ Feature: Core.Anonymous access to login page
   As a anonymous user
   I need to see the login form
 
-@javascript
 Scenario: An anonymous see the login form
   Given I am an anonymous user
   When I go to "/login"

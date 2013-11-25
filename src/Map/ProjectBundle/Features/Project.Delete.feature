@@ -1,9 +1,8 @@
 Feature: Project.Project.Delete Project
   In order to manage a project
   As a user with a manager role
-  I need to delete a project. 
+  I need to delete a project.
 
-@javascript
 Scenario: Delete a project
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -17,7 +16,6 @@ Scenario: Delete a project
   And I should see "Project removed successfully"
   And I should not see "Domain Two"
 
-@javascript
 Scenario: Cancel to delete a domain
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -29,7 +27,6 @@ Scenario: Cancel to delete a domain
   And I follow "Cancel"
   Then I should be on "/project/del/2"
 
-@javascript
 Scenario: Impossible to delete a domain
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -43,7 +40,29 @@ Scenario: Impossible to delete a domain
   Then I should be on "/project/del/1"
   And I should see "Impossible to remove this item - Integrity constraint violation !"
 
-@javascript
+Scenario: Wrong project Id for a domain
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/del/4"
+  Then I should see "404 Not Found"
+
+Scenario: Wrong project Id
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/del/999"
+  Then I should see "404 Not Found"
+
+Scenario: Impossible to delete a project without selecting a domain before
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  When I go to "/project/del/1"
+  Then I should see "403 Forbidden"
+
 Scenario Outline: Links to see
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"

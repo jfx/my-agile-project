@@ -3,7 +3,6 @@ Feature: Home.Home
   As a connected user
   I need to see the dashboard page 
 
-@javascript
 Scenario: Title
   Given I am a user
   When I follow "Home"

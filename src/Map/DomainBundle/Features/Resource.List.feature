@@ -3,7 +3,6 @@ Feature: Domain.Resource.Resources list
   As a connected user
   I need to see resources list. 
 
-@javascript
 Scenario: Display resources list for a connected user
   Given I am a user
   And I follow "Admin"
@@ -21,7 +20,6 @@ Scenario: Display resources list for a connected user
   | D1-user+ Firstd1-user+     | displayd1-user+   | User+   |
   | User Firstuser             | displayuser       | User    |
 
-@javascript
 Scenario: List with no resource for a connected user
   Given I am a user
   And I follow "Admin"
@@ -33,7 +31,6 @@ Scenario: List with no resource for a connected user
   And I should see 1 rows in the table
   And the table should contain "No resource"
 
-@javascript
 Scenario Outline: No modify actions buttons in domains list for a non super-admin profile
   Given I am a user
   When I follow "Admin"
@@ -49,7 +46,6 @@ Scenario Outline: No modify actions buttons in domains list for a non super-admi
   | Edit   |
   | Delete |
 
-@javascript
 Scenario Outline: Action buttons Add/View/Edit/Delete for a non super-admin profile
   Given I am a super-admin
   When I follow "Admin"
@@ -65,7 +61,6 @@ Scenario Outline: Action buttons Add/View/Edit/Delete for a non super-admin prof
   | Edit   |
   | Delete |
 
-@javascript
 Scenario Outline: Links to see
   Given I am a user
   And I follow "Admin"

@@ -3,7 +3,6 @@ Feature: Core.Footer.MAP footer
   As a connected user
   I need to see footer information 
 
-@javascript
 Scenario: A user see footer information
   Given I am a user
   When I go to "/"

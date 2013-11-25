@@ -3,7 +3,6 @@ Feature: Project.Project.View Project
   As a connected user
   I need to view project details. 
 
-@javascript
 Scenario: View a project details
   Given I am a user
   And I follow "Admin"
@@ -19,7 +18,6 @@ Scenario: View a project details
   | Details     | Details 4 project 1 |
   And the view checkbox "Closed" should not be checked
 
-@javascript
 Scenario: View a closed project details
   Given I am a user
   And I follow "Admin"
@@ -35,7 +33,29 @@ Scenario: View a closed project details
   | Details     | Details 4 project closed |
   And the view checkbox "Closed" should be checked
 
-@javascript
+Scenario: Wrong project Id for a domain
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/4"
+  Then I should see "404 Not Found"
+
+Scenario: Wrong project Id
+  Given I am a user
+  And I follow "Admin"
+  And I follow "Domains"
+  And I follow "View domain #1"
+  And I follow "Projects"
+  When I go to "/project/999"
+  Then I should see "404 Not Found"
+
+Scenario: Impossible to view a project without selecting a domain before
+  Given I am a user
+  When I go to "/project/1"
+  Then I should be on "/domain/"
+
 Scenario: Edit button for a manager role on domain
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -46,7 +66,6 @@ Scenario: Edit button for a manager role on domain
   When I follow "Edit"
   Then I should be on "/project/edit/1"
 
-@javascript
 Scenario: Edit button not displayed for a non manager role
   Given I am a user
   And I follow "Admin"
@@ -56,7 +75,6 @@ Scenario: Edit button not displayed for a non manager role
   When I follow "View project #1"
   Then I should not see "Edit" action button
 
-@javascript
 Scenario Outline: Links to see
   Given I am a user
   And I follow "Admin"

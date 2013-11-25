@@ -3,7 +3,6 @@ Feature: Home.Security.ACL
   As a user
   I need to have access only to granted pages
 
-@javascript
 Scenario: Profile
   Given I check the following ACL table:
   | URL |  super-admin | manager | user+ | user | guest | none | Prerequisite |

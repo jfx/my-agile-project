@@ -3,7 +3,6 @@ Feature: Domain.Domain.Domains list
   As a connected user
   I need to see domains list. 
 
-@javascript
 Scenario: Display domains list for connected user
   Given I am a user
   When I follow "Admin"
@@ -20,7 +19,6 @@ Scenario: Display domains list for connected user
   | Domain Three | Details 4 domain 3 | 
   | Domain Two   | Details 4 domain 2 | 
 
-@javascript
 Scenario: View action button for a user
   Given I am a user
   And I follow "Admin"
@@ -28,7 +26,6 @@ Scenario: View action button for a user
   Then I should see 5 rows in the table
   And I should see "View" action button
 
-@javascript
 Scenario Outline: No modify actions buttons in domains list for a non super-admin profile
   Given I am a user
   When I follow "Admin"
@@ -42,7 +39,6 @@ Scenario Outline: No modify actions buttons in domains list for a non super-admi
   | Edit   |
   | Delete |
 
-@javascript
 Scenario Outline: Action buttons Add/View/Edit/Delete for a super-admin
   Given I am a super-admin
   And I follow "Admin"

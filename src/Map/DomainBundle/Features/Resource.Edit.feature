@@ -3,7 +3,6 @@ Feature: Domain.Resource.Edit Resource
   As a super-admin user profile or a user with a manager role
   I need to change a resource's role. 
 
-@javascript
 Scenario: A super-admin edits a resource role
   Given I am a user
   And I follow "Admin"
@@ -36,7 +35,6 @@ Scenario: A super-admin edits a resource role
   And I should not see "Add" action button
 
 
-@javascript
 Scenario: A manager edits a resource role
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -51,7 +49,6 @@ Scenario: A manager edits a resource role
   | Name           | Displayname | Role  |
   | User Firstuser | displayuser | User+ |
 
-@javascript
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

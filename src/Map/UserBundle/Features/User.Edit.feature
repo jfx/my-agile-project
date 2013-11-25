@@ -3,7 +3,6 @@ Feature: User.User.Edit User
   As a super-admin user profile
   I need to edit user's details. 
 
-@javascript
 Scenario: Edit a user with non super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -31,7 +30,6 @@ Scenario: Edit a user with non super-admin profile
   And I logout
   And I am logged in as "usermodified" with the password "passModified"
 
-@javascript
 Scenario: Edit a user without changing password with non super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -58,7 +56,6 @@ Scenario: Edit a user without changing password with non super-admin profile
   And I logout
   And I am logged in as "usermodified" with the password "user"
 
-@javascript
 Scenario: Change a password of a user
   Given I am a super-admin
   And I follow "Admin"
@@ -79,7 +76,6 @@ Scenario: Change a password of a user
   And I logout
   And I am logged in as "useruser" with the password "passModified"
 
-@javascript
 Scenario: Change a user to super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -90,7 +86,6 @@ Scenario: Change a user to super-admin profile
   Then I should see "User edited successfully"
   And the view checkbox "Super-admin" should be checked
 
-@javascript
 Scenario: Change a super-admin profile to a non super-admin profile
   Given I am a super-admin
   And I follow "Admin"
@@ -101,7 +96,6 @@ Scenario: Change a super-admin profile to a non super-admin profile
   Then I should see "User edited successfully"
   And the view checkbox "Super-admin" should not be checked
 
-@javascript
 Scenario: Unlock a user
   Given I am a super-admin
   And I follow "Admin"
@@ -114,7 +108,6 @@ Scenario: Unlock a user
   And I logout
   And I am logged in as "userlock" with the password "lock"
 
-@javascript
 Scenario: Lock a user
   Given I am a super-admin
   And I follow "Admin"
@@ -132,7 +125,6 @@ Scenario: Lock a user
   And I should be on "/login"
   And I should see "User account is locked"
 
-@javascript
 Scenario Outline: Impossible to modify a user with data too short
   Given I am a super-admin
   And I follow "Admin"
@@ -149,7 +141,6 @@ Scenario Outline: Impossible to modify a user with data too short
   | Displayname |
   | Username    |
 
-@javascript
 Scenario: Impossible to modify a user with wrong mail
   Given I am a super-admin
   And I follow "Admin"
@@ -159,7 +150,6 @@ Scenario: Impossible to modify a user with wrong mail
   And I press "Save"
   Then I should be on "/user/edit/2"
 
-@javascript
 Scenario Outline: Impossible to edit a user with duplicate data
   Given I am a super-admin
   And I follow "Admin"
@@ -175,7 +165,11 @@ Scenario Outline: Impossible to edit a user with duplicate data
   | Username    | useruser         | username    |
   | Email       | user@example.com | email       |
 
-@javascript
+Scenario: Impossible to edit a user with wrong id
+  Given I am a super-admin
+  When I go to "/user/edit/999"
+  Then I should see "404 Not Found"
+
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

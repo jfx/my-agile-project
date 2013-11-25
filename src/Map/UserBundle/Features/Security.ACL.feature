@@ -3,7 +3,6 @@ Feature: User.Security.ACL
   As a user
   I need to have access only to granted pages
 
-@javascript
 Scenario: Profile
   Given I check the following ACL table:
   | URL            |  super-admin | manager | user+ | user | guest | none | Prerequisite |
@@ -11,7 +10,6 @@ Scenario: Profile
   | /user/password |       Y      |    Y    |   Y   |  Y   |   Y   |  Y   |              |
   | /user/role     |       Y      |    Y    |   Y   |  Y   |   Y   |  Y   |              |
 
-@javascript
 Scenario: User
   Given I check the following ACL table:
   | URL          |  super-admin | manager | user+ | user | guest | none | Prerequisite |
@@ -20,3 +18,4 @@ Scenario: User
   | /user/1      |       Y      |    N    |   N   |  N   |   N   |  N   |              |
   | /user/edit/1 |       Y      |    N    |   N   |  N   |   N   |  N   |              |
   | /user/del/1  |       Y      |    N    |   N   |  N   |   N   |  N   |              |
+  | /user/role/1 |       Y      |    N    |   N   |  N   |   N   |  N   |              |

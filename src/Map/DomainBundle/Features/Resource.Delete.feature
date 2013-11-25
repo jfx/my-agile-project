@@ -3,7 +3,6 @@ Feature: Domain.Resource.Delete Resource
   As a super-admin user profile or a user with a manager role
   I need to remove a resource from a domain. 
 
-@javascript
 Scenario: A super-admin remove a resource
   Given I am a super-admin
   And I follow "Admin"
@@ -17,7 +16,6 @@ Scenario: A super-admin remove a resource
   And I should see "Resource removed successfully"
   And I should not see "D1-guest Firstd1-guest"
 
-@javascript
 Scenario: A manager remove a resource
   Given I am a super-admin
   And I follow "Admin"
@@ -31,7 +29,6 @@ Scenario: A manager remove a resource
   And I should see "Resource removed successfully"
   And I should not see "D1-guest Firstd1-guest"
 
-@javascript
 Scenario: Cancel to delete a resource
   Given I am a super-admin
   And I follow "Admin"
@@ -43,10 +40,8 @@ Scenario: Cancel to delete a resource
   And I follow "Cancel"
   Then I should be on "/dm-resource/del/5"
 
-@javascript
-Scenario: Impossible to delete a domain
+Scenario: Impossible to delete a resource
 
-@javascript
 Scenario: Return to list button
   Given I am a super-admin
   And I follow "Admin"

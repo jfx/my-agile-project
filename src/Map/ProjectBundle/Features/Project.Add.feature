@@ -3,7 +3,6 @@ Feature: Project.Project.Add Project
   As a user with a manager role
   I need to add a project. 
 
-@javascript
 Scenario: Add a project
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -51,7 +50,6 @@ Scenario: Add a closed project with no details
   | Details     |                     |
   And the view checkbox "Closed" should be checked
 
-@javascript
 Scenario: Impossible to add a project with a name too short
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -66,7 +64,6 @@ Scenario: Impossible to add a project with a name too short
   And I press "Save"
   Then I should see "This value is too short. It should have 2 characters or more."
 
-@javascript
 Scenario Outline: Impossible to add a project with wrong date
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -87,7 +84,6 @@ Scenario Outline: Impossible to add a project with wrong date
   | Start date  |
   | Finish date |
 
-@javascript
 Scenario: Impossible to add a project with a finish date before a start date
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
@@ -96,13 +92,17 @@ Scenario: Impossible to add a project with a finish date before a start date
   And I follow "Projects"
   And I follow "Add"
   When I fill in the following with dynamic date:
-  | Name        | X                   |
+  | Name        | Project Added       |
   | Start date  | @date("+ 3 months") |
   | Finish date | @date("+ 1 days")   |
   And I press "Save"
   Then I should see "The finish date must be after the start date."
 
-@javascript
+Scenario: Impossible to add a project without selecting a domain before
+  Given I am logged in as "userd1-manager" with the password "d1-manager"
+  When I go to "/project/add"
+  Then I should see "403 Forbidden"
+
 Scenario Outline: Links to see
   Given I am logged in as "userd1-manager" with the password "d1-manager"
   And I follow "Admin"
