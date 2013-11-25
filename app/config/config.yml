@@ -84,6 +84,6 @@ fos_user:
     user_class: Map\UserBundle\Entity\User
 
 parameters:
-    app.version:    0.2.0
+    app.version:    0.3.0
     app.build:      BBB
     app.formatDate: d/m/Y
