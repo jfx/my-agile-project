@@ -1,0 +1,9 @@
+*** Settings ***
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Home
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /    True    True    True    True    True
+    ...    True
