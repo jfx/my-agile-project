@@ -1,0 +1,57 @@
+*** Settings ***
+Documentation     In order to make navigation ease in use
+...               As a connected user
+...               I need to see header information
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Title
+    [Documentation]    Title
+    Given I am a user
+    When I click on "My Agile Project" header text
+    Then Location Should Be    ${URL}/
+
+Select box to change domain for a user
+    [Documentation]    Select box to change domain for a user not manager
+    Given I am a user
+    When I select in menu select    Domain One
+    Then Location Should Be    ${URL}/domain/1
+    And the role should be    User
+    When I select in menu select    Domain Two
+    Then Location Should Be    ${URL}/domain/2
+    And the role should be    User+
+
+Non super-admin username
+    [Documentation]    Non super-admin username
+    When I am a user
+    Then Page Should Contain    Useruser
+
+Super-admin username displayed with a star
+    [Documentation]    Super-admin username displayed with a star
+    When I am a super-admin
+    Then Page Should Contain    Useradmin*
+
+Link to profile page
+    [Documentation]    Link to profile page
+    Given I am a user
+    When I click on header username    Useruser
+    Then I should be on profile page
+
+*** Keywords ***
+I click on "My Agile Project" header text
+    Click element    link=My Agile Project
+
+I select in menu select
+    [Arguments]    ${project}
+    Select From List By Label    id=map_menu_select_search    ${project}
+
+the role should be
+    [Arguments]    ${role}
+    Page Should Contain    (${role})
+
+I click on header username
+    [Arguments]    ${username}
+    Click element    link=${username}
+
+I should be on profile page
+    Location Should Be    ${URL}/user/profile

@@ -1,0 +1,19 @@
+*** Keywords ***
+I click action button
+    [Arguments]    ${action}
+    Click element    xpath=//a[@title='${action}']
+
+I save
+    Click element    xpath=//button[@title='Save']
+
+I click button
+    [Arguments]    ${label}
+    Click element    xpath=//a[@title='${label}']
+
+I confirm
+    Sleep    1s
+    Click link    link=OK
+
+I do not confirm
+    Sleep    1s
+    Click link    link=Cancel

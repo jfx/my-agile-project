@@ -9,6 +9,16 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.4.0 ()
+Features:
+
+  - Robot framework tests automation,
+
+Bugfixes:
+
+  - 
+
+
 ### 0.3.0 (25 November 2013)
 Features:
 

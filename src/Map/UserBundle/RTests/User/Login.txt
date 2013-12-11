@@ -1,0 +1,11 @@
+*** Settings ***
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Successfull Login
+    Given I am logging as    ${user_admin}
+    Then I should see MAP2 dashboard
+
+*** Keywords ***
+I should see MAP2 dashboard
+    Page Should Contain    Dashboard

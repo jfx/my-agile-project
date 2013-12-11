@@ -1,0 +1,40 @@
+*** Settings ***
+Documentation     In order to manage domains data
+...               As a connected user
+...               I need to see domains list.
+Resource          ../Keyword_resource.txt
+Resource          R_Domain.txt
+
+*** Test Cases ***
+Display domains list for connected user
+    [Documentation]    Display domains list for connected user
+    Given I am a user
+    When I go to domains list
+    Then the table header should contain    Action    \#    Name    Details
+    And the table should contain x rows    5
+    And the table should contain    Domain Five    Details 4 Domain Five
+    And the table should contain    Domain Four    Details 4 Domain Four
+    And the table should contain    Domain One    Details 4 Domain One
+    And the table should contain    Domain Three    Details 4 Domain Three
+    And the table should contain    Domain Two    Details 4 Domain Two
+
+View action button for a user
+    [Documentation]    View action button for a user
+    Given I am a user
+    When I go to domains list
+    Then the table should contain x rows    5
+    And I should see action button(s)    View domain #1
+
+No modify actions buttons in domains list for a non super-admin profile
+    [Documentation]    No modify actions buttons in domains list for a non super-admin profile
+    Given I am a user
+    When I go to domains list
+    Then the table should contain x rows    5
+    And I should not see action button(s)    Add    Edit domain #1    Delete domain #1
+
+Action buttons Add/View/Edit/Delete for a super-admin
+    [Documentation]    Action buttons Add/View/Edit/Delete for a super-admin
+    Given I am a super-admin
+    When I go to domains list
+    Then the table should contain x rows    5
+    And I should see action button(s)    Add    View domain #1    Edit domain #1    Delete domain #1

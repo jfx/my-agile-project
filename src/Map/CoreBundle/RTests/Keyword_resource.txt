@@ -1,0 +1,9 @@
+*** Settings ***
+Library           OperatingSystem
+Library           Selenium2Library
+Resource          R_PARAMETERS.txt
+Resource          R_Actions_FCT.txt
+Resource          R_Actions_GUI.txt
+Resource          R_Checks.txt
+
+*** Keywords ***

@@ -1,0 +1,16 @@
+*** Settings ***
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Display user data profile
+    Given I am logging as    ${user_user}
+    When I go to profile page
+    Then I should see profile data
+
+*** Keywords ***
+I should see profile data
+    Element Text Should Be    inputFirstname    Firstuser
+
+I go to profile page
+    Go to    ${url}/user/profile
+    Page Should Contain    Admin > Profile
