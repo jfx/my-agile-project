@@ -6,13 +6,11 @@ Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
 Title
-    [Documentation]    Title
     Given I am a user
     When I click on "My Agile Project" header text
     Then Location Should Be    ${URL}/
 
 Select box to change domain for a user
-    [Documentation]    Select box to change domain for a user not manager
     Given I am a user
     When I select in menu select    Domain One
     Then Location Should Be    ${URL}/domain/1
@@ -22,17 +20,14 @@ Select box to change domain for a user
     And the role should be    User+
 
 Non super-admin username
-    [Documentation]    Non super-admin username
     When I am a user
     Then Page Should Contain    Useruser
 
 Super-admin username displayed with a star
-    [Documentation]    Super-admin username displayed with a star
     When I am a super-admin
     Then Page Should Contain    Useradmin*
 
 Link to profile page
-    [Documentation]    Link to profile page
     Given I am a user
     When I click on header username    Useruser
     Then I should be on profile page

@@ -48,8 +48,14 @@ class Domains extends AbstractFixture implements OrderedFixtureInterface
         $dataArray = array(
             array('name' => 'Domain One', 'details' => 'Details 4 Domain One'),
             array('name' => 'Domain Two', 'details' => 'Details 4 Domain Two'),
-            array('name' => 'Domain Three', 'details' => 'Details 4 Domain Three'),
-            array('name' => 'Domain Four', 'details' => 'Details 4 Domain Four'),
+            array(
+                'name' => 'Domain Three',
+                'details' => 'Details 4 Domain Three'
+            ),
+            array(
+                'name' => 'Domain Four',
+                'details' => 'Details 4 Domain Four'
+            ),
             array('name' => 'Domain Five', 'details' => 'Details 4 Domain Five')
         );
 

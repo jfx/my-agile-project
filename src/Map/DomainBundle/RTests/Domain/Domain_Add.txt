@@ -3,11 +3,9 @@ Documentation     In order to manage domain
 ...               As a super-admin user profile
 ...               I need to add a domain.
 Resource          ../Keyword_resource.txt
-Resource          R_Domain.txt
 
 *** Test Cases ***
 Add a domain
-    [Documentation]    Add a domain
     Given I am a super-admin
     And I go to domains list
     And I click action button    Add
@@ -20,7 +18,6 @@ Add a domain
     And the table should contain    Dx    Details 4 Dx
 
 Impossible to add a domain with a name too short
-    [Documentation]    Impossible to add a domain with a name too short
     Given I am a super-admin
     And I go to domains list
     And I click action button    Add
@@ -29,7 +26,6 @@ Impossible to add a domain with a name too short
     Then Page Should Contain    This value is too short. It should have 2 characters or more.
 
 Impossible to add a domain with a duplicate name
-    [Documentation]    Impossible to add a domain with a duplicate name
     Given I am a super-admin
     And I go to domains list
     And I click action button    Add
@@ -38,7 +34,6 @@ Impossible to add a domain with a duplicate name
     Then Page Should Contain    A domain with this name already exists.
 
 Return to list button
-    [Documentation]    Add a domain
     Given I am a super-admin
     And I go to domains list
     And I click action button    Add

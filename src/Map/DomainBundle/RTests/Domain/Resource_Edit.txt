@@ -3,7 +3,6 @@ Documentation     In order to manage resource for a domain
 ...               As a super-admin user profile or a user with a manager role
 ...               I need to change a resource's role.
 Resource          ../Keyword_resource.txt
-Resource          R_Domain.txt
 
 *** Test Cases ***
 A super-admin edits a resource role

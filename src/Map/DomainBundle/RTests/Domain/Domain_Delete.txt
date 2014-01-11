@@ -3,11 +3,9 @@ Documentation     In order to manage domain
 ...               As a super-admin user profile
 ...               I need to delete a domain.
 Resource          ../Keyword_resource.txt
-Resource          R_Domain.txt
 
 *** Test Cases ***
 Delete a domain
-    [Documentation]    Delete a domain
     Given I am a super-admin
     And I go to domains list
     And I click action button    Delete domain #5
@@ -17,15 +15,7 @@ Delete a domain
     Then Page Should Contain    Domain removed successfully
     Then Page Should not Contain    Domain Five
 
-Wrong domain Id
-    [Documentation]    Wrong domain Id
-    Given I am a super-admin
-    And I go to domains list
-    When Go to    ${URL}/domain/del/999
-    Then Page Should Contain    404 Not Found
-
 Cancel to delete a domain
-    [Documentation]    Cancel to delete a domain
     Given I am a super-admin
     And I go to domains list
     And I click action button    Delete domain #5
@@ -33,8 +23,13 @@ Cancel to delete a domain
     And I do not confirm
     Then Location Should Be    ${URL}/domain/del/5
 
+Wrong domain Id
+    Given I am a super-admin
+    And I go to domains list
+    When Go to    ${URL}/domain/del/999
+    Then Page Should Contain    404 Not Found
+
 Impossible to delete a domain
-    [Documentation]    Impossible to delete a domain
     Given I am a super-admin
     And I go to domains list
     And I click action button    Delete domain #1
@@ -44,7 +39,6 @@ Impossible to delete a domain
     And Page Should Contain    Impossible to remove this item - Integrity constraint violation !
 
 Return to list button
-    [Documentation]    Return to list button
     Given I am a super-admin
     And I go to domains list
     And I click action button    Delete domain #5

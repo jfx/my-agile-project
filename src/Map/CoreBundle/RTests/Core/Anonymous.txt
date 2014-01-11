@@ -6,7 +6,6 @@ Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
 Login Page
-    [Documentation]    An anonymous see the login form
     When I go to login page
     Then Page Should Contain    My Agile Project
 

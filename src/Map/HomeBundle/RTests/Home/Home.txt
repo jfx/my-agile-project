@@ -1,4 +1,7 @@
 *** Settings ***
+Documentation     In order to see summary information
+...               As a connected user
+...               I need to see the dashboard page
 Resource          ../Keyword_resource.txt
 
 *** Test Cases ***

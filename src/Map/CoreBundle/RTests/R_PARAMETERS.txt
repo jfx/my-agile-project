@@ -1,4 +1,6 @@
 *** Variables ***
+${ENV}            dev
+${BROWSER}        chrome
 ${LOGIN_URL}      ${URL}/login
 ${URL}            http://map2dev.localhost/app_dev.php
 ${USER_ADMIN}     admin

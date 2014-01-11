@@ -5,5 +5,8 @@ Resource          R_PARAMETERS.txt
 Resource          R_Actions_FCT.txt
 Resource          R_Actions_GUI.txt
 Resource          R_Checks.txt
+Resource          Domain/R_Domain.txt
+Resource          Project/R_Project.txt
+Resource          R_Util.txt
 
 *** Keywords ***

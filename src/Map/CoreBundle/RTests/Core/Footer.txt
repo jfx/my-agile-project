@@ -6,6 +6,5 @@ Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
 Footer text
-    [Documentation]    A user see footer information
     When I am a user
     Then Page Should Contain    My Agile Project v

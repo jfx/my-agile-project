@@ -1,6 +1,8 @@
 *** Settings ***
+Documentation     In order to manage resource for a domain
+...               As a super-admin user profile or a user with a manager role
+...               I need to add a resource.
 Resource          ../Keyword_resource.txt
-Resource          R_Domain.txt
 
 *** Test Cases ***
 A super-admin adds a resource
@@ -46,7 +48,6 @@ Impossible to add a resource without selecting a domain before
     Then Location Should Be    ${URL}/domain/
 
 Return to list button
-    [Documentation]    Add a domain
     Given I am a super-admin
     And I go to resources list    View domain #1
     And I click action button    Add

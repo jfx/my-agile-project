@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     \ In order to secure the application
+Documentation     In order to secure the application
 ...               As a user
 ...               I need to have access only to granted pages
 Resource          ../Keyword_resource.txt

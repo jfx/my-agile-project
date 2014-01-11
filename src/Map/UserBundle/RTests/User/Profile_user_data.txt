@@ -1,4 +1,7 @@
 *** Settings ***
+Documentation     In order to see my personal data
+...               As a connected user
+...               I need to see my profile page.
 Resource          ../Keyword_resource.txt
 
 *** Test Cases ***

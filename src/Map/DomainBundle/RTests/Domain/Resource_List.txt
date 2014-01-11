@@ -3,7 +3,6 @@ Documentation     In order to see resources data for a domain
 ...               As a connected user
 ...               I need to see resources list.
 Resource          ../Keyword_resource.txt
-Resource          R_Domain.txt
 
 *** Test Cases ***
 Display resources list for a connected user

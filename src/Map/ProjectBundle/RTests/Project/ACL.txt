@@ -1,0 +1,54 @@
+*** Settings ***
+Documentation     In order to secure the application
+...               As a user
+...               I need to have access only to granted pages
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Project list
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /dm-project/    True    True    True    True    True
+    ...    True    /domain/1
+
+Project view
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/1    True    True    True    True    True
+    ...    True    /domain/1
+
+Project add
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/add    False    True    False    False    False
+    ...    False    /domain/1
+
+Project edit
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/edit/1    False    True    False    False    False
+    ...    False    /domain/1
+
+Project delete
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/del/1    False    True    False    False    False
+    ...    False    /domain/1
+
+Project add with no manager on domain
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/add    False    False    False    False    False
+    ...    False    /domain/2
+
+Project edit with no manager on domain
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/edit/4    False    False    False    False    False
+    ...    False    /domain/2
+
+Project delete with no manager on domain
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /project/del/4    False    False    False    False    False
+    ...    False    /domain/2

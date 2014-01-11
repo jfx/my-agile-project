@@ -1,4 +1,7 @@
 *** Settings ***
+Documentation     In order to use the application
+...               As a anonymous user
+...               I need to login to the application
 Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
