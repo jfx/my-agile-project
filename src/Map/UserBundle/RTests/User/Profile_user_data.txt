@@ -1,0 +1,54 @@
+*** Settings ***
+Documentation     In order to see my personal data
+...               As a connected user
+...               I need to see my profile page.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Display user data profile
+    Given I am a user
+    When I go to profile page
+    Then I should see user profile data
+
+Display super-admin data profile
+    Given I am a super-admin
+    When I go to profile page
+    Then I should see super-admin profile data
+
+Password tab
+    Given I am a user
+    When I go to profile page
+    When Click Link    Password
+    Then Location Should Be    ${URL}/user/password
+
+Roles tab
+    Given I am a user
+    When I go to profile page
+    When Click Link    Roles
+    Then Location Should Be    ${URL}/user/role
+
+*** Keywords ***
+I should see user profile data
+    Element Text Should Be    inputFirstname    Firstuser
+    Element Text Should Be    inputName    User
+    Element Text Should Be    inputDisplayname    displayuser
+    Element Text Should Be    inputUsername    useruser
+    Element Text Should Be    inputEmail    user@example.com
+    Checkbox Should Not Be Selected    inputSuperAdmin
+    Textarea Should Contain    textDetails    user role on domain 1
+    Checkbox Should Not Be Selected    inputLocked
+
+I go to profile page
+    Click element    link=Admin
+    Click element    link=Profile
+    Page Should Contain    Admin > Profile
+
+I should see super-admin profile data
+    Element Text Should Be    inputFirstname    Firstadmin
+    Element Text Should Be    inputName    Admin
+    Element Text Should Be    inputDisplayname    displayadmin
+    Element Text Should Be    inputUsername    useradmin
+    Element Text Should Be    inputEmail    admin@example.com
+    Checkbox Should Be Selected    inputSuperAdmin
+    Textarea Should Contain    textDetails    Admin user
+    Checkbox Should Not Be Selected    inputLocked

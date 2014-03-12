@@ -1,0 +1,62 @@
+*** Settings ***
+Documentation     In order to secure the application
+...               As a user
+...               I need to have access only to granted pages
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Domain list
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /domain/    True    True    True    True    True
+    ...    True
+
+Domain add
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /domain/add    True    False    False    False    False
+    ...    False
+
+Domain view
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /domain/1    True    True    True    True    True
+    ...    True
+
+Domain edit
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /domain/edit/1    True    True    False    False    False
+    ...    False
+
+Domain delete
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /domain/del/1    True    False    False    False    False
+    ...    False
+
+Resource list
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /dm-resource/    True    True    True    True    True
+    ...    True    /domain/1
+
+Resource add
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /dm-resource/add    True    True    False    False    False
+    ...    False    /domain/1
+
+Resource edit
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /dm-resource/edit/2    True    True    False    False    False
+    ...    False    /domain/1
+
+Resource delete
+    Comment    URL    super-admin    manager    user+    user    guest
+    ...    none    Prerequisite
+    Then I check the following ACL    /dm-resource/del/2    True    True    False    False    False
+    ...    False    /domain/1
+
+*** Keywords ***

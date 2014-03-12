@@ -1,0 +1,48 @@
+*** Settings ***
+Documentation     In order to manage domain
+...               As a super-admin user profile
+...               I need to delete a domain.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Delete a domain
+    Given I am a super-admin
+    And I go to delete domain page    5
+    When I click button    Remove
+    And I confirm
+    Then Location Should Be    ${URL}/domain/
+    And Page Should Contain    Domain removed successfully
+    And Page Should not Contain    Domain Five
+
+Cancel to delete a domain
+    Given I am a super-admin
+    And I go to delete domain page    5
+    When I click button    Remove
+    And I do not confirm
+    Then Location Should Be    ${URL}/domain/del/5
+
+Wrong domain Id
+    Given I am a super-admin
+    And I go to domains list
+    When Go to    ${URL}/domain/del/999
+    Then Page Should Contain    404 Not Found
+
+Impossible to delete a domain
+    Given I am a super-admin
+    And I go to delete domain page    1
+    When I click button    Remove
+    And I confirm
+    Then Location Should Be    ${URL}/domain/del/1
+    And Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+
+Return to list button
+    Given I am a super-admin
+    And I go to delete domain page    5
+    When I click button    Return to list
+    Then Location Should Be    ${URL}/domain/
+
+*** Keywords ***
+I go to delete domain page
+    [Arguments]    ${id}
+    And I go to domains list
+    And I click action button    Delete domain #${id}

@@ -46,11 +46,17 @@ class Domains extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $dataArray = array(
-            array('name' => 'Domain One', 'details' => 'Details 4 domain 1'),
-            array('name' => 'Domain Two', 'details' => 'Details 4 domain 2'),
-            array('name' => 'Domain Three', 'details' => 'Details 4 domain 3'),
-            array('name' => 'Domain Four', 'details' => 'Details 4 domain 4'),
-            array('name' => 'Domain Five', 'details' => 'Details 4 domain 5')
+            array('name' => 'Domain One', 'details' => 'Details 4 Domain One'),
+            array('name' => 'Domain Two', 'details' => 'Details 4 Domain Two'),
+            array(
+                'name' => 'Domain Three',
+                'details' => 'Details 4 Domain Three'
+            ),
+            array(
+                'name' => 'Domain Four',
+                'details' => 'Details 4 Domain Four'
+            ),
+            array('name' => 'Domain Five', 'details' => 'Details 4 Domain Five')
         );
 
         foreach ($dataArray as $i => $data) {

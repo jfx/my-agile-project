@@ -1,0 +1,54 @@
+*** Settings ***
+Documentation     In order to manage projects for a domain
+...               As a connected user
+...               I need to see projects list.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Display projects list on a domain for a user
+    Given I am a user
+    And I go to projects list    View domain #1
+    Then the table header should contain    Action    Name    Start date    Finish date    Closed    ${EMPTY}
+    ...    Details
+    And the table should contain x rows    3
+    And the table should contain    Project Closed    02/05/2013    31/07/2013    Details 4 project closed
+    And the table should contain    Project One
+    And the table should contain    Project Two
+
+List with no project on a domain for a user
+    Given I am a user
+    And I go to projects list    View domain #3
+    Then the table header should contain    Action    Name    Start date    Finish date    Closed    ${EMPTY}
+    ...    Details
+    And the table should contain x rows    1
+    And the table should contain    No project
+
+Impossible to view projects list without selecting a domain before
+    Given I am a user
+    When Go to    ${URL}/dm-project/
+    Then Location Should Be    ${URL}/domain/
+
+No modify actions buttons for a non-manager
+    Given I am a user
+    When I go to projects list    View domain #1
+    Then the table should contain x rows    3
+    And I should see action button(s)    View project #1
+    And I should not see action button(s)    Add    Edit project #1    Delete project #1
+
+Action buttons Add/View/Edit/Delete for a manager
+    Given I am a manager
+    When I go to projects list    View domain #1
+    Then the table should contain x rows    3
+    And I should see action button(s)    Add    View project #1    Edit project #1    Delete project #1
+
+Main tab
+    Given I am a user
+    And I go to projects list    View domain #1
+    When Click Link    Main
+    Then Location Should Be    ${URL}/domain/1
+
+Resources tab
+    Given I am a user
+    And I go to projects list    View domain #1
+    When Click Link    Resources
+    Then Location Should Be    ${URL}/dm-resource/
