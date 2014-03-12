@@ -7,8 +7,7 @@ Resource          ../Keyword_resource.txt
 *** Test Cases ***
 A super-admin edits a domain
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Edit domain #1
+    And I go to edit domain 1 page
     When I fill in domain form    D1Mod
     And I save
     Then Page Should Contain    Domain edited successfully
@@ -40,8 +39,7 @@ Impossible to edit a domain with a name too short
 
 Impossible to edit a domain with a duplicate name
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Edit domain #1
+    And I go to edit domain 1 page
     Input text    map_domainbundle_domaintype_name    Domain Two
     And I save
     Then Page Should Contain    A domain with this name already exists.
@@ -54,7 +52,11 @@ Wrong domain Id
 
 Return to list button
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Edit domain #1
+    And I go to edit domain 1 page
     When I click button    Return to list
     Then Location Should Be    ${URL}/domain/
+
+*** Keywords ***
+I go to edit domain 1 page
+    And I go to domains list
+    And I click action button    Edit domain #1

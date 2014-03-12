@@ -43,6 +43,7 @@ Impossible to add a project with wrong start date
     And I click action button    Add
     When I fill in project form    P1x
     And Input text    map_projectbundle_projecttype_startDate    xx/xx/xxxx
+    And Click Element    map_projectbundle_projecttype_name
     And I save
     Then Page Should Contain    This value is not valid.
 
@@ -52,6 +53,7 @@ Impossible to add a project with wrong finish date
     And I click action button    Add
     When I fill in project form    P1x
     And Input text    map_projectbundle_projecttype_finishDate    xx/xx/xxxx
+    And Click Element    map_projectbundle_projecttype_name
     And I save
     Then Page Should Contain    This value is not valid.
 

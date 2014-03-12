@@ -1,0 +1,43 @@
+*** Keywords ***
+I go to users list
+    Click element    link=Admin
+    Click element    link=Users
+
+I fill in user form
+    [Arguments]    ${name}    ${isSuperAdmin}=False    ${isLocked}=False
+    ${isSuperAdminBool} =    Convert To Boolean    ${isSuperAdmin}
+    ${isLockedBool} =    Convert To Boolean    ${isLocked}
+    Input text    map_userbundle_usertype_firstname    First${name}
+    ${firstUppercaseName}=    First uppercase    ${name}
+    Input text    map_userbundle_usertype_name    ${firstUppercaseName}
+    Input text    map_userbundle_usertype_displayname    display${name}
+    Input text    map_userbundle_usertype_username    user${name}
+    Input text    map_userbundle_usertype_updatedPassword    ${name}
+    Input text    map_userbundle_usertype_email    ${name}@example.com
+    Run Keyword If    ${isSuperAdminBool}    Select Checkbox    map_userbundle_usertype_superAdmin
+    Input text    map_userbundle_usertype_details    Details 4 ${name}
+    Run Keyword If    ${isLockedBool}    Select Checkbox    map_userbundle_usertype_locked
+
+I check user view form
+    [Arguments]    ${name}    ${isSuperAdmin}=False    ${isLocked}=False    ${details}=False
+    ${isSuperAdminBool} =    Convert To Boolean    ${isSuperAdmin}
+    ${isLockedBool} =    Convert To Boolean    ${isLocked}
+    ${detailsBool} =    Convert To Boolean    ${details}
+    Element Text Should Be    id=inputFirstname    First${name}
+    ${firstUppercaseName}=    First uppercase    ${name}
+    Element Text Should Be    id=inputName    ${firstUppercaseName}
+    Element Text Should Be    id=inputDisplayname    display${name}
+    Element Text Should Be    id=inputUsername    user${name}
+    Element Text Should Be    id=inputEmail    ${name}@example.com
+    Run Keyword If    ${isSuperAdminBool}    Checkbox Should Be Selected    inputSuperAdmin
+    Run Keyword Unless    ${isSuperAdminBool}    Checkbox Should Not Be Selected    inputSuperAdmin
+    Run Keyword If    ${detailsBool}    Element Text Should Be    id=textDetails    ${details}
+    Run Keyword Unless    ${detailsBool}    Element Text Should Be    id=textDetails    Details 4 ${name}
+    Run Keyword If    ${isLockedBool}    Checkbox Should Be Selected    inputLocked
+    Run Keyword Unless    ${isLockedBool}    Checkbox Should Not Be Selected    inputLocked
+
+I go to user view page
+    [Arguments]    ${id}
+    I go to users list
+    I click action button    View user #${id}
+    Location Should Be    ${URL}/user/${id}

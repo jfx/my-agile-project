@@ -7,8 +7,7 @@ Resource          ../Keyword_resource.txt
 *** Test Cases ***
 View a domain details
     Given I am a user
-    When I go to domains list
-    And I click action button    View domain #1
+    And I go to view domain 1 page
     And I check domain view form    Domain One
 
 Wrong domain Id
@@ -19,20 +18,22 @@ Wrong domain Id
 
 Return to list button
     Given I am a user
-    And I go to domains list
-    And I click action button    View domain #1
+    And I go to view domain 1 page
     When I click button    Return to list
     Then Location Should Be    ${URL}/domain/
 
 Edit button for super-admin profile
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    View domain #1
+    And I go to view domain 1 page
     When I click button    Edit
     Then Location Should Be    ${URL}/domain/edit/1
 
 Edit button not displayed for non super-admin profile
     Given I am a user
-    And I go to domains list
-    When I click action button    View domain #1
+    And I go to view domain 1 page
     Then I should not see action button(s)    Edit
+
+*** Keywords ***
+I go to view domain 1 page
+    And I go to domains list
+    And I click action button    View domain #1

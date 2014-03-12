@@ -35,7 +35,7 @@ use Symfony\Component\Validator\Constraints\Email;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class UserEditType extends DefaultType
+class UserType extends DefaultType
 {
     /**
      * Builds the form.

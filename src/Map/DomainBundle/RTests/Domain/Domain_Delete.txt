@@ -7,18 +7,16 @@ Resource          ../Keyword_resource.txt
 *** Test Cases ***
 Delete a domain
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Delete domain #5
+    And I go to delete domain page    5
     When I click button    Remove
     And I confirm
     Then Location Should Be    ${URL}/domain/
-    Then Page Should Contain    Domain removed successfully
-    Then Page Should not Contain    Domain Five
+    And Page Should Contain    Domain removed successfully
+    And Page Should not Contain    Domain Five
 
 Cancel to delete a domain
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Delete domain #5
+    And I go to delete domain page    5
     When I click button    Remove
     And I do not confirm
     Then Location Should Be    ${URL}/domain/del/5
@@ -31,8 +29,7 @@ Wrong domain Id
 
 Impossible to delete a domain
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Delete domain #1
+    And I go to delete domain page    1
     When I click button    Remove
     And I confirm
     Then Location Should Be    ${URL}/domain/del/1
@@ -40,7 +37,12 @@ Impossible to delete a domain
 
 Return to list button
     Given I am a super-admin
-    And I go to domains list
-    And I click action button    Delete domain #5
+    And I go to delete domain page    5
     When I click button    Return to list
     Then Location Should Be    ${URL}/domain/
+
+*** Keywords ***
+I go to delete domain page
+    [Arguments]    ${id}
+    And I go to domains list
+    And I click action button    Delete domain #${id}

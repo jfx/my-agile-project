@@ -5,10 +5,48 @@ Documentation     In order to use the application
 Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
-Successfull Login
-    Given I am logging as    ${user_admin}
-    Then I should see MAP2 dashboard
+Successfull user login
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    useruser    user
+    When Click element    xpath=//button[@title='Login']
+    Then Page Should Contain    Hello Firstuser User !
+
+Successfull admin login
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    useradmin    admin
+    When Click element    xpath=//button[@title='Login']
+    Then Page Should Contain    Hello Firstadmin Admin !
+
+Wrong username
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    wrong_user    user
+    When Click element    xpath=//button[@title='Login']
+    Then Location Should Be    ${URL}/login
+    And Page Should Contain    Invalid username or password
+
+Wrong password
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    useruser    wrong_pass
+    When Click element    xpath=//button[@title='Login']
+    Then Location Should Be    ${URL}/login
+    And Page Should Contain    Invalid username or password
+
+Wrong password for locked user
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    userlock    wrong_pass
+    When Click element    xpath=//button[@title='Login']
+    Then Location Should Be    ${URL}/login
+    And Page Should Contain    Invalid username or password
+
+Locked user cannot login
+    Given Go to    ${LOGIN_URL}
+    And I fill in login form    userlock    lock
+    When Click element    xpath=//button[@title='Login']
+    Then Location Should Be    ${URL}/login
+    And Page Should Contain    User account is locked
 
 *** Keywords ***
-I should see MAP2 dashboard
-    Page Should Contain    Dashboard
+I fill in login form
+    [Arguments]    ${user}    ${pass}
+    Input text    username    ${user}
+    Input text    password    ${pass}

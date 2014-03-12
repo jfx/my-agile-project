@@ -7,26 +7,23 @@ Resource          ../Keyword_resource.txt
 *** Test Cases ***
 A manager deletes a project
     Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Delete project #2
+    And I go to delete project page    2
     When I click button    Remove
     And I confirm
     Then Location Should Be    ${URL}/dm-project/
-    Then Page Should Contain    Project removed successfully
-    Then Page Should not Contain    Project Two
+    And Page Should Contain    Project removed successfully
+    And Page Should not Contain    Project Two
 
 Cancel to delete a project
     Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Delete project #2
+    And I go to delete project page    2
     When I click button    Remove
     And I do not confirm
     Then Location Should Be    ${URL}/project/del/2
 
 Impossible to delete a project
     Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Delete project #1
+    And I go to delete project page    1
     When I click button    Remove
     And I confirm
     Then Location Should Be    ${URL}/project/del/1
@@ -51,14 +48,18 @@ Impossible to delete a project without selecting a domain before
 
 Return to domain button
     Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Delete project #1
+    And I go to delete project page    1
     When I click button    Return to domain
     Then Location Should Be    ${URL}/dm-project/
 
 Domain link
     Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Delete project #1
+    And I go to delete project page    1
     When Click Link    Domain One
     Then Location Should Be    ${URL}/dm-project/
+
+*** Keywords ***
+I go to delete project page
+    [Arguments]    ${id}
+    And I go to projects list    View domain #1
+    And I click action button    Delete project #${id}
