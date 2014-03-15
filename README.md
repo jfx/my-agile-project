@@ -13,6 +13,7 @@ more specifically Agile projects with those following features :
 Features:
 
   - Robot framework tests automation,
+  - Remove Behat/Mink features,
 
 Bugfixes:
 
