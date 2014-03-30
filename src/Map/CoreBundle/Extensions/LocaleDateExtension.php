@@ -36,6 +36,9 @@ use Twig_Filter_Method;
  */
 class LocaleDateExtension extends Twig_Extension
 {
+    /**
+     * @var Symfony\Component\DependencyInjection\ContainerInterface Container
+     */
     protected $container;
 
     /**

@@ -33,8 +33,9 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "1.4.*",
-        "vipsoft/doctrine-data-fixtures-extension": "*",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "4.0.*",
+        "phpunit/php-code-coverage": "*",
+        "phpunit/phpcov": "*"
     },
     "repositories": [
     {

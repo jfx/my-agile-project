@@ -2,6 +2,13 @@ parameters:
 #    map_core.example.class: Map\CoreBundle\Example
 
 services:
+    map.CoverageListener:
+        class: Map\CoreBundle\Service\CoverageListener
+        arguments: [ '@kernel', '%app.codeCoverage%' ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
     map.navbar:
         class: '%mopa_bootstrap.navbar.generic%'
         scope: request
