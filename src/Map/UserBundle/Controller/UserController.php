@@ -20,8 +20,7 @@ namespace Map\UserBundle\Controller;
 
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Map\UserBundle\Form\UserAddType;
-use Map\UserBundle\Form\UserEditType;
+use Map\UserBundle\Form\UserType;
 use Map\UserBundle\Form\UserFormHandler;
 use Map\UserBundle\Form\UserPasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,7 +78,7 @@ class UserController extends Controller
     {
         $userManager = $this->get('fos_user.user_manager');
         $user        = $userManager->createUser();
-        $form        = $this->createForm(new UserAddType(), $user);
+        $form        = $this->createForm(new UserType(), $user);
 
         $user->setEnabled(true);
 
@@ -175,7 +174,7 @@ class UserController extends Controller
         if (! $user = $userManager->findUserBy(array('id' => $id))) {
             throw $this->createNotFoundException('User[id='.$id.'] not found');
         }
-        $form    = $this->createForm(new UserEditType(), $user);
+        $form    = $this->createForm(new UserType(), $user);
 
         $handler = new UserFormHandler(
             $form,

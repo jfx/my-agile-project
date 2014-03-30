@@ -1,0 +1,48 @@
+*** Settings ***
+Documentation     In order to see resources data for a domain
+...               As a connected user
+...               I need to see resources list.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+Display resources list for a connected user
+    Given I am a user
+    When I go to resources list    View domain #1
+    Then the table header should contain    Name    Displayname    Role
+    And the table should contain x rows    5
+    And the table should contain    D1-guest Firstd1-guest    displayd1-guest    Guest
+    And the table should contain    D1-manager Firstd1-manager    displayd1-manager    Manager
+    And the table should contain    D1-none Firstd1-none    displayd1-none    None
+    And the table should contain    D1-user+ Firstd1-user+    displayd1-user+    User+
+    And the table should contain    User Firstuser    displayuser    User
+
+List with no resource for a connected user
+    Given I am a user
+    When I go to resources list    View domain #5
+    Then the table header should contain    Name    Displayname    Role
+    And the table should contain x rows    1
+    And the table should contain    No resource
+
+No modify actions buttons in domains list for a non super-admin profile
+    Given I am a user
+    When I go to resources list    View domain #1
+    Then the table should contain x rows    5
+    And I should not see action button(s)    Add    Edit resource #2    Delete resource #2
+
+Action buttons Add/View/Edit/Delete for a non super-admin profile
+    Given I am a super-admin
+    When I go to resources list    View domain #1
+    Then the table should contain x rows    5
+    And I should see action button(s)    Add    Edit resource #2    Delete resource #2
+
+Main tab
+    Given I am a user
+    And I go to resources list    View domain #1
+    When Click element    link=Main
+    And Location Should Be    ${URL}/domain/1
+
+Projects tab
+    Given I am a user
+    And I go to resources list    View domain #1
+    When Click element    link=Projects
+    And Location Should Be    ${URL}/dm-project/

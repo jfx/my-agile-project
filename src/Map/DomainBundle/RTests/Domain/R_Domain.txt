@@ -1,0 +1,20 @@
+*** Keywords ***
+I go to domains list
+    Click element    link=Admin
+    Click element    link=Domains
+
+I go to resources list
+    [Arguments]    ${domain}
+    I go to domains list
+    I click action button    ${domain}
+    Click element    link=Resources
+
+I fill in domain form
+    [Arguments]    ${domain}
+    Input text    map_domainbundle_domaintype_name    ${domain}
+    Input text    map_domainbundle_domaintype_details    Details 4 ${domain}
+
+I check domain view form
+    [Arguments]    ${domain}
+    And Element Text Should Be    id=inputName    ${domain}
+    And Element Text Should Be    id=textDetails    Details 4 ${domain}

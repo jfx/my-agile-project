@@ -9,6 +9,19 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.4.0 (30 March 2014)
+Features:
+
+  - Robot framework tests automation,
+  - Remove Behat/Mink features,
+  - Code coverage listener.
+
+Bugfixes:
+
+  - Add missing title to buttons,
+  - Fix API documentation error.
+
+
 ### 0.3.0 (25 November 2013)
 Features:
 

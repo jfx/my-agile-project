@@ -1,0 +1,62 @@
+*** Settings ***
+Documentation     In order to manage domain
+...               As a super-admin user profile
+...               I need to edit a domain.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+A super-admin edits a domain
+    Given I am a super-admin
+    And I go to edit domain 1 page
+    When I fill in domain form    D1Mod
+    And I save
+    Then Page Should Contain    Domain edited successfully
+    And I check domain view form    D1Mod
+    And I click button    Return to list
+    And the table should contain x rows    5
+    And the table should contain    D1Mod    Details 4 D1Mod
+
+A manager edits a domain
+    Given I am a manager
+    And I go to domains list
+    And I click action button    View domain #1
+    And I click button    Edit
+    When I fill in domain form    D1Mod
+    And I save
+    Then Page Should Contain    Domain edited successfully
+    And I check domain view form    D1Mod
+    And I click button    Return to list
+    And the table should contain x rows    5
+    And the table should contain    D1Mod    Details 4 D1Mod
+
+Impossible to edit a domain with a name too short
+    Given I am a super-admin
+    And I go to domains list
+    And I click action button    Edit domain #1
+    Input text    map_domainbundle_domaintype_name    X
+    And I save
+    Then Page Should Contain    This value is too short. It should have 2 characters or more.
+
+Impossible to edit a domain with a duplicate name
+    Given I am a super-admin
+    And I go to edit domain 1 page
+    Input text    map_domainbundle_domaintype_name    Domain Two
+    And I save
+    Then Page Should Contain    A domain with this name already exists.
+
+Wrong domain Id
+    Given I am a super-admin
+    And I go to domains list
+    When Go to    ${URL}/domain/edit/999
+    Then Page Should Contain    404 Not Found
+
+Return to list button
+    Given I am a super-admin
+    And I go to edit domain 1 page
+    When I click button    Return to list
+    Then Location Should Be    ${URL}/domain/
+
+*** Keywords ***
+I go to edit domain 1 page
+    And I go to domains list
+    And I click action button    Edit domain #1

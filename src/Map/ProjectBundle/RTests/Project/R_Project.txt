@@ -1,0 +1,29 @@
+*** Keywords ***
+I go to projects list
+    [Arguments]    ${domain}
+    I go to domains list
+    I click action button    ${domain}
+    Click element    link=Projects
+
+I fill in project form
+    [Arguments]    ${project}    ${monthStart}=0    ${monthFinish}=3    ${isClosed}=False
+    ${isClosedBool} =    Convert To Boolean    ${isClosed}
+    Input text    map_projectbundle_projecttype_name    ${project}
+    I select date    map_projectbundle_projecttype_startDate    1    15    ${monthStart}
+    Click Element    map_projectbundle_projecttype_name
+    I select date    map_projectbundle_projecttype_finishDate    2    15    ${monthFinish}
+    Click Element    map_projectbundle_projecttype_name
+    Run Keyword If    ${isClosedBool}    Select Checkbox    map_projectbundle_projecttype_closed
+    Input text    map_projectbundle_projecttype_details    Details 4 ${project}
+
+I check project view form
+    [Arguments]    ${project}    ${monthStart}=0    ${monthFinish}=3    ${isClosed}=False
+    ${isClosedBool} =    Convert To Boolean    ${isClosed}
+    Element Text Should Be    id=inputName    ${project}
+    ${formatDateStart} =    I get formated date in X months    15    ${monthStart}
+    ${formatDateFinish} =    I get formated date in X months    15    ${monthFinish}
+    Element Text Should Be    id=inputStartDate    ${formatDateStart}
+    Element Text Should Be    id=inputFinishDate    ${formatDateFinish}
+    Run Keyword If    ${isClosedBool}    Checkbox Should Be Selected    inputClosed
+    Run Keyword Unless    ${isClosedBool}    Checkbox Should Not Be Selected    inputClosed
+    Element Text Should Be    id=textDetails    Details 4 ${project}

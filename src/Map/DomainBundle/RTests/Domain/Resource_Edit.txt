@@ -1,0 +1,41 @@
+*** Settings ***
+Documentation     In order to manage resource for a domain
+...               As a super-admin user profile or a user with a manager role
+...               I need to change a resource's role.
+Resource          ../Keyword_resource.txt
+
+*** Test Cases ***
+A super-admin edits a resource role
+    Given I am a user
+    And I go to resources list    View domain #1
+    And I should not see action button(s)    Add
+    And I log out
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Edit resource #2
+    And Select From List By Label    map_domainbundle_resourceedittype_role    Manager
+    When I save
+    Then Page Should Contain    Resource edited successfully
+    When I log out
+    And I am a user
+    And I go to resources list    View domain #1
+    Then I should see action button(s)    Add
+    And I go to resources list    View domain #2
+    And I should not see action button(s)    Add
+
+A manager edits a resource role
+    Given I am a manager
+    And I go to resources list    View domain #1
+    And I click action button    Edit resource #2
+    And Select From List By Label    map_domainbundle_resourceedittype_role    User+
+    When I save
+    Then Page Should Contain    Resource edited successfully
+    And the table should contain    User Firstuser    displayuser    User+
+
+Return to list button
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Edit resource #2
+    When I click button    Return to list
+    Then Location Should Be    ${URL}/dm-resource/
+    And Page Should Contain    Domain One
