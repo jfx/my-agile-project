@@ -4,11 +4,16 @@ parameters:
 services:
     map_user.updatedomain4user:
         class: Map\UserBundle\Service\UpdateDomain4User
-        arguments: ['@security.context', '@doctrine.orm.entity_manager', '@fos_user.user_manager']
+        arguments: [ '@security.context', '@doctrine.orm.entity_manager', '@fos_user.user_manager' ]
         scope: request
 
     map_user.AuthenticationListener:
         class: Map\UserBundle\Service\AuthenticationListener
-        arguments: ['@doctrine.orm.entity_manager', '@fos_user.user_manager']
+        arguments: [ '@doctrine.orm.entity_manager', '@fos_user.user_manager' ]
         tags:
             - { name: kernel.event_listener, event: security.authentication.success, method: onSecurityAuthenticationSuccess }
+
+    map_user.passwordFactory:
+        class: Map\UserBundle\Service\PasswordFactory
+        arguments: [ '%app.defaultPasswordLength%' ]
+        scope: request

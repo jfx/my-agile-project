@@ -18,6 +18,18 @@ Add a user with non super-admin profile
     I log out
     I am logging as    Added
 
+Add a user without password with non super-admin profile
+    Given I am a super-admin
+    And I go to users list
+    And I click action button    Add
+    When I fill in user form    Added
+    Input text    map_userbundle_usertype_updatedPassword    ${EMPTY}
+    And I save
+    Then Page Should Contain    User added successfully
+    And I check user view form    Added
+    And I click button    Return to list
+    And the table should contain    Added    FirstAdded    displayAdded    userAdded    Added@example.com    Details 4 Added
+
 Add a user with super-admin profile
     Given I am a super-admin
     And I go to users list

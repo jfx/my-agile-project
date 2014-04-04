@@ -88,3 +88,4 @@ parameters:
     app.build:        BBB
     app.formatDate:   d/m/Y
     app.codeCoverage: false
+    app.defaultPasswordLength: 12

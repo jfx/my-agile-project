@@ -750,12 +750,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817"
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f8e9255eedc91bc53195de288c9fe640719b2817",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/98953461473facd3bcb486b88cdd87bc5120b218",
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218",
                 "shasum": ""
             },
             "require": {
@@ -810,7 +810,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-18 08:55:34"
+            "time": "2014-04-01 09:27:17"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1550,12 +1550,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4cf49e5496857532f4ca4bbb69d1eee591b88234"
+                "reference": "9ebcdcd7f22e5ab94305d97fbeed0ad73a2bebd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4cf49e5496857532f4ca4bbb69d1eee591b88234",
-                "reference": "4cf49e5496857532f4ca4bbb69d1eee591b88234",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9ebcdcd7f22e5ab94305d97fbeed0ad73a2bebd0",
+                "reference": "9ebcdcd7f22e5ab94305d97fbeed0ad73a2bebd0",
                 "shasum": ""
             },
             "require": {
@@ -1610,7 +1610,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-03-26 11:12:35"
+            "time": "2014-03-31 17:22:13"
         },
         {
             "name": "mopa/bootstrap-bundle",
@@ -1820,22 +1820,20 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "dev-master",
+            "version": "v2.3.4",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "7e5be792d3d17dcc407d73057f44f0c451a56b04"
+                "reference": "66df91b4bd637a83299d8072aed3658bfd3b3021"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/7e5be792d3d17dcc407d73057f44f0c451a56b04",
-                "reference": "7e5be792d3d17dcc407d73057f44f0c451a56b04",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/66df91b4bd637a83299d8072aed3658bfd3b3021",
+                "reference": "66df91b4bd637a83299d8072aed3658bfd3b3021",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "symfony/class-loader": "~2.2",
                 "symfony/framework-bundle": "~2.2"
             },
             "type": "symfony-bundle",
@@ -1866,7 +1864,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-03-14 12:33:57"
+            "time": "2013-08-22 05:04:53"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1924,12 +1922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioGeneratorBundle.git",
-                "reference": "eae9c659949b0901947a565ec0ff7606692ce53e"
+                "reference": "201c75b4ae26e906c26cdfe4db7ac5043cc15743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/eae9c659949b0901947a565ec0ff7606692ce53e",
-                "reference": "eae9c659949b0901947a565ec0ff7606692ce53e",
+                "url": "https://api.github.com/repos/sensiolabs/SensioGeneratorBundle/zipball/201c75b4ae26e906c26cdfe4db7ac5043cc15743",
+                "reference": "201c75b4ae26e906c26cdfe4db7ac5043cc15743",
                 "shasum": ""
             },
             "require": {
@@ -1965,7 +1963,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2014-02-19 06:31:38"
+            "time": "2014-03-30 07:47:50"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2252,12 +2250,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "9f259786434b2efb51bdfac572ed7559c03afe82"
+                "reference": "8aa194c0a663513f9316af54e74c4bea78178b79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/9f259786434b2efb51bdfac572ed7559c03afe82",
-                "reference": "9f259786434b2efb51bdfac572ed7559c03afe82",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/8aa194c0a663513f9316af54e74c4bea78178b79",
+                "reference": "8aa194c0a663513f9316af54e74c4bea78178b79",
                 "shasum": ""
             },
             "require": {
@@ -2354,7 +2352,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-03-29 06:58:16"
+            "time": "2014-04-01 06:01:53"
         },
         {
             "name": "twbs/bootstrap",
@@ -2438,12 +2436,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "dab8d90755a7c1a54cd20be5098f5b5bf3346d9b"
+                "reference": "c8366374d9d531029a6b031528b552c37e1b2e66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/dab8d90755a7c1a54cd20be5098f5b5bf3346d9b",
-                "reference": "dab8d90755a7c1a54cd20be5098f5b5bf3346d9b",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/c8366374d9d531029a6b031528b552c37e1b2e66",
+                "reference": "c8366374d9d531029a6b031528b552c37e1b2e66",
                 "shasum": ""
             },
             "require": {
@@ -2487,7 +2485,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-03-15 10:50:05"
+            "time": "2014-03-30 17:23:57"
         }
     ],
     "packages-dev": [
