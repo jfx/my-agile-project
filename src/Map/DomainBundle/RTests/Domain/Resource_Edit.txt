@@ -32,6 +32,17 @@ A manager edits a resource role
     Then Page Should Contain    Resource edited successfully
     And the table should contain    User Firstuser    displayuser    User+
 
+Impossible to edit a resource without selecting a domain before
+    Given I am a super-admin
+    When Go To    ${URL}/dm-resource/edit/2
+    Then Location Should Be    ${URL}/domain/
+
+Wrong resource Id for a domain
+    Given I am a manager
+    And I go to resources list    View domain #1
+    When Go to    ${URL}/dm-resource/edit/1
+    Then Page Should Contain    Resource[id=1] not found for this domain
+
 Return to list button
     Given I am a super-admin
     And I go to resources list    Edit domain #1

@@ -9,6 +9,14 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.5.0 ()
+Features:
+
+  - Add a default password when adding a user without password,
+
+Bugfixes:
+
+
 ### 0.4.0 (30 March 2014)
 Features:
 

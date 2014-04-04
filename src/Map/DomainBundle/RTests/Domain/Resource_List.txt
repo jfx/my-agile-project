@@ -35,6 +35,11 @@ Action buttons Add/View/Edit/Delete for a non super-admin profile
     Then the table should contain x rows    5
     And I should see action button(s)    Add    Edit resource #2    Delete resource #2
 
+Impossible to display resources list without selecting a domain before
+    Given I am a user
+    When Go to    ${URL}/dm-resource/
+    Then Location Should Be    ${URL}/domain/
+
 Main tab
     Given I am a user
     And I go to resources list    View domain #1

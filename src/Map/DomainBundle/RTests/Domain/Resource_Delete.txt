@@ -42,6 +42,17 @@ Impossible to delete a resource
     Then Location Should Be    ${URL}/dm-resource/del/2
     Then Page Should Contain    Impossible to remove this item - Integrity constraint violation !
 
+Impossible to delete a resource without selecting a domain before
+    Given I am a super-admin
+    When Go To    ${URL}/dm-resource/del/2
+    Then Location Should Be    ${URL}/domain/
+
+Wrong resource Id for a domain
+    Given I am a manager
+    And I go to resources list    View domain #1
+    When Go to    ${URL}/dm-resource/del/1
+    Then Page Should Contain    Resource[id=1] not found for this domain
+
 Return to list button
     Given I am a super-admin
     And I go to resources list    Edit domain #1
