@@ -17,3 +17,9 @@ services:
         class: Map\UserBundle\Service\PasswordFactory
         arguments: [ '%app.defaultPasswordLength%' ]
         scope: request
+
+    map_user.resetting.form.type:
+        class: Map\UserBundle\Form\Type\ResettingFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: map_userbundle_resettingformtype }

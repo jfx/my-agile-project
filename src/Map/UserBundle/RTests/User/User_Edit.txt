@@ -23,7 +23,7 @@ Edit a user without changing password with non super-admin profile
     And I go to users list
     And I click action button    Edit user #2
     When I fill in user form    Modified
-    Input text    map_userbundle_usertype_updatedPassword    ${EMPTY}
+    And Input Text    map_userbundle_usertype_updatedPassword    ${EMPTY}
     And I save
     Then Page Should Contain    User edited successfully
     And I check user view form    Modified
@@ -34,7 +34,7 @@ Change a password of a user
     Given I am a super-admin
     And I go to users list
     And I click action button    Edit user #2
-    When Input text    map_userbundle_usertype_updatedPassword    passModified
+    When Input Text    map_userbundle_usertype_updatedPassword    passModified
     And I save
     Then Page Should Contain    User edited successfully
     I log out
@@ -120,6 +120,6 @@ Impossible to edit a user with wrong data
     And I go to users list
     And I click action button    Edit user #2
     When I fill in user form    Modified
-    Input text    ${field}    ${value}
+    When Input Text    ${field}    ${value}
     And I save
     Then Page Should Contain    ${message}

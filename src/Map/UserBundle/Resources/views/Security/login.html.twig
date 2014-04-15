@@ -2,10 +2,7 @@
 
 {% block title %}{{ parent() }} - Login{% endblock title %}
 
-{% block navbar %}
-{% endblock navbar %}
-
-{% block headline %}My Agile Project{% endblock headline %}
+{% block headline %}{{ parent() }} > Login{% endblock headline %}
 
 {% block fos_user_content %}
 {% if error %}
@@ -45,6 +42,11 @@
             &nbsp;&nbsp;{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}&nbsp;&nbsp;
         </button>
     </div>
+    <div class="center">
+        <br />
+        <a href="{{ path('fos_user_resetting_request') }}">Forgot your password ?</a>
+    </div>
+
 </form>
 </div>
 </div>

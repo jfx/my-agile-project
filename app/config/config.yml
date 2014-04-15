@@ -82,6 +82,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Map\UserBundle\Entity\User
+    resetting:
+        form:
+            type: map_userbundle_resettingformtype
 
 parameters:
     app.version:      0.4.0

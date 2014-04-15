@@ -12,9 +12,14 @@ more specifically Agile projects with those following features :
 ### 0.5.0 ()
 Features:
 
-  - Add a default password when adding a user without password,
+  - New Robot Framework tests for resources,
+  - Resetting password feature and robot framework tests,
+  
+
 
 Bugfixes:
+
+  - Add a default password when adding a user without password,
 
 
 ### 0.4.0 (30 March 2014)

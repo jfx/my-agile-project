@@ -53,7 +53,7 @@ class ProjectController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        // Low probability If you have not a domain, 
+        // Low probability If you have not a domain,
         // you have not a ROLE_DM -> Error 403
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
@@ -143,7 +143,7 @@ class ProjectController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        // Low probability If you have not a domain, 
+        // Low probability If you have not a domain,
         // you have not a ROLE_DM -> Error 403
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
@@ -206,8 +206,8 @@ class ProjectController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        // Low probability If you have not a domain, 
-        // you have not a ROLE_DM -> Error 403        
+        // Low probability If you have not a domain,
+        // you have not a ROLE_DM -> Error 403
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
         }

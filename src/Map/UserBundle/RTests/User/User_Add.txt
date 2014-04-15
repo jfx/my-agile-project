@@ -23,7 +23,7 @@ Add a user without password with non super-admin profile
     And I go to users list
     And I click action button    Add
     When I fill in user form    Added
-    Input text    map_userbundle_usertype_updatedPassword    ${EMPTY}
+    And Input Text    map_userbundle_usertype_updatedPassword    ${EMPTY}
     And I save
     Then Page Should Contain    User added successfully
     And I check user view form    Added
@@ -90,6 +90,6 @@ Impossible to add a user with wrong data
     And I go to users list
     And I click action button    Add
     When I fill in user form    Added
-    Input text    ${field}    ${value}
+    When Input Text    ${field}    ${value}
     And I save
     Then Page Should Contain    ${message}

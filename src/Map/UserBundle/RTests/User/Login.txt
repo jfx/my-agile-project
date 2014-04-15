@@ -48,5 +48,5 @@ Locked user cannot login
 *** Keywords ***
 I fill in login form
     [Arguments]    ${user}    ${pass}
-    Input text    username    ${user}
-    Input text    password    ${pass}
+    Input Text    username    ${user}
+    Input Text    password    ${pass}

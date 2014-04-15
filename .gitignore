@@ -10,3 +10,4 @@ nbproject/
 vendor/
 bin
 composer.phar
+src/Map/CoreBundle/RTests/R_Google_Account.txt
