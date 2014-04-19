@@ -55,9 +55,16 @@ class ProjectController extends Controller
 
         $projects = $repository->findProjectsByDomain($domain);
 
+        $service = $this->container->get('map_user.domaininfo');
+        $child   = $service->getChildCount($domain);
+
         return $this->render(
             'MapDomainBundle:Project:index.html.twig',
-            array('projects' => $projects, 'domain' => $domain)
+            array(
+                'projects' => $projects,
+                'domain' => $domain,
+                'child' => $child
+            )
         );
     }
 

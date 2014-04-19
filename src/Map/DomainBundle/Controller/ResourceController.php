@@ -60,9 +60,16 @@ class ResourceController extends Controller
 
         $resources = $repository->findUsersByDomain($domain);
 
+        $service = $this->container->get('map_user.domaininfo');
+        $child   = $service->getChildCount($domain);
+
         return $this->render(
             'MapDomainBundle:Resource:index.html.twig',
-            array('resources' => $resources, 'domain' => $domain)
+            array(
+                'resources' => $resources,
+                'domain' => $domain,
+                'child' => $child
+            )
         );
     }
 

@@ -6,7 +6,10 @@
 
 {% block fos_user_content %}
 {% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+    <div class="alert alert-error fade in  alert-block">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        {{ error|trans({}, 'FOSUserBundle') }}
+    </div>
 {% endif %}
 
 <div class="container">

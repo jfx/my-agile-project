@@ -14,8 +14,8 @@ Features:
 
   - New Robot Framework tests for resources,
   - Resetting password feature and robot framework tests,
-  
-
+  - Login with email,
+  - Badge for projects and resources on domain view,
 
 Bugfixes:
 

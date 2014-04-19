@@ -6,9 +6,9 @@
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li><a href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
-    <li><a href="{{ path('dm-project_index') }}">Projects</a></li>
-    <li class="active"><a href="#">Resources</a></li>
+    <li><a id="a_main" href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
+    <li><a id="a_projects" href="{{ path('dm-project_index') }}"><span id="badge_projects" class="badge badge-info">{{ child.projects }}</span>&nbsp;&nbsp;Projects</a></li>
+    <li class="active"><a id="a_resources" href="#"><span id="badge_resources" class="badge badge-inverse">{{ child.resources }}</span>&nbsp;&nbsp;Resources</a></li>
 </ul>
 <table class="table table-bordered table-hover">
     <thead>

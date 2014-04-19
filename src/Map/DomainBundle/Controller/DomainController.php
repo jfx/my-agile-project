@@ -109,12 +109,15 @@ class DomainController extends Controller
      */
     public function viewAction(Domain $domain)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
-        $service->setCurrentDomain($domain);
+        $serviceUpdate = $this->container->get('map_user.updatedomain4user');
+        $serviceUpdate->setCurrentDomain($domain);
+
+        $serviceInfo = $this->container->get('map_user.domaininfo');
+        $child       = $serviceInfo->getChildCount($domain);
 
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
-            array('domain' => $domain)
+            array('domain' => $domain, 'child' => $child)
         );
     }
 

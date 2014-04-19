@@ -61,6 +61,27 @@ class UserDmRoleRepository extends EntityRepository
     }
 
     /**
+     * Count all resources with role for a domain.
+     *
+     * @param Domain $domain The domain.
+     *
+     * @return int
+     */
+    public function countUsersByDomain(Domain $domain)
+    {
+        $qb = $this->createQueryBuilder('udr')
+            ->innerJoin('udr.user', 'u')
+            ->select('count(u.id)')
+            ->innerJoin('udr.domain', 'd')
+            ->where('d.id = :domainId')
+            ->setParameter('domainId', $domain->getId());
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
+    /**
      * Get all domains for a user as a resource.
      *
      * @param User $user The user.

@@ -33,6 +33,20 @@ Edit button not displayed for non super-admin profile
     And I go to view domain 1 page
     Then I should not see action button(s)    Edit
 
+Tab Projects
+    Given I am a user
+    And I go to view domain 1 page
+    And Element Should Contain    id=badge_projects    3
+    When Click Link    id=a_projects
+    Then Location Should Be    ${URL}/dm-project/
+
+Tab Resources
+    Given I am a user
+    And I go to view domain 1 page
+    And Element Should Contain    id=badge_resources    5
+    When Click Link    id=a_resources
+    Then Location Should Be    ${URL}/dm-resource/
+
 *** Keywords ***
 I go to view domain 1 page
     And I go to domains list

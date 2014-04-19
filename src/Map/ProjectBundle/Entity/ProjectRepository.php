@@ -55,6 +55,26 @@ class ProjectRepository extends EntityRepository
     }
 
     /**
+     * Count all projects for a domain.
+     *
+     * @param Domain $domain The domain.
+     *
+     * @return int List of projects.
+     */
+    public function countProjectsByDomain(Domain $domain)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->innerJoin('p.domain', 'd')
+            ->select('count(p.id)')
+            ->where('d.id = :domainId')
+            ->setParameter('domainId', $domain->getId());
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
+    /**
      * Get a project by its id and domain id.
      *
      * @param int $projectId Project id.
