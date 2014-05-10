@@ -25,6 +25,11 @@ Wrong user Id
     When Go to    ${URL}/user/role/999
     Then Page Should Contain    404 Not Found
 
+Breadcrumb
+    Given I am a super-admin
+    When I go to user view role page    2
+    Then Page Should Contain    Admin > View user > Roles
+
 Main tab
     Given I am a super-admin
     When I go to user view role page    2

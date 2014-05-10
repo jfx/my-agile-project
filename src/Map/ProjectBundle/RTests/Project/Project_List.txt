@@ -43,6 +43,17 @@ Action buttons Add/View/Edit/Delete for a manager
     Then the table should contain x rows    3
     And I should see action button(s)    Add    View project #1    Edit project #1    Delete project #1
 
+Breadcrumb
+    Given I am a user
+    When I go to projects list    View domain #1
+    Then Page Should Contain    Domain One > Projects list
+
+Breadcrumb domain link
+    Given I am a user
+    And I go to projects list    View domain #1
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
 Tab Main
     Given I am a user
     And I go to projects list    View domain #1

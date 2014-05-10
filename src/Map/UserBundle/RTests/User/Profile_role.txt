@@ -18,15 +18,20 @@ No role
     Then the table should contain x rows    1
     And the table should contain    No role
 
-Main tab
+Breadcrumb
     Given I am a user
     When I go to profile role page
+    Then Page Should Contain    Admin > Profile > Roles
+
+Main tab
+    Given I am a user
+    And I go to profile role page
     When Click Link    Main
     Then Location Should Be    ${URL}/user/profile
 
 Password tab
     Given I am a user
-    When I go to profile role page
+    And I go to profile role page
     When Click Link    Password
     Then Location Should Be    ${URL}/user/password
 

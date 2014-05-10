@@ -110,7 +110,7 @@ class ResourceController extends Controller
             $userDmRoleInForm = $form->getData();
             $userId = $userDmRoleInForm->getUser()->getId();
 
-            $service = $this->container->get('map_user.updatedomain4user');
+            $service = $this->container->get('map_user.updatecontext4user');
             $service->refreshAvailableDomains4UserId($userId);
 
             $this->get('session')->getFlashBag()
@@ -168,7 +168,7 @@ class ResourceController extends Controller
 
         if ($handler->process()) {
 
-            $service = $this->container->get('map_user.updatedomain4user');
+            $service = $this->container->get('map_user.updatecontext4user');
             $service->refreshAvailableDomains4UserId($id);
 
             $this->get('session')->getFlashBag()
@@ -226,7 +226,7 @@ class ResourceController extends Controller
             try {
                 $em->flush();
 
-                $service = $this->container->get('map_user.updatedomain4user');
+                $service = $this->container->get('map_user.updatecontext4user');
                 $service->refreshAvailableDomains4UserId($id);
 
                 $success = true;

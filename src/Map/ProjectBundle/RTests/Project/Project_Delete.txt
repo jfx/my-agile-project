@@ -33,7 +33,7 @@ Wrong project Id for a domain
     Given I am a manager
     And I go to projects list    View domain #1
     When Go to    ${URL}/project/del/4
-    Then Page Should Contain    404 Not Found
+    Then Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
 
 Wrong project Id
     Given I am a manager
@@ -41,21 +41,33 @@ Wrong project Id
     When Go to    ${URL}/project/del/999
     Then Page Should Contain    404 Not Found
 
-Impossible to delete a project without selecting a domain before
+Delete a project without selecting a domain before
     Given I am a manager
     When Go to    ${URL}/project/del/1
-    Then Page Should Contain    403 Forbidden
+    Then Location should be    ${URL}/project/del/1
+    And Page Should Not Contain    ${FORBIDDEN_ACCESS_TEXT}
+
+Breadcrumb
+    Given I am a manager
+    When I go to delete project page    1
+    Then Page Should Contain    Domain One > Project One > Delete
+
+Breadcrumb domain link
+    Given I am a manager
+    And I go to delete project page    1
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/dm-project/
+
+Breadcrumb project link
+    Given I am a manager
+    And I go to delete project page    1
+    When Click Link    id=b_project
+    Then Location Should Be    ${URL}/project/1
 
 Return to domain button
     Given I am a manager
     And I go to delete project page    1
     When I click button    Return to domain
-    Then Location Should Be    ${URL}/dm-project/
-
-Domain link
-    Given I am a manager
-    And I go to delete project page    1
-    When Click Link    Domain One
     Then Location Should Be    ${URL}/dm-project/
 
 *** Keywords ***

@@ -50,6 +50,11 @@ Wrong domain Id
     When Go to    ${URL}/domain/edit/999
     Then Page Should Contain    404 Not Found
 
+Breadcrumb
+    Given I am a super-admin
+    When I go to edit domain 1 page
+    Then Page Should Contain    Admin > Edit domain
+
 Return to list button
     Given I am a super-admin
     And I go to edit domain 1 page

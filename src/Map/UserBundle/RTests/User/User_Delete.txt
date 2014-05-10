@@ -40,6 +40,12 @@ Wrong user Id
     When Go to    ${URL}/user/del/999
     Then Page Should Contain    404 Not Found
 
+Breadcrumb
+    Given I am a super-admin
+    And I go to users list
+    When I click action button    Delete user #3
+    Then Page Should Contain    Admin > Delete user
+
 Return to list button
     Given I am a super-admin
     And I go to users list

@@ -70,16 +70,22 @@ Impossible to add a project without selecting a domain before
     When Go to    ${URL}/project/add
     Then Page Should Contain    403 Forbidden
 
+Breadcrumb
+    Given I am a manager
+    And I go to projects list    View domain #1
+    When I click action button    Add
+    Then Page Should Contain    Domain One > Add project
+
+Breadcrumb domain link
+    Given I am a manager
+    And I go to projects list    View domain #1
+    And I click action button    Add
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
 Return to domain button
     Given I am a manager
     And I go to projects list    View domain #1
     And I click action button    Add
     When I click button    Return to domain
-    Then Location Should Be    ${URL}/dm-project/
-
-Domain link
-    Given I am a manager
-    And I go to projects list    View domain #1
-    And I click action button    Add
-    When Click Link    Domain One
     Then Location Should Be    ${URL}/dm-project/

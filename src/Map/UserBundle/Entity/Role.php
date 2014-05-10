@@ -37,6 +37,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role
 {
+    const GUEST_ROLE   = 'ROLE_DM_GUEST';
     const DEFAULT_ROLE = 'ROLE_DM_USER';
     const MANAGER_ROLE = 'ROLE_DM_MANAGER';
     const LABEL_NONE   = 'None';

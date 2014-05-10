@@ -50,3 +50,9 @@ services:
         arguments: [ '@service_container' ]
         tags:
             - { name: twig.extension }
+
+    map.breadcrumb:
+        class: Map\CoreBundle\Extensions\BreadcrumbExtension
+        arguments: [ '@security.context', '@router' ]
+        tags:
+            - { name: twig.extension }

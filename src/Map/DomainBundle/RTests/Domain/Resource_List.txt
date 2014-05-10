@@ -42,6 +42,17 @@ Impossible to display resources list without selecting a domain before
     When Go to    ${URL}/dm-resource/
     Then Location Should Be    ${URL}/domain/
 
+Breadcrumb
+    Given I am a user
+    When I go to resources list    View domain #1
+    Then Page Should Contain    Domain One > Resources list
+
+Breadcrumb domain link
+    Given I am a user
+    And I go to resources list    View domain #1
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
 Main tab
     Given I am a user
     And I go to resources list    View domain #1

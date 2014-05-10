@@ -21,6 +21,7 @@ namespace Map\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Map\DomainBundle\Entity\Domain;
+use Map\ProjectBundle\Entity\Project;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -90,6 +91,13 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     private $currentDomain;
+
+    /**
+     * @var Map\ProjectBundle\Entity\Project Current project
+     *
+     * @ORM\ManyToOne(targetEntity="Map\ProjectBundle\Entity\Project")
+     */
+    private $currentProject;
 
     /**
      * @var string Current role label
@@ -242,6 +250,42 @@ class User extends BaseUser
     public function unsetCurrentDomain()
     {
         $this->currentDomain = null;
+
+        return $this;
+    }
+
+    /**
+     * Set current project
+     *
+     * @param Project $pj The current project
+     *
+     * @return User
+     */
+    public function setCurrentProject(Project $pj)
+    {
+        $this->currentProject = $pj;
+
+        return $this;
+    }
+
+    /**
+     * Get current project
+     *
+     * @return Project
+     */
+    public function getCurrentProject()
+    {
+        return $this->currentProject;
+    }
+
+    /**
+     * unset current project
+     *
+     * @return User
+     */
+    public function unsetCurrentProject()
+    {
+        $this->currentProject = null;
 
         return $this;
     }

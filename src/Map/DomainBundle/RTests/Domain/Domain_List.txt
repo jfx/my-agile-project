@@ -28,6 +28,11 @@ No modify actions buttons in domains list for a non super-admin profile
     Then the table should contain x rows    5
     And I should not see action button(s)    Add    Edit domain #1    Delete domain #1
 
+Breadcrumb
+    Given I am a super-admin
+    When I go to domains list
+    Then Page Should Contain    Admin > Domains list
+
 Action buttons Add/View/Edit/Delete for a super-admin
     Given I am a super-admin
     When I go to domains list

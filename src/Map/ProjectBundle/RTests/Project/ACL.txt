@@ -14,8 +14,8 @@ Project list
 Project view
     Comment    URL    super-admin    manager    user+    user    guest
     ...    none    Prerequisite
-    Then I check the following ACL    /project/1    True    True    True    True    True
-    ...    True    /domain/1
+    Then I check the following ACL    /project/1    False    True    True    True    True
+    ...    False    /domain/1
 
 Project add
     Comment    URL    super-admin    manager    user+    user    guest

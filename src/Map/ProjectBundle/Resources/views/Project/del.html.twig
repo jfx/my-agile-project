@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Project delete - Id : {{ project.id }}{% endblock title %}
 
-{% block headline %}<a href="{{ path('dm-project_index') }}">{{ domain.name }}</a> > Delete {{ project.name }}{% endblock headline %}
+{% block headline %}{{ project_breadcrumb() }} > Delete{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">

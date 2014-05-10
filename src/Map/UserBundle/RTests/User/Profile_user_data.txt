@@ -15,15 +15,20 @@ Display super-admin data profile
     When I go to profile page
     Then I should see super-admin profile data
 
-Password tab
+Breadcrumb
     Given I am a user
     When I go to profile page
+    Then Page Should Contain    Admin > Profile
+
+Password tab
+    Given I am a user
+    And I go to profile page
     When Click Link    Password
     Then Location Should Be    ${URL}/user/password
 
 Roles tab
     Given I am a user
-    When I go to profile page
+    And I go to profile page
     When Click Link    Roles
     Then Location Should Be    ${URL}/user/role
 

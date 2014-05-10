@@ -24,7 +24,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Update domain service class.
+ * Update context service class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -34,7 +34,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class UpdateDomain4User
+class UpdateContext4User
 {
     /**
      * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
@@ -79,6 +79,7 @@ class UpdateDomain4User
      */
     public function setCurrentDomain($domain, $userId = null)
     {
+        // @TODO : setCurrentDomain($domain, $resetCurrentProject = true)
         if ($userId == null) {
 
             $user = $this->securityContext->getToken()->getUser();
@@ -115,6 +116,28 @@ class UpdateDomain4User
             }
         }
         $this->userManager->updateUser($user);
+    }
+
+    /**
+     * Set the current project and set domain and role.
+     *
+     * @param Project|null $project The project, if null unset current project.
+     *
+     * @return void
+     */
+    public function setCurrentProject($project)
+    {
+        $user = $this->securityContext->getToken()->getUser();
+
+        if ($project == null) {
+            $user->unsetCurrentProject();
+        } else {
+            $user->unsetDomainRole();
+            $user->setCurrentProject($project);
+
+            $domain = $project->getDomain();
+            $this->setCurrentDomain($domain);
+        }
     }
 
     /**

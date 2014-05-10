@@ -43,7 +43,9 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $user = $this->container->get('security.context')->getToken()
+            ->getUser();
+        $domain = $user->getCurrentDomain();
 
         if (is_null($domain)) {
             return $this->redirect($this->generateUrl('domain_index'));
@@ -66,20 +68,5 @@ class ProjectController extends Controller
                 'child' => $child
             )
         );
-    }
-
-    /**
-     * Return the current domain from user context.
-     *
-     * @return Domain
-     */
-    private function getCurrentDomainFromUser()
-    {
-        $user = $this->container->get('security.context')->getToken()
-            ->getUser();
-
-        $domain = $user->getCurrentDomain();
-
-        return $domain;
     }
 }

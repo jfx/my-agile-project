@@ -21,11 +21,12 @@ namespace Map\ProjectBundle\Controller;
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Map\CoreBundle\Form\FormHandler;
-use Map\DomainBundle\Entity\Domain;
 use Map\ProjectBundle\Entity\Project;
 use Map\ProjectBundle\Form\ProjectType;
+use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Project controller class.
@@ -51,7 +52,9 @@ class ProjectController extends Controller
      */
     public function addAction()
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $user = $this->container->get('security.context')->getToken()
+            ->getUser();
+        $domain = $user->getCurrentDomain();
 
         // Low probability If you have not a domain,
         // you have not a ROLE_DM -> Error 403
@@ -93,73 +96,50 @@ class ProjectController extends Controller
     /**
      * View a project.
      *
-     * @param int $id The project to view.
+     * @param Project $project The project to view.
      *
      * @return Response A Response instance
      *
      * @Secure(roles="ROLE_USER")
      */
-    public function viewAction($id)
+    public function viewAction(Project $project)
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $service = $this->container->get('map_user.updatecontext4user');
+        $service->setCurrentProject($project);
 
-        if (is_null($domain)) {
-            return $this->redirect($this->generateUrl('domain_index'));
-        }
+        $sc = $this->container->get('security.context');
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MapProjectBundle:Project');
-
-        try {
-            $project = $repository->findByProjectIdDomainId(
-                $id,
-                $domain->getId()
-            );
-        } catch (Exception $e) {
-            throw $this->createNotFoundException(
-                'Project[id='.$id.'] not found for this domain'
+        if (!($sc->isGranted(Role::GUEST_ROLE))) {
+            throw new AccessDeniedHttpException(
+                'You are not allowed to access this resource'
             );
         }
 
         return $this->render(
             'MapProjectBundle:Project:view.html.twig',
-            array(
-                'project' => $project,
-                'domain' => $domain
-            )
+            array('project' => $project)
         );
     }
 
     /**
      * Edit a project
      *
-     * @param int $id Id of the project to edit.
+     * @param Project $project The project to edit.
      *
      * @return Response A Response instance
      *
-     * @Secure(roles="ROLE_DM_MANAGER")
+     * @Secure(roles="ROLE_USER")
      */
-    public function editAction($id)
+    public function editAction(Project $project)
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $service = $this->container->get('map_user.updatecontext4user');
+        $service->setCurrentProject($project);
 
-        // Low probability If you have not a domain,
-        // you have not a ROLE_DM -> Error 403
-        if (is_null($domain)) {
-            return $this->redirect($this->generateUrl('domain_index'));
-        }
+        $sc = $this->container->get('security.context');
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MapProjectBundle:Project');
-
-        try {
-            $project = $repository->findByProjectIdDomainId(
-                $id,
-                $domain->getId()
-            );
-        } catch (Exception $e) {
-            throw $this->createNotFoundException(
-                'Project[id='.$id.'] not found for this domain'
+        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
+            throw new AccessDeniedHttpException(
+                'You are not allowed to access this resource'
             );
         }
 
@@ -185,46 +165,32 @@ class ProjectController extends Controller
 
         return $this->render(
             'MapProjectBundle:Project:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-                'project' => $project,
-                'domain' => $domain
-            )
+            array('form' => $form->createView(), 'project' => $project)
         );
     }
 
     /**
      * Delete a project
      *
-     * @param int $id Id of the project to delete.
+     * @param Project $project The project to delete.
      *
      * @return Response A Response instance
      *
-     * @Secure(roles="ROLE_DM_MANAGER")
+     * @Secure(roles="ROLE_USER")
      */
-    public function delAction($id)
+    public function delAction(Project $project)
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $service = $this->container->get('map_user.updatecontext4user');
+        $service->setCurrentProject($project);
 
-        // Low probability If you have not a domain,
-        // you have not a ROLE_DM -> Error 403
-        if (is_null($domain)) {
-            return $this->redirect($this->generateUrl('domain_index'));
-        }
+        $sc = $this->container->get('security.context');
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('MapProjectBundle:Project');
-
-        try {
-            $project = $repository->findByProjectIdDomainId(
-                $id,
-                $domain->getId()
-            );
-        } catch (Exception $e) {
-            throw $this->createNotFoundException(
-                'Project[id='.$id.'] not found for this domain'
+        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
+            throw new AccessDeniedHttpException(
+                'You are not allowed to access this resource'
             );
         }
+
         $success = true;
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -255,22 +221,7 @@ class ProjectController extends Controller
 
         return $this->render(
             'MapProjectBundle:Project:del.html.twig',
-            array('project' => $project, 'domain' => $domain)
+            array('project' => $project)
         );
-    }
-
-    /**
-     * Return the current domain from user context.
-     *
-     * @return Domain
-     */
-    private function getCurrentDomainFromUser()
-    {
-        $user = $this->container->get('security.context')->getToken()
-            ->getUser();
-
-        $domain = $user->getCurrentDomain();
-
-        return $domain;
     }
 }

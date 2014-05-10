@@ -76,6 +76,12 @@ Impossible to add a user with duplicate username
 Impossible to add a user with duplicate email
     Impossible to add a user with wrong data    map_userbundle_usertype_email    user@example.com    A user with this email already exists.
 
+Breadcrumb
+    Given I am a super-admin
+    And I go to users list
+    When I click action button    Add
+    Then Page Should Contain    Admin > Add user
+
 Return to list button
     Given I am a super-admin
     And I go to users list

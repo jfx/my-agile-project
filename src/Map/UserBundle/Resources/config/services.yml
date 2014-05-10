@@ -2,8 +2,8 @@ parameters:
 #    map_user.example.class: Map\UserBundle\Example
 
 services:
-    map_user.updatedomain4user:
-        class: Map\UserBundle\Service\UpdateDomain4User
+    map_user.updatecontext4user:
+        class: Map\UserBundle\Service\UpdateContext4User
         arguments: [ '@security.context', '@doctrine.orm.entity_manager', '@fos_user.user_manager' ]
         scope: request
 

@@ -48,3 +48,13 @@ Actions buttons in users list for a super-admin profile
     When I go to users list
     And the table should contain x rows    8
     And I should see action button(s)    Add    View user #1    Edit user #1    Delete user #1
+
+Breadcrumb for a non super-admin profile
+    Given I am a user
+    When I go to users list
+    Then Page Should Contain    Admin > Users list
+
+Breadcrumb for a super-admin profile
+    Given I am a super-admin
+    When I go to users list
+    Then Page Should Contain    Admin > Users list

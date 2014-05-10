@@ -53,6 +53,19 @@ Wrong resource Id for a domain
     When Go to    ${URL}/dm-resource/del/1
     Then Page Should Contain    Resource[id=1] not found for this domain
 
+Breadcrumb
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Delete resource #5
+    Then Page Should Contain    Domain One > Delete resource
+
+Breadcrumb domain link
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Delete resource #5
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
 Return to list button
     Given I am a super-admin
     And I go to resources list    Edit domain #1
