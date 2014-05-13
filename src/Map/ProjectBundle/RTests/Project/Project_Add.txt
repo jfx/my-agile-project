@@ -68,7 +68,7 @@ Impossible to add a project with a finish date before a start date
 Impossible to add a project without selecting a domain before
     Given I am a manager
     When Go to    ${URL}/project/add
-    Then Page Should Contain    403 Forbidden
+    Then Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
 
 Breadcrumb
     Given I am a manager
