@@ -22,6 +22,7 @@ Cancel to delete a project
     Then Location Should Be    ${URL}/project/del/2
 
 Impossible to delete a project
+    [Tags]    failedTest
     Given I am a manager
     And I go to delete project page    1
     When I click button    Remove

@@ -195,6 +195,10 @@ class ProjectController extends Controller
 
         if ($this->get('request')->getMethod() == 'POST') {
 
+            $service = $this->container->get('map_user.updatecontext4user');
+            $service->setCurrentProject(null);
+
+            $em = $this->getDoctrine()->getManager();
             $em->remove($project);
 
             try {

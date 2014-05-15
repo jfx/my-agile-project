@@ -73,26 +73,4 @@ class ProjectRepository extends EntityRepository
 
         return $count;
     }
-
-    /**
-     * Get a project by its id and domain id.
-     *
-     * @param int $projectId Project id.
-     * @param int $domainId  Domain id.
-     *
-     * @return Project.
-     */
-    public function findByProjectIdDomainId($projectId, $domainId)
-    {
-        $qb = $this->createQueryBuilder('p')
-            ->join('p.domain', 'd')
-            ->where('p.id = :projectId')
-            ->andWhere('d.id = :domainId')
-            ->setParameter('projectId', $projectId)
-            ->setParameter('domainId', $domainId);
-
-        $result = $qb->getQuery()->getSingleResult();
-
-        return $result;
-    }
 }

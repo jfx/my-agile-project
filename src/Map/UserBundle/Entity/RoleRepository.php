@@ -34,20 +34,6 @@ use Gedmo\Sortable\Entity\Repository\SortableRepository;
 class RoleRepository extends SortableRepository
 {
     /**
-     * Get all role ordered.
-     *
-     * @return array List of roles.
-     */
-    public function findAllOrdered()
-    {
-        $qb = $this->getQBAllOrdered();
-
-        $results = $qb->getQuery()->getResult();
-
-        return $results;
-    }
-
-    /**
      * Get the default role (user).
      *
      * @return Role.

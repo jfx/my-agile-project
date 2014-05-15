@@ -72,27 +72,20 @@ class UpdateContext4User
     /**
      * Set the current domain for a user and set role.
      *
-     * @param Domain|null $domain The domain, if null unset current domain.
-     * @param int|null    $userId The user id, if null get user id from context.
+     * @param Domain|null $domain              The domain, if null unset domain.
+     * @param boolean     $resetCurrentProject Current project must be resetted.
      *
      * @return void
      */
-    public function setCurrentDomain($domain, $userId = null)
+    public function setCurrentDomain($domain, $resetCurrentProject = true)
     {
-        // @TODO : setCurrentDomain($domain, $resetCurrentProject = true)
-        if ($userId == null) {
+        $user = $this->securityContext->getToken()->getUser();
 
-            $user = $this->securityContext->getToken()->getUser();
-        } else {
-            if (! $user = $this->userManager->findUserBy(
-                array('id' => $userId)
-            )) {
-                throw $this->createNotFoundException(
-                    'User[id='.$userId.'] not found'
-                );
-            }
-        }
         $user->unsetDomainRole();
+
+        if ($resetCurrentProject) {
+            $user->unsetCurrentProject();
+        }
 
         if ($domain == null) {
             $user->unsetCurrentDomain();
@@ -132,11 +125,10 @@ class UpdateContext4User
         if ($project == null) {
             $user->unsetCurrentProject();
         } else {
-            $user->unsetDomainRole();
             $user->setCurrentProject($project);
 
             $domain = $project->getDomain();
-            $this->setCurrentDomain($domain);
+            $this->setCurrentDomain($domain, false);
         }
     }
 
