@@ -87,7 +87,7 @@ class UpdateContext4User
             $user->unsetCurrentProject();
         }
 
-        if ($domain == null) {
+        if ($domain === null) {
             $user->unsetCurrentDomain();
         } else {
             $user->setCurrentDomain($domain);
@@ -122,7 +122,7 @@ class UpdateContext4User
     {
         $user = $this->securityContext->getToken()->getUser();
 
-        if ($project == null) {
+        if ($project === null) {
             $user->unsetCurrentProject();
         } else {
             $user->setCurrentProject($project);

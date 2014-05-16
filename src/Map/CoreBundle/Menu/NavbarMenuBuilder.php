@@ -107,7 +107,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $username = ucfirst($user->getUsername());
         $roleLabel = $user->getCurrentRoleLabel();
 
-        if (($roleLabel != null)
+        if (($roleLabel !== null)
             && (strlen($roleLabel) > 0)
             && ($roleLabel != Role::LABEL_NONE)
         ) {

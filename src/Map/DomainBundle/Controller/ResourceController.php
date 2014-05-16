@@ -50,7 +50,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -84,7 +84,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -140,7 +140,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -202,7 +202,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 

@@ -81,7 +81,7 @@ class AuthenticationListener
 
         $user->unsetDomainRole();
 
-        if ($currentDomain != null) {
+        if ($currentDomain !== null) {
             try {
                 $userDmRole = $repository->findByUserIdDomainId(
                     $user->getId(),

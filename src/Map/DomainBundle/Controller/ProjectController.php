@@ -47,7 +47,7 @@ class ProjectController extends Controller
             ->getUser();
         $domain = $user->getCurrentDomain();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 

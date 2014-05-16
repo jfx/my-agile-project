@@ -58,7 +58,7 @@ class MenuSelectType extends DefaultType implements
         $user = $securityContext->getToken()->getUser();
 
         $currentDomain = $user->getCurrentDomain();
-        if (is_null($currentDomain)) {
+        if ($currentDomain === null) {
             $currentDomainId = 0;
         } else {
             $currentDomainId = $currentDomain->getId();

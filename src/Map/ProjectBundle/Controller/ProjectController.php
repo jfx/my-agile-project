@@ -58,7 +58,7 @@ class ProjectController extends Controller
 
         // Low probability If you have not a domain,
         // you have not a ROLE_DM -> Error 403
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
         $project = new Project();

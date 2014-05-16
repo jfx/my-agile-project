@@ -79,7 +79,7 @@ class UserFormHandler extends FormHandler
         // If add user without password, then set a default password.
         $route = $this->request->get('_route');
 
-        if (($route == 'user_add') && ($entity->getPlainPassword() == null)) {
+        if (($route == 'user_add') && ($entity->getPlainPassword() === null)) {
 
             $password = $this->passwordFactory->generatePassword();
             $entity->setPlainPassword($password);

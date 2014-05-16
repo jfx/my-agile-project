@@ -62,7 +62,7 @@ class PasswordFactory
      */
     public function generatePassword($length = null)
     {
-        if ($length  == null) {
+        if ($length  === null) {
             $length = $this->defaultLength;
         }
 
