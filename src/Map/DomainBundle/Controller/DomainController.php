@@ -25,6 +25,7 @@ use Map\DomainBundle\Entity\Domain;
 use Map\DomainBundle\Form\DomainType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**

@@ -20,6 +20,7 @@ namespace Map\DomainBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Project controller class.

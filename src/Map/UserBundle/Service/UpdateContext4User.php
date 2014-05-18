@@ -21,6 +21,8 @@ namespace Map\UserBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Map\DomainBundle\Entity\Domain;
+use Map\ProjectBundle\Entity\Project;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
@@ -37,13 +39,13 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class UpdateContext4User
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     * @var SecurityContextInterface S. Context
      *
      */
     protected $securityContext;
 
     /**
-     * @var Doctrine\ORM\EntityManager Entity manager
+     * @var EntityManager Entity manager
      */
     protected $entityManager;
 

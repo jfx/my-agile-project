@@ -18,8 +18,8 @@
 
 namespace Map\CoreBundle\Extensions;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 
@@ -37,12 +37,12 @@ use Twig_Function_Method;
 class BreadcrumbExtension extends Twig_Extension
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     * @var SecurityContextInterface S. Context
      */
     protected $securityContext;
 
     /**
-     * @var Symfony\Bundle\FrameworkBundle\Routing\Router Router service
+     * @var Router Router service
      */
     protected $router;
 

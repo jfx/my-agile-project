@@ -40,7 +40,7 @@ class MenuSelectType extends DefaultType implements
     ContainerAwareInterface
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface Container
+     * @var ContainerInterface Container
      */
     protected $container;
 

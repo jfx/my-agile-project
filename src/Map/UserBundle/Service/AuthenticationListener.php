@@ -37,7 +37,7 @@ use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 class AuthenticationListener
 {
     /**
-     * @var Doctrine\ORM\EntityManager Entity manager
+     * @var EntityManager Entity manager
      */
     protected $entityManager;
 

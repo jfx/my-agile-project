@@ -19,6 +19,7 @@
 namespace Map\DomainBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Map\DomainBundle\Entity\Domain;
 
 /**
  * Domain info service class.
@@ -34,7 +35,7 @@ use Doctrine\ORM\EntityManager;
 class DomainInfo
 {
     /**
-     * @var Doctrine\ORM\EntityManager Entity manager
+     * @var EntityManager Entity manager
      */
     protected $entityManager;
 

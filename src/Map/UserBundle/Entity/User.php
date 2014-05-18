@@ -86,14 +86,14 @@ class User extends BaseUser
     private $details;
 
     /**
-     * @var Map\DomainBundle\Entity\Domain Current domain
+     * @var Domain Current domain
      *
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     private $currentDomain;
 
     /**
-     * @var Map\ProjectBundle\Entity\Project Current project
+     * @var Project Current project
      *
      * @ORM\ManyToOne(targetEntity="Map\ProjectBundle\Entity\Project")
      */

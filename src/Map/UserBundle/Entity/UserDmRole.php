@@ -19,9 +19,9 @@
 namespace Map\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Map\UserBundle\Entity\User;
 use Map\DomainBundle\Entity\Domain;
 use Map\UserBundle\Entity\Role;
+use Map\UserBundle\Entity\User;
 
 /**
  * UserDmRole entity class.
@@ -41,7 +41,7 @@ class UserDmRole
 {
 
     /**
-     * @var Map\UserBundle\Entity\User User
+     * @var User User
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\User")
@@ -49,7 +49,7 @@ class UserDmRole
     protected $user;
 
     /**
-     * @var Map\DomainBundle\Entity\Domain Domain
+     * @var Domain Domain
      *
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
@@ -57,7 +57,7 @@ class UserDmRole
     protected $domain;
 
     /**
-     * @var Map\UserBundle\Entity\Role Role
+     * @var Role Role
      *
      * @ORM\ManyToOne(targetEntity="Map\UserBundle\Entity\Role")
      * @ORM\JoinColumn(nullable=false)

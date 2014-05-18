@@ -20,11 +20,13 @@ namespace Map\DomainBundle\Controller;
 
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Map\DomainBundle\Entiy\Domain;
 use Map\DomainBundle\Form\ResourceAddType;
 use Map\DomainBundle\Form\ResourceEditType;
 use Map\DomainBundle\Form\ResourceFormHandler;
 use Map\UserBundle\Entity\UserDmRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Resource controller class.

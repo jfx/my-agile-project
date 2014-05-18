@@ -18,6 +18,7 @@
 
 namespace Map\ProjectBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Map\DomainBundle\Entity\Domain;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -63,14 +64,14 @@ class Project
     protected $details;
 
     /**
-     * @var \DateTime Start date
+     * @var DateTime Start date
      *
      * @ORM\Column(name="startdate", type="date")
      */
     protected $startDate;
 
     /**
-     * @var \DateTime Finish date
+     * @var DateTime Finish date
      *
      * @ORM\Column(name="finishdate", type="date")
      */
@@ -84,7 +85,7 @@ class Project
     protected $closed;
 
     /**
-     * @var Map\DomainBundle\Entity\Domain Domain
+     * @var Domain Domain
      *
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      * @ORM\JoinColumn(nullable=false)
@@ -152,7 +153,7 @@ class Project
     /**
      * Set start date of project.
      *
-     * @param \DateTime $startDate Start date of project.
+     * @param DateTime $startDate Start date of project.
      *
      * @return Project
      */
@@ -166,7 +167,7 @@ class Project
     /**
      * Get start date of project.
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStartDate()
     {
@@ -176,7 +177,7 @@ class Project
     /**
      * Set finish date of project.
      *
-     * @param \DateTime $finishDate Finish date
+     * @param DateTime $finishDate Finish date
      *
      * @return Project
      */
@@ -190,7 +191,7 @@ class Project
     /**
      * Get finish date of project.
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getFinishDate()
     {

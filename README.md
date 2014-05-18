@@ -16,10 +16,16 @@ Features:
   - Resetting password feature and robot framework tests,
   - Login with email,
   - Badge for projects and resources on domain view,
+  - Role check is initiated by project,
+  - Breadcrumb improvement
 
 Bugfixes:
 
   - Add a default password when adding a user without password,
+  - Replacement of 403 error message by variable,
+  - Remove unused methods,
+  - Change conditional statements with null value,
+  - Fix use statements
 
 
 ### 0.4.0 (30 March 2014)
