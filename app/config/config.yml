@@ -82,9 +82,13 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Map\UserBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
     resetting:
         form:
             type: map_userbundle_resettingformtype
+        email:
+            template: MapUserBundle:User:resetting.email.html.twig
 
 parameters:
     app.version:      0.4.0
