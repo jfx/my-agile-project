@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "341fdd071e75e0d7a608eef079114862",
+    "hash": "e8398fa8fc13cf125f217dd0957580f4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -357,12 +357,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa"
+                "reference": "6252da0cf1ed04cc790af533f0841bf5c01de44e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9d6300fd862478f58a526fbcad0a8f630daa60aa",
-                "reference": "9d6300fd862478f58a526fbcad0a8f630daa60aa",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/6252da0cf1ed04cc790af533f0841bf5c01de44e",
+                "reference": "6252da0cf1ed04cc790af533f0841bf5c01de44e",
                 "shasum": ""
             },
             "require": {
@@ -374,8 +374,11 @@
                 "symfony/console": "2.*"
             },
             "suggest": {
-                "symfony/console": "Allows use of the command line interface"
+                "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
+            "bin": [
+                "bin/doctrine-dbal"
+            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -420,7 +423,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-05-09 13:52:56"
+            "time": "2014-05-16 11:43:27"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -511,12 +514,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "8dc5d88800194304babf30695d231232cf65fedb"
+                "reference": "ec984dd37d1b0096deeb0cc8165e7c6ca10273f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/8dc5d88800194304babf30695d231232cf65fedb",
-                "reference": "8dc5d88800194304babf30695d231232cf65fedb",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/ec984dd37d1b0096deeb0cc8165e7c6ca10273f4",
+                "reference": "ec984dd37d1b0096deeb0cc8165e7c6ca10273f4",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +589,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2014-04-25 14:56:13"
+            "time": "2014-05-19 14:53:37"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -783,16 +786,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "94837a0105eec91f572ef18dc140779586f931a6"
+                "reference": "7debf736a68e8000a272599294ba9da6e7c690b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/94837a0105eec91f572ef18dc140779586f931a6",
-                "reference": "94837a0105eec91f572ef18dc140779586f931a6",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/7debf736a68e8000a272599294ba9da6e7c690b7",
+                "reference": "7debf736a68e8000a272599294ba9da6e7c690b7",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "~1.1",
+                "doctrine/collections": "~1.2",
                 "doctrine/dbal": ">=2.5-dev,<2.6-dev",
                 "ext-pdo": "*",
                 "php": ">=5.3.2",
@@ -852,7 +855,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-05-02 23:43:38"
+            "time": "2014-05-19 20:59:06"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -861,12 +864,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "13c173ff60eef8e32c10f76225eacca00a430826"
+                "reference": "3969d7fe39fd58398bf9a00110ca349c000fa05e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/13c173ff60eef8e32c10f76225eacca00a430826",
-                "reference": "13c173ff60eef8e32c10f76225eacca00a430826",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3969d7fe39fd58398bf9a00110ca349c000fa05e",
+                "reference": "3969d7fe39fd58398bf9a00110ca349c000fa05e",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +924,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-05-07 23:51:03"
+            "time": "2014-05-18 21:15:38"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1496,12 +1499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "e5700ed8cbd5c402d24d6dda118aa23400937288"
+                "reference": "f6d6d5081c0e441f953200a6b5f1c760ee54377e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/e5700ed8cbd5c402d24d6dda118aa23400937288",
-                "reference": "e5700ed8cbd5c402d24d6dda118aa23400937288",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/f6d6d5081c0e441f953200a6b5f1c760ee54377e",
+                "reference": "f6d6d5081c0e441f953200a6b5f1c760ee54377e",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1544,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2014-03-03 22:44:01"
+            "time": "2014-05-17 17:25:37"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1664,12 +1667,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "467e30a9c9fa22395608cc515cd45a60ecc84c4e"
+                "reference": "3030d3da4d3abb18d3c1e3479259af0d88a92488"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/467e30a9c9fa22395608cc515cd45a60ecc84c4e",
-                "reference": "467e30a9c9fa22395608cc515cd45a60ecc84c4e",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/3030d3da4d3abb18d3c1e3479259af0d88a92488",
+                "reference": "3030d3da4d3abb18d3c1e3479259af0d88a92488",
                 "shasum": ""
             },
             "require": {
@@ -1724,7 +1727,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-05-01 15:55:56"
+            "time": "2014-05-19 16:18:53"
         },
         {
             "name": "mopa/bootstrap-bundle",
@@ -1733,12 +1736,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "5152f29f4b1b9e4d9d622561d26c1b8e603f0e11"
+                "reference": "95825d2cbc0e29fcc6b0102dc53e14b8c1584f26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/5152f29f4b1b9e4d9d622561d26c1b8e603f0e11",
-                "reference": "5152f29f4b1b9e4d9d622561d26c1b8e603f0e11",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/95825d2cbc0e29fcc6b0102dc53e14b8c1584f26",
+                "reference": "95825d2cbc0e29fcc6b0102dc53e14b8c1584f26",
                 "shasum": ""
             },
             "require": {
@@ -1787,7 +1790,7 @@
                 "form",
                 "template"
             ],
-            "time": "2014-04-24 10:29:34"
+            "time": "2014-05-14 06:04:49"
         },
         {
             "name": "mopa/composer-bridge",
@@ -2381,12 +2384,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "fe75bc62488c4d10c6357d2038864ce48982416c"
+                "reference": "492f7a38c7a70b8006e2e1cedb3100792ab20276"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/fe75bc62488c4d10c6357d2038864ce48982416c",
-                "reference": "fe75bc62488c4d10c6357d2038864ce48982416c",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/492f7a38c7a70b8006e2e1cedb3100792ab20276",
+                "reference": "492f7a38c7a70b8006e2e1cedb3100792ab20276",
                 "shasum": ""
             },
             "require": {
@@ -2489,7 +2492,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-05-09 15:34:01"
+            "time": "2014-05-17 20:50:45"
         },
         {
             "name": "twbs/bootstrap",
@@ -2573,12 +2576,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "052eb5d1ed1b5b7755525e4e7af26faea1619747"
+                "reference": "55253c3f37b1b47ad797eb95f27b0a33e3a76d2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/052eb5d1ed1b5b7755525e4e7af26faea1619747",
-                "reference": "052eb5d1ed1b5b7755525e4e7af26faea1619747",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/55253c3f37b1b47ad797eb95f27b0a33e3a76d2f",
+                "reference": "55253c3f37b1b47ad797eb95f27b0a33e3a76d2f",
                 "shasum": ""
             },
             "require": {
@@ -2622,7 +2625,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-05-05 08:48:03"
+            "time": "2014-05-15 19:43:48"
         }
     ],
     "packages-dev": [
@@ -2632,12 +2635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99"
+                "reference": "99a530363b6cf50efc18e1a7cbb12d42b6b22a0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/bccecf50645068b44f49a84009e2a0499a500b99",
-                "reference": "bccecf50645068b44f49a84009e2a0499a500b99",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/99a530363b6cf50efc18e1a7cbb12d42b6b22a0b",
+                "reference": "99a530363b6cf50efc18e1a7cbb12d42b6b22a0b",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2692,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-04-30 09:01:21"
+            "time": "2014-05-19 02:25:07"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2830,12 +2833,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32"
+                "reference": "955c24b708f8bfd6a05f303217a8dac3a443d531"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/ad4e1e23ae01b483c16f600ff1bebec184588e32",
-                "reference": "ad4e1e23ae01b483c16f600ff1bebec184588e32",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/955c24b708f8bfd6a05f303217a8dac3a443d531",
+                "reference": "955c24b708f8bfd6a05f303217a8dac3a443d531",
                 "shasum": ""
             },
             "require": {
@@ -2872,7 +2875,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-05-12 05:34:42"
         },
         {
             "name": "phpunit/phpcov",
@@ -3057,17 +3060,352 @@
             "time": "2014-05-09 09:05:20"
         },
         {
+            "name": "ptachoire/cssembed",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/krichprollsch/phpCssEmbed.git",
+                "reference": "406c6d5b846cafa9186f9944a6210d0e6fed154b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/krichprollsch/phpCssEmbed/zipball/406c6d5b846cafa9186f9944a6210d0e6fed154b",
+                "reference": "406c6d5b846cafa9186f9944a6210d0e6fed154b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CssEmbed": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Tachoire",
+                    "email": "pierre.tachoire@gmail.com"
+                }
+            ],
+            "description": "Css url embed library.",
+            "homepage": "https://github.com/krichprollsch/phpCssEmbed",
+            "keywords": [
+                "css",
+                "url"
+            ],
+            "time": "2013-07-22 20:01:48"
+        },
+        {
+            "name": "raulfraile/ladybug",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug.git",
+                "reference": "7878b0fec84041bc6791155b9ec357a1ff8cd3b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug/zipball/7878b0fec84041bc6791155b9ec357a1ff8cd3b1",
+                "reference": "7878b0fec84041bc6791155b9ec357a1ff8cd3b1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "ptachoire/cssembed": "v1.0.2",
+                "raulfraile/ladybug-plugin-extra": "~1.0.0",
+                "raulfraile/ladybug-theme-modern": "~1.0.0",
+                "symfony/config": ">=2.0",
+                "symfony/console": ">=2.0",
+                "symfony/dependency-injection": ">=2.0",
+                "symfony/finder": ">=2.0",
+                "twig/twig": ">=1.7.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "0.2.0",
+                "jms/serializer": ">=0.11.0",
+                "mockery/mockery": "0.8.0",
+                "phpdocumentor/reflection-docblock": "2.0.0",
+                "symfony/dom-crawler": ">=2.0.4"
+            },
+            "suggest": {
+                "jms/serializer": "Required to serialize data to XML and JSON",
+                "phpdocumentor/reflection-docblock": "Required to display object methods description",
+                "symfony/yaml": "Required to serialize data to YAML format"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Theme": [
+                        "../ladybug-themes",
+                        "data/themes"
+                    ],
+                    "Ladybug\\Plugin": [
+                        "../ladybug-plugins",
+                        "data/plugins"
+                    ],
+                    "Ladybug": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Fraile",
+                    "email": "raulfraile@gmail.com",
+                    "homepage": "http://www.raulfb.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple and Extensible PHP Dumper",
+            "homepage": "https://github.com/raulfraile/ladybug",
+            "keywords": [
+                "dump",
+                "dumper",
+                "ladybug",
+                "print_r",
+                "var_dump"
+            ],
+            "time": "2013-10-15 09:36:24"
+        },
+        {
+            "name": "raulfraile/ladybug-bundle",
+            "version": "v1.0.2",
+            "target-dir": "RaulFraile/Bundle/LadybugBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/LadybugBundle.git",
+                "reference": "5c3739a881313f63f7b47ace49af5deeed211362"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/LadybugBundle/zipball/5c3739a881313f63f7b47ace49af5deeed211362",
+                "reference": "5c3739a881313f63f7b47ace49af5deeed211362",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "raulfraile/ladybug": "~1.0.0",
+                "raulfraile/ladybug-plugin-symfony2": "~1.0.0",
+                "symfony/framework-bundle": ">=2.0.0"
+            },
+            "replace": {
+                "raulfraile/ladybugbundle": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "RaulFraile\\Bundle\\LadybugBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Fraile",
+                    "email": "raulfraile@gmail.com",
+                    "homepage": "http://www.raulfrailebeneyto.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 bundle for Ladybug library (Simple and Extensible PHP Dumper)",
+            "homepage": "https://github.com/raulfraile/LadybugBundle",
+            "keywords": [
+                "dump",
+                "ladybug",
+                "tree",
+                "twig"
+            ],
+            "time": "2013-10-03 11:29:02"
+        },
+        {
+            "name": "raulfraile/ladybug-installer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-installer.git",
+                "reference": "04f38f50cac673d3ca93de9c0805889e37804b33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-installer/zipball/04f38f50cac673d3ca93de9c0805889e37804b33",
+                "reference": "04f38f50cac673d3ca93de9c0805889e37804b33",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "*"
+            },
+            "require-dev": {
+                "composer/composer": "1.*",
+                "mockery/mockery": "0.8.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "\\Ladybug\\LadybugPlugin"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unified installer for ladybug addons",
+            "keywords": [
+                "installer",
+                "ladybug",
+                "plugins",
+                "themes"
+            ],
+            "time": "2013-09-21 23:28:23"
+        },
+        {
+            "name": "raulfraile/ladybug-plugin-extra",
+            "version": "v1.0.1",
+            "target-dir": "Ladybug/Plugin/Extra",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-plugin-extra.git",
+                "reference": "d240770a4c610e26657e5edc0edaace6d07187b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-plugin-extra/zipball/d240770a4c610e26657e5edc0edaace6d07187b2",
+                "reference": "d240770a4c610e26657e5edc0edaace6d07187b2",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "raulfraile/ladybug": "~1.0.0"
+            },
+            "type": "ladybug-plugin",
+            "extra": {
+                "ladybug_name": "Extra"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Plugin\\Extra\\": ""
+                },
+                "files": [
+                    "Resources/php/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Extra plugin for ladybug",
+            "keywords": [
+                "ladybug",
+                "plugin"
+            ],
+            "time": "2013-09-29 10:19:08"
+        },
+        {
+            "name": "raulfraile/ladybug-plugin-symfony2",
+            "version": "v1.0.1",
+            "target-dir": "Ladybug/Plugin/Symfony2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-plugin-symfony2.git",
+                "reference": "81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-plugin-symfony2/zipball/81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84",
+                "reference": "81a50bdcf966ccf51e9dbf07494fdb3a4bf69b84",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "raulfraile/ladybug": "~1.0.0",
+                "symfony/http-foundation": "*"
+            },
+            "type": "ladybug-plugin",
+            "extra": {
+                "ladybug_name": "Symfony2"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ladybug\\Plugin\\Symfony2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony2 plugin for ladybug",
+            "keywords": [
+                "ladybug",
+                "plugin"
+            ],
+            "time": "2013-09-29 09:17:09"
+        },
+        {
+            "name": "raulfraile/ladybug-theme-modern",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/ladybug-theme-modern.git",
+                "reference": "528c9114ca1a82860e8b7025d1fe4f64dc728b72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/ladybug-theme-modern/zipball/528c9114ca1a82860e8b7025d1fe4f64dc728b72",
+                "reference": "528c9114ca1a82860e8b7025d1fe4f64dc728b72",
+                "shasum": ""
+            },
+            "require": {
+                "raulfraile/ladybug-installer": "~1.0.0"
+            },
+            "type": "ladybug-theme",
+            "extra": {
+                "ladybug_name": "Modern"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Theme 'modern' for ladybug",
+            "keywords": [
+                "dump",
+                "ladybug",
+                "print_r",
+                "theme",
+                "var_dump"
+            ],
+            "time": "2013-10-07 21:55:38"
+        },
+        {
             "name": "sebastian/diff",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "10a9cd901c6878378482b0191618faf50e701732"
+                "reference": "ac84cfdec593945f36f24074d6ea17d296e86f76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/10a9cd901c6878378482b0191618faf50e701732",
-                "reference": "10a9cd901c6878378482b0191618faf50e701732",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/ac84cfdec593945f36f24074d6ea17d296e86f76",
+                "reference": "ac84cfdec593945f36f24074d6ea17d296e86f76",
                 "shasum": ""
             },
             "require": {
@@ -3104,7 +3442,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2014-05-07 06:57:00"
+            "time": "2014-05-12 05:21:40"
         },
         {
             "name": "sebastian/environment",
