@@ -6,6 +6,7 @@ Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
 Title
+    [Tags]    init
     Given I am a user
     When I click on "My Agile Project" header text
     Then Location Should Be    ${URL}/

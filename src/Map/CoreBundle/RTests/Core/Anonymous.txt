@@ -6,6 +6,7 @@ Resource          ../Keyword_resource.txt
 
 *** Test Cases ***
 Login Page
+    [Tags]    init
     When I go to login page
     Then Page Should Contain    My Agile Project
 

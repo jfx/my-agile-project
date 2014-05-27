@@ -17,7 +17,8 @@ Features:
   - Login with email,
   - Badge for projects and resources on domain view,
   - Role check is initiated by project,
-  - Breadcrumb improvement
+  - Breadcrumb improvement,
+  - Add Ladybug bundle
 
 Bugfixes:
 
