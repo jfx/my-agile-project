@@ -46,15 +46,19 @@ the table should contain
 
 the table header should contain
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    Table Header Should Contain    xpath=//table    ${item}
 
 I should see action button(s)
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    And Element Should Be Visible    xpath=//a[@title='${item}']
 
 I should not see action button(s)
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    And Page Should Not Contain Element    xpath=//a[@title='${item}']
+
+I should see 404 error page
+    [Arguments]    ${msg}='404 Item not found'
+    Page Should Contain    404 Not Found

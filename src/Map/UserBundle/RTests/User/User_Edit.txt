@@ -104,7 +104,7 @@ Wrong user Id
     Given I am a super-admin
     And I go to users list
     When Go to    ${URL}/user/edit/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Breadcrumb
     Given I am a super-admin

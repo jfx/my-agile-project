@@ -25,7 +25,7 @@ Wrong project Id
     Given I am a user
     And I go to projects list    View domain #1
     When Go to    ${URL}/project/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 View a project without selecting a domain before
     Given I am a user

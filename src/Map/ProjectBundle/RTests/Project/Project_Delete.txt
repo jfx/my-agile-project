@@ -40,7 +40,7 @@ Wrong project Id
     Given I am a manager
     And I go to projects list    View domain #1
     When Go to    ${URL}/project/del/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Delete a project without selecting a domain before
     Given I am a manager

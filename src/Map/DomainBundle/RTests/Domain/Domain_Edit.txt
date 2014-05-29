@@ -48,7 +48,7 @@ Wrong domain Id
     Given I am a super-admin
     And I go to domains list
     When Go to    ${URL}/domain/edit/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Breadcrumb
     Given I am a super-admin

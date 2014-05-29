@@ -23,7 +23,7 @@ View a user role list with no role
 Wrong user Id
     Given I am a super-admin
     When Go to    ${URL}/user/role/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Breadcrumb
     Given I am a super-admin
