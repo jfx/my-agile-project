@@ -19,7 +19,8 @@ Wrong project Id for a domain
     Given I am a manager
     And I go to projects list    View domain #1
     When Go to    ${URL}/project/4
-    Then Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
+    Then Location Should Be    ${URL}/project/4
+    And Element Text Should Be    id=inputName    Project Three
 
 Wrong project Id
     Given I am a user

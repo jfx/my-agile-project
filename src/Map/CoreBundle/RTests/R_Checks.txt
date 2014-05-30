@@ -1,7 +1,7 @@
 *** Keywords ***
 I check the following ACL
     [Arguments]    ${acl_url}    ${acl_super-admin}    ${acl_manager}    ${acl_user+}    ${acl_user}    ${acl_guest}
-    ...    ${acl_none}    ${acl_prerequisite}=False
+    ...    ${acl_none}    ${acl_nodomain}    ${acl_prerequisite}=False
     ${isPrerequiste} =    Set Variable If    '${acl_prerequisite}' == 'False'    False    True
     I am a super-admin
     Run Keyword If    ${isPrerequiste}    Go to    ${URL}${acl_prerequisite}
@@ -32,6 +32,11 @@ I check the following ACL
     Run Keyword If    ${isPrerequiste}    Go to    ${URL}${acl_prerequisite}
     Go to    ${URL}${acl_url}
     Run Keyword If    ${acl_none}    Page Should Not Contain    ${FORBIDDEN_ACCESS_TEXT}    ELSE    Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
+    I log out
+    I am a user with no role on any domain
+    Run Keyword If    ${isPrerequiste}    Go to    ${URL}${acl_prerequisite}
+    Go to    ${URL}${acl_url}
+    Run Keyword If    ${acl_nodomain}    Page Should Not Contain    ${FORBIDDEN_ACCESS_TEXT}    ELSE    Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
     I log out
 
 the table should contain x rows

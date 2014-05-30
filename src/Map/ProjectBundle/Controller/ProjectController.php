@@ -107,14 +107,6 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
-        $sc = $this->container->get('security.context');
-
-        if (!($sc->isGranted(Role::GUEST_ROLE))) {
-            throw new AccessDeniedHttpException(
-                'You are not allowed to access this resource'
-            );
-        }
-
         return $this->render(
             'MapProjectBundle:Project:view.html.twig',
             array('project' => $project)
