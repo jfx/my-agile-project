@@ -2,7 +2,8 @@
 ${ENV}            dev
 ${BROWSER}        chrome    # chrome | firefox
 ${LOGIN_URL}      ${URL}/login
-${URL}            http://map2dev.localhost/app_dev.php
+${URL}            ${URL_DEV}
+${URL_DEV}        http://map2dev.localhost/app_dev.php
 ${USER_ADMIN}     admin
 ${USER_MANAGER}    d1-manager
 ${USER_USER+}     d1-user+
