@@ -1,7 +1,8 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
     "hash": "29e8e529e461db18d354638a830a2fbb",
     "packages": [
@@ -789,12 +790,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "b421d03f69049e1f6037756f1093707bf443a52f"
+                "reference": "2101a8fdc640ce3df640181f83a7d2aa1eee04c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b421d03f69049e1f6037756f1093707bf443a52f",
-                "reference": "b421d03f69049e1f6037756f1093707bf443a52f",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/2101a8fdc640ce3df640181f83a7d2aa1eee04c1",
+                "reference": "2101a8fdc640ce3df640181f83a7d2aa1eee04c1",
                 "shasum": ""
             },
             "require": {
@@ -858,7 +859,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-05-21 22:15:22"
+            "time": "2014-05-31 11:37:50"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1437,12 +1438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenu.git",
-                "reference": "de645e813ddca4a1243db48bce5eaee8adb346a2"
+                "reference": "80b87cb4ebc5f046ee5c3a57dae6c1f97f281068"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/de645e813ddca4a1243db48bce5eaee8adb346a2",
-                "reference": "de645e813ddca4a1243db48bce5eaee8adb346a2",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/80b87cb4ebc5f046ee5c3a57dae6c1f97f281068",
+                "reference": "80b87cb4ebc5f046ee5c3a57dae6c1f97f281068",
                 "shasum": ""
             },
             "require": {
@@ -1493,7 +1494,7 @@
                 "menu",
                 "tree"
             ],
-            "time": "2014-05-01 19:50:28"
+            "time": "2014-06-01 10:01:17"
         },
         {
             "name": "knplabs/knp-menu-bundle",
@@ -1670,12 +1671,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "93f8f3271fc20f2e09e79c80ffdc371114ad4f29"
+                "reference": "016423a804140a33814b8fad4240dbfa49a884da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/93f8f3271fc20f2e09e79c80ffdc371114ad4f29",
-                "reference": "93f8f3271fc20f2e09e79c80ffdc371114ad4f29",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/016423a804140a33814b8fad4240dbfa49a884da",
+                "reference": "016423a804140a33814b8fad4240dbfa49a884da",
                 "shasum": ""
             },
             "require": {
@@ -1730,7 +1731,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-05-24 17:56:29"
+            "time": "2014-05-29 15:04:35"
         },
         {
             "name": "mopa/bootstrap-bundle",
@@ -2099,12 +2100,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "59e424776e352f0adb325daecdb7f136757853fe"
+                "reference": "41a2d6227dbb47c1ec28d1a9508c61646bbb30ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/59e424776e352f0adb325daecdb7f136757853fe",
-                "reference": "59e424776e352f0adb325daecdb7f136757853fe",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/41a2d6227dbb47c1ec28d1a9508c61646bbb30ee",
+                "reference": "41a2d6227dbb47c1ec28d1a9508c61646bbb30ee",
                 "shasum": ""
             },
             "require": {
@@ -2145,7 +2146,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2014-05-25 14:34:15"
+            "time": "2014-06-01 03:21:42"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -2387,12 +2388,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "a11645c63740c29c10f49af961c9856676778349"
+                "reference": "5c782607ade9bd7bc8e51131cdcd06ee0d568c92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/a11645c63740c29c10f49af961c9856676778349",
-                "reference": "a11645c63740c29c10f49af961c9856676778349",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/5c782607ade9bd7bc8e51131cdcd06ee0d568c92",
+                "reference": "5c782607ade9bd7bc8e51131cdcd06ee0d568c92",
                 "shasum": ""
             },
             "require": {
@@ -2495,7 +2496,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-05-23 14:36:49"
+            "time": "2014-05-31 02:03:04"
         },
         {
             "name": "twbs/bootstrap",
@@ -2579,12 +2580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "7c63a7df8a9d38ff9eb9fb982ae8f6a70258c10c"
+                "reference": "1c0bec2814a078a81fb86dbc38798bf73418f839"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/7c63a7df8a9d38ff9eb9fb982ae8f6a70258c10c",
-                "reference": "7c63a7df8a9d38ff9eb9fb982ae8f6a70258c10c",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/1c0bec2814a078a81fb86dbc38798bf73418f839",
+                "reference": "1c0bec2814a078a81fb86dbc38798bf73418f839",
                 "shasum": ""
             },
             "require": {
@@ -2628,7 +2629,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-05-26 00:34:04"
+            "time": "2014-05-26 15:15:28"
         }
     ],
     "packages-dev": [
@@ -2774,12 +2775,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "99a530363b6cf50efc18e1a7cbb12d42b6b22a0b"
+                "reference": "58401826c8cfc8fd689b60026e91c337df374bca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/99a530363b6cf50efc18e1a7cbb12d42b6b22a0b",
-                "reference": "99a530363b6cf50efc18e1a7cbb12d42b6b22a0b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/58401826c8cfc8fd689b60026e91c337df374bca",
+                "reference": "58401826c8cfc8fd689b60026e91c337df374bca",
                 "shasum": ""
             },
             "require": {
@@ -2831,7 +2832,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-19 02:25:07"
+            "time": "2014-05-26 14:55:24"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3018,16 +3019,16 @@
         },
         {
             "name": "phpunit/phpcov",
-            "version": "dev-master",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpcov.git",
-                "reference": "9732a6803005c9a4b6607f10047f9ba4fbdd4c66"
+                "reference": "5e32a1355826e5e2e0e99b4e2d0762867f4a8181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpcov/zipball/9732a6803005c9a4b6607f10047f9ba4fbdd4c66",
-                "reference": "9732a6803005c9a4b6607f10047f9ba4fbdd4c66",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpcov/zipball/5e32a1355826e5e2e0e99b4e2d0762867f4a8181",
+                "reference": "5e32a1355826e5e2e0e99b4e2d0762867f4a8181",
                 "shasum": ""
             },
             "require": {
@@ -3036,7 +3037,7 @@
                 "phpunit/phpunit": "~4.0",
                 "sebastian/diff": "~1.1",
                 "sebastian/finder-facade": "~1.1",
-                "sebastian/version": "~1.0.3",
+                "sebastian/version": "~1.0",
                 "symfony/console": "~2.2"
             },
             "bin": [
@@ -3066,7 +3067,7 @@
             ],
             "description": "CLI frontend for PHP_CodeCoverage",
             "homepage": "https://github.com/sebastianbergmann/phpcov",
-            "time": "2014-05-23 15:28:12"
+            "time": "2014-03-07 07:35:11"
         },
         {
             "name": "phpunit/phpunit",
@@ -3074,12 +3075,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "620a672be667898f4f4b0e21a4ce349873ebc35a"
+                "reference": "47c99e64be0e7467c8f45e55d00b287a80395b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/620a672be667898f4f4b0e21a4ce349873ebc35a",
-                "reference": "620a672be667898f4f4b0e21a4ce349873ebc35a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/47c99e64be0e7467c8f45e55d00b287a80395b01",
+                "reference": "47c99e64be0e7467c8f45e55d00b287a80395b01",
                 "shasum": ""
             },
             "require": {
@@ -3139,7 +3140,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-05-24 08:20:39"
+            "time": "2014-05-30 23:51:13"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3147,12 +3148,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "3bf40987c4e3dc379970478bf372c7eecc7b6cfc"
+                "reference": "97e05c88929d9619b29de942e446b1c7e563f63f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/3bf40987c4e3dc379970478bf372c7eecc7b6cfc",
-                "reference": "3bf40987c4e3dc379970478bf372c7eecc7b6cfc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/97e05c88929d9619b29de942e446b1c7e563f63f",
+                "reference": "97e05c88929d9619b29de942e446b1c7e563f63f",
                 "shasum": ""
             },
             "require": {
@@ -3196,7 +3197,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2014-05-09 09:05:20"
+            "time": "2014-05-26 09:55:27"
         },
         {
             "name": "ptachoire/cssembed",

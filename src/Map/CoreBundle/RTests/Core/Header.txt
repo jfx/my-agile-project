@@ -11,15 +11,6 @@ Title
     When I click on "My Agile Project" header text
     Then Location Should Be    ${URL}/
 
-Select box to change domain for a user
-    Given I am a user
-    When I select in menu select    Domain One
-    Then Location Should Be    ${URL}/domain/1
-    And the role should be    User
-    When I select in menu select    Domain Two
-    Then Location Should Be    ${URL}/domain/2
-    And the role should be    User+
-
 Non super-admin username
     When I am a user
     Then Page Should Contain    Useruser
@@ -36,14 +27,6 @@ Link to profile page
 *** Keywords ***
 I click on "My Agile Project" header text
     Click element    link=My Agile Project
-
-I select in menu select
-    [Arguments]    ${project}
-    Select From List By Label    id=map_menu_select_search    ${project}
-
-the role should be
-    [Arguments]    ${role}
-    Page Should Contain    (${role})
 
 I click on header username
     [Arguments]    ${username}

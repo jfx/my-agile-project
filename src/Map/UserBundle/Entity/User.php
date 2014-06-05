@@ -109,9 +109,9 @@ class User extends BaseUser
     /**
      * @var array Available domain for user
      *
-     * @ORM\Column(name="available_domains", type="array")
+     * @ORM\Column(name="available_projects", type="array")
      */
-    private $availableDomains;
+    private $availableProjects;
 
     /**
      * Constructor
@@ -315,27 +315,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set available domains
+     * Set available projects
      *
-     * @param array $domains List of domains
+     * @param array $projects List of projects
      *
      * @return User
      */
-    public function setAvailableDomains($domains)
+    public function setAvailableProjects($projects)
     {
-        $this->availableDomains = $domains;
+        $this->availableProjects = $projects;
 
         return $this;
     }
 
     /**
-     * Get available domains
+     * Get available projects
      *
      * @return array
      */
-    public function getAvailableDomains()
+    public function getAvailableProjects()
     {
-        return $this->availableDomains;
+        return $this->availableProjects;
     }
 
     /**

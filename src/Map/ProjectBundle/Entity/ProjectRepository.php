@@ -20,6 +20,7 @@ namespace Map\ProjectBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Map\DomainBundle\Entity\Domain;
+use Map\UserBundle\Entity\User;
 
 /**
  * Project entity repository class.
@@ -72,5 +73,43 @@ class ProjectRepository extends EntityRepository
         $count = $qb->getQuery()->getSingleScalarResult();
 
         return $count;
+    }
+
+    /**
+     * Get all projects for a user as a resource.
+     *
+     * @param User $user The user.
+     *
+     * @return array List of projects.
+     */
+    public function findAvailableProjectsByUser(User $user)
+    {
+        $sql  = ' select p.id as p_id, p.name as p_name, d.name as d_name';
+        $sql .= ' from map_project p';
+        $sql .= ' inner join map_domain d on p.domain_id = d.id';
+        $sql .= ' inner join map_user_dm_role udr on udr.domain_id = d.id';
+        $sql .= ' where p.closed = 0';
+        $sql .= ' and udr.user_id = :userId';
+        $sql .= ' and udr.role_id != \'ROLE_DM_NONE\'';
+        $sql .= ' order by d.name, p.name';
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam('userId', $user->getId());
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        $return = array();
+
+        foreach ($results as $row) {
+
+            if (!array_key_exists($row['d_name'], $return)) {
+                $return[$row['d_name']] = array();
+            }
+            $return[$row['d_name']][$row['p_id']] = $row['p_name'];
+        }
+
+        return $return;
     }
 }

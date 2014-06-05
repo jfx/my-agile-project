@@ -149,18 +149,12 @@ class UpdateContext4User
             );
         }
         $repository = $this->entityManager->getRepository(
-            'MapUserBundle:UserDmRole'
+            'MapProjectBundle:Project'
         );
 
-        $availableDomains = $repository->findAvailableDomainsByUser($user);
+        $projects = $repository->findAvailableProjectsByUser($user);
 
-        $arrayDomains = array();
-
-        foreach ($availableDomains as $domain) {
-            $arrayDomains[$domain['id']] = $domain['name'];
-        }
-
-        $user->setAvailableDomains($arrayDomains);
+        $user->setAvailableProjects($projects);
         $this->userManager->updateUser($user);
     }
 }

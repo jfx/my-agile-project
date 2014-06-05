@@ -52,8 +52,8 @@ class ProjectController extends Controller
      */
     public function addAction()
     {
-        $user = $this->container->get('security.context')->getToken()
-            ->getUser();
+        $sc = $this->container->get('security.context');
+        $user = $sc->getToken()->getUser();
         $domain = $user->getCurrentDomain();
 
         // Low probability If you have not a domain,
@@ -79,6 +79,10 @@ class ProjectController extends Controller
 
             $id = $project->getId();
 
+            $service = $this->container->get('map_user.updatecontext4user');
+            $service->refreshAvailableDomains4UserId($user->getId());
+            $sc->getToken()->setAuthenticated(false);
+                
             $this->get('session')->getFlashBag()
                 ->add('success', 'Project added successfully !');
 
@@ -147,6 +151,10 @@ class ProjectController extends Controller
 
             $id = $project->getId();
 
+            $user = $sc->getToken()->getUser();
+            $service->refreshAvailableDomains4UserId($user->getId());
+            $sc->getToken()->setAuthenticated(false);
+                
             $this->get('session')->getFlashBag()
                 ->add('success', 'Project edited successfully !');
 
@@ -187,7 +195,6 @@ class ProjectController extends Controller
 
         if ($this->get('request')->getMethod() == 'POST') {
 
-            $service = $this->container->get('map_user.updatecontext4user');
             $service->setCurrentProject(null);
 
             $em = $this->getDoctrine()->getManager();
@@ -206,6 +213,10 @@ class ProjectController extends Controller
                 );
             }
             if ($success) {
+                $user = $sc->getToken()->getUser();
+                $service->refreshAvailableDomains4UserId($user->getId());
+                $sc->getToken()->setAuthenticated(false);
+            
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Project removed successfully !');
 
@@ -218,6 +229,23 @@ class ProjectController extends Controller
         return $this->render(
             'MapProjectBundle:Project:del.html.twig',
             array('project' => $project)
+        );
+    }
+
+    /**
+     * Select a project in combobox
+     *
+     * @return Response A Response instance
+     *
+     * @Secure(roles="ROLE_USER")
+     */
+    public function selectAction()
+    {
+        $request = $this->getRequest();
+        $projectId = $request->request->get('map_menu_select')['search'];
+
+        return $this->redirect(
+            $this->generateUrl('project_view', array('id' => $projectId))
         );
     }
 }

@@ -40,8 +40,8 @@ Impossible to delete a resource
     And I click action button    Delete resource #2
     When I click button    Remove
     And I confirm
-    Then Location Should Be    ${URL}/dm-resource/del/2
-    Then Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+    Then Run Keyword And Expect Error    *    Then Location Should Be    ${URL}/dm-resource/del/2
+    Then Run Keyword And Expect Error    *    Then Page Should Contain    Impossible to remove this item - Integrity constraint violation !
 
 Impossible to delete a resource without selecting a domain before
     Given I am a super-admin

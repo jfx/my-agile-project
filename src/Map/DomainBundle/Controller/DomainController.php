@@ -225,21 +225,4 @@ class DomainController extends Controller
             array('domain' => $domain)
         );
     }
-
-    /**
-     * Select a domain in combobox
-     *
-     * @return Response A Response instance
-     *
-     * @Secure(roles="ROLE_USER")
-     */
-    public function selectAction()
-    {
-        $request = $this->getRequest();
-        $domainId = $request->request->get('map_menu_select')['search'];
-
-        return $this->redirect(
-            $this->generateUrl('domain_view', array('id' => $domainId))
-        );
-    }
 }

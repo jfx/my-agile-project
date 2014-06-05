@@ -18,7 +18,8 @@ Features:
   - Badge for projects and resources on domain view,
   - Role check is initiated by project,
   - Breadcrumb improvement,
-  - Add Ladybug bundle
+  - Add Ladybug bundle,
+  - Select box by project
 
 Bugfixes:
 
@@ -27,6 +28,7 @@ Bugfixes:
   - Remove unused methods,
   - Change conditional statements with null value,
   - Fix use statements
+  - Fix Robot Framework test with Gmail,
 
 
 ### 0.4.0 (30 March 2014)

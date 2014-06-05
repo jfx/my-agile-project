@@ -19,3 +19,7 @@ project_del:
     defaults: { _controller: "MapProjectBundle:Project:del" }
     requirements:
         id:  \d+
+
+project_select:
+    pattern:  /select
+    defaults: { _controller: "MapProjectBundle:Project:select" }

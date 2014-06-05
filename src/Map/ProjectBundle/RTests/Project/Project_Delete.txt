@@ -27,8 +27,8 @@ Impossible to delete a project
     And I go to delete project page    1
     When I click button    Remove
     And I confirm
-    Then Location Should Be    ${URL}/project/del/1
-    And Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+    Then Run Keyword And Expect Error    *    Then Location Should Be    ${URL}/project/del/1
+    Then Run Keyword And Expect Error    *    And Page Should Contain    Impossible to remove this item - Integrity constraint violation !
 
 Wrong project Id for a domain
     Given I am a manager

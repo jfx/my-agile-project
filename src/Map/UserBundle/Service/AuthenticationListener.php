@@ -73,9 +73,13 @@ class AuthenticationListener
         $token = $event->getAuthenticationToken();
         $user = $token->getUser();
 
-        $repository = $this->entityManager->getRepository(
+        $repositoryUDR = $this->entityManager->getRepository(
             'MapUserBundle:UserDmRole'
         );
+        $repositoryProject = $this->entityManager->getRepository(
+            'MapProjectBundle:Project'
+        );
+
         // Update current domain role
         $currentDomain = $user->getCurrentDomain();
 
@@ -83,7 +87,7 @@ class AuthenticationListener
 
         if ($currentDomain !== null) {
             try {
-                $userDmRole = $repository->findByUserIdDomainId(
+                $userDmRole = $repositoryUDR->findByUserIdDomainId(
                     $user->getId(),
                     $currentDomain->getId()
                 );
@@ -93,16 +97,9 @@ class AuthenticationListener
             }
         }
 
-        // Update available domains
-        $availableDomains = $repository->findAvailableDomainsByUser($user);
+        $projects = $repositoryProject->findAvailableProjectsByUser($user);
 
-        $arrayDomains = array();
-
-        foreach ($availableDomains as $domain) {
-            $arrayDomains[$domain['id']] = $domain['name'];
-        }
-
-        $user->setAvailableDomains($arrayDomains);
+        $user->setAvailableProjects($projects);
         $this->userManager->updateUser($user);
     }
 }
