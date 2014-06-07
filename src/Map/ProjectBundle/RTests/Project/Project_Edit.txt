@@ -13,6 +13,7 @@ A manager edits a project
     Then Page Should Contain    Project edited successfully
     And I check project view form    P1Mod    -2    1
     And I click button    Return to domain
+    Element Should Contain    xpath=//option    P1Mod
     And the table should contain x rows    3
     And the table should contain    P1Mod    Details 4 P1Mod
 

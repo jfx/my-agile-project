@@ -22,6 +22,7 @@ use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * User change password form class.
@@ -68,7 +69,10 @@ class UserPasswordType extends DefaultType
                     'type' => 'password',
                     'first_options' => array('label' => 'New password'),
                     'second_options' => array('label' => 'Verification'),
-                    'invalid_message' => 'The entered passwords don\'t match'
+                    'invalid_message' => 'The entered passwords don\'t match',
+                    'constraints' => new Length(
+                        array('min' => 6, 'max' => 50)
+                    )
                 )
             );
     }

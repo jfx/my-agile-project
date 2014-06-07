@@ -14,6 +14,7 @@ A manager adds a project
     Then Page Should Contain    Project added successfully
     And I check project view form    P1x
     And I click button    Return to domain
+    Element Should Contain    xpath=//option    P1x
     And the table should contain x rows    4
     And the table should contain    P1x    Details 4 P1x
 

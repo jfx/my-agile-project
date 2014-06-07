@@ -82,7 +82,7 @@ class ProjectController extends Controller
             $service = $this->container->get('map_user.updatecontext4user');
             $service->refreshAvailableDomains4UserId($user->getId());
             $sc->getToken()->setAuthenticated(false);
-                
+
             $this->get('session')->getFlashBag()
                 ->add('success', 'Project added successfully !');
 
@@ -154,7 +154,7 @@ class ProjectController extends Controller
             $user = $sc->getToken()->getUser();
             $service->refreshAvailableDomains4UserId($user->getId());
             $sc->getToken()->setAuthenticated(false);
-                
+
             $this->get('session')->getFlashBag()
                 ->add('success', 'Project edited successfully !');
 
@@ -216,7 +216,7 @@ class ProjectController extends Controller
                 $user = $sc->getToken()->getUser();
                 $service->refreshAvailableDomains4UserId($user->getId());
                 $sc->getToken()->setAuthenticated(false);
-            
+
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Project removed successfully !');
 
