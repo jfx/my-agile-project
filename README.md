@@ -9,7 +9,7 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
-### 0.5.0 ()
+### 0.5.0 (08 June 2014)
 Features:
 
   - New Robot Framework tests for resources,
@@ -18,8 +18,11 @@ Features:
   - Badge for projects and resources on domain view,
   - Role check is initiated by project,
   - Breadcrumb improvement,
+  - Migration to Symfony 2.4, 
   - Add Ladybug bundle,
-  - Select box by project
+  - View project for all connected users,
+  - Select box by project,
+  - Minimum length of password in change password form. 
 
 Bugfixes:
 
@@ -27,8 +30,9 @@ Bugfixes:
   - Replacement of 403 error message by variable,
   - Remove unused methods,
   - Change conditional statements with null value,
-  - Fix use statements
-  - Fix Robot Framework test with Gmail,
+  - Fix use statements,
+  - Same 404 error pages checks between dev and prod env,
+  - Fix Robot Framework test with Gmail.
 
 
 ### 0.4.0 (30 March 2014)
