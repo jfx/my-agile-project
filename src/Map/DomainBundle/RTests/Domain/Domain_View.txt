@@ -14,7 +14,7 @@ Wrong domain Id
     Given I am a user
     And I go to domains list
     When Go to    ${URL}/domain/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Return to list button
     Given I am a user
@@ -32,6 +32,25 @@ Edit button not displayed for non super-admin profile
     Given I am a user
     And I go to view domain 1 page
     Then I should not see action button(s)    Edit
+
+Breadcrumb
+    Given I am a user
+    When I go to view domain 1 page
+    Then Page Should Contain    Admin > View domain
+
+Tab Projects
+    Given I am a user
+    And I go to view domain 1 page
+    And Element Should Contain    id=badge_projects    3
+    When Click Link    id=a_projects
+    Then Location Should Be    ${URL}/dm-project/
+
+Tab Resources
+    Given I am a user
+    And I go to view domain 1 page
+    And Element Should Contain    id=badge_resources    5
+    When Click Link    id=a_resources
+    Then Location Should Be    ${URL}/dm-resource/
 
 *** Keywords ***
 I go to view domain 1 page

@@ -1,7 +1,7 @@
 *** Keywords ***
 I check the following ACL
     [Arguments]    ${acl_url}    ${acl_super-admin}    ${acl_manager}    ${acl_user+}    ${acl_user}    ${acl_guest}
-    ...    ${acl_none}    ${acl_prerequisite}=False
+    ...    ${acl_none}    ${acl_nodomain}    ${acl_prerequisite}=False
     ${isPrerequiste} =    Set Variable If    '${acl_prerequisite}' == 'False'    False    True
     I am a super-admin
     Run Keyword If    ${isPrerequiste}    Go to    ${URL}${acl_prerequisite}
@@ -33,6 +33,11 @@ I check the following ACL
     Go to    ${URL}${acl_url}
     Run Keyword If    ${acl_none}    Page Should Not Contain    ${FORBIDDEN_ACCESS_TEXT}    ELSE    Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
     I log out
+    I am a user with no role on any domain
+    Run Keyword If    ${isPrerequiste}    Go to    ${URL}${acl_prerequisite}
+    Go to    ${URL}${acl_url}
+    Run Keyword If    ${acl_nodomain}    Page Should Not Contain    ${FORBIDDEN_ACCESS_TEXT}    ELSE    Page Should Contain    ${FORBIDDEN_ACCESS_TEXT}
+    I log out
 
 the table should contain x rows
     [Arguments]    ${count}
@@ -46,15 +51,19 @@ the table should contain
 
 the table header should contain
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    Table Header Should Contain    xpath=//table    ${item}
 
 I should see action button(s)
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    And Element Should Be Visible    xpath=//a[@title='${item}']
 
 I should not see action button(s)
     [Arguments]    @{list}
-    :FOR    ${item}    IN    @{list}
+    : FOR    ${item}    IN    @{list}
     \    And Page Should Not Contain Element    xpath=//a[@title='${item}']
+
+I should see 404 error page
+    [Arguments]    ${msg}='404 Item not found'
+    Page Should Contain    404 Not Found

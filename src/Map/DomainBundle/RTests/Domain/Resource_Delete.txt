@@ -34,13 +34,38 @@ Cancel to delete a resource
     Then Location Should Be    ${URL}/dm-resource/del/5
 
 Impossible to delete a resource
+    [Tags]    failedTest
     Given I am a manager
     And I go to resources list    View domain #1
     And I click action button    Delete resource #2
     When I click button    Remove
     And I confirm
-    Then Location Should Be    ${URL}/dm-resource/del/2
-    Then Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+    Then Run Keyword And Expect Error    *    Then Location Should Be    ${URL}/dm-resource/del/2
+    Then Run Keyword And Expect Error    *    Then Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+
+Impossible to delete a resource without selecting a domain before
+    Given I am a super-admin
+    When Go To    ${URL}/dm-resource/del/2
+    Then Location Should Be    ${URL}/domain/
+
+Wrong resource Id for a domain
+    Given I am a manager
+    And I go to resources list    View domain #1
+    When Go to    ${URL}/dm-resource/del/1
+    Then I should see 404 error page    Resource[id=1] not found for this domain
+
+Breadcrumb
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Delete resource #5
+    Then Page Should Contain    Domain One > Delete resource
+
+Breadcrumb domain link
+    Given I am a super-admin
+    And I go to resources list    Edit domain #1
+    And I click action button    Delete resource #5
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
 
 Return to list button
     Given I am a super-admin

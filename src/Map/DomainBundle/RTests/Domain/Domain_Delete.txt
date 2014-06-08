@@ -25,7 +25,7 @@ Wrong domain Id
     Given I am a super-admin
     And I go to domains list
     When Go to    ${URL}/domain/del/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
 
 Impossible to delete a domain
     Given I am a super-admin
@@ -34,6 +34,11 @@ Impossible to delete a domain
     And I confirm
     Then Location Should Be    ${URL}/domain/del/1
     And Page Should Contain    Impossible to remove this item - Integrity constraint violation !
+
+Breadcrumb
+    Given I am a super-admin
+    When I go to delete domain page    5
+    Then Page Should Contain    Admin > Delete domain
 
 Return to list button
     Given I am a super-admin

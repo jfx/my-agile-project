@@ -2,12 +2,14 @@
 ${ENV}            dev
 ${BROWSER}        chrome    # chrome | firefox
 ${LOGIN_URL}      ${URL}/login
-${URL}            http://map2dev.localhost/app_dev.php
+${URL}            ${URL_DEV}
+${URL_DEV}        http://map2dev.localhost/app_dev.php
 ${USER_ADMIN}     admin
 ${USER_MANAGER}    d1-manager
 ${USER_USER+}     d1-user+
 ${USER_USER}      user
 ${USER_GUEST}     d1-guest
 ${USER_NONE}      d1-none
+${USER_NODOMAIN}    no-domain
 ${CONSOLE_PATH}    /opt/Dropbox/Nprojects/Map2/app/console
 ${FORBIDDEN_ACCESS_TEXT}    403 Forbidden

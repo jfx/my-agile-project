@@ -36,7 +36,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class DefaultDateType extends DefaultType
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface Container
+     * @var ContainerInterface Container
      */
     protected $container;
 

@@ -2,6 +2,7 @@ parameters:
 #    map_domain.example.class: Map\DomainBundle\Example
 
 services:
-#    map_domain.example:
-#        class: %map_domain.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    map_user.domaininfo:
+        class: Map\DomainBundle\Service\DomainInfo
+        arguments: [ '@doctrine.orm.entity_manager' ]
+        scope: request

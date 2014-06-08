@@ -2,12 +2,12 @@
 
 {% block title %}{{ parent() }} - Domain edit - Id : {{ domain.id }}{% endblock title %}
 
-{% block headline %}Admin > Domain edit - Id : {{ domain.id }}{% endblock headline %}
+{% block headline %}Admin > Edit domain{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Main</a></li>
-    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
+    <li class="active"><a id="a_main" href="#">Main</a></li>
+    <li><a id="a_resources" href="{{ path('dm-resource_index') }}">Resources</a></li>
 </ul>
 <div class="span8">
     <form novalidate="novalidate" class="form-horizontal well" method="post">

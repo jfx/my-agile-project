@@ -37,7 +37,7 @@ use Twig_Filter_Method;
 class LocaleDateExtension extends Twig_Extension
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface Container
+     * @var ContainerInterface Container
      */
     protected $container;
 
@@ -84,6 +84,6 @@ class LocaleDateExtension extends Twig_Extension
      */
     public function getName()
     {
-        return 'localeDate_extension';
+        return 'map_corebundle_localedate';
     }
 }

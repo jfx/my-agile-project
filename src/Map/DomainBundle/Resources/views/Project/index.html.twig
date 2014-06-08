@@ -2,13 +2,13 @@
 
 {% block title %}{{ parent() }} - Projects list{% endblock title %}
 
-{% block headline %}{{ domain.name }} > Projects list{% endblock headline %}
+{% block headline %}{{ domain_breadcrumb() }} > Projects list{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li><a href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
-    <li class="active"><a href="#">Projects</a></li>
-    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
+    <li><a id="a_main" href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
+    <li class="active"><a id="a_projects" href="#"><span id="badge_projects" class="badge badge-inverse">{{ child.projects }}</span>&nbsp;&nbsp;Projects</a></li>
+    <li><a id="a_resources" href="{{ path('dm-resource_index') }}"><span id="badge_resources" class="badge badge-info">{{ child.resources }}</span>&nbsp;&nbsp;Resources</a></li>
 </ul>
 <table class="table table-bordered table-hover">
     <thead>

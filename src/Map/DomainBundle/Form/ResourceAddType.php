@@ -21,11 +21,11 @@
 namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
+use Map\DomainBundle\Entity\Domain;
+use Map\UserBundle\Entity\RoleRepository;
+use Map\UserBundle\Entity\UserRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Map\DomainBundle\Entity\Domain;
-use Map\UserBundle\Entity\UserRepository;
-use Map\UserBundle\Entity\RoleRepository;
 
 /**
  * Resource form class for add action.
@@ -42,7 +42,7 @@ use Map\UserBundle\Entity\RoleRepository;
 class ResourceAddType extends DefaultType
 {
     /**
-     * @var Map\DomainBundle\Entity\Domain Domain
+     * @var Domain Domain
      */
     protected $domain;
 

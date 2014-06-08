@@ -6,31 +6,34 @@ I open browser
     Run Keyword If    '${ENV}' == 'dev'    Click element    xpath=//a[@title='Close Toolbar']
 
 I am logging as
-    [Arguments]    ${user}    ${password}=DEFAULT
+    [Arguments]    ${user}    ${password}=DEFAULT    ${check}=Hello
     Go to    ${LOGIN_URL}
     ${password}    Set Variable If    '${password}' == 'DEFAULT'    ${user}    ${password}
     Input text    username    user${user}
     Input text    password    ${password}
     Click element    xpath=//button[@title='Login']
-    Page Should Contain    Hello
+    Page Should Contain    ${check}
 
 I am a super-admin
-    Run Keyword     I am logging as    ${USER_ADMIN}
+    Run Keyword    I am logging as    ${USER_ADMIN}
 
 I am a manager
-    Run Keyword     I am logging as    ${USER_MANAGER}
+    Run Keyword    I am logging as    ${USER_MANAGER}
 
 I am a user+
-    Run Keyword     I am logging as    ${USER_USER+}
+    Run Keyword    I am logging as    ${USER_USER+}
 
 I am a user
-    Run Keyword     I am logging as    ${USER_USER}
+    Run Keyword    I am logging as    ${USER_USER}
 
 I am a guest
-    Run Keyword     I am logging as    ${USER_GUEST}
+    Run Keyword    I am logging as    ${USER_GUEST}
 
 I am a user with no role
-    Run Keyword     I am logging as    ${USER_NONE}
+    Run Keyword    I am logging as    ${USER_NONE}
+
+I am a user with no role on any domain
+    Run Keyword    I am logging as    ${USER_NODOMAIN}
 
 I log out
     Go to    ${URL}/logout

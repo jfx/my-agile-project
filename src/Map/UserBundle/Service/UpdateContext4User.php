@@ -21,10 +21,12 @@ namespace Map\UserBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Map\DomainBundle\Entity\Domain;
+use Map\ProjectBundle\Entity\Project;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Update domain service class.
+ * Update context service class.
  *
  * @category  MyAgileProject
  * @package   User
@@ -34,16 +36,16 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class UpdateDomain4User
+class UpdateContext4User
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     * @var SecurityContextInterface S. Context
      *
      */
     protected $securityContext;
 
     /**
-     * @var Doctrine\ORM\EntityManager Entity manager
+     * @var EntityManager Entity manager
      */
     protected $entityManager;
 
@@ -72,28 +74,22 @@ class UpdateDomain4User
     /**
      * Set the current domain for a user and set role.
      *
-     * @param Domain|null $domain The domain, if null unset current domain.
-     * @param int|null    $userId The user id, if null get user id from context.
+     * @param Domain|null $domain              The domain, if null unset domain.
+     * @param boolean     $resetCurrentProject Current project must be resetted.
      *
      * @return void
      */
-    public function setCurrentDomain($domain, $userId = null)
+    public function setCurrentDomain($domain, $resetCurrentProject = true)
     {
-        if ($userId == null) {
+        $user = $this->securityContext->getToken()->getUser();
 
-            $user = $this->securityContext->getToken()->getUser();
-        } else {
-            if (! $user = $this->userManager->findUserBy(
-                array('id' => $userId)
-            )) {
-                throw $this->createNotFoundException(
-                    'User[id='.$userId.'] not found'
-                );
-            }
-        }
         $user->unsetDomainRole();
 
-        if ($domain == null) {
+        if ($resetCurrentProject) {
+            $user->unsetCurrentProject();
+        }
+
+        if ($domain === null) {
             $user->unsetCurrentDomain();
         } else {
             $user->setCurrentDomain($domain);
@@ -118,6 +114,27 @@ class UpdateDomain4User
     }
 
     /**
+     * Set the current project and set domain and role.
+     *
+     * @param Project|null $project The project, if null unset current project.
+     *
+     * @return void
+     */
+    public function setCurrentProject($project)
+    {
+        $user = $this->securityContext->getToken()->getUser();
+
+        if ($project === null) {
+            $user->unsetCurrentProject();
+        } else {
+            $user->setCurrentProject($project);
+
+            $domain = $project->getDomain();
+            $this->setCurrentDomain($domain, false);
+        }
+    }
+
+    /**
      * Refresh available domains list.
      *
      * @param int $userId The user id.
@@ -132,18 +149,12 @@ class UpdateDomain4User
             );
         }
         $repository = $this->entityManager->getRepository(
-            'MapUserBundle:UserDmRole'
+            'MapProjectBundle:Project'
         );
 
-        $availableDomains = $repository->findAvailableDomainsByUser($user);
+        $projects = $repository->findAvailableProjectsByUser($user);
 
-        $arrayDomains = array();
-
-        foreach ($availableDomains as $domain) {
-            $arrayDomains[$domain['id']] = $domain['name'];
-        }
-
-        $user->setAvailableDomains($arrayDomains);
+        $user->setAvailableProjects($projects);
         $this->userManager->updateUser($user);
     }
 }

@@ -20,10 +20,11 @@ namespace Map\UserBundle\Controller;
 
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-use Map\UserBundle\Form\UserType;
 use Map\UserBundle\Form\UserFormHandler;
 use Map\UserBundle\Form\UserPasswordType;
+use Map\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User controller class.

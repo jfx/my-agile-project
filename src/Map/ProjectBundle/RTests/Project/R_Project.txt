@@ -3,7 +3,7 @@ I go to projects list
     [Arguments]    ${domain}
     I go to domains list
     I click action button    ${domain}
-    Click element    link=Projects
+    Click link    id=a_projects
 
 I fill in project form
     [Arguments]    ${project}    ${monthStart}=0    ${monthFinish}=3    ${isClosed}=False

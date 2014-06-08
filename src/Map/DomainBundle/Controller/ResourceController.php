@@ -20,11 +20,13 @@ namespace Map\DomainBundle\Controller;
 
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Map\DomainBundle\Entiy\Domain;
 use Map\DomainBundle\Form\ResourceAddType;
 use Map\DomainBundle\Form\ResourceEditType;
 use Map\DomainBundle\Form\ResourceFormHandler;
 use Map\UserBundle\Entity\UserDmRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Resource controller class.
@@ -50,7 +52,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -60,9 +62,16 @@ class ResourceController extends Controller
 
         $resources = $repository->findUsersByDomain($domain);
 
+        $service = $this->container->get('map_user.domaininfo');
+        $child   = $service->getChildCount($domain);
+
         return $this->render(
             'MapDomainBundle:Resource:index.html.twig',
-            array('resources' => $resources, 'domain' => $domain)
+            array(
+                'resources' => $resources,
+                'domain' => $domain,
+                'child' => $child
+            )
         );
     }
 
@@ -77,7 +86,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -103,7 +112,7 @@ class ResourceController extends Controller
             $userDmRoleInForm = $form->getData();
             $userId = $userDmRoleInForm->getUser()->getId();
 
-            $service = $this->container->get('map_user.updatedomain4user');
+            $service = $this->container->get('map_user.updatecontext4user');
             $service->refreshAvailableDomains4UserId($userId);
 
             $this->get('session')->getFlashBag()
@@ -133,7 +142,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -161,7 +170,7 @@ class ResourceController extends Controller
 
         if ($handler->process()) {
 
-            $service = $this->container->get('map_user.updatedomain4user');
+            $service = $this->container->get('map_user.updatecontext4user');
             $service->refreshAvailableDomains4UserId($id);
 
             $this->get('session')->getFlashBag()
@@ -195,7 +204,7 @@ class ResourceController extends Controller
     {
         $domain = $this->getCurrentDomainFromUser();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -219,7 +228,7 @@ class ResourceController extends Controller
             try {
                 $em->flush();
 
-                $service = $this->container->get('map_user.updatedomain4user');
+                $service = $this->container->get('map_user.updatecontext4user');
                 $service->refreshAvailableDomains4UserId($id);
 
                 $success = true;

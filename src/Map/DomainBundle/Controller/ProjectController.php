@@ -20,6 +20,7 @@ namespace Map\DomainBundle\Controller;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Project controller class.
@@ -43,9 +44,11 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $domain = $this->getCurrentDomainFromUser();
+        $user = $this->container->get('security.context')->getToken()
+            ->getUser();
+        $domain = $user->getCurrentDomain();
 
-        if (is_null($domain)) {
+        if ($domain === null) {
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
@@ -55,24 +58,16 @@ class ProjectController extends Controller
 
         $projects = $repository->findProjectsByDomain($domain);
 
+        $service = $this->container->get('map_user.domaininfo');
+        $child   = $service->getChildCount($domain);
+
         return $this->render(
             'MapDomainBundle:Project:index.html.twig',
-            array('projects' => $projects, 'domain' => $domain)
+            array(
+                'projects' => $projects,
+                'domain' => $domain,
+                'child' => $child
+            )
         );
-    }
-
-    /**
-     * Return the current domain from user context.
-     *
-     * @return Domain
-     */
-    private function getCurrentDomainFromUser()
-    {
-        $user = $this->container->get('security.context')->getToken()
-            ->getUser();
-
-        $domain = $user->getCurrentDomain();
-
-        return $domain;
     }
 }

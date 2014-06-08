@@ -7,7 +7,7 @@ I go to resources list
     [Arguments]    ${domain}
     I go to domains list
     I click action button    ${domain}
-    Click element    link=Resources
+    Click Link    id=a_resources
 
 I fill in domain form
     [Arguments]    ${domain}

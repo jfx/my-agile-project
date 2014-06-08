@@ -40,7 +40,7 @@ class MenuSelectType extends DefaultType implements
     ContainerAwareInterface
 {
     /**
-     * @var Symfony\Component\DependencyInjection\ContainerInterface Container
+     * @var ContainerInterface Container
      */
     protected $container;
 
@@ -57,22 +57,28 @@ class MenuSelectType extends DefaultType implements
         $securityContext = $this->container->get('security.context');
         $user = $securityContext->getToken()->getUser();
 
-        $currentDomain = $user->getCurrentDomain();
-        if (is_null($currentDomain)) {
-            $currentDomainId = 0;
+        $currentProject = $user->getCurrentProject();
+        if ($currentProject === null) {
+            $currentProjectId = 0;
         } else {
-            $currentDomainId = $currentDomain->getId();
+            $currentProjectId = $currentProject->getId();
         }
-        $availableDomains = $user->getAvailableDomains();
+        $availableProjects = $user->getAvailableProjects();
 
-        if (key_exists($currentDomainId, $availableDomains)) {
+        $keyExists = false;
+        foreach ($availableProjects as $projects4aDomain) {
+            if (array_key_exists($currentProjectId, $projects4aDomain)) {
+                $keyExists = true;
+            }
+        }
+        if ($keyExists) {
             $builder->add(
                 'search',
                 'choice',
                 array(
                     'label' => false,
-                    'choices' => $availableDomains,
-                    'data' => $currentDomainId,
+                    'choices' => $availableProjects,
+                    'data' => $currentProjectId,
                     'widget_control_group' => false,
                     'widget_controls' => false,
                     'attr' => array(
@@ -87,7 +93,7 @@ class MenuSelectType extends DefaultType implements
                 'choice',
                 array(
                     'label' => false,
-                    'choices' => $availableDomains,
+                    'choices' => $availableProjects,
                     'empty_value' => '',
                     'widget_control_group' => false,
                     'widget_controls' => false,
@@ -117,7 +123,7 @@ class MenuSelectType extends DefaultType implements
      */
     public function getRoute()
     {
-        return "domain_select";
+        return "project_select";
     }
 
     /**

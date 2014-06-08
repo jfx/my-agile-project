@@ -19,9 +19,9 @@
 namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
+use Map\UserBundle\Entity\RoleRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Map\UserBundle\Entity\RoleRepository;
 
 /**
  * Resource form class.

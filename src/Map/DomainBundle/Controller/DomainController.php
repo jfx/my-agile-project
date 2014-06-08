@@ -25,6 +25,7 @@ use Map\DomainBundle\Entity\Domain;
 use Map\DomainBundle\Form\DomainType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -109,12 +110,15 @@ class DomainController extends Controller
      */
     public function viewAction(Domain $domain)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
-        $service->setCurrentDomain($domain);
+        $serviceUpdate = $this->container->get('map_user.updatecontext4user');
+        $serviceUpdate->setCurrentDomain($domain);
+
+        $serviceInfo = $this->container->get('map_user.domaininfo');
+        $child       = $serviceInfo->getChildCount($domain);
 
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
-            array('domain' => $domain)
+            array('domain' => $domain, 'child' => $child)
         );
     }
 
@@ -129,7 +133,7 @@ class DomainController extends Controller
      */
     public function editAction(Domain $domain)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
+        $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentDomain($domain);
 
         $sc = $this->container->get('security.context');
@@ -179,7 +183,7 @@ class DomainController extends Controller
      */
     public function delAction(Domain $domain)
     {
-        $service = $this->container->get('map_user.updatedomain4user');
+        $service = $this->container->get('map_user.updatecontext4user');
 
         $success = true;
 
@@ -219,23 +223,6 @@ class DomainController extends Controller
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
             array('domain' => $domain)
-        );
-    }
-
-    /**
-     * Select a domain in combobox
-     *
-     * @return Response A Response instance
-     *
-     * @Secure(roles="ROLE_USER")
-     */
-    public function selectAction()
-    {
-        $request = $this->getRequest();
-        $domainId = $request->request->get('map_menu_select')['search'];
-
-        return $this->redirect(
-            $this->generateUrl('domain_view', array('id' => $domainId))
         );
     }
 }

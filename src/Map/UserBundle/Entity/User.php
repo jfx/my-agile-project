@@ -21,6 +21,7 @@ namespace Map\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Map\DomainBundle\Entity\Domain;
+use Map\ProjectBundle\Entity\Project;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -85,11 +86,18 @@ class User extends BaseUser
     private $details;
 
     /**
-     * @var Map\DomainBundle\Entity\Domain Current domain
+     * @var Domain Current domain
      *
      * @ORM\ManyToOne(targetEntity="Map\DomainBundle\Entity\Domain")
      */
     private $currentDomain;
+
+    /**
+     * @var Project Current project
+     *
+     * @ORM\ManyToOne(targetEntity="Map\ProjectBundle\Entity\Project")
+     */
+    private $currentProject;
 
     /**
      * @var string Current role label
@@ -101,9 +109,9 @@ class User extends BaseUser
     /**
      * @var array Available domain for user
      *
-     * @ORM\Column(name="available_domains", type="array")
+     * @ORM\Column(name="available_projects", type="array")
      */
-    private $availableDomains;
+    private $availableProjects;
 
     /**
      * Constructor
@@ -247,6 +255,42 @@ class User extends BaseUser
     }
 
     /**
+     * Set current project
+     *
+     * @param Project $pj The current project
+     *
+     * @return User
+     */
+    public function setCurrentProject(Project $pj)
+    {
+        $this->currentProject = $pj;
+
+        return $this;
+    }
+
+    /**
+     * Get current project
+     *
+     * @return Project
+     */
+    public function getCurrentProject()
+    {
+        return $this->currentProject;
+    }
+
+    /**
+     * unset current project
+     *
+     * @return User
+     */
+    public function unsetCurrentProject()
+    {
+        $this->currentProject = null;
+
+        return $this;
+    }
+
+    /**
      * Set current role label
      *
      * @param string $crl Label of the role.
@@ -271,27 +315,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set available domains
+     * Set available projects
      *
-     * @param array $domains List of domains
+     * @param array $projects List of projects
      *
      * @return User
      */
-    public function setAvailableDomains($domains)
+    public function setAvailableProjects($projects)
     {
-        $this->availableDomains = $domains;
+        $this->availableProjects = $projects;
 
         return $this;
     }
 
     /**
-     * Get available domains
+     * Get available projects
      *
      * @return array
      */
-    public function getAvailableDomains()
+    public function getAvailableProjects()
     {
-        return $this->availableDomains;
+        return $this->availableProjects;
     }
 
     /**

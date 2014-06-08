@@ -20,6 +20,7 @@ namespace Map\UserBundle\Form;
 
 use FOS\UserBundle\Model\UserManager;
 use Map\CoreBundle\Form\FormHandler;
+use Map\UserBundle\Service\PasswordFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,11 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserFormHandler extends FormHandler
 {
+    /**
+     * @var PasswordFactory Password factory
+     */
+    protected $passwordFactory;
+
     /**
      * @var UserManager User manager
      */
@@ -57,6 +63,7 @@ class UserFormHandler extends FormHandler
         UserManager $um
     ) {
         parent::__construct($form, $request, $container);
+        $this->passwordFactory = $container->get('map_user.passwordFactory');
         $this->userManager = $um;
     }
 
@@ -69,6 +76,14 @@ class UserFormHandler extends FormHandler
      */
     public function onSuccess($entity)
     {
+        // If add user without password, then set a default password.
+        $route = $this->request->get('_route');
+
+        if (($route == 'user_add') && ($entity->getPlainPassword() === null)) {
+
+            $password = $this->passwordFactory->generatePassword();
+            $entity->setPlainPassword($password);
+        }
         $this->userManager->updateUser($entity);
     }
 }

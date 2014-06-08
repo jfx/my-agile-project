@@ -19,10 +19,10 @@
 namespace Map\CoreBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Map\UserBundle\Entity\Role;
+use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
-use Map\UserBundle\Entity\Role;
 
 /**
  * Menu builder class.
@@ -38,7 +38,7 @@ use Map\UserBundle\Entity\Role;
 class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
 {
     /**
-     * @var Symfony\Component\Security\Core\SecurityContextInterface S. Context
+     * @var SecurityContextInterface S. Context
      */
     protected $securityContext;
 
@@ -107,7 +107,7 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
         $username = ucfirst($user->getUsername());
         $roleLabel = $user->getCurrentRoleLabel();
 
-        if (($roleLabel != null)
+        if (($roleLabel !== null)
             && (strlen($roleLabel) > 0)
             && ($roleLabel != Role::LABEL_NONE)
         ) {

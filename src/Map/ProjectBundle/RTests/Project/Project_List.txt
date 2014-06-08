@@ -7,21 +7,23 @@ Resource          ../Keyword_resource.txt
 *** Test Cases ***
 Display projects list on a domain for a user
     Given I am a user
-    And I go to projects list    View domain #1
+    When I go to projects list    View domain #1
     Then the table header should contain    Action    Name    Start date    Finish date    Closed    ${EMPTY}
     ...    Details
     And the table should contain x rows    3
     And the table should contain    Project Closed    02/05/2013    31/07/2013    Details 4 project closed
     And the table should contain    Project One
     And the table should contain    Project Two
+    And Element Should Contain    id=badge_projects    3
 
 List with no project on a domain for a user
     Given I am a user
-    And I go to projects list    View domain #3
+    When I go to projects list    View domain #3
     Then the table header should contain    Action    Name    Start date    Finish date    Closed    ${EMPTY}
     ...    Details
     And the table should contain x rows    1
     And the table should contain    No project
+    And Element Should Contain    id=badge_projects    0
 
 Impossible to view projects list without selecting a domain before
     Given I am a user
@@ -41,14 +43,26 @@ Action buttons Add/View/Edit/Delete for a manager
     Then the table should contain x rows    3
     And I should see action button(s)    Add    View project #1    Edit project #1    Delete project #1
 
-Main tab
+Breadcrumb
+    Given I am a user
+    When I go to projects list    View domain #1
+    Then Page Should Contain    Domain One > Projects list
+
+Breadcrumb domain link
+    Given I am a user
+    And I go to projects list    View domain #1
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
+Tab Main
     Given I am a user
     And I go to projects list    View domain #1
     When Click Link    Main
     Then Location Should Be    ${URL}/domain/1
 
-Resources tab
+Tab Resources
     Given I am a user
     And I go to projects list    View domain #1
-    When Click Link    Resources
+    And Element Should Contain    id=badge_resources    5
+    When Click Link    id=a_resources
     Then Location Should Be    ${URL}/dm-resource/

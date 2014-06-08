@@ -1,0 +1,26 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Resetting password - Step 2{% endblock title %}
+
+{% block headline %}{{ parent() }} > Resetting password > Step 2{% endblock headline %}
+
+{% block fos_user_content %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+<div class="row">
+<div class="offset3 span6">
+
+<form class="form-horizontal well" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="post">
+    {{ form_widget(form) }}
+    <div class="center">
+        <button type="submit" class="btn btn-small btn-info" title="Change">
+            <i class="icon-ok icon-white"></i>
+            &nbsp;&nbsp;{{ 'resetting.reset.submit'|trans }}&nbsp;&nbsp;
+        </button>
+    </div>
+</form>
+</div>
+</div>
+</div>
+{% endblock fos_user_content %}

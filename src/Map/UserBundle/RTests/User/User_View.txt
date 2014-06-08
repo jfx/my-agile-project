@@ -23,7 +23,18 @@ View a locked user profile
 Wrong user Id
     Given I am a super-admin
     When Go to    ${URL}/user/999
-    Then Page Should Contain    404 Not Found
+    Then I should see 404 error page
+
+Breadcrumb
+    Given I am a super-admin
+    When I go to user view page    1
+    Then Page Should Contain    Admin > View user
+
+Role tab
+    Given I am a super-admin
+    And I go to user view page    2
+    When Click Link    Roles
+    Then Location Should Be    ${URL}/user/role/2
 
 Return to list button
     Given I am a super-admin
@@ -36,9 +47,3 @@ Edit button
     And I go to user view page    2
     When I click button    Edit
     Then Location Should Be    ${URL}/user/edit/2
-
-Role tab
-    Given I am a super-admin
-    And I go to user view page    2
-    When Click Link    Roles
-    Then Location Should Be    ${URL}/user/role/2

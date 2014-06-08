@@ -1,8 +1,8 @@
 {% extends 'MapCoreBundle::layout.html.twig' %}
 
-{% block title %}{{ parent() }} - Project Add{% endblock title %}
+{% block title %}{{ parent() }} - Project add{% endblock title %}
 
-{% block headline %}<a href="{{ path('dm-project_index') }}">{{ domain.name }}</a> > Add Project{% endblock headline %}
+{% block headline %}{{ domain_breadcrumb() }} > Add project{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">

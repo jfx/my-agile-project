@@ -15,6 +15,7 @@ Display resources list for a connected user
     And the table should contain    D1-none Firstd1-none    displayd1-none    None
     And the table should contain    D1-user+ Firstd1-user+    displayd1-user+    User+
     And the table should contain    User Firstuser    displayuser    User
+    And Element Should Contain    id=badge_resources    5
 
 List with no resource for a connected user
     Given I am a user
@@ -22,6 +23,7 @@ List with no resource for a connected user
     Then the table header should contain    Name    Displayname    Role
     And the table should contain x rows    1
     And the table should contain    No resource
+    And Element Should Contain    id=badge_resources    0
 
 No modify actions buttons in domains list for a non super-admin profile
     Given I am a user
@@ -35,14 +37,31 @@ Action buttons Add/View/Edit/Delete for a non super-admin profile
     Then the table should contain x rows    5
     And I should see action button(s)    Add    Edit resource #2    Delete resource #2
 
+Impossible to display resources list without selecting a domain before
+    Given I am a user
+    When Go to    ${URL}/dm-resource/
+    Then Location Should Be    ${URL}/domain/
+
+Breadcrumb
+    Given I am a user
+    When I go to resources list    View domain #1
+    Then Page Should Contain    Domain One > Resources list
+
+Breadcrumb domain link
+    Given I am a user
+    And I go to resources list    View domain #1
+    When Click Link    id=b_domain
+    Then Location Should Be    ${URL}/domain/1
+
 Main tab
     Given I am a user
     And I go to resources list    View domain #1
     When Click element    link=Main
     And Location Should Be    ${URL}/domain/1
 
-Projects tab
+Tab Projects
     Given I am a user
     And I go to resources list    View domain #1
-    When Click element    link=Projects
+    And Element Should Contain    id=badge_projects    3
+    When Click element    id=a_projects
     And Location Should Be    ${URL}/dm-project/

@@ -20,6 +20,7 @@ namespace Map\ProjectBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Map\DomainBundle\Entity\Domain;
+use Map\UserBundle\Entity\User;
 
 /**
  * Project entity repository class.
@@ -55,24 +56,60 @@ class ProjectRepository extends EntityRepository
     }
 
     /**
-     * Get a project by its id and domain id.
+     * Count all projects for a domain.
      *
-     * @param int $projectId Project id.
-     * @param int $domainId  Domain id.
+     * @param Domain $domain The domain.
      *
-     * @return Project.
+     * @return int List of projects.
      */
-    public function findByProjectIdDomainId($projectId, $domainId)
+    public function countProjectsByDomain(Domain $domain)
     {
         $qb = $this->createQueryBuilder('p')
-            ->join('p.domain', 'd')
-            ->where('p.id = :projectId')
-            ->andWhere('d.id = :domainId')
-            ->setParameter('projectId', $projectId)
-            ->setParameter('domainId', $domainId);
+            ->innerJoin('p.domain', 'd')
+            ->select('count(p.id)')
+            ->where('d.id = :domainId')
+            ->setParameter('domainId', $domain->getId());
 
-        $result = $qb->getQuery()->getSingleResult();
+        $count = $qb->getQuery()->getSingleScalarResult();
 
-        return $result;
+        return $count;
+    }
+
+    /**
+     * Get all projects for a user as a resource.
+     *
+     * @param User $user The user.
+     *
+     * @return array List of projects.
+     */
+    public function findAvailableProjectsByUser(User $user)
+    {
+        $sql  = ' select p.id as p_id, p.name as p_name, d.name as d_name';
+        $sql .= ' from map_project p';
+        $sql .= ' inner join map_domain d on p.domain_id = d.id';
+        $sql .= ' inner join map_user_dm_role udr on udr.domain_id = d.id';
+        $sql .= ' where p.closed = 0';
+        $sql .= ' and udr.user_id = :userId';
+        $sql .= ' and udr.role_id != \'ROLE_DM_NONE\'';
+        $sql .= ' order by d.name, p.name';
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam('userId', $user->getId());
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        $return = array();
+
+        foreach ($results as $row) {
+
+            if (!array_key_exists($row['d_name'], $return)) {
+                $return[$row['d_name']] = array();
+            }
+            $return[$row['d_name']][$row['p_id']] = $row['p_name'];
+        }
+
+        return $return;
     }
 }

@@ -9,3 +9,11 @@ Home link
     given I am a user
     When Click element    link=Home
     Then Location Should Be    ${URL}/
+
+Title
+    When I am a user
+    Then Page Should Contain    Dashboard
+
+Greetings
+    When I am a user
+    Then Page Should Contain    Hello Firstuser User !

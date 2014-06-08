@@ -34,6 +34,10 @@ user_profile:
     pattern:  /profile
     defaults: { _controller: "MapUserBundle:User:profile" }
 
+fos_user_profile_show:
+    pattern:  /profile
+    defaults: { _controller: "MapUserBundle:User:profile" }
+
 user_password:
     pattern:  /password
     defaults: { _controller: "MapUserBundle:User:password" }

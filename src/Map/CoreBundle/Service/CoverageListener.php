@@ -18,12 +18,12 @@
 
 namespace Map\CoreBundle\Service;
 
+use AppKernel;
 use PHP_CodeCoverage;
 use PHP_CodeCoverage_Filter;
 use PHP_CodeCoverage_Report_PHP;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use \AppKernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**

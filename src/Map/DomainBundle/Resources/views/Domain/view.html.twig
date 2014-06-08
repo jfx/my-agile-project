@@ -2,13 +2,13 @@
 
 {% block title %}{{ parent() }} - Domain view - Id : {{ domain.id }}{% endblock title %}
 
-{% block headline %}Admin > Domain view - Id : {{ domain.id }}{% endblock headline %}
+{% block headline %}Admin > View domain{% endblock headline %}
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#">Main</a></li>
-    <li><a href="{{ path('dm-project_index') }}">Projects</a></li>
-    <li><a href="{{ path('dm-resource_index') }}">Resources</a></li>
+    <li class="active"><a id="a_main" href="#">Main</a></li>
+    <li><a id="a_projects" href="{{ path('dm-project_index') }}"><span id="badge_projects" class="badge badge-info">{{ child.projects }}</span>&nbsp;&nbsp;Projects</a></li>
+    <li><a id="a_resources" href="{{ path('dm-resource_index') }}"><span id="badge_resources" class="badge badge-info">{{ child.resources }}</span>&nbsp;&nbsp;Resources</a></li>
 </ul>
 <div class="span8">
     <form class="form-horizontal well">
