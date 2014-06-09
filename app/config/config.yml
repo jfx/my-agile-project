@@ -91,8 +91,8 @@ fos_user:
             template: MapUserBundle:User:resetting.email.html.twig
 
 parameters:
-    app.version:      0.5.0
-    app.build:        BBB
-    app.formatDate:   d/m/Y
-    app.codeCoverage: false
+    app.version:               0.5.0
+    app.build:                 BBB
+    app.formatDate:            d/m/Y
+    app.codeCoverage:          false
     app.defaultPasswordLength: 12

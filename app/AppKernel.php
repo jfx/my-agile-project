@@ -42,16 +42,4 @@ class AppKernel extends Kernel {
     public function registerContainerConfiguration(LoaderInterface $loader) {
         $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
-    // TO_REMOVE_START
-    // Remove whole method if you want to go back to the original cache folder
-    public function getCacheDir() {
-        return '/opt/var/map2dev/sf2/cache/' . $this->environment;
-    }
-
-    // Remove whole method if you want to go back to the original log folder
-    public function getLogDir() {
-        return '/opt/var/map2dev/sf2/logs';
-    }
-    // TO_REMOVE_END
-
 }
