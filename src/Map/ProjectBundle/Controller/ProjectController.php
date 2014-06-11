@@ -26,7 +26,7 @@ use Map\ProjectBundle\Form\ProjectType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Project controller class.
@@ -134,7 +134,7 @@ class ProjectController extends Controller
         $sc = $this->container->get('security.context');
 
         if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedHttpException(
+            throw new AccessDeniedException(
                 'You are not allowed to access this resource'
             );
         }
@@ -186,7 +186,7 @@ class ProjectController extends Controller
         $sc = $this->container->get('security.context');
 
         if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedHttpException(
+            throw new AccessDeniedException(
                 'You are not allowed to access this resource'
             );
         }

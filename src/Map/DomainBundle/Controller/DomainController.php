@@ -26,7 +26,7 @@ use Map\DomainBundle\Form\DomainType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Domain controller class.
@@ -141,7 +141,7 @@ class DomainController extends Controller
         if (!($sc->isGranted('ROLE_SUPER_ADMIN')
             || $sc->isGranted(Role::MANAGER_ROLE))
         ) {
-            throw new AccessDeniedHttpException(
+            throw new AccessDeniedException(
                 'You are not allowed to access this resource'
             );
         }
