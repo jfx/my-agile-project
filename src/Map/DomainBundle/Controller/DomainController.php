@@ -185,8 +185,6 @@ class DomainController extends Controller
     {
         $service = $this->container->get('map_user.updatecontext4user');
 
-        $success = true;
-
         if ($this->get('request')->getMethod() == 'POST') {
 
             $em = $this->getDoctrine()->getManager();
@@ -198,27 +196,30 @@ class DomainController extends Controller
             try {
                 $em->flush();
 
-            } catch (Exception $e) {
-                $success = false;
-
-                $this->get('session')->getFlashBag()->add(
-                    'error',
-                    'Impossible to remove this item'
-                    .' - Integrity constraint violation !'
-                );
-            }
-            if ($success) {
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Domain removed successfully !');
 
                 return $this->redirect(
                     $this->generateUrl('domain_index')
                 );
+
+            } catch (Exception $e) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
+                );
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'domain_del',
+                        array('id' => $domain->getId())
+                    )
+                );
             }
         }
-        if ($success) {
-            $service->setCurrentDomain($domain);
-        }
+        $service->setCurrentDomain($domain);
 
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',

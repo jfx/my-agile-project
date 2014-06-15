@@ -231,23 +231,18 @@ class ResourceController extends Controller
                 $service = $this->container->get('map_user.updatecontext4user');
                 $service->refreshAvailableDomains4UserId($id);
 
-                $success = true;
-            } catch (Exception $e) {
-                $success = false;
-
-                $this->get('session')->getFlashBag()
-                    ->add(
-                        'error',
-                        'Impossible to remove this item'
-                        .' - Integrity constraint violation !'
-                    );
-            }
-            if ($success) {
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Resource removed successfully !');
 
                 return $this->redirect(
                     $this->generateUrl('dm-resource_index')
+                );
+            } catch (Exception $e) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
                 );
             }
         }

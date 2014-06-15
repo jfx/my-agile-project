@@ -131,13 +131,7 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
-        $sc = $this->container->get('security.context');
-
-        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedException(
-                'You are not allowed to access this resource'
-            );
-        }
+        $this->checkManagerRole();
 
         $form = $this->createForm(new ProjectType($this->container), $project);
 
@@ -151,6 +145,7 @@ class ProjectController extends Controller
 
             $id = $project->getId();
 
+            $sc = $this->container->get('security.context');
             $user = $sc->getToken()->getUser();
             $service->refreshAvailableDomains4UserId($user->getId());
             $sc->getToken()->setAuthenticated(false);
@@ -183,15 +178,7 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
-        $sc = $this->container->get('security.context');
-
-        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedException(
-                'You are not allowed to access this resource'
-            );
-        }
-
-        $success = true;
+        $this->checkManagerRole();
 
         if ($this->get('request')->getMethod() == 'POST') {
 
@@ -203,25 +190,29 @@ class ProjectController extends Controller
             try {
                 $em->flush();
 
-            } catch (Exception $e) {
-                $success = false;
-
-                $this->get('session')->getFlashBag()->add(
-                    'error',
-                    'Impossible to remove this item'
-                    .' - Integrity constraint violation !'
-                );
-            }
-            if ($success) {
-                $user = $sc->getToken()->getUser();
-                $service->refreshAvailableDomains4UserId($user->getId());
-                $sc->getToken()->setAuthenticated(false);
+                $this->refreshAvailableDomains();
 
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Project removed successfully !');
 
                 return $this->redirect(
                     $this->generateUrl('dm-project_index')
+                );
+
+            } catch (Exception $e) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
+                );
+
+                // With exception entity manager is closed.
+                return $this->redirect(
+                    $this->generateUrl(
+                        'project_del',
+                        array('id' => $project->getId())
+                    )
                 );
             }
         }
@@ -247,5 +238,40 @@ class ProjectController extends Controller
         return $this->redirect(
             $this->generateUrl('project_view', array('id' => $projectId))
         );
+    }
+
+    /**
+     * Refresh available domain displayed in select box
+     *
+     * @return void
+     *
+     */
+    private function refreshAvailableDomains()
+    {
+        $sc = $this->container->get('security.context');
+        $user = $sc->getToken()->getUser();
+
+        $service = $this->container->get('map_user.updatecontext4user');
+        $service->refreshAvailableDomains4UserId($user->getId());
+
+        $sc->getToken()->setAuthenticated(false);
+    }
+
+    /**
+     * Check role of user
+     *
+     * @return void
+     *
+     */
+    private function checkManagerRole()
+    {
+        $sc = $this->container->get('security.context');
+
+        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
+
+            throw new AccessDeniedException(
+                'You are not allowed to access this resource'
+            );
+        }
     }
 }

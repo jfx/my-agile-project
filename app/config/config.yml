@@ -94,5 +94,5 @@ parameters:
     app.version:               0.5.0
     app.build:                 BBB
     app.formatDate:            d/m/Y
-    app.codeCoverage:          false
+    app.codeCoverage: false
     app.defaultPasswordLength: 12
