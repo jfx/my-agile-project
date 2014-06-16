@@ -1,6 +1,8 @@
 My Agile Project 2
 ==============
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7/mini.png)](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7)
+
 My Agile Project is an open source software to manage projects in general and 
 more specifically Agile projects with those following features :
 
@@ -9,6 +11,19 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.6.0 ()
+Features:
+
+  - Add travis CI for multiple php version,
+
+Bugfixes:
+
+  - Remove specific location for log and cache dir,
+  - Replace AccessDeniedHttpException by AccessDeniedException,
+  - Refactoring of controller delete methods,
+  - Remove config.php file,
+
+
 ### 0.5.0 (08 June 2014)
 Features:
 
