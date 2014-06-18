@@ -9,8 +9,11 @@ env:
   - DB=mysql
 
 before_script:
-  - echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  # echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - mkdir app/cache
+  - chmod 777 app/cache
   - cp app/config/parameters.yml.dist app/config/parameters.yml
+  - composer self-update
   - composer install
   - php app/console doctrine:database:create
   - php app/console doctrine:schema:update --force
