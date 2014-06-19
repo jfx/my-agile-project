@@ -21,4 +21,6 @@ before_script:
 
 script: phpunit -c app
 
-after_failure: "cat app/logs/test.log"
+after_failure: 
+  - cat app/logs/test.log
+  - cat /var/log/apache2/error.log
