@@ -23,4 +23,4 @@ script: phpunit -c app
 
 after_failure: 
   - cat app/logs/test.log
-  - find / -name 'error.log' 2> /dev/null
+  - find / -name '*.log' 2> /dev/null
