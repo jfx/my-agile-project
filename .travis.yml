@@ -20,3 +20,5 @@ before_script:
   - php app/console doctrine:fixtures:load --no-interaction
 
 script: phpunit -c app
+
+after_failure: "cat app/logs/test.log"

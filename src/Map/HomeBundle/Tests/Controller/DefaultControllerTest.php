@@ -60,6 +60,10 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue(200 === $statusCode);
         
         $content = $client->getResponse()->getContent();
+        
+        $logger = $client->getContainer()->get('logger');
+        $logger->info($content);
+        
         $count = substr_count($content, 'Hello Firstuser User !');
         $this->assertGreaterThan(0, $count);
     }
