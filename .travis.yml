@@ -1,15 +1,17 @@
 language: php
 
 php:
-  - 5.4
+  # 5.4
   - 5.5
-  - 5.6
+  # 5.6
 
 env:
   - DB=mysql
 
 before_script:
-  # echo 'date.timezone = "Europe/Paris"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'error_reporting = E_ALL' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'log_errors = On' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'error_log = /home/travis/build/jfx/my-agile-project/app/logs/php_error.log' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - mkdir app/cache
   - chmod 777 app/cache
   - cp app/config/parameters.yml.dist app/config/parameters.yml
@@ -23,4 +25,4 @@ script: phpunit -c app
 
 after_failure: 
   - cat app/logs/test.log
-  - find / -name '*.log' 2> /dev/null
+  - cat /home/travis/build/jfx/my-agile-project/app/logs/php_error.log
