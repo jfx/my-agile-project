@@ -1,6 +1,7 @@
 My Agile Project 2
 ==============
-
+[![Build Status](https://travis-ci.org/jfx/my-agile-project.svg?branch=develop)](https://travis-ci.org/jfx/my-agile-project)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jfx/my-agile-project/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/jfx/my-agile-project/?branch=develop)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7/mini.png)](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7)
 
 My Agile Project is an open source software to manage projects in general and 
