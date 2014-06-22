@@ -25,4 +25,5 @@ after_failure:
 
 matrix:
   allow_failures:
+    - 5.6
     - php: hhvm
