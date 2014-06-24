@@ -47,7 +47,10 @@ TestSetup
     Should Be Equal As Integers    ${rc}    0
     ${rc} =    Run And Return Rc    php ${CONSOLE_PATH} doctrine:fixtures:load --no-interaction
     Should Be Equal As Integers    ${rc}    0
+    Run Keyword If    '${ENV}' == 'dev'    Remove File    ${LOG_PATH}/testName.txt
+    Run Keyword If    '${ENV}' == 'dev'    Append To File    ${LOG_PATH}/testName.txt    ${SUITE NAME} / ${TEST NAME}
     I open browser
 
 TestTeardown
+    Run Keyword If    '${ENV}' == 'dev'    Remove File    ${LOG_PATH}/testName.txt
     Close All Browsers

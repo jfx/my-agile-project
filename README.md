@@ -16,6 +16,7 @@ more specifically Agile projects with those following features :
 Features:
 
   - Add travis CI for multiple php version,
+  - Add badges to readme page,
 
 Bugfixes:
 

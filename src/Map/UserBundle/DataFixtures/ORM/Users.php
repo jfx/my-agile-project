@@ -50,6 +50,8 @@ class Users extends AbstractFixture implements
      * @param ContainerInterface|null $container A ContainerInterface
      *
      * @return void
+     * 
+     * @codeCoverageIgnore
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -62,6 +64,8 @@ class Users extends AbstractFixture implements
      * @param ObjectManager $manager The entity manager
      *
      * @return void
+     * 
+     * @codeCoverageIgnore
      */
     public function load(ObjectManager $manager)
     {
@@ -146,6 +150,8 @@ class Users extends AbstractFixture implements
      * Get the order of this fixture
      *
      * @return integer
+     * 
+     * @codeCoverageIgnore
      */
     public function getOrder()
     {
