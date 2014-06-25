@@ -43,27 +43,27 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects();
-        
+
         $crawler = $client->request('GET', '/login');
-        
+
         $elt = $crawler->filter('html:contains("Username")');
         $eltCount = $elt->count();
         $this->assertGreaterThan(0, $eltCount);
-        
+
         $form = $crawler->selectButton('login')->form();
         $form['_username'] = 'useruser';
         $form['_password'] = 'user';
-        
+
         $client->submit($form);
 
         $statusCode  = $client->getResponse()->getStatusCode();
         $this->assertTrue(200 === $statusCode);
-        
+
         $content = $client->getResponse()->getContent();
-        
+
         $logger = $client->getContainer()->get('logger');
         $logger->info($content);
-        
+
         $count = substr_count($content, 'Hello Firstuser User !');
         $this->assertGreaterThan(0, $count);
     }

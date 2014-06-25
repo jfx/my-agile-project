@@ -63,7 +63,7 @@ class CoverageListener
      * @static string Name of test
      */
     protected static $coverageDirName = 'coverage';
-    
+
     /**
      * @var string Name of test
      */
@@ -73,7 +73,7 @@ class CoverageListener
      * @static string Name of test
      */
     protected static $testNameFile = 'testName.txt';
-    
+
     /**
      * Constructor
      *
@@ -99,7 +99,7 @@ class CoverageListener
         $this->coverage = new PHP_CodeCoverage(null, $filter);
 
         $testNameFilePath = $kernel->getLogDir().'/'.self::$testNameFile;
-        
+
         if (file_exists($testNameFilePath)) {
 
             $content = htmlspecialchars(file_get_contents($testNameFilePath));

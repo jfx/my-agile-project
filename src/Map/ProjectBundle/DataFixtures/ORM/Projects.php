@@ -43,7 +43,7 @@ class Projects extends AbstractFixture implements OrderedFixtureInterface
      * @param ObjectManager $manager The entity manager
      *
      * @return void
-     * 
+     *
      * @codeCoverageIgnore
      */
     public function load(ObjectManager $manager)
@@ -105,7 +105,7 @@ class Projects extends AbstractFixture implements OrderedFixtureInterface
      * Get the order of this fixture
      *
      * @return integer
-     * 
+     *
      * @codeCoverageIgnore
      */
     public function getOrder()

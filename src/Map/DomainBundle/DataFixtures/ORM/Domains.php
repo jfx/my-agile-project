@@ -79,7 +79,7 @@ class Domains extends AbstractFixture implements OrderedFixtureInterface
      * Get the order of this fixture
      *
      * @return integer
-     * 
+     *
      * @codeCoverageIgnore
      */
     public function getOrder()

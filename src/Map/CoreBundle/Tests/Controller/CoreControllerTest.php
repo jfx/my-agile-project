@@ -41,12 +41,12 @@ class CoreControllerTest extends WebTestCase
      */
     public function testIndex()
     {
-        $client = static::createClient();       
+        $client = static::createClient();
         $crawler = $client->request('GET', '/login');
-        
+
         $statusCode  = $client->getResponse()->getStatusCode();
         $this->assertTrue(200 === $statusCode);
-                
+
         $elt = $crawler->filter('html:contains("My Agile Project > Login")');
         $eltCount = $elt->count();
         $this->assertGreaterThan(0, $eltCount);
