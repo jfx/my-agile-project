@@ -12,8 +12,7 @@
     {% stylesheets filter='lessphp,cssembed'
         '@MapCoreBundle/Resources/public/less/map.less'
         '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
-        '@MopaBootstrapBundle/Resources/public/less/eyecon-bootstrap-datepicker.less'
-        '@MopaBootstrapBundle/Resources/bootstrap/less/responsive.less'
+        '@MopaBootstrapBundle/Resources/public/less/eyecon-datepicker.less'
         '@MapCoreBundle/Resources/public/less/mapover.less'
        output='css/all.css'
     %}
@@ -48,7 +47,16 @@
 
 {% block body %}
     {% block navbar %}
-        {{ mopa_bootstrap_navbar('frontendNavbar') }}
+        {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true } %}
+            {% block brand %}
+                <a class="navbar-brand" href="#">My Agile Project</a>
+            {% endblock %}
+
+            {% block menu %}
+                {{ mopa_bootstrap_menu('MapCoreBundle:Builder:mainMenu') }}
+                {{ mopa_bootstrap_menu('MapCoreBundle:Builder:rightMenu') }}
+            {% endblock %}
+        {% endembed %}
     {% endblock navbar %}
 
     {% block container %}
@@ -93,18 +101,18 @@
     {% block foot_script %}
     {% javascripts
         '@MapCoreBundle/Resources/public/js/jquery.min.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-transition.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-alert.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-modal.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-dropdown.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-scrollspy.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tab.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-tooltip.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-popover.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-button.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-collapse.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-carousel.js'
-        '@MopaBootstrapBundle/Resources/bootstrap/js/bootstrap-typeahead.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/affix.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/alert.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/button.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/carousel.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/collapse.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/dropdown.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/modal.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/popover.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/scrollspy.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/tab.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/tooltip.js'
+        '@MopaBootstrapBundle/Resources/bootstrap/js/transition.js'
         '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-collection.js'
         '@MopaBootstrapBundle/Resources/public/js/mopabootstrap-subnav.js'
         '@MopaBootstrapBundle/Resources/public/js/eyecon-bootstrap-datepicker.js'

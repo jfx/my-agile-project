@@ -75,7 +75,8 @@ swiftmailer:
     
 # Bootstrap bundle
 mopa_bootstrap:
-    navbar: ~
+    form: ~
+    menu: ~
     
 # FOSUser bundle
 fos_user:

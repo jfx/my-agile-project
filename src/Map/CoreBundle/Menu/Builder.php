@@ -20,9 +20,7 @@ namespace Map\CoreBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Map\UserBundle\Entity\Role;
-use Mopa\Bundle\BootstrapBundle\Navbar\AbstractNavbarMenuBuilder;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * Menu builder class.
@@ -35,75 +33,55 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
+class Builder extends ContainerAware
 {
     /**
-     * @var SecurityContextInterface S. Context
-     */
-    protected $securityContext;
-
-    /**
-     * {@inheritDoc}
+     * Create main menu
      *
-     * @param FactoryInterface         $factory         Factory.
-     * @param SecurityContextInterface $securityContext Security context.
-     */
-    public function __construct(
-        FactoryInterface $factory,
-        SecurityContextInterface $securityContext
-    ) {
-        parent::__construct($factory);
-
-        $this->securityContext = $securityContext;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param Request $request Request.
-     *
+     * @param FactoryInterface $factory Factory interface.
+     * @param array            $options Options.
+     * 
      * @return Knp\Menu\MenuItem
      */
-    public function createMainMenu(Request $request)
+    public function mainMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav');
+         $menu = $factory->createItem('root', array(
+            'navbar' => true,
+        ));
 
         $menu->addChild('Home', array('route' => 'home_index'));
+        
+        $dropdownAdmin = $menu->addChild('Admin', array(
+            'dropdown' => true,
+            'caret' => true,          
+        ));
 
-        $this->addDivider($menu, true);
-
-        $dropdownAdmin = $this->createDropdownMenuItem(
-            $menu,
-            "Admin",
-            false,
-            array('caret' => true)
-        );
         $dropdownAdmin->addChild('Profile', array('route' => 'user_profile'));
 
-        $this->addDivider($dropdownAdmin);
+        $dropdownAdmin->addChild('divider_1', array('divider' => true));
 
         $dropdownAdmin->addChild('Users', array('route' => 'user_index'));
         $dropdownAdmin->addChild('Domains', array('route' => 'domain_index'));
-
-        $this->addDivider($menu, true);
 
         return $menu;
     }
 
     /**
-     * {@inheritDoc}
+     * Create right menu
      *
-     * @param Request $request Request.
-     *
+     * @param FactoryInterface $factory Factory interface.
+     * @param array            $options Options.
+     * 
      * @return Knp\Menu\MenuItem
      */
-    public function createRightSideDropdownMenu(Request $request)
+    public function rightMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav pull-right');
-
-        $user = $this->securityContext->getToken()->getUser();
+        $menu = $factory->createItem('root', array(
+            'navbar' => true,
+            'pull-right' => true,
+        ));
+        $securityContext = $this->container->get('security.context');
+        $user = $securityContext->getToken()->getUser();
         $username = ucfirst($user->getUsername());
         $roleLabel = $user->getCurrentRoleLabel();
 
@@ -124,9 +102,6 @@ class NavbarMenuBuilder extends AbstractNavbarMenuBuilder
             $username.$star.' '.$roleLabel2Display,
             array('route' => 'user_profile')
         );
-
-        $this->addDivider($menu, true);
-
         $menu->addChild(
             'Log out',
             array('route' => 'fos_user_security_logout')
