@@ -1,0 +1,3 @@
+map_menu_select:
+    pattern:  /select
+    defaults: { _controller: "MapCoreBundle:Select:request" }

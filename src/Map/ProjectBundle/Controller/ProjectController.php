@@ -224,23 +224,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Select a project in combobox
-     *
-     * @return Response A Response instance
-     *
-     * @Secure(roles="ROLE_USER")
-     */
-    public function selectAction()
-    {
-        $request = $this->getRequest();
-        $projectId = $request->request->get('map_menu_select')['search'];
-
-        return $this->redirect(
-            $this->generateUrl('project_view', array('id' => $projectId))
-        );
-    }
-
-    /**
      * Refresh available domain displayed in select box
      *
      * @return void

@@ -54,6 +54,7 @@
 
             {% block menu %}
                 {{ mopa_bootstrap_menu('MapCoreBundle:Builder:mainMenu') }}
+                {{ render(controller("MapCoreBundle:Select:display")) }}
                 {{ mopa_bootstrap_menu('MapCoreBundle:Builder:rightMenu') }}
             {% endblock %}
         {% endembed %}

@@ -19,8 +19,7 @@
 namespace Map\CoreBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
-use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Map\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -35,15 +34,23 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class MenuSelectType extends DefaultType implements
-    NavbarFormInterface,
-    ContainerAwareInterface
+class MenuSelectType extends DefaultType
 {
     /**
-     * @var ContainerInterface Container
+     * @var User User object
      */
-    protected $container;
+    protected $user;
 
+    /**
+     * Constructor
+     *
+     * @param ContainerInterface $containerInterface The container.
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+    
     /**
      * {@inheritDoc}
      *
@@ -54,16 +61,14 @@ class MenuSelectType extends DefaultType implements
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $securityContext = $this->container->get('security.context');
-        $user = $securityContext->getToken()->getUser();
 
-        $currentProject = $user->getCurrentProject();
+        $currentProject = $this->user->getCurrentProject();
         if ($currentProject === null) {
             $currentProjectId = 0;
         } else {
             $currentProjectId = $currentProject->getId();
         }
-        $availableProjects = $user->getAvailableProjects();
+        $availableProjects = $this->user->getAvailableProjects();
 
         $keyExists = false;
         foreach ($availableProjects as $projects4aDomain) {
@@ -79,10 +84,13 @@ class MenuSelectType extends DefaultType implements
                     'label' => false,
                     'choices' => $availableProjects,
                     'data' => $currentProjectId,
-                    'widget_control_group' => false,
-                    'widget_controls' => false,
+  //                  'horizontal_label_class' => 'col-lg-offset-3',
+                'horizontal_input_wrapper_class' => 'col-lg-12',
+    //                'widget_control_group' => false,
+    //                'widget_controls' => false,
                     'attr' => array(
-                        'class' => "span2",
+                        'placeholder' => 'col-lg-12',
+    //                    'class' => "form-control",
                         'onChange' => "this.form.submit()"
                     )
                 )
@@ -95,10 +103,13 @@ class MenuSelectType extends DefaultType implements
                     'label' => false,
                     'choices' => $availableProjects,
                     'empty_value' => '',
-                    'widget_control_group' => false,
-                    'widget_controls' => false,
+ //                   'horizontal_label_class' => 'col-lg-offset-3',
+                'horizontal_input_wrapper_class' => 'col-lg-12',
+    //                'widget_control_group' => false,
+    //                'widget_controls' => false,
                     'attr' => array(
-                        'class' => "span2",
+                        'placeholder' => 'col-lg-12',
+    //                    'class' => "form-control",
                         'onChange' => "this.form.submit()"
                     )
                 )
@@ -123,19 +134,6 @@ class MenuSelectType extends DefaultType implements
      */
     public function getRoute()
     {
-        return "project_select";
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance
-     * or null
-     *
-     * @return void
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
+        return "map_menu_select";
     }
 }
