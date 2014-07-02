@@ -1,13 +1,14 @@
 {% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+{% from 'MopaBootstrapBundle::macros.html.twig' import label, badge %}
 
 <!DOCTYPE html>
 
 {% block html_tag %}
-<html>
+<html lang="en">
 {% endblock html_tag %}
 {% block head %}
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     {% block head_externalstyle %}
     {% stylesheets filter='lessphp,cssembed'
         '@MapCoreBundle/Resources/public/less/map.less'
@@ -28,7 +29,7 @@
     {% endblock head_internalstyle %}
     </style>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% block head_script %}
     {% endblock head_script %}
@@ -39,7 +40,7 @@
 {% endblock head %}
 
 {% block body_tag %}
-<body data-spy="scroll">
+<body  role="document">
 {% endblock body_tag %}
 
 {% block body_start %}
@@ -47,7 +48,7 @@
 
 {% block body %}
     {% block navbar %}
-        {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { fixedTop: true, inverse: true } %}
+        {% embed '@MopaBootstrap/Navbar/navbar.html.twig' with { inverse: true, fixedTop: true } %}
             {% block brand %}
                 <a class="navbar-brand" href="#">My Agile Project</a>
             {% endblock %}
@@ -61,7 +62,7 @@
     {% endblock navbar %}
 
     {% block container %}
-    <div class="{% block container_class %}container-fluid{% endblock container_class %}">
+    <div class="{% block container_class %}container{% endblock container_class %}">
         {% block header %}
         {% endblock header %}
 
