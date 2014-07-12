@@ -106,7 +106,7 @@ class FormHandler
                 foreach ($errors as $error) {
 
                     $this->session->getFlashBag()->add(
-                        'error',
+                        'danger',
                         ucfirst($error->getPropertyPath())
                         .' : '.$error->getMessage()
                     );

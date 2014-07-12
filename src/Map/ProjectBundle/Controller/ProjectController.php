@@ -202,7 +202,7 @@ class ProjectController extends Controller
             } catch (Exception $e) {
 
                 $this->get('session')->getFlashBag()->add(
-                    'error',
+                    'danger',
                     'Impossible to remove this item'
                     .' - Integrity constraint violation !'
                 );

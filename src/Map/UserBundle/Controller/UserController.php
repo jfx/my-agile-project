@@ -228,7 +228,7 @@ class UserController extends Controller
 
                 $this->get('session')->getFlashBag()
                     ->add(
-                        'error',
+                        'danger',
                         'Impossible to remove this item'
                         .' - Integrity constraint violation !'
                     );
