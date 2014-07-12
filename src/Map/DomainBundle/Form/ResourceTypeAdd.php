@@ -1,5 +1,7 @@
 <?php
 /**
+ * Resource form class.
+ *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -18,23 +20,23 @@
 
 namespace Map\DomainBundle\Form;
 
-use Map\CoreBundle\Form\DefaultType;
+use Map\UserBundle\Entity\RoleRepository;
+use Map\UserBundle\Entity\UserRepository;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Domain form class.
+ * Resource form class for add action.
  *
  * @category  MyAgileProject
  * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2012 Francois-Xavier Soubirou
+ * @copyright 2014 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
  *
  */
-class DomainType extends DefaultType
+class ResourceTypeAdd extends ResourceType
 {
     /**
      * Builds the form.
@@ -49,47 +51,33 @@ class DomainType extends DefaultType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $domain = $this->domain;
+     
         $builder
             ->add(
-                'name',
-                'text',
-                array()
+                'user',
+                'entity',
+                array(
+                    'label' => 'Resource',
+                    'class' => 'Map\UserBundle\Entity\User',
+                    'property' => 'nameFirstname',
+                    'query_builder' =>
+                        function (UserRepository $er) use ($domain) {
+                            return $er->getQBAvailableUserByDomain($domain);
+                    }
+                )
             )
             ->add(
-                'details',
-                'textarea',
+                'role',
+                'entity',
                 array(
-                    'required' => false,
-                    'attr'  => array(
-                        'rows' => 4
-                    )
+                    'label' => 'Role',
+                    'class' => 'Map\UserBundle\Entity\Role',
+                    'property' => 'label',
+                    'query_builder' => function (RoleRepository $er) {
+                        return $er->getQBAllOrdered();
+                    },
                 )
             );
-    }
-
-    /**
-     * Sets the default options for this type.
-     *
-     * @param OptionsResolverInterface $resolver The resolver for the options.
-     *
-     * @return void
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            $this->setDisabledAttr(
-                array('data_class' => 'Map\DomainBundle\Entity\Domain')
-            )
-        );
-    }
-
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return "map_domain";
     }
 }

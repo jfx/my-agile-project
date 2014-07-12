@@ -21,8 +21,8 @@ namespace Map\DomainBundle\Controller;
 use Exception;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Map\DomainBundle\Entiy\Domain;
-use Map\DomainBundle\Form\ResourceAddType;
-use Map\DomainBundle\Form\ResourceEditType;
+use Map\DomainBundle\Form\ResourceTypeAdd;
+use Map\DomainBundle\Form\ResourceTypeEditDel;
 use Map\DomainBundle\Form\ResourceFormHandler;
 use Map\UserBundle\Entity\UserDmRole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -98,7 +98,7 @@ class ResourceController extends Controller
         $defaultRole = $repositoryRole->findDefaultRole();
         $userDmRole->setRole($defaultRole);
 
-        $form = $this->createForm(new ResourceAddType($domain), $userDmRole);
+        $form = $this->createForm(new ResourceTypeAdd($domain), $userDmRole);
 
         $handler = new ResourceFormHandler(
             $form,
@@ -125,7 +125,7 @@ class ResourceController extends Controller
 
         return $this->render(
             'MapDomainBundle:Resource:add.html.twig',
-            array('form' => $form->createView(), 'domain' => $domain)
+            array('form' => $form->createView())
         );
     }
 
@@ -159,7 +159,11 @@ class ResourceController extends Controller
                 'Resource[id='.$id.'] not found for this domain'
             );
         }
-        $form = $this->createForm(new ResourceEditType($domain), $userDmRole);
+
+        $form = $this->createForm(
+            new ResourceTypeEditDel($domain),
+            $userDmRole
+        );
 
         $handler = new ResourceFormHandler(
             $form,
@@ -183,11 +187,7 @@ class ResourceController extends Controller
 
         return $this->render(
             'MapDomainBundle:Resource:edit.html.twig',
-            array(
-                'form' => $form->createView(),
-                'userDmRole' => $userDmRole,
-                'domain' => $domain
-            )
+            array('form' => $form->createView())
         );
     }
 
@@ -221,6 +221,7 @@ class ResourceController extends Controller
                 'Resource[id='.$id.'] not found for this domain'
             );
         }
+        
         if ($this->get('request')->getMethod() == 'POST') {
 
             $em->remove($userDmRole);
@@ -240,16 +241,20 @@ class ResourceController extends Controller
             } catch (Exception $e) {
 
                 $this->get('session')->getFlashBag()->add(
-                    'error',
+                    'danger',
                     'Impossible to remove this item'
                     .' - Integrity constraint violation !'
                 );
             }
         }
 
+        $resourceType = new ResourceTypeEditDel($domain);
+        $resourceType->setDisabled();       
+        $form = $this->createForm($resourceType, $userDmRole);
+
         return $this->render(
             'MapDomainBundle:Resource:del.html.twig',
-            array('userDmRole' => $userDmRole, 'domain' => $domain)
+            array('form' => $form->createView())
         );
     }
 

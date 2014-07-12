@@ -12,11 +12,11 @@ I click button
 
 I confirm
     Sleep    1s
-    Click link    link=OK
+    Click element    button_ok
 
 I do not confirm
     Sleep    1s
-    Click link    link=Cancel
+    Click element    button_cancel
 
 I select date
     [Arguments]    ${element}    ${order}    ${day}    ${month}=0

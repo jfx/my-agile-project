@@ -67,3 +67,9 @@ I should not see action button(s)
 I should see 404 error page
     [Arguments]    ${msg}='404 Item not found'
     Page Should Contain    404 Not Found
+
+Disabled text element should contain
+    [Arguments]    ${id}    ${expected}
+    Element Should Be Disabled    ${id}
+    ${value} =    Get Element Attribute    ${id}@value
+    Should Be Equal     ${expected}    ${value}

@@ -116,9 +116,17 @@ class DomainController extends Controller
         $serviceInfo = $this->container->get('map_user.domaininfo');
         $child       = $serviceInfo->getChildCount($domain);
 
+        $domainType = new DomainType();
+        $domainType->setDisabled();
+        $form = $this->createForm($domainType, $domain);
+        
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
-            array('domain' => $domain, 'child' => $child)
+            array(
+                'form' => $form->createView(),
+                'domain' => $domain,
+                'child' => $child
+            )
         );
     }
 
@@ -206,7 +214,7 @@ class DomainController extends Controller
             } catch (Exception $e) {
 
                 $this->get('session')->getFlashBag()->add(
-                    'error',
+                    'danger',
                     'Impossible to remove this item'
                     .' - Integrity constraint violation !'
                 );
@@ -221,9 +229,13 @@ class DomainController extends Controller
         }
         $service->setCurrentDomain($domain);
 
+        $domainType = new DomainType();
+        $domainType->setDisabled();
+        $form = $this->createForm($domainType, $domain);
+
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
-            array('domain' => $domain)
+            array('form' => $form->createView(), 'domain' => $domain)
         );
     }
 }

@@ -135,4 +135,14 @@ class UserDmRole
     {
         return $this->role;
     }
+    
+    /**
+     * Get name and firstname of user
+     *
+     * @return string
+     */
+    public function getUserNameFirstname()
+    {
+        return $this->user->getNameFirstname();
+    }
 }

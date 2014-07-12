@@ -16,8 +16,8 @@ Switch project with select box
 
 Select box should contain available projects
     When I am a user
-    Page Should Contain Element    xpath=//optgroup[@label='Domain One']
-    Then Element Should Contain    id=map_menu_select_search    Project One
+    Then Page Should Contain Element    xpath=//optgroup[@label='Domain One']
+    And Element Should Contain    id=map_menu_select_search    Project One
     And Element Should Contain    id=map_menu_select_search    Project Two
     Page Should Contain Element    xpath=//optgroup[@label='Domain Two']
     And Element Should Contain    id=map_menu_select_search    Project Three
@@ -29,6 +29,10 @@ Select box should not contain closed project
 Select box should not contain project with no role
     I am a user with no role
     Then Run Keyword And Expect Error    *    Element Should Contain    id=map_menu_select_search    Project One
+
+Select box should not be displayed when no project
+    When I am a super-admin
+    Then Page Should Not Contain Element    id=map_menu_select_search
 
 *** Keywords ***
 I select in menu select

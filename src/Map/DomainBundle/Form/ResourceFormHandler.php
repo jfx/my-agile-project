@@ -81,7 +81,7 @@ class ResourceFormHandler extends FormHandler
                 return true;
             } else {
                 $this->session->getFlashBag()->add(
-                    'error',
+                    'danger',
                     'Integrity constraint violation !'
                 );
             }

@@ -70,50 +70,43 @@ class MenuSelectType extends DefaultType
         }
         $availableProjects = $this->user->getAvailableProjects();
 
-        $keyExists = false;
-        foreach ($availableProjects as $projects4aDomain) {
-            if (array_key_exists($currentProjectId, $projects4aDomain)) {
-                $keyExists = true;
+        if (count($availableProjects) > 0) {
+            
+            $keyExists = false;
+            foreach ($availableProjects as $projects4aDomain) {
+                if (array_key_exists($currentProjectId, $projects4aDomain)) {
+                    $keyExists = true;
+                }
             }
-        }
-        if ($keyExists) {
-            $builder->add(
-                'search',
-                'choice',
-                array(
-                    'label' => false,
-                    'choices' => $availableProjects,
-                    'data' => $currentProjectId,
-  //                  'horizontal_label_class' => 'col-lg-offset-3',
-                'horizontal_input_wrapper_class' => 'col-lg-12',
-    //                'widget_control_group' => false,
-    //                'widget_controls' => false,
-                    'attr' => array(
-                        'placeholder' => 'col-lg-12',
-    //                    'class' => "form-control",
-                        'onChange' => "this.form.submit()"
+            if ($keyExists) {
+                $builder->add(
+                    'search',
+                    'choice',
+                    array(
+                        'label' => false,
+                        'choices' => $availableProjects,
+                        'data' => $currentProjectId,
+                        'horizontal_input_wrapper_class' => 'col-lg-12',
+                        'attr' => array(
+                            'onChange' => "this.form.submit()"
+                        )
                     )
-                )
-            );
-        } else {
-            $builder->add(
-                'search',
-                'choice',
-                array(
-                    'label' => false,
-                    'choices' => $availableProjects,
-                    'empty_value' => '',
- //                   'horizontal_label_class' => 'col-lg-offset-3',
-                'horizontal_input_wrapper_class' => 'col-lg-12',
-    //                'widget_control_group' => false,
-    //                'widget_controls' => false,
-                    'attr' => array(
-                        'placeholder' => 'col-lg-12',
-    //                    'class' => "form-control",
-                        'onChange' => "this.form.submit()"
+                );
+            } else {
+                $builder->add(
+                    'search',
+                    'choice',
+                    array(
+                        'label' => false,
+                        'choices' => $availableProjects,
+                        'empty_value' => '',
+                        'horizontal_input_wrapper_class' => 'col-lg-12',
+                        'attr' => array(
+                            'onChange' => "this.form.submit()"
+                        )
                     )
-                )
-            );
+                );
+            }
         }
     }
 

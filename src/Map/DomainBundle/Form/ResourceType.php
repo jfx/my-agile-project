@@ -1,5 +1,7 @@
 <?php
 /**
+ * Resource form class.
+ *
  * LICENSE : This file is part of My Agile Project.
  *
  * My Agile Project is free software; you can redistribute it and/or modify
@@ -19,12 +21,11 @@
 namespace Map\DomainBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
-use Map\UserBundle\Entity\RoleRepository;
-use Symfony\Component\Form\FormBuilderInterface;
+use Map\DomainBundle\Entity\Domain;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Resource form class.
+ * Resource form class for add action.
  *
  * @category  MyAgileProject
  * @package   Domain
@@ -35,34 +36,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @since     2
  *
  */
-class ResourceEditType extends DefaultType
+abstract class ResourceType extends DefaultType
 {
     /**
-     * Builds the form.
-     *
-     * This method is called for each type in the hierarchy starting form the
-     * top most type. Type extensions can further modify the form.
-     *
-     * @param FormBuilderInterface $builder The form builder
-     * @param array                $options The options
-     *
-     * @return void
+     * @var Domain Domain
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    protected $domain;
+
+    /**
+     * Constructor.
+     *
+     * @param Domain $domain The domain in which the resource will be added.
+     */
+    public function __construct(Domain $domain)
     {
-        $builder
-            ->add(
-                'role',
-                'entity',
-                array(
-                    'label' => 'Role',
-                    'class' => 'Map\UserBundle\Entity\Role',
-                    'property' => 'label',
-                    'query_builder' => function (RoleRepository $er) {
-                        return $er->getQBAllOrdered();
-                    },
-                )
-            );
+        $this->domain     = $domain;
     }
 
     /**
@@ -75,7 +63,9 @@ class ResourceEditType extends DefaultType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array('data_class' => 'Map\UserBundle\Entity\UserDmRole')
+            $this->setDisabledAttr(
+                array('data_class' => 'Map\UserBundle\Entity\UserDmRole')
+            )
         );
     }
 
@@ -86,6 +76,6 @@ class ResourceEditType extends DefaultType
      */
     public function getName()
     {
-        return "map_domainbundle_resourceedittype";
+        return "map_resource";
     }
 }

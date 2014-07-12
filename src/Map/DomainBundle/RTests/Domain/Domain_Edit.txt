@@ -33,14 +33,14 @@ Impossible to edit a domain with a name too short
     Given I am a super-admin
     And I go to domains list
     And I click action button    Edit domain #1
-    When Input Text    map_domainbundle_domaintype_name    X
+    When Input Text    map_domain_name    X
     And I save
     Then Page Should Contain    This value is too short. It should have 2 characters or more.
 
 Impossible to edit a domain with a duplicate name
     Given I am a super-admin
     And I go to edit domain 1 page
-    When Input Text    map_domainbundle_domaintype_name    Domain Two
+    When Input Text    map_domain_name    Domain Two
     And I save
     Then Page Should Contain    A domain with this name already exists.
 

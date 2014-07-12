@@ -5,19 +5,25 @@
 {% block headline %}{{ domain_breadcrumb() }} > Projects list{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
+<div class="row-fluid">
+<ul class="nav nav-tabs" role="tablist">
     <li><a id="a_main" href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
     <li class="active"><a id="a_projects" href="#"><span id="badge_projects" class="badge badge-inverse">{{ child.projects }}</span>&nbsp;&nbsp;Projects</a></li>
     <li><a id="a_resources" href="{{ path('dm-resource_index') }}"><span id="badge_resources" class="badge badge-info">{{ child.resources }}</span>&nbsp;&nbsp;Resources</a></li>
 </ul>
+</div>
+<br />
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>
             {% if is_granted('ROLE_DM_MANAGER') %}
-                    <a href="{{ path('project_add') }}"
-                        class="btn" title="Add">
-                        <i class="icon-plus-sign"></i>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('project_add') }}"
+                        title="Add">
+                        {{ icon('plus') }}
                     </a>
             {% endif %}
                &nbsp;&nbsp;Action
@@ -32,26 +38,29 @@
     <tbody>
 {% for project in projects %}
             <tr>
-                <td width="150">
+                <td class="action">
                     <a href="{{ path('project_view', {'id': project.id}) }}"
-                       class="btn" title="View project #{{ project.id }}">
-                        <i class="icon-eye-open"></i>
+                       class="btn btn-default btn-xs"
+                       title="View project #{{ project.id }}">
+                        {{ icon('eye-open') }}
                     </a>
                     {% if is_granted('ROLE_DM_MANAGER') %}
                     <a href="{{ path('project_edit', {'id': project.id}) }}"
-                       class="btn" title="Edit project #{{ project.id }}">
-                        <i class="icon-edit"></i>
+                       class="btn btn-default btn-xs"
+                       title="Edit project #{{ project.id }}">
+                        {{ icon('edit') }}
                     </a>
                     <a href="{{ path('project_del', {'id': project.id}) }}"
-                       class="btn" title="Delete project #{{ project.id }}">
-                        <i class="icon-trash"></i>
+                       class="btn btn-default btn-xs"
+                       title="Delete project #{{ project.id }}">
+                        {{ icon('trash') }}
                     </a>
                     {% endif %}
                 </td>
                 <td>{{ project.name }}</td>
                 <td>{{ project.startDate|localeDate }}</td>
                 <td>{{ project.finishDate|localeDate }}</td>
-                <td>{% if project.isClosed() %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
+                <td>{% if project.isClosed() %}{{ icon('ok') }}{% else %}-{% endif %}</td>
                 <td>{{ project.details }}</td>
             </tr>
 {% else %}
@@ -59,4 +68,6 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
 {% endblock content %}

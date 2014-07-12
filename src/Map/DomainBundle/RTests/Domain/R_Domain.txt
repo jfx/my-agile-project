@@ -11,10 +11,10 @@ I go to resources list
 
 I fill in domain form
     [Arguments]    ${domain}
-    Input text    map_domainbundle_domaintype_name    ${domain}
-    Input text    map_domainbundle_domaintype_details    Details 4 ${domain}
+    Input text    map_domain_name    ${domain}
+    Input text    map_domain_details    Details 4 ${domain}
 
 I check domain view form
     [Arguments]    ${domain}
-    And Element Text Should Be    id=inputName    ${domain}
-    And Element Text Should Be    id=textDetails    Details 4 ${domain}
+    Disabled text element should contain    map_domain_name    ${domain}
+    Element Text Should Be    map_domain_details    Details 4 ${domain}

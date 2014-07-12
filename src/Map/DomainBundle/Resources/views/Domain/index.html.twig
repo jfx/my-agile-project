@@ -5,14 +5,16 @@
 {% block headline %}Admin > Domains list{% endblock headline %}
 
 {% block content %}
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>{% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('domain_add') }}"
-                        class="btn" title="Add">
-                        <i class="icon-plus-sign"></i>
-                    </a>
+                <a class="btn btn-default btn-xs" href="{{ path('domain_add') }}"
+                   title="Add">
+                    {{ icon('plus') }}
+                </a>
                {% endif %}
                &nbsp;&nbsp;Action
             </th>
@@ -24,19 +26,22 @@
     <tbody>
 {% for domain in domains %}
             <tr>
-                <td width="150">
-                    <a href="{{ path('domain_view', {'id': domain.id}) }}"
-                       class="btn" title="View domain #{{ domain.id }}">
-                        <i class="icon-eye-open"></i>
+                <td class="action">
+                    <a class="btn btn-default btn-xs" 
+                       href="{{ path('domain_view', {'id': domain.id}) }}"
+                       title="View domain #{{ domain.id }}">
+                            {{ icon('eye-open') }}
                     </a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a href="{{ path('domain_edit', {'id': domain.id}) }}"
-                       class="btn" title="Edit domain #{{ domain.id }}">
-                        <i class="icon-edit"></i>
+                    <a class="btn btn-default btn-xs" 
+                       href="{{ path('domain_edit', {'id': domain.id}) }}"
+                       title="Edit domain #{{ domain.id }}">
+                            {{ icon('edit') }}
                     </a>
-                    <a href="{{ path('domain_del', {'id': domain.id}) }}"
-                       class="btn" title="Delete domain #{{ domain.id }}">
-                        <i class="icon-trash"></i>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('domain_del', {'id': domain.id}) }}"
+                       title="Delete domain #{{ domain.id }}">
+                            {{ icon('trash') }}
                     </a>
                     {% endif %}
                 </td>
@@ -53,4 +58,6 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
 {% endblock content %}

@@ -5,19 +5,24 @@
 {% block headline %}{{ domain_breadcrumb() }} > Resources list{% endblock headline %}
 
 {% block content %}
+<div class="row-fluid">
 <ul class="nav nav-tabs">
     <li><a id="a_main" href="{{ path('domain_view', {'id': domain.id}) }}">Main</a></li>
     <li><a id="a_projects" href="{{ path('dm-project_index') }}"><span id="badge_projects" class="badge badge-info">{{ child.projects }}</span>&nbsp;&nbsp;Projects</a></li>
     <li class="active"><a id="a_resources" href="#"><span id="badge_resources" class="badge badge-inverse">{{ child.resources }}</span>&nbsp;&nbsp;Resources</a></li>
 </ul>
+</div>
+<br />
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
             <th>
                     <a href="{{ path('dm-resource_add') }}"
-                        class="btn" title="Add">
-                        <i class="icon-plus-sign"></i>
+                        class="btn btn-default btn-xs" title="Add">
+                        {{ icon('plus') }}
                     </a>
 
                &nbsp;&nbsp;Action
@@ -32,14 +37,16 @@
 {% for resource in resources %}
             <tr>
                 {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_DM_MANAGER') %}
-                <td width="150">
+                <td class="action">
                     <a href="{{ path('dm-resource_edit', {'id': resource.id}) }}"
-                       class="btn" title="Edit resource #{{ resource.id }}">
-                        <i class="icon-edit"></i>
+                       class="btn btn-default btn-xs"
+                       title="Edit resource #{{ resource.id }}">
+                        {{ icon('edit') }}
                     </a>
                     <a href="{{ path('dm-resource_del', {'id': resource.id}) }}"
-                       class="btn" title="Delete resource #{{ resource.id }}">
-                        <i class="icon-trash"></i>
+                       class="btn btn-default btn-xs"
+                       title="Delete resource #{{ resource.id }}">
+                        {{ icon('trash') }}
                     </a>
                 </td>
                 {% endif %}
@@ -56,4 +63,6 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
 {% endblock content %}
