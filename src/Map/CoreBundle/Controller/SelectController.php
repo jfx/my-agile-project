@@ -50,7 +50,7 @@ class SelectController extends Controller
         $user = $securityContext->getToken()->getUser();
 
         $form = $this->createForm(new MenuSelectType($user));
-        
+
         return $this->render(
             'MapCoreBundle:Select:display.html.twig',
             array('form' => $form->createView())

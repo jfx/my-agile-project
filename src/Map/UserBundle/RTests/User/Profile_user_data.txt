@@ -34,14 +34,7 @@ Roles tab
 
 *** Keywords ***
 I should see user profile data
-    Element Text Should Be    inputFirstname    Firstuser
-    Element Text Should Be    inputName    User
-    Element Text Should Be    inputDisplayname    displayuser
-    Element Text Should Be    inputUsername    useruser
-    Element Text Should Be    inputEmail    user@example.com
-    Checkbox Should Not Be Selected    inputSuperAdmin
-    Textarea Should Contain    textDetails    user role on domain 1
-    Checkbox Should Not Be Selected    inputLocked
+    I check user view form    user    False    False    user role on domain 1 + user+ on domain 2
 
 I go to profile page
     Click element    link=Admin
@@ -49,11 +42,4 @@ I go to profile page
     Page Should Contain    Admin > Profile
 
 I should see super-admin profile data
-    Element Text Should Be    inputFirstname    Firstadmin
-    Element Text Should Be    inputName    Admin
-    Element Text Should Be    inputDisplayname    displayadmin
-    Element Text Should Be    inputUsername    useradmin
-    Element Text Should Be    inputEmail    admin@example.com
-    Checkbox Should Be Selected    inputSuperAdmin
-    Textarea Should Contain    textDetails    Admin user
-    Checkbox Should Not Be Selected    inputLocked
+    I check user view form    admin    True    False    Admin user

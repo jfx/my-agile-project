@@ -27,13 +27,13 @@
 {% for domain in domains %}
             <tr>
                 <td class="action">
-                    <a class="btn btn-default btn-xs" 
+                    <a class="btn btn-default btn-xs"
                        href="{{ path('domain_view', {'id': domain.id}) }}"
                        title="View domain #{{ domain.id }}">
                             {{ icon('eye-open') }}
                     </a>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <a class="btn btn-default btn-xs" 
+                    <a class="btn btn-default btn-xs"
                        href="{{ path('domain_edit', {'id': domain.id}) }}"
                        title="Edit domain #{{ domain.id }}">
                             {{ icon('edit') }}

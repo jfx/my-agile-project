@@ -135,7 +135,7 @@ class UserDmRole
     {
         return $this->role;
     }
-    
+
     /**
      * Get name and firstname of user
      *

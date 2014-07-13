@@ -52,7 +52,7 @@ class ProjectType extends DefaultDateType
         $builder
             ->add(
                 'name',
-                null,
+                'text',
                 array()
             )
             ->add(
@@ -109,7 +109,9 @@ class ProjectType extends DefaultDateType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array('data_class' => 'Map\ProjectBundle\Entity\Project')
+            $this->setDisabledAttr(
+                array('data_class' => 'Map\ProjectBundle\Entity\Project')
+            )
         );
     }
 
@@ -120,6 +122,6 @@ class ProjectType extends DefaultDateType
      */
     public function getName()
     {
-        return "map_projectbundle_projecttype";
+        return "map_project";
     }
 }

@@ -221,7 +221,7 @@ class ResourceController extends Controller
                 'Resource[id='.$id.'] not found for this domain'
             );
         }
-        
+
         if ($this->get('request')->getMethod() == 'POST') {
 
             $em->remove($userDmRole);
@@ -249,7 +249,7 @@ class ResourceController extends Controller
         }
 
         $resourceType = new ResourceTypeEditDel($domain);
-        $resourceType->setDisabled();       
+        $resourceType->setDisabled();
         $form = $this->createForm($resourceType, $userDmRole);
 
         return $this->render(

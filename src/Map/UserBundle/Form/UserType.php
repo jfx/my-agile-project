@@ -53,19 +53,22 @@ class UserType extends DefaultType
         $builder
             ->add(
                 'firstname',
-                null
+                'text',
+                array()
             )
             ->add(
                 'name',
-                null
+                'text',
+                array()
             )
             ->add(
                 'displayname',
-                null
+                'text',
+                array()
             )
             ->add(
                 'username',
-                null,
+                'text',
                 array(
                     'constraints' => array(
                         new Length(array('min' => 2, 'max' => 50))
@@ -82,7 +85,7 @@ class UserType extends DefaultType
             )
             ->add(
                 'email',
-                null,
+                'text',
                 array(
                     'constraints' => array(
                         new Email(array('message' => 'Invalid email address'))
@@ -92,7 +95,10 @@ class UserType extends DefaultType
             ->add(
                 'superAdmin',
                 'checkbox',
-                array('label' => 'Super-admin', 'required' => false)
+                array(
+                    'label' => 'Super-admin',
+                    'required' => false
+                )
             )
             ->add(
                 'details',
@@ -100,12 +106,17 @@ class UserType extends DefaultType
                 array(
                     'required' => false,
                     'attr'  => array(
-                        'class' => 'input-xxlarge',
                         'rows'  => 4
                     )
                 )
             )
-            ->add('locked', 'checkbox', array('required' => false));
+            ->add(
+                'locked',
+                'checkbox',
+                array(
+                    'required' => false
+                )
+            );
     }
 
     /**
@@ -118,7 +129,9 @@ class UserType extends DefaultType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array('data_class' => 'Map\UserBundle\Entity\User')
+            $this->setDisabledAttr(
+                array('data_class' => 'Map\UserBundle\Entity\User')
+            )
         );
     }
 
@@ -129,6 +142,6 @@ class UserType extends DefaultType
      */
     public function getName()
     {
-        return "map_userbundle_usertype";
+        return "map_user";
     }
 }

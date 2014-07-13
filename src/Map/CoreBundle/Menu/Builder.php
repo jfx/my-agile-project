@@ -40,21 +40,22 @@ class Builder extends ContainerAware
      *
      * @param FactoryInterface $factory Factory interface.
      * @param array            $options Options.
-     * 
+     *
      * @return Knp\Menu\MenuItem
      */
     public function mainMenu(FactoryInterface $factory, array $options)
     {
-         $menu = $factory->createItem('root', array(
-            'navbar' => true,
-        ));
+        $menu = $factory->createItem('root', array('navbar' => true));
 
         $menu->addChild('Home', array('route' => 'home_index'));
-        
-        $dropdownAdmin = $menu->addChild('Admin', array(
-            'dropdown' => true,
-            'caret' => true,          
-        ));
+
+        $dropdownAdmin = $menu->addChild(
+            'Admin',
+            array(
+                'dropdown' => true,
+                'caret' => true,
+            )
+        );
 
         $dropdownAdmin->addChild('Profile', array('route' => 'user_profile'));
 
@@ -71,15 +72,19 @@ class Builder extends ContainerAware
      *
      * @param FactoryInterface $factory Factory interface.
      * @param array            $options Options.
-     * 
+     *
      * @return Knp\Menu\MenuItem
      */
     public function rightMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $factory->createItem('root', array(
-            'navbar' => true,
-            'pull-right' => true,
-        ));
+        $menu = $factory->createItem(
+            'root',
+            array(
+                'navbar' => true,
+                'pull-right' => true,
+            )
+        );
+
         $securityContext = $this->container->get('security.context');
         $user = $securityContext->getToken()->getUser();
         $username = ucfirst($user->getUsername());

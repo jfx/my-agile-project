@@ -20,7 +20,6 @@ namespace Map\CoreBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
 use Map\UserBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -44,13 +43,13 @@ class MenuSelectType extends DefaultType
     /**
      * Constructor
      *
-     * @param ContainerInterface $containerInterface The container.
+     * @param User $user The user.
      */
     public function __construct(User $user)
     {
         $this->user = $user;
     }
-    
+
     /**
      * {@inheritDoc}
      *
@@ -71,7 +70,7 @@ class MenuSelectType extends DefaultType
         $availableProjects = $this->user->getAvailableProjects();
 
         if (count($availableProjects) > 0) {
-            
+
             $keyExists = false;
             foreach ($availableProjects as $projects4aDomain) {
                 if (array_key_exists($currentProjectId, $projects4aDomain)) {

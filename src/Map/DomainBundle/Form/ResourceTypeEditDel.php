@@ -21,7 +21,6 @@
 namespace Map\DomainBundle\Form;
 
 use Map\UserBundle\Entity\RoleRepository;
-use Map\UserBundle\Entity\UserRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

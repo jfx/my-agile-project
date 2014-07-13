@@ -125,9 +125,13 @@ class UserController extends Controller
             throw $this->createNotFoundException('User[id='.$id.'] not found');
         }
 
+        $userType = new UserType();
+        $userType->setDisabled();
+        $form = $this->createForm($userType, $user);
+
         return $this->render(
             'MapUserBundle:User:view.html.twig',
-            array('user' => $user)
+            array('form' => $form->createView(), 'user' => $user)
         );
     }
 
@@ -241,9 +245,13 @@ class UserController extends Controller
             }
         }
 
+        $userType = new UserType();
+        $userType->setDisabled();
+        $form = $this->createForm($userType, $user);
+
         return $this->render(
             'MapUserBundle:User:del.html.twig',
-            array('user' => $user)
+            array('form' => $form->createView(), 'user' => $user)
         );
     }
 
@@ -259,9 +267,13 @@ class UserController extends Controller
         $user = $this->container->get('security.context')
             ->getToken()->getUser();
 
+        $userType = new UserType();
+        $userType->setDisabled();
+        $form = $this->createForm($userType, $user);
+
         return $this->render(
             'MapUserBundle:User:profile.html.twig',
-            array('user' => $user)
+            array('form' => $form->createView(), 'user' => $user)
         );
     }
 

@@ -52,7 +52,7 @@ class ResourceTypeAdd extends ResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $domain = $this->domain;
-     
+
         $builder
             ->add(
                 'user',
@@ -64,7 +64,7 @@ class ResourceTypeAdd extends ResourceType
                     'query_builder' =>
                         function (UserRepository $er) use ($domain) {
                             return $er->getQBAvailableUserByDomain($domain);
-                    }
+                        }
                 )
             )
             ->add(

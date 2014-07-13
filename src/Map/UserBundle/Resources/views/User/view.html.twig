@@ -5,26 +5,30 @@
 {% block headline %}Admin > View user{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
+<div class="row-fluid">
+<ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#">Main</a></li>
     <li><a href="{{ path('user_view-role', {'id': user.id}) }}">Roles</a></li>
 </ul>
-<div class="span8">
-    <form class="form-horizontal well">
-
-        {% include "MapUserBundle:User:formread.html.twig" %}
-
-    </form>
 </div>
-<div class="span8">
-<a href="{{ path('user_index') }}" class="btn" title="Return to list">
-<i class="icon-chevron-left"></i>
-Return to list
+<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="form-horizontal well">
+
+            {{ form_widget(form) }}
+
+        </form>
+    </div>
+</div>
+<div class="row-fluid">
+<a class="btn btn-default btn-sm" href="{{ path('user_index') }}"
+   title="Return to list">
+    {{ icon('chevron-left') }} Return to list
 </a>
-<a href="{{ path('user_edit', {'id': user.id}) }}"
-class="btn" title="Edit">
-<i class="icon-edit"></i>
-Edit
+<a class="btn btn-default btn-sm"
+   href="{{ path('user_edit', {'id': user.id}) }}" title="Edit">
+    {{ icon('edit') }} Edit
 </a>
 </div>
 {% endblock content %}

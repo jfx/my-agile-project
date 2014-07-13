@@ -44,11 +44,11 @@ abstract class DefaultType extends AbstractType
      * Set disabled status
      *
      * @return DefaultType
-     */        
-    public function setDisabled() {
-        
+     */
+    public function setDisabled()
+    {
         $this->isDisabled = true;
-        
+
         return $this;
     }
 
@@ -59,14 +59,15 @@ abstract class DefaultType extends AbstractType
      *
      * @return array
      */
-    protected function setDisabledAttr(array $array) {
-        
+    protected function setDisabledAttr(array $array)
+    {
         if ($this->isDisabled) {
             $array['disabled'] = true;
         }
+
         return $array;
     }
-    
+
     /**
      * Builds the form view.
      *

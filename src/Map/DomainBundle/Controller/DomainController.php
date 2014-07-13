@@ -119,7 +119,7 @@ class DomainController extends Controller
         $domainType = new DomainType();
         $domainType->setDisabled();
         $form = $this->createForm($domainType, $domain);
-        
+
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
             array(

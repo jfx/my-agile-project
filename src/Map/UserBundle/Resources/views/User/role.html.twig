@@ -5,12 +5,16 @@
 {% block headline %}Admin > Profile > Roles{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
+<div class="row-fluid">
+<ul class="nav nav-tabs" role="tablist">
     <li><a href="{{ path('user_profile') }}">Main</a></li>
     <li><a href="{{ path('user_password') }}">Password</a></li>
     <li class="active"><a href="#">Roles</a></li>
 </ul>
-<div class="span6">
+</div>
+<br />
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -29,5 +33,6 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
 </div>
 {% endblock content %}

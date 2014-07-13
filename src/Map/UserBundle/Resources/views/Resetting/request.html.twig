@@ -15,21 +15,21 @@
     {% endif %}
 
 <div class="container">
-<div class="row">
-<div class="offset3 span6">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
 <form class="form-horizontal well" action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
 
-    <div class="control-group">
-        <label  class="control-label" for="username">{{ 'resetting.request.username'|trans }}</label>
-        <div class="controls">
-            <input type="text" id="username" name="username" required="required" />
+    <div class="form-group">
+        <label class="col-sm-5 control-label" for="username">{{ 'resetting.request.username'|trans }}</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control" id="username" name="username" required="required" />
         </div>
     </div>
-
+    <br />
     <div class="center">
-        <button type="submit" class="btn btn-small btn-info" title="Reset">
-            <i class="icon-ok icon-white"></i>
+        <button type="submit" id="reset" class="btn btn-sm btn-info" title="Reset">
+            {{ icon('ok', true) }}
             &nbsp;&nbsp;{{ 'resetting.request.submit'|trans }}&nbsp;&nbsp;
         </button>
     </div>
@@ -38,7 +38,7 @@
         <a href="{{ path('fos_user_security_login') }}">Return to login</a>
     </div>
 </form>
-</div>
-</div>
+        </div>
+    </div>
 </div>
 {% endblock fos_user_content %}
