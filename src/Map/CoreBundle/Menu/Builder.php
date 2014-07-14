@@ -41,7 +41,7 @@ class Builder extends ContainerAware
      * @param FactoryInterface $factory Factory interface.
      * @param array            $options Options.
      *
-     * @return Knp\Menu\MenuItem
+     * @return Knp\Menu\ItemInterface
      */
     public function mainMenu(FactoryInterface $factory, array $options)
     {
@@ -73,7 +73,7 @@ class Builder extends ContainerAware
      * @param FactoryInterface $factory Factory interface.
      * @param array            $options Options.
      *
-     * @return Knp\Menu\MenuItem
+     * @return Knp\Menu\ItemInterface
      */
     public function rightMenu(FactoryInterface $factory, array $options)
     {

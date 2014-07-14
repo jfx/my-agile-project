@@ -117,7 +117,7 @@ class UserDmRole
      *
      * @param Role $role The role
      *
-     * @return User
+     * @return UserDmRole
      */
     public function setRole(Role $role)
     {

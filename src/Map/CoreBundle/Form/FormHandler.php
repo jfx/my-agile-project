@@ -87,7 +87,7 @@ class FormHandler
     /**
      * For a submited form, valid it and update database.
      *
-     * @return bolean
+     * @return boolean
      */
     public function process()
     {
