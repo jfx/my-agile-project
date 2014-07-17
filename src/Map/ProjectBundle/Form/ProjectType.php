@@ -18,7 +18,7 @@
 
 namespace Map\ProjectBundle\Form;
 
-use Map\CoreBundle\Form\DefaultDateType;
+use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -34,7 +34,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @since     2
  *
  */
-class ProjectType extends DefaultDateType
+class ProjectType extends DefaultType
 {
     /**
      * Builds the form.
@@ -60,12 +60,8 @@ class ProjectType extends DefaultDateType
                 'date',
                 array(
                     'widget' => 'single_text',
-                    'input' => 'datetime',
-                    'format' => $this->getIcuFormat(),
-                    'attr'  => array(
-                        'class' => 'input-small datepicker',
-                        'data-date-format' => $this->getDatepickerFormat()
-                    )
+                    'datepicker' => true,
+                    'horizontal_input_wrapper_class' => 'col-lg-4',
                 )
             )
             ->add(
@@ -73,12 +69,8 @@ class ProjectType extends DefaultDateType
                 'date',
                 array(
                     'widget' => 'single_text',
-                    'input' => 'datetime',
-                    'format' => $this->getIcuFormat(),
-                    'attr'  => array(
-                        'class' => 'input-small datepicker',
-                        'data-date-format' => $this->getDatepickerFormat()
-                    )
+                    'datepicker' => true,
+                    'horizontal_input_wrapper_class' => 'col-lg-4',
                 )
             )
             ->add(
@@ -92,7 +84,6 @@ class ProjectType extends DefaultDateType
                 array(
                     'required' => false,
                     'attr'  => array(
-                        'class' => 'input-xxlarge',
                         'rows'  => 4
                     )
                 )

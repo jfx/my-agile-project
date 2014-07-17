@@ -111,9 +111,13 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
+        $projectType = new ProjectType($this->container);
+        $projectType->setDisabled();
+        $form = $this->createForm($projectType, $project);
+        
         return $this->render(
             'MapProjectBundle:Project:view.html.twig',
-            array('project' => $project)
+            array('form' => $form->createView(), 'project' => $project)
         );
     }
 
@@ -217,9 +221,13 @@ class ProjectController extends Controller
             }
         }
 
+        $projectType = new ProjectType($this->container);
+        $projectType->setDisabled();
+        $form = $this->createForm($projectType, $project);
+        
         return $this->render(
             'MapProjectBundle:Project:del.html.twig',
-            array('project' => $project)
+            array('form' => $form->createView(), 'project' => $project)
         );
     }
 

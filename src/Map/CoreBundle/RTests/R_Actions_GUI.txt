@@ -21,7 +21,6 @@ I do not confirm
 I select date
     [Arguments]    ${element}    ${order}    ${day}    ${month}=0
     Click Element    ${element}
-    ${order_next} =    Evaluate    1 + 3*(${order}-1)
     : FOR    ${INDEX}    IN RANGE    0    ${month}
-    \    Click Element    xpath=(//th[@class='next'])[${order_next}]
+    \    Click Element    xpath=(//div[@class='datetimepicker-days' and @style='display: block;']/table/thead/tr/th[@class='next'])[${order}]
     Click Element    xpath=(//td[text()='${day}'])[${order}]

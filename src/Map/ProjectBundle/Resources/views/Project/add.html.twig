@@ -1,34 +1,27 @@
-{% extends 'MapCoreBundle::layout.html.twig' %}
+{% extends 'MapCoreBundle::layoutDatetimepickerjs.html.twig' %}
 
 {% block title %}{{ parent() }} - Project add{% endblock title %}
 
 {% block headline %}{{ domain_breadcrumb() }} > Add project{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#">Main</a></li>
-</ul>
-<div class="span8">
-    <form novalidate="novalidate" class="form-horizontal well" method="post">
-        {{ form_widget(form) }}
-        <div class="center">
-            <button type="submit" class="btn btn-small btn-info" title="Save"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
-        </div>
-    </form>
+<div class="row-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#">Main</a></li>
+    </ul>
 </div>
-<div class="span8">
-<a href="{{ path('dm-project_index') }}" class="btn" title="Return to domain">
-<i class="icon-chevron-left"></i>
-Return to domain
-</a>
-</div>
-{% endblock content %}
+<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
-{% block foot_script %}
-{{ parent() }}
-<script type="text/javascript">
-$("form input.datepicker").datepicker({
-    weekStart: 1
-});
-</script>
-{% endblock foot_script %}
+        {% include "MapCoreBundle::form.html.twig" %}
+
+    </div>
+</div>
+<div class="row-fluid">
+    <a class="btn btn-default btn-sm" href="{{ path('dm-project_index') }}"
+       title="Return to domain">
+        {{ icon('chevron-left') }} Return to domain
+    </a>
+</div>        
+{% endblock content %}
