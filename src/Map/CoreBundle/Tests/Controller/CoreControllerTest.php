@@ -47,7 +47,7 @@ class CoreControllerTest extends WebTestCase
         $statusCode  = $client->getResponse()->getStatusCode();
         $this->assertTrue(200 === $statusCode);
 
-        $elt = $crawler->filter('html:contains("My Agile Project > Login")');
+        $elt = $crawler->filter('html:contains("My Agile Project")');
         $eltCount = $elt->count();
         $this->assertGreaterThan(0, $eltCount);
     }
