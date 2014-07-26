@@ -90,6 +90,22 @@ class ResourceController extends Controller
             return $this->redirect($this->generateUrl('domain_index'));
         }
 
+        $repositoryUser = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('MapUserBundle:User');
+
+        $count = $repositoryUser->getCountAvailableUserByDomain($domain);
+
+        if ($count < 1) {
+
+            $this->get('session')->getFlashBag()
+                ->add('danger', 'No resource to add !');
+
+            return $this->redirect(
+                $this->generateUrl('dm-resource_index')
+            );
+        }
+
         $userDmRole = new UserDmRole();
 
         $repositoryRole = $this->getDoctrine()
