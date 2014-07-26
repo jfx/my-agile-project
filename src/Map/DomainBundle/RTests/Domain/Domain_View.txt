@@ -36,7 +36,7 @@ Edit button not displayed for non super-admin profile
 Breadcrumb
     Given I am a user
     When I go to view domain 1 page
-    Then Page Should Contain    Admin > View domain
+    Then the breadcrumb should contain    Admin    View domain
 
 Tab Projects
     Given I am a user

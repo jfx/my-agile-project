@@ -72,4 +72,12 @@ Disabled text element should contain
     [Arguments]    ${id}    ${expected}
     Element Should Be Disabled    ${id}
     ${value} =    Get Element Attribute    ${id}@value
-    Should Be Equal     ${expected}    ${value}
+    Should Be Equal    ${expected}    ${value}
+
+the breadcrumb should contain
+    [Arguments]    @{list}
+    ${i} =     Set variable    0
+    :FOR    ${item}    IN    @{list}
+    \    ${i} =     Evaluate    ${i} + 1
+    \    ${level} =     Get Text    br_lvl${i}
+    \    Should Be Equal As Strings    ${item}    ${level}

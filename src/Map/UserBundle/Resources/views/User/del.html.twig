@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - User delete - Id : {{ user.id }}{% endblock title %}
 
-{% block headline %}Admin > Delete user{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Delete user']) }}{% endblock headline %}
 
 {% block content %}
 <div class="row">

@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Profile - Roles{% endblock title %}
 
-{% block headline %}Admin > Profile > Roles{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Profile', 'Roles']) }}{% endblock headline %}
 
 {% block content %}
 <div class="row-fluid">

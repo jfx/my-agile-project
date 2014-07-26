@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - User add{% endblock title %}
 
-{% block headline %}Admin > Add user{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Add user']) }}{% endblock headline %}
 
 {% block content %}
 

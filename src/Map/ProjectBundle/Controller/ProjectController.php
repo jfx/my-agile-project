@@ -114,7 +114,7 @@ class ProjectController extends Controller
         $projectType = new ProjectType($this->container);
         $projectType->setDisabled();
         $form = $this->createForm($projectType, $project);
-        
+
         return $this->render(
             'MapProjectBundle:Project:view.html.twig',
             array('form' => $form->createView(), 'project' => $project)
@@ -224,7 +224,7 @@ class ProjectController extends Controller
         $projectType = new ProjectType($this->container);
         $projectType->setDisabled();
         $form = $this->createForm($projectType, $project);
-        
+
         return $this->render(
             'MapProjectBundle:Project:del.html.twig',
             array('form' => $form->createView(), 'project' => $project)

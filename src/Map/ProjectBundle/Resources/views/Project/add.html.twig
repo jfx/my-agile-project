@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Project add{% endblock title %}
 
-{% block headline %}{{ domain_breadcrumb() }} > Add project{% endblock headline %}
+{% block headline %}{{ domain_breadcrumb('Add project') }}{% endblock headline %}
 
 {% block content %}
 <div class="row-fluid">
@@ -23,5 +23,5 @@
        title="Return to domain">
         {{ icon('chevron-left') }} Return to domain
     </a>
-</div>        
+</div>
 {% endblock content %}

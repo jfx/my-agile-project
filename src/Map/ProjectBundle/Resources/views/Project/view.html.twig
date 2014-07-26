@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Project view - Id : {{ project.id }}{% endblock title %}
 
-{% block headline %}{{ project_breadcrumb() }} > View{% endblock headline %}
+{% block headline %}{{ project_breadcrumb('View') }}{% endblock headline %}
 
 {% block content %}
 <div class="row-fluid">
@@ -27,12 +27,12 @@
     <a class="btn btn-default btn-sm" href="{{ path('dm-project_index') }}"
        title="Return to domain">
         {{ icon('chevron-left') }} Return to domain
-    </a> 
+    </a>
 {% if is_granted('ROLE_DM_MANAGER') %}
     <a class="btn btn-default btn-sm"
        href="{{ path('project_edit', {'id': project.id}) }}" title="Edit">
         {{ icon('edit') }} Edit
-    </a> 
+    </a>
 {% endif %}
 </div>
 {% endblock content %}

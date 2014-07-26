@@ -110,7 +110,7 @@ Breadcrumb
     Given I am a super-admin
     And I go to users list
     When I click action button    Edit user #2
-    Then Page Should Contain    Admin > Edit user
+    Then the breadcrumb should contain    Admin    Edit user
 
 Return to list button
     Given I am a super-admin

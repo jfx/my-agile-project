@@ -53,7 +53,7 @@ Wrong domain Id
 Breadcrumb
     Given I am a super-admin
     When I go to edit domain 1 page
-    Then Page Should Contain    Admin > Edit domain
+    Then the breadcrumb should contain    Admin    Edit domain
 
 Return to list button
     Given I am a super-admin

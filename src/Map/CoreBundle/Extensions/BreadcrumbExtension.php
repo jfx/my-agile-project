@@ -60,12 +60,45 @@ class BreadcrumbExtension extends Twig_Extension
         $this->router      = $router;
     }
 
-    /**
+        /**
      * Display domain breadcrumb.
+     *
+     * @param array $levels Label of levels.
      *
      * @return string
      */
-    public function domainBreadcrumb()
+    public function breadcrumb(array $levels)
+    {
+        $breadcrumb  = '<ol class="breadcrumb">';
+
+        $lvl_count = 0;
+
+        foreach ($levels as $level) {
+
+            $id = 'br_lvl'.++$lvl_count;
+
+            if (is_array($level)) {
+                $breadcrumb .= '  <li><a id="'.$id.'" href="';
+                $breadcrumb .= $level[1].'">'.$level[0].'</a></li>';
+            } else {
+                $breadcrumb .= '  <li id="'.$id.'" class="active">';
+                $breadcrumb .= $level.'</li>';
+            }
+
+        }
+        $breadcrumb .= '</ol>';
+
+        return $breadcrumb;
+    }
+
+    /**
+     * Display domain breadcrumb.
+     *
+     * @param string $action Label of action displayed.
+     *
+     * @return string
+     */
+    public function domainBreadcrumb($action)
     {
         $user = $this->securityContext->getToken()->getUser();
 
@@ -75,26 +108,31 @@ class BreadcrumbExtension extends Twig_Extension
             array('id' => $domain->getId())
         );
         $domainName = htmlspecialchars($domain->getName());
-        $domainLink  = '<a  id="b_domain" href="';
-        $domainLink .= $domainUrl.'">'.$domainName.'</a>';
 
-        return $domainLink;
+        $breadcrumb = $this->breadcrumb(
+            array(
+                array($domainName, $domainUrl),
+                $action
+            )
+        );
+
+        return $breadcrumb;
     }
 
     /**
      * Display project breadcrumb.
      *
+     * @param string $action Label of action displayed.
+     *
      * @return string
      */
-    public function projectBreadcrumb()
+    public function projectBreadcrumb($action)
     {
         $user = $this->securityContext->getToken()->getUser();
 
         $domain = $user->getCurrentDomain();
         $domainUrl = $this->router->generate('dm-project_index');
         $domainName = htmlspecialchars($domain->getName());
-        $domainLink  = '<a id="b_domain" href="';
-        $domainLink .= $domainUrl.'">'.$domainName.'</a>';
 
         $project = $user->getCurrentProject();
         $projectUrl = $this->router->generate(
@@ -102,10 +140,16 @@ class BreadcrumbExtension extends Twig_Extension
             array('id' => $project->getId())
         );
         $projectName = htmlspecialchars($project->getName());
-        $projectLink  = '<a id="b_project" href="';
-        $projectLink .= $projectUrl.'">'.$projectName.'</a>';
 
-        return $domainLink.' > '.$projectLink;
+        $breadcrumb = $this->breadcrumb(
+            array(
+                array($domainName, $domainUrl),
+                array($projectName, $projectUrl),
+                $action
+            )
+        );
+
+        return $breadcrumb;
     }
 
     /**
@@ -116,6 +160,11 @@ class BreadcrumbExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
+            'breadcrumb' => new Twig_Function_Method(
+                $this,
+                'breadcrumb',
+                array('is_safe' => array('html'))
+            ),
             'domain_breadcrumb' => new Twig_Function_Method(
                 $this,
                 'domainBreadcrumb',

@@ -80,7 +80,7 @@ Breadcrumb
     Given I am a super-admin
     And I go to users list
     When I click action button    Add
-    Then Page Should Contain    Admin > Add user
+    Then the breadcrumb should contain    Admin    Add user
 
 Return to list button
     Given I am a super-admin

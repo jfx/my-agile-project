@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - User edit - Id : {{ user.id }}{% endblock title %}
 
-{% block headline %}Admin > Edit user{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Edit user']) }}{% endblock headline %}
 
 {% block content %}
 <div class="row">

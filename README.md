@@ -18,6 +18,9 @@ Features:
   - Add travis CI for multiple php version,
   - Add badges to readme page,
   - Add test name in code coverage report,
+  - Migration to twitter bootstrap v3,
+  - Bootstrap modal confirm box,
+  - Bootstrap breadcrumb,
 
 Bugfixes:
 

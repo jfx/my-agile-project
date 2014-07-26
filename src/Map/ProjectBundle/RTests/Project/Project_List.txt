@@ -46,12 +46,12 @@ Action buttons Add/View/Edit/Delete for a manager
 Breadcrumb
     Given I am a user
     When I go to projects list    View domain #1
-    Then Page Should Contain    Domain One > Projects list
+    Then the breadcrumb should contain    Domain One    Projects list
 
 Breadcrumb domain link
     Given I am a user
     And I go to projects list    View domain #1
-    When Click Link    id=b_domain
+    When Click Link    id=br_lvl1
     Then Location Should Be    ${URL}/domain/1
 
 Tab Main

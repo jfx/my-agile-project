@@ -58,13 +58,13 @@ Breadcrumb
     Given I am a super-admin
     And I go to resources list    Edit domain #1
     And I click action button    Delete resource #5
-    Then Page Should Contain    Domain One > Delete resource
+    Then the breadcrumb should contain    Domain One    Delete resource
 
 Breadcrumb domain link
     Given I am a super-admin
     And I go to resources list    Edit domain #1
     And I click action button    Delete resource #5
-    When Click Link    id=b_domain
+    When Click Link    id=br_lvl1
     Then Location Should Be    ${URL}/domain/1
 
 Return to list button

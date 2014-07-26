@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Domain view - Id : {{ domain.id }}{% endblock title %}
 
-{% block headline %}Admin > View domain{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'View domain']) }}{% endblock headline %}
 
 {% block content %}
 <div class="row-fluid">

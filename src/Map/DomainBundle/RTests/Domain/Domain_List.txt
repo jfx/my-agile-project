@@ -31,7 +31,7 @@ No modify actions buttons in domains list for a non super-admin profile
 Breadcrumb
     Given I am a super-admin
     When I go to domains list
-    Then Page Should Contain    Admin > Domains list
+    Then the breadcrumb should contain    Admin    Domains list
 
 Action buttons Add/View/Edit/Delete for a super-admin
     Given I am a super-admin

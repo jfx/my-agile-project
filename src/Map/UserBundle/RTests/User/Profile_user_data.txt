@@ -18,7 +18,7 @@ Display super-admin data profile
 Breadcrumb
     Given I am a user
     When I go to profile page
-    Then Page Should Contain    Admin > Profile
+    Then the breadcrumb should contain    Admin    Profile
 
 Password tab
     Given I am a user
@@ -39,7 +39,7 @@ I should see user profile data
 I go to profile page
     Click element    link=Admin
     Click element    link=Profile
-    Page Should Contain    Admin > Profile
+    the breadcrumb should contain    Admin    Profile
 
 I should see super-admin profile data
     I check user view form    admin    True    False    Admin user

@@ -37,7 +37,7 @@ Breadcrumb
     Given I am a super-admin
     And I go to domains list
     When I click action button    Add
-    Then Page Should Contain    Admin > Add domain
+    Then the breadcrumb should contain    Admin    Add domain
 
 Return to list button
     Given I am a super-admin

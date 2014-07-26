@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} - Domains list{% endblock title %}
 
-{% block headline %}Admin > Domains list{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Domains list']) }}{% endblock headline %}
 
 {% block content %}
 <div class="row">

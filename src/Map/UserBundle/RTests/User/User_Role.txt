@@ -28,7 +28,7 @@ Wrong user Id
 Breadcrumb
     Given I am a super-admin
     When I go to user view role page    2
-    Then Page Should Contain    Admin > View user > Roles
+    Then the breadcrumb should contain    Admin    View user    Roles
 
 Main tab
     Given I am a super-admin
