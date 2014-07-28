@@ -21,6 +21,7 @@ Features:
   - Migration to twitter bootstrap v3,
   - Bootstrap modal confirm box,
   - Bootstrap breadcrumb,
+  - Migration to Symfony 2.5
 
 Bugfixes:
 
