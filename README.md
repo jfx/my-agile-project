@@ -30,6 +30,7 @@ Bugfixes:
   - Refactoring of controller delete methods,
   - Remove config.php file,
   - Fix Phpunit tests issue,
+  - Error 500 when no available resource to add.
 
 
 ### 0.5.0 (08 June 2014)
