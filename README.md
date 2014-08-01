@@ -12,7 +12,7 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
-### 0.6.0 ()
+### 0.6.0 (31 July 2014)
 Features:
 
   - Add travis CI for multiple php version,
@@ -21,7 +21,7 @@ Features:
   - Migration to twitter bootstrap v3,
   - Bootstrap modal confirm box,
   - Bootstrap breadcrumb,
-  - Migration to Symfony 2.5
+  - Migration to Symfony 2.5.
 
 Bugfixes:
 
