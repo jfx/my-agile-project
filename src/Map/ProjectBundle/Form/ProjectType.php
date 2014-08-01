@@ -18,7 +18,7 @@
 
 namespace Map\ProjectBundle\Form;
 
-use Map\CoreBundle\Form\DefaultDateType;
+use Map\CoreBundle\Form\DefaultType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -34,7 +34,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @since     2
  *
  */
-class ProjectType extends DefaultDateType
+class ProjectType extends DefaultType
 {
     /**
      * Builds the form.
@@ -52,7 +52,7 @@ class ProjectType extends DefaultDateType
         $builder
             ->add(
                 'name',
-                null,
+                'text',
                 array()
             )
             ->add(
@@ -60,12 +60,8 @@ class ProjectType extends DefaultDateType
                 'date',
                 array(
                     'widget' => 'single_text',
-                    'input' => 'datetime',
-                    'format' => $this->getIcuFormat(),
-                    'attr'  => array(
-                        'class' => 'input-small datepicker',
-                        'data-date-format' => $this->getDatepickerFormat()
-                    )
+                    'datepicker' => true,
+                    'horizontal_input_wrapper_class' => 'col-lg-4',
                 )
             )
             ->add(
@@ -73,12 +69,8 @@ class ProjectType extends DefaultDateType
                 'date',
                 array(
                     'widget' => 'single_text',
-                    'input' => 'datetime',
-                    'format' => $this->getIcuFormat(),
-                    'attr'  => array(
-                        'class' => 'input-small datepicker',
-                        'data-date-format' => $this->getDatepickerFormat()
-                    )
+                    'datepicker' => true,
+                    'horizontal_input_wrapper_class' => 'col-lg-4',
                 )
             )
             ->add(
@@ -92,7 +84,6 @@ class ProjectType extends DefaultDateType
                 array(
                     'required' => false,
                     'attr'  => array(
-                        'class' => 'input-xxlarge',
                         'rows'  => 4
                     )
                 )
@@ -109,7 +100,9 @@ class ProjectType extends DefaultDateType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array('data_class' => 'Map\ProjectBundle\Entity\Project')
+            $this->setDisabledAttr(
+                array('data_class' => 'Map\ProjectBundle\Entity\Project')
+            )
         );
     }
 
@@ -120,6 +113,6 @@ class ProjectType extends DefaultDateType
      */
     public function getName()
     {
-        return "map_projectbundle_projecttype";
+        return "map_project";
     }
 }

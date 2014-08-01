@@ -13,7 +13,7 @@ A super-admin edits a resource role
     Given I am a super-admin
     And I go to resources list    Edit domain #1
     And I click action button    Edit resource #2
-    And Select From List By Label    map_domainbundle_resourceedittype_role    Manager
+    And Select From List By Label    map_resource_role    Manager
     When I save
     Then Page Should Contain    Resource edited successfully
     When I log out
@@ -27,7 +27,7 @@ A manager edits a resource role
     Given I am a manager
     And I go to resources list    View domain #1
     And I click action button    Edit resource #2
-    And Select From List By Label    map_domainbundle_resourceedittype_role    User+
+    And Select From List By Label    map_resource_role    User+
     When I save
     Then Page Should Contain    Resource edited successfully
     And the table should contain    User Firstuser    displayuser    User+
@@ -47,13 +47,13 @@ Breadcrumb
     Given I am a super-admin
     And I go to resources list    Edit domain #1
     And I click action button    Edit resource #2
-    Then Page Should Contain    Domain One > Edit resource
+    Then the breadcrumb should contain    Domain One    Edit resource
 
 Breadcrumb domain link
     Given I am a super-admin
     And I go to resources list    Edit domain #1
     And I click action button    Edit resource #2
-    When Click Link    id=b_domain
+    When Click Link    id=br_lvl1
     Then Location Should Be    ${URL}/domain/1
 
 Return to list button

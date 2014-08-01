@@ -2,14 +2,18 @@
 
 {% block title %}{{ parent() }} - User view - Id : {{ user.id }}{% endblock title %}
 
-{% block headline %}Admin > View user > Roles{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'View user', 'Roles']) }}{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
+<div class="row-fluid">
+<ul class="nav nav-tabs" role="tablist">
     <li><a href="{{ path('user_view', {'id': user.id}) }}">Main</a></li>
     <li class="active"><a href="#">Roles</a></li>
 </ul>
-<div class="span6">
+</div>
+<br />
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -28,5 +32,12 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
+</div>
+<div class="row-fluid">
+<a class="btn btn-default btn-sm" href="{{ path('user_index') }}"
+   title="Return to list">
+    {{ icon('chevron-left') }} Return to list
+</a>
 </div>
 {% endblock content %}

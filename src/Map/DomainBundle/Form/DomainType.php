@@ -52,7 +52,8 @@ class DomainType extends DefaultType
         $builder
             ->add(
                 'name',
-                null
+                'text',
+                array()
             )
             ->add(
                 'details',
@@ -60,8 +61,7 @@ class DomainType extends DefaultType
                 array(
                     'required' => false,
                     'attr'  => array(
-                        'class' => 'input-xxlarge',
-                        'rows'  => 4
+                        'rows' => 4
                     )
                 )
             );
@@ -77,7 +77,9 @@ class DomainType extends DefaultType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
-            array('data_class' => 'Map\DomainBundle\Entity\Domain')
+            $this->setDisabledAttr(
+                array('data_class' => 'Map\DomainBundle\Entity\Domain')
+            )
         );
     }
 
@@ -88,6 +90,6 @@ class DomainType extends DefaultType
      */
     public function getName()
     {
-        return "map_domainbundle_domaintype";
+        return "map_domain";
     }
 }

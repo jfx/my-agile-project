@@ -50,6 +50,28 @@ class UserRepository extends EntityRepository
     }
 
     /**
+     * Get count of all available user for a domain (new resource).
+     *
+     * @param Domain $domain The domain.
+     *
+     * @return int.
+     */
+    public function getCountAvailableUserByDomain(Domain $domain)
+    {
+        $subQuery = $this->getDQLAddedUserByDomain();
+
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('count(u.id)')
+            ->where($qb->expr()->notIn('u.id', $subQuery))
+            ->andWhere('u.locked = false')
+            ->setParameter('domainId', $domain->getId());
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
+    /**
      * Get the query builder of all available user for a domain (new resource).
      *
      * @param Domain $domain The domain.
@@ -58,10 +80,7 @@ class UserRepository extends EntityRepository
      */
     public function getQBAvailableUserByDomain(Domain $domain)
     {
-        $udrRepository = $this->_em->getRepository('MapUserBundle:UserDmRole');
-        $subQuery = $udrRepository
-            ->getQBUserIdByDomainParam('domainId')
-            ->getDQL();
+        $subQuery = $this->getDQLAddedUserByDomain();
 
         $qb = $this->createQueryBuilder('u');
         $qb->where($qb->expr()->notIn('u.id', $subQuery))
@@ -70,5 +89,21 @@ class UserRepository extends EntityRepository
             ->setParameter('domainId', $domain->getId());
 
         return $qb;
+    }
+
+    /**
+     * Get the DQL query of all added user for a domain.
+     *
+     * @return DQL query.
+     */
+    private function getDQLAddedUserByDomain()
+    {
+        $udrRepository = $this->_em->getRepository('MapUserBundle:UserDmRole');
+
+        $subQuery = $udrRepository
+            ->getQBUserIdByDomainParam('domainId')
+            ->getDQL();
+
+        return $subQuery;
     }
 }

@@ -63,7 +63,7 @@ class ResourceFormHandler extends FormHandler
     /**
      * For a submited form, valid it and update database.
      *
-     * @return bolean
+     * @return boolean
      */
     public function process()
     {
@@ -81,7 +81,7 @@ class ResourceFormHandler extends FormHandler
                 return true;
             } else {
                 $this->session->getFlashBag()->add(
-                    'error',
+                    'danger',
                     'Integrity constraint violation !'
                 );
             }

@@ -2,27 +2,20 @@
 
 {% block title %}{{ parent() }} - Resource edit{% endblock title %}
 
-{% block headline %}{{ domain_breadcrumb() }} > Edit resource{% endblock headline %}
+{% block headline %}{{ domain_breadcrumb('Edit resource') }}{% endblock headline %}
 
 {% block content %}
-<div class="span8">
-    <form class="form-horizontal well" method="post">
-        <div class="control-group">
-            <label class="control-label" for="inputResource">Resource</label>
-            <div class="controls">
-                <span  id="inputResource" class="input-xlarge uneditable-input">{{ userDmRole.user.nameFirstname }}</span>
-            </div>
-        </div>
-        {{ form_widget(form) }}
-        <div class="center">
-            <button type="submit" class="btn btn-small btn-info" title="Save"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
-        </div>
-    </form>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        {% include "MapCoreBundle::form.html.twig" %}
+
+    </div>
 </div>
-<div class="span8">
-    <a href="{{ path('dm-resource_index') }}" class="btn" title="Return to list">
-        <i class="icon-chevron-left"></i>
-        Return to list
+<div class="row-fluid">
+    <a href="{{ path('dm-resource_index') }}" class="btn btn-default btn-sm"
+       title="Return to list">
+        {{ icon('chevron-left') }} Return to list
     </a>
 </div>
 {% endblock content %}

@@ -36,6 +36,39 @@ use Symfony\Component\Form\FormView;
 abstract class DefaultType extends AbstractType
 {
     /**
+     * @var boolean $isDisabled Disabled status
+     */
+    protected $isDisabled = false;
+
+    /**
+     * Set disabled status
+     *
+     * @return DefaultType
+     */
+    public function setDisabled()
+    {
+        $this->isDisabled = true;
+
+        return $this;
+    }
+
+    /**
+     * Set disabled status in options array
+     *
+     * @param array $array Array of options.
+     *
+     * @return array
+     */
+    protected function setDisabledAttr(array $array)
+    {
+        if ($this->isDisabled) {
+            $array['disabled'] = true;
+        }
+
+        return $array;
+    }
+
+    /**
      * Builds the form view.
      *
      * This method is called for each type in the hierarchy starting form the

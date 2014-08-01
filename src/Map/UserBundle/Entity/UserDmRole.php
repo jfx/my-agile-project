@@ -117,7 +117,7 @@ class UserDmRole
      *
      * @param Role $role The role
      *
-     * @return User
+     * @return UserDmRole
      */
     public function setRole(Role $role)
     {
@@ -134,5 +134,15 @@ class UserDmRole
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * Get name and firstname of user
+     *
+     * @return string
+     */
+    public function getUserNameFirstname()
+    {
+        return $this->user->getNameFirstname();
     }
 }

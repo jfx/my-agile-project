@@ -52,9 +52,9 @@ Actions buttons in users list for a super-admin profile
 Breadcrumb for a non super-admin profile
     Given I am a user
     When I go to users list
-    Then Page Should Contain    Admin > Users list
+    Then the breadcrumb should contain    Admin    Users list
 
 Breadcrumb for a super-admin profile
     Given I am a super-admin
     When I go to users list
-    Then Page Should Contain    Admin > Users list
+    Then the breadcrumb should contain    Admin    Users list

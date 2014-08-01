@@ -26,7 +26,7 @@ use Map\DomainBundle\Form\DomainType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Domain controller class.
@@ -116,9 +116,17 @@ class DomainController extends Controller
         $serviceInfo = $this->container->get('map_user.domaininfo');
         $child       = $serviceInfo->getChildCount($domain);
 
+        $domainType = new DomainType();
+        $domainType->setDisabled();
+        $form = $this->createForm($domainType, $domain);
+
         return $this->render(
             'MapDomainBundle:Domain:view.html.twig',
-            array('domain' => $domain, 'child' => $child)
+            array(
+                'form' => $form->createView(),
+                'domain' => $domain,
+                'child' => $child
+            )
         );
     }
 
@@ -141,7 +149,7 @@ class DomainController extends Controller
         if (!($sc->isGranted('ROLE_SUPER_ADMIN')
             || $sc->isGranted(Role::MANAGER_ROLE))
         ) {
-            throw new AccessDeniedHttpException(
+            throw new AccessDeniedException(
                 'You are not allowed to access this resource'
             );
         }
@@ -185,8 +193,6 @@ class DomainController extends Controller
     {
         $service = $this->container->get('map_user.updatecontext4user');
 
-        $success = true;
-
         if ($this->get('request')->getMethod() == 'POST') {
 
             $em = $this->getDoctrine()->getManager();
@@ -198,31 +204,38 @@ class DomainController extends Controller
             try {
                 $em->flush();
 
-            } catch (Exception $e) {
-                $success = false;
-
-                $this->get('session')->getFlashBag()->add(
-                    'error',
-                    'Impossible to remove this item'
-                    .' - Integrity constraint violation !'
-                );
-            }
-            if ($success) {
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Domain removed successfully !');
 
                 return $this->redirect(
                     $this->generateUrl('domain_index')
                 );
+
+            } catch (Exception $e) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'danger',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
+                );
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        'domain_del',
+                        array('id' => $domain->getId())
+                    )
+                );
             }
         }
-        if ($success) {
-            $service->setCurrentDomain($domain);
-        }
+        $service->setCurrentDomain($domain);
+
+        $domainType = new DomainType();
+        $domainType->setDisabled();
+        $form = $this->createForm($domainType, $domain);
 
         return $this->render(
             'MapDomainBundle:Domain:del.html.twig',
-            array('domain' => $domain)
+            array('form' => $form->createView(), 'domain' => $domain)
         );
     }
 }

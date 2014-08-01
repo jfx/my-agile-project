@@ -2,16 +2,17 @@
 
 {% block title %}{{ parent() }} - Users list{% endblock title %}
 
-{% block headline %}Admin > Users list{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Users list']) }}{% endblock headline %}
 
 {% block content %}
+<div class="row-fluid">
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>
-                <a href="{{ path('user_add') }}"
-                   class="btn" title="Add">
-                    <i class="icon-plus-sign"></i>
+                <a class="btn btn-default btn-xs" href="{{ path('user_add') }}"
+                   title="Add">
+                    {{ icon('plus') }}
                 </a>&nbsp;&nbsp;Action
             </th>
             <th>#</th>
@@ -28,18 +29,21 @@
     <tbody>
 {% for user in users %}
             <tr>
-                <td width="150">
-                    <a href="{{ path('user_view', {'id': user.id}) }}"
-                       class="btn" title="View user #{{ user.id }}">
-                        <i class="icon-eye-open"></i>
+                <td class="action">
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('user_view', {'id': user.id}) }}"
+                       title="View user #{{ user.id }}">
+                            {{ icon('eye-open') }}
                     </a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}"
-                       class="btn" title="Edit user #{{ user.id }}">
-                        <i class="icon-edit"></i>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('user_edit', {'id': user.id}) }}"
+                       title="Edit user #{{ user.id }}">
+                            {{ icon('edit') }}
                     </a>
-                    <a href="{{ path('user_del', {'id': user.id}) }}"
-                       class="btn" title="Delete user #{{ user.id }}">
-                        <i class="icon-trash"></i>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('user_del', {'id': user.id}) }}"
+                       title="Delete user #{{ user.id }}">
+                            {{ icon('trash') }}
                     </a>
                 </td>
                 <td>{{ user.id }}</td>
@@ -48,8 +52,8 @@
                 <td>{{ user.displayname }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{% if user.isSuperAdmin() %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
-                <td>{% if user.isLocked() %}<i class="icon-ban-circle"></i>{% else %}-{% endif %}</td>
+                <td>{% if user.isSuperAdmin() %}{{ icon('ok') }}{% else %}-{% endif %}</td>
+                <td>{% if user.isLocked() %}{{ icon('ban-circle') }}{% else %}-{% endif %}</td>
                 <td>{{ user.details }}</td>
             </tr>
 {% else %}
@@ -57,4 +61,5 @@
 {% endfor %}
     </tbody>
 </table>
+</div>
 {% endblock content %}

@@ -1,5 +1,8 @@
 My Agile Project 2
 ==============
+[![Build Status](https://travis-ci.org/jfx/my-agile-project.svg?branch=develop)](https://travis-ci.org/jfx/my-agile-project)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jfx/my-agile-project/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/jfx/my-agile-project/?branch=develop)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7/mini.png)](https://insight.sensiolabs.com/projects/16faa3bb-fc5c-4bdb-b185-c7867a7480a7)
 
 My Agile Project is an open source software to manage projects in general and 
 more specifically Agile projects with those following features :
@@ -9,6 +12,27 @@ more specifically Agile projects with those following features :
 * Agile concepts : definition of iteration and burn-down charts.
 
 - - -
+### 0.6.0 (31 July 2014)
+Features:
+
+  - Add travis CI for multiple php version,
+  - Add badges to readme page,
+  - Add test name in code coverage report,
+  - Migration to twitter bootstrap v3,
+  - Bootstrap modal confirm box,
+  - Bootstrap breadcrumb,
+  - Migration to Symfony 2.5.
+
+Bugfixes:
+
+  - Remove specific location for log and cache dir,
+  - Replace AccessDeniedHttpException by AccessDeniedException,
+  - Refactoring of controller delete methods,
+  - Remove config.php file,
+  - Fix Phpunit tests issue,
+  - Error 500 when no available resource to add.
+
+
 ### 0.5.0 (08 June 2014)
 Features:
 

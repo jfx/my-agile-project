@@ -87,7 +87,7 @@ class FormHandler
     /**
      * For a submited form, valid it and update database.
      *
-     * @return bolean
+     * @return boolean
      */
     public function process()
     {
@@ -106,7 +106,7 @@ class FormHandler
                 foreach ($errors as $error) {
 
                     $this->session->getFlashBag()->add(
-                        'error',
+                        'danger',
                         ucfirst($error->getPropertyPath())
                         .' : '.$error->getMessage()
                     );

@@ -20,12 +20,8 @@
 
 namespace Map\DomainBundle\Form;
 
-use Map\CoreBundle\Form\DefaultType;
-use Map\DomainBundle\Entity\Domain;
 use Map\UserBundle\Entity\RoleRepository;
-use Map\UserBundle\Entity\UserRepository;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Resource form class for add action.
@@ -33,29 +29,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @category  MyAgileProject
  * @package   Domain
  * @author    Francois-Xavier Soubirou <soubirou@yahoo.fr>
- * @copyright 2013 Francois-Xavier Soubirou
+ * @copyright 2014 Francois-Xavier Soubirou
  * @license   http://www.gnu.org/licenses/   GPLv3
  * @link      http://www.myagileproject.org
  * @since     2
  *
  */
-class ResourceAddType extends DefaultType
+class ResourceTypeEditDel extends ResourceType
 {
-    /**
-     * @var Domain Domain
-     */
-    protected $domain;
-
-    /**
-     * Constructor.
-     *
-     * @param Domain $domain The domain in which the resource will be added.
-     */
-    public function __construct(Domain $domain)
-    {
-        $this->domain = $domain;
-    }
-
     /**
      * Builds the form.
      *
@@ -69,20 +50,13 @@ class ResourceAddType extends DefaultType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $domain = $this->domain;
-
         $builder
             ->add(
-                'user',
-                'entity',
+                'userNameFirstname',
+                'text',
                 array(
                     'label' => 'Resource',
-                    'class' => 'Map\UserBundle\Entity\User',
-                    'property' => 'nameFirstname',
-                    'query_builder' =>
-                        function (UserRepository $er) use ($domain) {
-                            return $er->getQBAvailableUserByDomain($domain);
-                        }
+                    'disabled' => true
                 )
             )
             ->add(
@@ -97,29 +71,5 @@ class ResourceAddType extends DefaultType
                     },
                 )
             );
-    }
-
-    /**
-     * Sets the default options for this type.
-     *
-     * @param OptionsResolverInterface $resolver The resolver for the options.
-     *
-     * @return void
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(
-            array('data_class' => 'Map\UserBundle\Entity\UserDmRole')
-        );
-    }
-
-    /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
-     */
-    public function getName()
-    {
-        return "map_domainbundle_resourceaddtype";
     }
 }

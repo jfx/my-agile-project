@@ -2,21 +2,20 @@
 
 {% block title %}{{ parent() }} - User edit - Id : {{ user.id }}{% endblock title %}
 
-{% block headline %}Admin > Edit user{% endblock headline %}
+{% block headline %}{{ breadcrumb(['Admin', 'Edit user']) }}{% endblock headline %}
 
 {% block content %}
-<div class="span8">
-    <form novalidate="novalidate" class="form-horizontal well" method="post">
-        {{ form_widget(form) }}
-        <div class="center">
-            <button type="submit" class="btn btn-small btn-info" title="Save"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
-        </div>
-    </form>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        {% include "MapCoreBundle::form.html.twig" %}
+
+    </div>
 </div>
-<div class="span8">
-    <a href="{{ path('user_index') }}" class="btn" title="Return to list">
-        <i class="icon-chevron-left"></i>
-        Return to list
+<div class="row-fluid">
+    <a class="btn btn-default btn-sm" href="{{ path('user_index') }}"
+       title="Return to list">
+        {{ icon('chevron-left') }} Return to list
     </a>
 </div>
 {% endblock content %}

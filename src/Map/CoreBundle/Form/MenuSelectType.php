@@ -19,9 +19,7 @@
 namespace Map\CoreBundle\Form;
 
 use Map\CoreBundle\Form\DefaultType;
-use Mopa\Bundle\BootstrapBundle\Navbar\NavbarFormInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Map\UserBundle\Entity\User;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -35,14 +33,22 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @link      http://www.myagileproject.org
  * @since     2
  */
-class MenuSelectType extends DefaultType implements
-    NavbarFormInterface,
-    ContainerAwareInterface
+class MenuSelectType extends DefaultType
 {
     /**
-     * @var ContainerInterface Container
+     * @var User User object
      */
-    protected $container;
+    protected $user;
+
+    /**
+     * Constructor
+     *
+     * @param User $user The user.
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
     /**
      * {@inheritDoc}
@@ -54,55 +60,52 @@ class MenuSelectType extends DefaultType implements
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $securityContext = $this->container->get('security.context');
-        $user = $securityContext->getToken()->getUser();
 
-        $currentProject = $user->getCurrentProject();
+        $currentProject = $this->user->getCurrentProject();
         if ($currentProject === null) {
             $currentProjectId = 0;
         } else {
             $currentProjectId = $currentProject->getId();
         }
-        $availableProjects = $user->getAvailableProjects();
+        $availableProjects = $this->user->getAvailableProjects();
 
-        $keyExists = false;
-        foreach ($availableProjects as $projects4aDomain) {
-            if (array_key_exists($currentProjectId, $projects4aDomain)) {
-                $keyExists = true;
+        if (count($availableProjects) > 0) {
+
+            $keyExists = false;
+            foreach ($availableProjects as $projects4aDomain) {
+                if (array_key_exists($currentProjectId, $projects4aDomain)) {
+                    $keyExists = true;
+                }
             }
-        }
-        if ($keyExists) {
-            $builder->add(
-                'search',
-                'choice',
-                array(
-                    'label' => false,
-                    'choices' => $availableProjects,
-                    'data' => $currentProjectId,
-                    'widget_control_group' => false,
-                    'widget_controls' => false,
-                    'attr' => array(
-                        'class' => "span2",
-                        'onChange' => "this.form.submit()"
+            if ($keyExists) {
+                $builder->add(
+                    'search',
+                    'choice',
+                    array(
+                        'label' => false,
+                        'choices' => $availableProjects,
+                        'data' => $currentProjectId,
+                        'horizontal_input_wrapper_class' => 'col-lg-12',
+                        'attr' => array(
+                            'onChange' => "this.form.submit()"
+                        )
                     )
-                )
-            );
-        } else {
-            $builder->add(
-                'search',
-                'choice',
-                array(
-                    'label' => false,
-                    'choices' => $availableProjects,
-                    'empty_value' => '',
-                    'widget_control_group' => false,
-                    'widget_controls' => false,
-                    'attr' => array(
-                        'class' => "span2",
-                        'onChange' => "this.form.submit()"
+                );
+            } else {
+                $builder->add(
+                    'search',
+                    'choice',
+                    array(
+                        'label' => false,
+                        'choices' => $availableProjects,
+                        'empty_value' => '',
+                        'horizontal_input_wrapper_class' => 'col-lg-12',
+                        'attr' => array(
+                            'onChange' => "this.form.submit()"
+                        )
                     )
-                )
-            );
+                );
+            }
         }
     }
 
@@ -123,19 +126,6 @@ class MenuSelectType extends DefaultType implements
      */
     public function getRoute()
     {
-        return "project_select";
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface|null $container A ContainerInterface instance
-     * or null
-     *
-     * @return void
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
+        return "map_menu_select";
     }
 }

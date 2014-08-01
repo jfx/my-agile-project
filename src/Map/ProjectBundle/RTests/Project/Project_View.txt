@@ -10,17 +10,17 @@ View a project details
     And I go to projects list    View domain #1
     When I click action button    View project #3
     Then Location Should Be    ${URL}/project/3
-    And Element Text Should Be    id=inputName    Project Closed
-    And Element Text Should Be    id=inputStartDate    02/05/2013
-    And Element Text Should Be    id=inputFinishDate    31/07/2013
-    And Checkbox Should Be Selected    inputClosed
+    And Disabled text element should contain    map_project_name    Project Closed
+    And Disabled text element should contain    map_project_startDate    2013-05-02
+    And Disabled text element should contain    map_project_finishDate    2013-07-31
+    And Checkbox Should Be Selected    map_project_closed
 
 Wrong project Id for a domain
     Given I am a manager
     And I go to projects list    View domain #1
     When Go to    ${URL}/project/4
     Then Location Should Be    ${URL}/project/4
-    And Element Text Should Be    id=inputName    Project Three
+    And Disabled text element should contain    map_project_name    Project Three
 
 Wrong project Id
     Given I am a user
@@ -48,18 +48,18 @@ Edit button not displayed for a non manager role
 Breadcrumb
     Given I am a user
     When I go to view project #1 page
-    Then Page Should Contain    Domain One > Project One > View
+    Then the breadcrumb should contain    Domain One    Project One    View
 
 Breadcrumb domain link
     Given I am a user
     And I go to view project #1 page
-    When Click Link    id=b_domain
+    When Click Link    id=br_lvl1
     Then Location Should Be    ${URL}/dm-project/
 
 Breadcrumb project link
     Given I am a user
     And I go to view project #1 page
-    When Click Link    id=b_project
+    When Click Link    id=br_lvl2
     Then Location Should Be    ${URL}/project/1
 
 Objectives tab

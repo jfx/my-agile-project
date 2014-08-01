@@ -38,7 +38,7 @@ Impossible to delete a domain
 Breadcrumb
     Given I am a super-admin
     When I go to delete domain page    5
-    Then Page Should Contain    Admin > Delete domain
+    Then the breadcrumb should contain    Admin    Delete domain
 
 Return to list button
     Given I am a super-admin

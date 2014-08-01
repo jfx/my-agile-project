@@ -96,7 +96,8 @@ class ProjectRepository extends EntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam('userId', $user->getId());
+        $userId = $user->getId();
+        $stmt->bindParam('userId', $userId);
         $stmt->execute();
         $results = $stmt->fetchAll();
 

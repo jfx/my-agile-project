@@ -1,33 +1,37 @@
-{% extends 'MapCoreBundle::layout.html.twig' %}
+{% extends 'MapCoreBundle::layoutDatetimepickerjs.html.twig' %}
 
 {% block title %}{{ parent() }} - Project view - Id : {{ project.id }}{% endblock title %}
 
-{% block headline %}{{ project_breadcrumb() }} > View{% endblock headline %}
+{% block headline %}{{ project_breadcrumb('View') }}{% endblock headline %}
 
 {% block content %}
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#">Main</a></li>
-    <li><a href="#">Objectives</a></li>
-    <li><a href="#">Milestones</a></li>
-    <li><a href="#">Risks</a></li>
+<div class="row-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#">Main</a></li>
+        <li><a href="#">Objectives</a></li>
+        <li><a href="#">Milestones</a></li>
+        <li><a href="#">Risks</a></li>
 </ul>
-<div class="span8">
-    <form class="form-horizontal well">
-
-        {% include "MapProjectBundle:Project:formread.html.twig" %}
-
-    </form>
 </div>
-<div class="span8">
-<a href="{{ path('dm-project_index') }}" class="btn" title="Return to domain">
-<i class="icon-chevron-left"></i>
-Return to domain
-</a>
+<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form class="form-horizontal well">
+
+            {{ form_widget(form) }}
+
+        </form>
+    </div>
+</div>
+<div class="row-fluid">
+    <a class="btn btn-default btn-sm" href="{{ path('dm-project_index') }}"
+       title="Return to domain">
+        {{ icon('chevron-left') }} Return to domain
+    </a>
 {% if is_granted('ROLE_DM_MANAGER') %}
-    <a href="{{ path('project_edit', {'id': project.id}) }}"
-    class="btn" title="Edit">
-        <i class="icon-edit"></i>
-    Edit
+    <a class="btn btn-default btn-sm"
+       href="{{ path('project_edit', {'id': project.id}) }}" title="Edit">
+        {{ icon('edit') }} Edit
     </a>
 {% endif %}
 </div>

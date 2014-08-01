@@ -21,7 +21,7 @@ No role
 Breadcrumb
     Given I am a user
     When I go to profile role page
-    Then Page Should Contain    Admin > Profile > Roles
+    the breadcrumb should contain    Admin    Profile    Roles
 
 Main tab
     Given I am a user

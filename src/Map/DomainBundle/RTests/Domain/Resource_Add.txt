@@ -9,8 +9,8 @@ A super-admin adds a resource
     Given I am a super-admin
     And I go to resources list    View domain #1
     And I click action button    Add
-    Select From List By Label    id=map_domainbundle_resourceaddtype_user    No-domain Firstno-domain
-    Select From List By Label    id=map_domainbundle_resourceaddtype_role    User+
+    And Select From List By Label    map_resource_user    No-domain Firstno-domain
+    And Select From List By Label    map_resource_role    User+
     When I save
     Then Page Should Contain    Resource added successfully
     And the table should contain x rows    6
@@ -20,8 +20,8 @@ A manager adds a resource
     Given I am a manager
     And I go to resources list    View domain #1
     And I click action button    Add
-    Select From List By Label    id=map_domainbundle_resourceaddtype_user    No-domain Firstno-domain
-    Select From List By Label    id=map_domainbundle_resourceaddtype_role    User+
+    And Select From List By Label    map_resource_user    No-domain Firstno-domain
+    And Select From List By Label    map_resource_role    User+
     When I save
     Then Page Should Contain    Resource added successfully
     And the table should contain x rows    6
@@ -31,8 +31,8 @@ A super-admin adds a manager
     Given I am a super-admin
     And I go to resources list    View domain #3
     And I click action button    Add
-    Select From List By Label    id=map_domainbundle_resourceaddtype_user    No-domain Firstno-domain
-    Select From List By Label    id=map_domainbundle_resourceaddtype_role    Manager
+    And Select From List By Label    map_resource_user    No-domain Firstno-domain
+    And Select From List By Label    map_resource_role    Manager
     When I save
     Then Page Should Contain    Resource added successfully
     And the table should contain x rows    1
@@ -41,6 +41,20 @@ A super-admin adds a manager
     And I am logging as    no-domain
     And I go to resources list    View domain #3
     And I should see action button(s)    Add
+
+Impossible to add when no resource available
+    Given I am a super-admin
+    And I go to resources list    View domain #1
+    And I click action button    Add
+    And Select From List By Label    map_resource_user    Admin Firstadmin
+    When I save
+    Then Page Should Contain    Resource added successfully
+    And I click action button    Add
+    And Select From List By Label    map_resource_user    No-domain Firstno-domain
+    When I save
+    Then Page Should Contain    Resource added successfully
+    And I click action button    Add
+    Then Page Should Contain    No resource to add !
 
 Impossible to add a resource without selecting a domain before
     Given I am a super-admin
@@ -51,13 +65,13 @@ Breadcrumb
     Given I am a super-admin
     And I go to resources list    View domain #1
     When I click action button    Add
-    Then Page Should Contain    Domain One > Add resource
+    Then the breadcrumb should contain    Domain One    Add resource
 
 Breadcrumb domain link
     Given I am a super-admin
     And I go to resources list    View domain #1
     When I click action button    Add
-    When Click Link    id=b_domain
+    When Click Link    id=br_lvl1
     Then Location Should Be    ${URL}/domain/1
 
 Return to list button

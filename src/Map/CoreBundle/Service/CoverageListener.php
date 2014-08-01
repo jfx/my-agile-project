@@ -60,6 +60,21 @@ class CoverageListener
     protected $coverageDir;
 
     /**
+     * @static string Name of test
+     */
+    protected static $coverageDirName = 'coverage';
+
+    /**
+     * @var string Name of test
+     */
+    protected $testName = 'Coverage tests';
+
+    /**
+     * @static string Name of test
+     */
+    protected static $testNameFile = 'testName.txt';
+
+    /**
      * Constructor
      *
      * @param AppKernel $kernel            The Kernel is the heart of Symfony.
@@ -74,14 +89,22 @@ class CoverageListener
         if (($env == 'prod') || (!$isCoverageEnabled)) {
             return;
         }
-            $this->isEnabled = true;
-            $rootDir = $kernel->getRootDir();
-            $this->coverageDir  = $kernel->getLogDir().'/coverage';
+        $this->isEnabled = true;
+        $rootDir = $kernel->getRootDir();
+        $this->coverageDir  = $kernel->getLogDir().'/'.self::$coverageDirName;
 
-            $filter = new PHP_CodeCoverage_Filter();
-            $filter->addDirectoryToWhitelist($rootDir.'/../src');
+        $filter = new PHP_CodeCoverage_Filter();
+        $filter->addDirectoryToWhitelist($rootDir.'/../src');
 
-            $this->coverage = new PHP_CodeCoverage(null, $filter);
+        $this->coverage = new PHP_CodeCoverage(null, $filter);
+
+        $testNameFilePath = $kernel->getLogDir().'/'.self::$testNameFile;
+
+        if (file_exists($testNameFilePath)) {
+
+            $content = htmlspecialchars(file_get_contents($testNameFilePath));
+            $this->testName = substr($content, 0, 100);
+        }
     }
 
     /**
@@ -98,7 +121,7 @@ class CoverageListener
         if (!$this->isEnabled) {
             return;
         }
-        $this->coverage->start('Coverage tests');
+        $this->coverage->start($this->testName);
         $this->isStarted = true;
     }
 

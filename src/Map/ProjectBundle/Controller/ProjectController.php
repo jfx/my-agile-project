@@ -26,7 +26,7 @@ use Map\ProjectBundle\Form\ProjectType;
 use Map\UserBundle\Entity\Role;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Project controller class.
@@ -111,9 +111,13 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
+        $projectType = new ProjectType($this->container);
+        $projectType->setDisabled();
+        $form = $this->createForm($projectType, $project);
+
         return $this->render(
             'MapProjectBundle:Project:view.html.twig',
-            array('project' => $project)
+            array('form' => $form->createView(), 'project' => $project)
         );
     }
 
@@ -131,13 +135,7 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
-        $sc = $this->container->get('security.context');
-
-        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedHttpException(
-                'You are not allowed to access this resource'
-            );
-        }
+        $this->checkManagerRole();
 
         $form = $this->createForm(new ProjectType($this->container), $project);
 
@@ -151,6 +149,7 @@ class ProjectController extends Controller
 
             $id = $project->getId();
 
+            $sc = $this->container->get('security.context');
             $user = $sc->getToken()->getUser();
             $service->refreshAvailableDomains4UserId($user->getId());
             $sc->getToken()->setAuthenticated(false);
@@ -183,15 +182,7 @@ class ProjectController extends Controller
         $service = $this->container->get('map_user.updatecontext4user');
         $service->setCurrentProject($project);
 
-        $sc = $this->container->get('security.context');
-
-        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
-            throw new AccessDeniedHttpException(
-                'You are not allowed to access this resource'
-            );
-        }
-
-        $success = true;
+        $this->checkManagerRole();
 
         if ($this->get('request')->getMethod() == 'POST') {
 
@@ -203,19 +194,7 @@ class ProjectController extends Controller
             try {
                 $em->flush();
 
-            } catch (Exception $e) {
-                $success = false;
-
-                $this->get('session')->getFlashBag()->add(
-                    'error',
-                    'Impossible to remove this item'
-                    .' - Integrity constraint violation !'
-                );
-            }
-            if ($success) {
-                $user = $sc->getToken()->getUser();
-                $service->refreshAvailableDomains4UserId($user->getId());
-                $sc->getToken()->setAuthenticated(false);
+                $this->refreshAvailableDomains();
 
                 $this->get('session')->getFlashBag()
                     ->add('success', 'Project removed successfully !');
@@ -223,29 +202,67 @@ class ProjectController extends Controller
                 return $this->redirect(
                     $this->generateUrl('dm-project_index')
                 );
+
+            } catch (Exception $e) {
+
+                $this->get('session')->getFlashBag()->add(
+                    'danger',
+                    'Impossible to remove this item'
+                    .' - Integrity constraint violation !'
+                );
+
+                // With exception entity manager is closed.
+                return $this->redirect(
+                    $this->generateUrl(
+                        'project_del',
+                        array('id' => $project->getId())
+                    )
+                );
             }
         }
 
+        $projectType = new ProjectType($this->container);
+        $projectType->setDisabled();
+        $form = $this->createForm($projectType, $project);
+
         return $this->render(
             'MapProjectBundle:Project:del.html.twig',
-            array('project' => $project)
+            array('form' => $form->createView(), 'project' => $project)
         );
     }
 
     /**
-     * Select a project in combobox
+     * Refresh available domain displayed in select box
      *
-     * @return Response A Response instance
+     * @return void
      *
-     * @Secure(roles="ROLE_USER")
      */
-    public function selectAction()
+    private function refreshAvailableDomains()
     {
-        $request = $this->getRequest();
-        $projectId = $request->request->get('map_menu_select')['search'];
+        $sc = $this->container->get('security.context');
+        $user = $sc->getToken()->getUser();
 
-        return $this->redirect(
-            $this->generateUrl('project_view', array('id' => $projectId))
-        );
+        $service = $this->container->get('map_user.updatecontext4user');
+        $service->refreshAvailableDomains4UserId($user->getId());
+
+        $sc->getToken()->setAuthenticated(false);
+    }
+
+    /**
+     * Check role of user
+     *
+     * @return void
+     *
+     */
+    private function checkManagerRole()
+    {
+        $sc = $this->container->get('security.context');
+
+        if (!($sc->isGranted(Role::MANAGER_ROLE))) {
+
+            throw new AccessDeniedException(
+                'You are not allowed to access this resource'
+            );
+        }
     }
 }

@@ -8,22 +8,22 @@ I go to projects list
 I fill in project form
     [Arguments]    ${project}    ${monthStart}=0    ${monthFinish}=3    ${isClosed}=False
     ${isClosedBool} =    Convert To Boolean    ${isClosed}
-    Input text    map_projectbundle_projecttype_name    ${project}
-    I select date    map_projectbundle_projecttype_startDate    1    15    ${monthStart}
-    Click Element    map_projectbundle_projecttype_name
-    I select date    map_projectbundle_projecttype_finishDate    2    15    ${monthFinish}
-    Click Element    map_projectbundle_projecttype_name
-    Run Keyword If    ${isClosedBool}    Select Checkbox    map_projectbundle_projecttype_closed
-    Input text    map_projectbundle_projecttype_details    Details 4 ${project}
+    Input text    map_project_name    ${project}
+    I select date    //div[@data-link-field='map_project_startDate']    1    15    ${monthStart}
+    Click Element    map_project_name
+    I select date    //div[@data-link-field='map_project_finishDate']    2    15    ${monthFinish}
+    Click Element    map_project_name
+    Run Keyword If    ${isClosedBool}    Select Checkbox    map_project_closed
+    Input text    map_project_details    Details 4 ${project}
 
 I check project view form
     [Arguments]    ${project}    ${monthStart}=0    ${monthFinish}=3    ${isClosed}=False
     ${isClosedBool} =    Convert To Boolean    ${isClosed}
-    Element Text Should Be    id=inputName    ${project}
-    ${formatDateStart} =    I get formated date in X months    15    ${monthStart}
-    ${formatDateFinish} =    I get formated date in X months    15    ${monthFinish}
-    Element Text Should Be    id=inputStartDate    ${formatDateStart}
-    Element Text Should Be    id=inputFinishDate    ${formatDateFinish}
-    Run Keyword If    ${isClosedBool}    Checkbox Should Be Selected    inputClosed
-    Run Keyword Unless    ${isClosedBool}    Checkbox Should Not Be Selected    inputClosed
-    Element Text Should Be    id=textDetails    Details 4 ${project}
+    Disabled text element should contain    map_project_name    ${project}
+    ${formatDateStart} =    I get sql formated date in X months    15    ${monthStart}
+    ${formatDateFinish} =    I get sql formated date in X months    15    ${monthFinish}
+    Disabled text element should contain    map_project_startDate    ${formatDateStart}
+    Disabled text element should contain    map_project_finishDate    ${formatDateFinish}
+    Run Keyword If    ${isClosedBool}    Checkbox Should Be Selected    map_project_closed
+    Run Keyword Unless    ${isClosedBool}    Checkbox Should Not Be Selected    map_project_closed
+    Element Text Should Be    map_project_details    Details 4 ${project}

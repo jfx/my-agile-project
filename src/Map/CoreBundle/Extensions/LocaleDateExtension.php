@@ -74,7 +74,13 @@ class LocaleDateExtension extends Twig_Extension
     {
         $format = $this->container->getParameter('app.formatDate');
 
-        return $dateTime->format($format);
+        $formatLocale = str_replace(
+            ['dd', 'mm', 'yyyy'],
+            ['d', 'm', 'Y'],
+            $format
+        );
+
+        return $dateTime->format($formatLocale);
     }
 
     /**

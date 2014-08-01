@@ -201,7 +201,7 @@ class Project
     /**
      * Is project closed or not.
      *
-     * @return integer
+     * @return boolean
      */
     public function isClosed()
     {
